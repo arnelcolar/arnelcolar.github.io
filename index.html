@@ -49,11 +49,14 @@ nav a:hover{color:var(--ink)}
 .three .project h2{font-size:17px}
 .three .meta{flex-direction:column;gap:2px}
 
+.skills{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px;padding-bottom:96px}
+.skills li{border-top:1px solid var(--line);padding:24px 0 32px}
+.skills h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.skills p{margin-top:6px;color:var(--muted);font-size:15px}
+
 .about{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:56px 0 120px;border-top:1px solid var(--line)}
 .about h2{font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.2;margin-top:8px}
 .about p{color:var(--muted);margin-bottom:16px;max-width:52ch}
-.about ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:28px 0 36px;font-size:15px}
-.about li{padding:10px 0;border-top:1px solid var(--line)}
 .cta{display:inline-block;background:var(--ink);color:#fff;padding:12px 22px;border-radius:99px;font-size:14px;font-weight:500}
 .cta:hover{background:#333}
 
@@ -64,7 +67,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
 @media (max-width:760px){
   .intro{padding:72px 0 64px}
-  .grid,.grid.three,.about{grid-template-columns:1fr}
+  .grid,.grid.three,.skills,.about{grid-template-columns:1fr}
   .grid{gap:56px}
   nav{gap:18px}
 }
@@ -78,6 +81,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <a class="name" href="#top">Arnel Colar</a>
     <nav aria-label="Primary">
       <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
       <a href="#about">About</a>
       <a href="https://github.com/arnelcolar">GitHub</a>
     </nav>
@@ -170,6 +174,42 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </div>
   </section>
 
+  <section class="wrap" id="skills" aria-labelledby="skills-title">
+    <div class="head"><h2 id="skills-title">What I bring</h2><span class="label">Each one shows up in the work above</span></div>
+    <ul class="skills">
+      <li>
+        <h3>Financial calculators</h3>
+        <p>Tools that do real math in the browser: debt costs, payoff timelines, emergency fund targets, and credit utilization.</p>
+        <div class="links"><a href="https://debtfix.com/calculators/cost-of-debt">DebtFix cost of debt</a><a href="https://wisestwallet.com/debt-payoff-calculator/">WisestWallet debt payoff</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund</a></div>
+      </li>
+      <li>
+        <h3>Custom WordPress themes</h3>
+        <p>Themes built for the content they hold: topic hubs, guide and blog templates, and calculators that live inside the site.</p>
+        <div class="links"><a href="https://wisestwallet.com/">WisestWallet</a><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></div>
+      </li>
+      <li>
+        <h3>Landing pages that convert</h3>
+        <p>Pages built around one action. Clear pricing, trust badges where doubts come up, and calls to action that stay in reach on a phone.</p>
+        <div class="links"><a href="https://debtfix.com/">DebtFix</a><a href="work/wardline.html">Wardline</a><a href="work/vigil.html">Vigil</a></div>
+      </li>
+      <li>
+        <h3>Hand-coded front end</h3>
+        <p>Semantic HTML, modern CSS, and plain JavaScript. Scrollspy navigation, pinned scroll stories, swipeable cards, and animated heroes without a framework.</p>
+        <div class="links"><a href="work/halcyon.html">Halcyon H16</a><a href="work/vaultledger.html">Vaultledger</a></div>
+      </li>
+      <li>
+        <h3>UX research and prototyping</h3>
+        <p>From problem statement and persona to wireframes, a design system, and a clickable prototype people can test before anything gets built.</p>
+        <div class="links"><a href="work/nook/">NOOK case study</a><a href="work/nook/nook-prototype.html">Prototype</a></div>
+      </li>
+      <li>
+        <h3>Scripting and automation</h3>
+        <p>Google Apps Script tied to Telegram, Google Sheets, and AI APIs. Everyday work like logging sales and filing receipts, done from a chat.</p>
+        <div class="links"><a href="work/cafe-bot/">Corner Cup Bot</a></div>
+      </li>
+    </ul>
+  </section>
+
   <section class="wrap about" id="about">
     <div>
       <p class="label">About</p>
@@ -178,14 +218,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <div>
       <p>I work where design meets the browser. I sketch the layout, pick the type and color, then write the HTML and CSS myself, so what you approve is what ships.</p>
       <p>Most of my work is for finance and security brands, where trust has to show up in the details: clear pricing, honest disclaimers, and pages that stay fast on a phone.</p>
-      <ul>
-        <li>Landing pages</li>
-        <li>Client portals</li>
-        <li>Product launches</li>
-        <li>App prototypes</li>
-        <li>Calculators and tools</li>
-        <li>WordPress themes</li>
-      </ul>
       <a class="cta" href="https://github.com/arnelcolar">Find me on GitHub</a>
     </div>
   </section>
