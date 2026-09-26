@@ -16,7 +16,7 @@ a{color:inherit}
 .wrap{width:min(1120px,100% - 48px);margin-inline:auto}
 .bar{display:flex;justify-content:space-between;align-items:center;height:64px;font-size:14px}
 .bar a{text-decoration:none}
-.bar .back{color:var(--muted)}
+.bar .back{color:var(--muted);padding:8px 0}
 .bar .back:hover{color:var(--ink)}
 .label{font-size:13px;color:var(--muted)}
 
@@ -67,7 +67,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <section class="hero">
     <div>
       <p class="label">Case study · Google Apps Script</p>
-      <h1>A café's sales, costs, and stock, run from a group chat.</h1>
+      <h1>A café's sales, costs, and stock, logged from Telegram.</h1>
       <p>Staff type orders into Telegram the way they'd say them out loud. The bot prices each item from a menu sheet, logs it to Google Sheets, deducts stock, and replies with a total. A photo of a supplier receipt becomes an itemized expense.</p>
       <ul class="facts">
         <li>Apps Script</li>
@@ -101,7 +101,7 @@ Profit: Php 3,585.00</div>
 
   <section class="block">
     <h2>How it works</h2>
-    <p class="lede">Everything runs inside Google's free Apps Script runtime. The café already used Sheets and Telegram, so nobody had to learn a new app.</p>
+    <p class="lede">Everything runs in Google Apps Script, so there is no server to host or pay for.</p>
     <ol class="steps">
       <li><b>Poll</b>A time trigger runs every minute and checks Telegram for new messages every ten seconds, saving its place in Script Properties so nothing is logged twice.</li>
       <li><b>Parse</b>A message splits on commas and new lines. Each piece is read as quantity, item, and size, then priced from the Menu sheet.</li>
@@ -112,7 +112,7 @@ Profit: Php 3,585.00</div>
 
   <section class="block">
     <h2>Commands</h2>
-    <p class="lede">Short words staff can type with one thumb between orders.</p>
+    <p class="lede">Staff send these as plain messages.</p>
     <ul class="cmds">
       <li><code>1 latte 16</code>log an order</li>
       <li><code>expense 588 beans</code>log a cost</li>
@@ -128,7 +128,7 @@ Profit: Php 3,585.00</div>
 
   <section class="block">
     <h2>Selected code</h2>
-    <p class="lede">Three pieces that carry most of the weight. The full script stays private because it runs a real business.</p>
+    <p class="lede">Three excerpts. The full script stays private because a real café runs on it.</p>
 
     <div class="code">
       <div>
@@ -163,7 +163,7 @@ var OPENROUTER_API_KEY = PROPS.getProperty("OPENROUTER_API_KEY");</code></pre>
 
     <div class="code">
       <div>
-        <h3>Trusting the model, carefully</h3>
+        <h3>Parsing the model's reply</h3>
         <p>Models sometimes wrap JSON in prose or code fences. The bot cuts out the first object it finds before parsing, and retries up to three times when the API errors.</p>
       </div>
 <pre><code>var start = textResponse.indexOf('{');
