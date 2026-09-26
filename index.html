@@ -43,9 +43,11 @@ nav a:hover{color:var(--ink)}
 .links a{border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .2s}
 .links a:hover{border-color:var(--ink)}
 
-.client{padding:0 0 96px;color:var(--muted);font-size:15px}
-.client a{color:var(--ink);border-bottom:1px solid var(--line)}
-.client a:hover{border-color:var(--ink)}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:16px}
+.head h2{font-size:15px;font-weight:600}
+.grid.three{grid-template-columns:repeat(3,1fr);gap:56px 28px}
+.three .project h2{font-size:17px}
+.three .meta{flex-direction:column;gap:2px}
 
 .about{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:56px 0 120px;border-top:1px solid var(--line)}
 .about h2{font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.2;margin-top:8px}
@@ -62,7 +64,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
 @media (max-width:760px){
   .intro{padding:72px 0 64px}
-  .grid,.about{grid-template-columns:1fr}
+  .grid,.grid.three,.about{grid-template-columns:1fr}
   .grid{gap:56px}
   nav{gap:18px}
 }
@@ -88,15 +90,37 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <p>I design and build landing pages, client portals, product launches, and app prototypes. Every project below is a working page you can click through.</p>
   </section>
 
-  <section class="wrap" id="work" aria-label="Selected work">
-    <div class="grid">
+  <section class="wrap" id="work" aria-labelledby="live-title">
+    <div class="head"><h2 id="live-title">Live client sites</h2><span class="label">Built for real businesses, running today</span></div>
+    <div class="grid three">
 
       <article class="project">
         <a class="shot" href="https://debtfix.com/" aria-label="Open debtfix.com"><img src="assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></a>
-        <div class="meta"><h2>DebtFix</h2><span class="label">Debt relief · Live client site</span></div>
-        <p>The live site for a debt settlement company. A debt slider that estimates monthly deposits, trust badges up front, and a clear path to apply or call.</p>
+        <div class="meta"><h2>DebtFix</h2><span class="label">Debt relief</span></div>
+        <p>A debt settlement company's site. A slider estimates monthly deposits, trust badges sit up front, and every page leads to apply or call.</p>
         <div class="links"><a href="https://debtfix.com/">Visit debtfix.com</a></div>
       </article>
+
+      <article class="project">
+        <a class="shot" href="https://wisestwallet.com/" aria-label="Open wisestwallet.com"><img src="assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></a>
+        <div class="meta"><h2>WisestWallet</h2><span class="label">Personal finance · WordPress</span></div>
+        <p>A custom WordPress theme for a finance blog. Budget, credit, and debt guides sit next to calculators for emergency funds, loan costs, and credit use.</p>
+        <div class="links"><a href="https://wisestwallet.com/">Visit wisestwallet.com</a></div>
+      </article>
+
+      <article class="project">
+        <a class="shot" href="https://resourcehelpnetwork.com/" aria-label="Open resourcehelpnetwork.com"><img src="assets/shots/resourcehelpnetwork.webp" alt="Resource Help Network homepage with topic cards for bills, credit, jobs, health, and money" width="1440" height="900"></a>
+        <div class="meta"><h2>Resource Help Network</h2><span class="label">Guides · WordPress</span></div>
+        <p>A WordPress site with step-by-step help for bills, credit, jobs, and health coverage, sorted into topic hubs so readers find their next step fast.</p>
+        <div class="links"><a href="https://resourcehelpnetwork.com/">Visit the site</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap" id="templates" aria-labelledby="templates-title">
+    <div class="head"><h2 id="templates-title">Templates and concepts</h2><span class="label">Fictional brands, working pages</span></div>
+    <div class="grid">
 
       <article class="project">
         <a class="shot" href="work/evenkeel/" aria-label="Open the Evenkeel site"><img src="assets/shots/evenkeel.webp" alt="Evenkeel homepage with a savings slider over a sunrise photo" width="1440" height="900"></a>
@@ -147,8 +171,14 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         <div class="links"><a href="work/vaultledger.html">Open the page</a></div>
       </article>
 
+      <article class="project">
+        <a class="shot" href="work/cafe-bot/" aria-label="Open the Corner Cup Bot case study"><img src="assets/shots/cafebot.webp" alt="Corner Cup Bot case study with a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2>Corner Cup Bot</h2><span class="label">Automation · Apps Script</span></div>
+        <p>A Telegram bot that logs a café's orders, expenses, and stock to Google Sheets, and reads supplier receipts with a vision model.</p>
+        <div class="links"><a href="work/cafe-bot/">Read the case study</a></div>
+      </article>
+
     </div>
-    <p class="client">Custom WordPress work: <a href="https://wisestwallet.com/">WisestWallet</a>, a personal finance site, and <a href="https://resourcehelpnetwork.com/">Resource Help Network</a>, step-by-step guides for money, bills, and credit.</p>
   </section>
 
   <section class="wrap about" id="about">
@@ -175,7 +205,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 <footer>
   <div class="wrap">
     <span>© 2026 Arnel Colar</span>
-    <span>Brands other than DebtFix are fictional templates. Photos from Unsplash and Pexels.</span>
+    <span>Template brands are fictional. Template photos from Unsplash and Pexels.</span>
   </div>
 </footer>
 
