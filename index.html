@@ -32,7 +32,7 @@ nav a:hover{color:var(--ink)}
 .intro p{margin-top:24px;max-width:50ch;color:var(--muted);font-size:18px}
 
 .label{font-size:13px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:32px 0 120px;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:32px 0 72px;border-top:1px solid var(--line)}
 .project .shot{display:block;border-radius:10px;overflow:hidden;background:var(--soft);border:1px solid var(--line)}
 .project .shot img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .project .shot:hover img{transform:scale(1.02)}
@@ -42,6 +42,10 @@ nav a:hover{color:var(--ink)}
 .links{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:14px;font-size:14px;font-weight:500}
 .links a{border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .2s}
 .links a:hover{border-color:var(--ink)}
+
+.client{padding:0 0 96px;color:var(--muted);font-size:15px}
+.client a{color:var(--ink);border-bottom:1px solid var(--line)}
+.client a:hover{border-color:var(--ink)}
 
 .about{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:56px 0 120px;border-top:1px solid var(--line)}
 .about h2{font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.2;margin-top:8px}
@@ -137,6 +141,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       </article>
 
     </div>
+    <p class="client">Live client work: <a href="https://wisestwallet.com/">WisestWallet</a>, a custom WordPress theme for a personal finance site.</p>
   </section>
 
   <section class="wrap about" id="about">
@@ -163,7 +168,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 <footer>
   <div class="wrap">
     <span>© 2026 Arnel Colar</span>
-    <span>Brands shown are fictional templates. Photos from Unsplash and Pexels.</span>
+    <span>Project brands are fictional templates. Photos from Unsplash and Pexels.</span>
   </div>
 </footer>
 
