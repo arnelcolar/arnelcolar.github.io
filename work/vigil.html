@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vigil: Identity monitoring template</title>
+<meta name="description" content="Dark web alerts, 3-bureau credit monitoring, data broker removal, password manager, VPN, and $1M recovery insurance. One membership for your whole household. Plans from $11.99/mo." />
+<meta name="theme-color" content="#fafafa" />
+<link rel="icon" href="assets/shield-red.svg" type="image/svg+xml" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --red:#cb2e29;
+  --red-tint:#e05a55;
+  --red-dark:#a8231f;
+  --red-soft:#fceae9;
+
+  --ink:#1e2430;
+  --ink-mid:#2d3442;
+  --muted:#5c6573;
+  --muted-soft:#6b7482;
+  --paper:#fafafa;
+  --paper-2:#ffff;
+  --white:#ffffff;
+  --ink-deep:#0b0e14;
+
+  --line:#e4e3e0;
+  --line-2:#d4d4d8;
+  --line-soft:rgba(30,36,48,.08);
+
+  --font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',ui-sans-serif,system-ui,'Segoe UI',Roboto,sans-serif;
+  --display:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',ui-sans-serif,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --r-sm:8px;
+  --r-md:8px;
+  --r-lg:8px;
+  --r-xl:8px;
+  --maxw:1200px;
+
+  --ease:cubic-bezier(.22,.61,.24,1);
+  --ease-spring:cubic-bezier(.34,1.3,.64,1);
+  --ease-soft:cubic-bezier(.25,.46,.45,.94);
+
+  --shadow-card:0 1px 2px rgba(30,36,48,.05), 0 8px 24px -8px rgba(30,36,48,.10);
+  --shadow-lift:0 24px 48px -16px rgba(30,36,48,.14);
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-feature-settings:'ss01' on,'cv11' on;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5,p,figure,blockquote{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none;margin:0;padding:0}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:var(--r-sm)}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.section{position:relative;padding:96px 0}
+@media(min-width:900px){.section{padding:124px 0}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:16px;
+}
+
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.08}
+.h1{font-size:clamp(38px,4.2vw,50px);line-height:1.02;letter-spacing:-.035em}
+.h2{font-size:clamp(28px,3.4vw,38px);line-height:1.05;letter-spacing:-.028em}
+.h3{font-size:clamp(20px,2.0vw,24px);line-height:1.18;letter-spacing:-.022em}
+.lede{font-size:clamp(15px,1.25vw,17px);line-height:1.6;color:var(--muted);font-weight:400;max-width:62ch}
+.lede--center{margin-left:auto;margin-right:auto}
+.lede--mt{margin-top:16px}
+
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:48px;padding:0 24px;border-radius:8px;
+  font-size:14px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;
+  transition:transform .35s var(--ease-spring), background .3s, box-shadow .35s, border-color .2s, color .2s;
+  overflow:hidden;
+}
+.btn:active{transform:translateY(1px) scale(.985)}
+.btn svg{width:15px;height:15px;flex:none;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn--primary{background:var(--red);color:#fff;box-shadow:none}
+.btn--primary:hover{background:var(--red-dark);transform:translateY(-2px)}
+.btn--light{background:rgba(255,255,255,.5);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(30,36,48,.12)}
+.btn--light:hover{background:#fff;transform:translateY(-2px)}
+.btn--ghost{border:1px solid var(--line-2);color:var(--ink);background:#fff}
+.btn--ghost:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,36,48,.09)}
+.btn--sm{height:40px;padding:0 18px;font-size:13px}
+
+.skip-link{
+  position:absolute;top:-100px;left:16px;z-index:200;
+  background:var(--ink);color:#fff;padding:12px 18px;border-radius:8px;font-weight:600;
+  transition:top .2s var(--ease);
+}
+.skip-link:focus{top:16px}
+
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,250,250,.85);
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid transparent;
+  transition:background .35s var(--ease), border-color .35s, box-shadow .35s;
+}
+.header.is-stuck{
+  background:rgba(255,255,255,.92);
+  border-bottom-color:var(--line);
+  box-shadow:0 1px 0 rgba(30,36,48,.02), 0 8px 24px -16px rgba(30,36,48,.1);
+}
+.header__inner{display:flex;align-items:center;gap:32px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.01em;flex:none;transition:transform .5s var(--ease-spring)}
+.brand:hover{transform:scale(1.03)}
+.brand img{width:24px;height:24px;display:block;transition:transform .6s var(--ease-spring)}
+.brand:hover img{transform:rotate(-10deg) scale(1.14)}
+.brand .accent{color:var(--red)}
+.nav{display:flex;align-items:center;gap:2px;margin-left:8px}
+.nav a{font-size:14px;font-weight:500;color:var(--muted);padding:8px 14px;border-radius:8px;transition:color .18s, background .18s}
+.nav a:hover{color:var(--ink);background:rgba(30,36,48,.05)}
+.header__actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.header__signin{font-size:14px;font-weight:500;color:var(--muted);padding:8px 12px;border-radius:8px;transition:color .18s,background .18s}
+.header__signin:hover{color:var(--ink);background:rgba(30,36,48,.05)}
+.menu-btn{display:none;width:42px;height:42px;border-radius:8px;border:1px solid var(--line);color:var(--ink);align-items:center;justify-content:center;background:#fff;transition:background .2s, transform .4s var(--ease-spring), border-color .2s}
+.menu-btn:hover{border-color:var(--ink);transform:scale(1.03)}
+.menu-btn:active{transform:scale(.94)}
+@media(max-width:960px){
+  .nav,.header__signin{display:none}
+  .menu-btn{display:flex}
+}
+.mobile-nav{
+  display:none;flex-direction:column;gap:2px;
+  padding:12px 24px 20px;
+  background:rgba(255,255,255,.98);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+.mobile-nav.is-open{display:flex;animation:menuIn .4s var(--ease-spring) both}
+@keyframes menuIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.mobile-nav a{padding:12px 4px;color:var(--ink-mid);font-weight:500;font-size:15px;border-bottom:1px solid var(--line-soft)}
+.mobile-nav a:last-child{border-bottom:0}
+
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg, #fbf8f6 0%, var(--paper) 40%, var(--paper) 100%);
+  background-color: #ffffff;
+  color:var(--ink);
+  padding:88px 0 0;
+  margin-top:-68px;
+  border-bottom:1px solid var(--line);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23e5e5e5' fill-opacity='0.2' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 46%, rgba(0, 0, 0, 1) 82%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 46%, rgba(0, 0, 0, 1) 82%);
+  z-index: 0;
+}
+/* Hero grid + red tracers */
+.hero__grid-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+  -webkit-mask-image:linear-gradient(to right, rgba(0,0,0,0) 22%, rgba(0,0,0,1) 78%);
+  mask-image:linear-gradient(to right, rgba(0,0,0,0) 22%, rgba(0,0,0,1) 78%);
+}
+.hero__tracer{
+  fill:none;
+  stroke:var(--red);
+  stroke-width:1;
+  stroke-linecap:butt;
+  stroke-linejoin:miter;
+  opacity:.22;
+  animation:heroTrace 14s linear infinite;
+}
+.hero__tracer--1{ stroke-dasharray:30 70; animation-delay:3s;    animation-duration:14s; }
+.hero__tracer--2{ stroke-dasharray:24 76; animation-delay:-4.5s; animation-duration:17s; }
+.hero__tracer--3{ stroke-dasharray:36 64; animation-delay:-9s;   animation-duration:20s; }
+
+@keyframes heroTrace{
+  from{ stroke-dashoffset: 0;   }
+  to  { stroke-dashoffset: -100; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero__tracer{ animation:none; stroke-dasharray:none; stroke-dashoffset:0; opacity:.3; }
+}
+@media(max-width:720px){ .hero__grid-svg{ display:none; } }
+.hero__grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr;gap:56px;align-items:center;
+  padding-top:56px;padding-bottom:72px;
+}
+@media(min-width:1000px){
+  .hero__grid{grid-template-columns:minmax(0,640px);gap:56px;padding-top:96px;padding-bottom:132px}
+}
+.hero h1{color:var(--ink);margin-bottom:22px}
+.hero h1 .red{color:var(--red)}
+.hero .lede{color:var(--muted);max-width:56ch}
+.hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero__actions--spaced{margin-top:32px}
+.hero__note{
+  margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-size:13px;color:var(--muted-soft);
+}
+.hero__note b{color:var(--ink);font-weight:600}
+
+.trust{
+  position:relative;z-index:2;
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:48px 0 52px;
+}
+.trust__label{
+  text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  color:var(--muted-soft);margin-bottom:24px;
+}
+.trust__row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:14px 40px;
+}
+.trust__item{
+  display:flex;align-items:center;gap:9px;
+  font-size:16px;font-weight:600;letter-spacing:-.01em;
+  color:var(--muted-soft);
+  transition:color .25s;
+  white-space:nowrap;
+}
+.trust__item svg{width:14px;height:14px;flex:none;color:var(--muted-soft);opacity:.9}
+.trust__item:hover{color:var(--ink)}
+
+.stats{
+  background:var(--paper-2);
+  border-top:1px solid var(--line);
+  padding:80px 0 96px;
+  position:relative;overflow:hidden;
+}
+.stats__grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(2,1fr);gap:36px 24px;
+}
+@media(min-width:900px){.stats__grid{grid-template-columns:repeat(4,1fr);gap:24px}}
+.stat{border-left:2px solid var(--line);padding-left:22px;transition:border-color .4s}
+.stat:hover{border-color:var(--red)}
+.stat__num{
+  display:block;font-family:var(--display);
+  font-size:clamp(28px,3.2vw,40px);font-weight:700;
+  letter-spacing:-.03em;color:var(--ink);line-height:1;
+  margin-bottom:10px;transition:color .4s;
+}
+.stat:hover .stat__num{color:var(--red)}
+.stat__label{font-size:13px;line-height:1.5;color:var(--muted);max-width:22ch}
+.stat__src{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-soft)}
+
+.stats__grid .stat:nth-child(2){--d:90ms}
+.stats__grid .stat:nth-child(3){--d:180ms}
+.stats__grid .stat:nth-child(4){--d:270ms}
+
+.usecases{background:var(--paper)}
+.features-head{max-width:680px;margin-bottom:44px}
+.tabs{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;
+  padding:14px;margin-left:-14px;margin-right:-14px;
+}
+.tab{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:10px 18px;border-radius:8px;
+  font-size:12px;font-weight:700;color:var(--muted);
+  letter-spacing:.08em;text-transform:uppercase;
+  transition:background .2s, color .2s, border-color .2s, box-shadow .2s, transform .35s var(--ease-spring);
+}
+.tab:hover{color:var(--ink);background:#fff;border-color:var(--line);transform:translateY(-2px);box-shadow:0 4px 12px rgba(30,36,48,.06)}
+.tab.is-active{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 8px 20px rgba(30,36,48,.16)}
+
+.panel{display:none}
+.panel.is-active{display:block;animation:panelIn .55s var(--ease) both}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.panel__grid{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+@media(min-width:960px){.panel__grid{grid-template-columns:1.05fr .95fr;gap:64px}}
+.panel__copy h3{margin-bottom:16px}
+.panel__list{margin-top:28px;display:flex;flex-direction:column;gap:2px}
+.panel__list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-size:14.5px;line-height:1.55;color:var(--ink-mid);
+  padding:11px 0;border-bottom:1px solid var(--line-soft);
+  transition:transform .5s var(--ease), color .4s;
+}
+.panel__list li:hover{transform:translateX(4px);color:var(--ink)}
+.panel__list li:last-child{border-bottom:0}
+.check{
+  flex:none;width:20px;height:20px;border-radius:8px;margin-top:1px;
+  display:grid;place-items:center;
+  background:var(--red-soft);
+  border:1px solid rgba(203,46,41,.18);
+  transition:transform .5s var(--ease-spring), background .3s, border-color .3s;
+}
+.panel__list li:hover .check{transform:scale(1.12) rotate(-6deg);background:var(--red);border-color:var(--red)}
+.check svg{width:11px;height:11px;stroke:var(--red);stroke-width:2.4;fill:none;transition:stroke .3s}
+.panel__list li:hover .check svg{stroke:#fff}
+
+.codecard{
+  border-radius:var(--r-lg);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 30px 60px -28px rgba(30,36,48,.35),
+    0 10px 24px -12px rgba(30,36,48,.24);
+  overflow:hidden;
+}
+.codecard__img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4 / 3;
+  object-fit:cover;
+  background:#12151d;
+  filter:saturate(.92) contrast(1.04);
+  transition:transform .9s var(--ease), filter .6s var(--ease);
+}
+.visual-scene .codecard:hover .codecard__img{
+  transform:scale(1.045);
+  filter:saturate(1.05) contrast(1.04);
+}
+
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip-sm{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;
+  border-radius:9999px;
+  background:#fff;
+  border:1px solid var(--line);
+  font-size:13px;font-weight:500;color:var(--ink-mid);
+  box-shadow:0 1px 2px rgba(30,36,48,.04);
+  transition:all .25s var(--ease);
+}
+.chip-sm:hover{
+  background:var(--paper);
+  border-color:var(--line-2);
+  box-shadow:0 2px 6px rgba(30,36,48,.06);
+  color:var(--ink);
+  transform:translateY(-1px);
+}
+.pull-quote{margin-top:28px;padding-left:16px;border-left:2px solid var(--ink)}
+.pull-quote__text{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:-.015em;color:var(--ink);line-height:1.4}
+.pull-quote__cap{margin-top:6px;font-size:12.5px;color:var(--muted-soft)}
+
+.visual-scene{position:relative;padding:28px 6px}
+.visual-scene .codecard{position:relative;transform:rotate(-1.1deg)}
+.scene-badge{
+  position:absolute;z-index:2;bottom:-16px;right:14px;
+  display:flex;flex-direction:column;gap:1px;
+  background:var(--red);color:#fff;padding:10px 16px;border-radius:8px;
+  box-shadow:var(--shadow-lift);transform:rotate(1.4deg);
+}
+.scene-badge .sb-label{font-size:11px;font-weight:600;opacity:.75;letter-spacing:.04em;text-transform:uppercase}
+.scene-badge .sb-value{font-family:var(--mono);font-size:15px;font-weight:600}
+
+.vault{
+  background:var(--paper-2);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  position:relative;overflow:hidden;
+}
+.vault .wrap{position:relative;z-index:1}
+.vault__grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center}
+@media(min-width:1000px){.vault__grid{grid-template-columns:1fr 1.05fr;gap:72px}}
+.vault h2{color:var(--ink);margin-bottom:18px}
+.pillars{margin-top:38px;display:grid;gap:2px}
+.pillars .pillar:nth-child(2){--d:90ms}
+.pillars .pillar:nth-child(3){--d:180ms}
+.pillar{
+  padding:20px 0;border-top:1px solid var(--line);
+}
+.pillar:last-child{border-bottom:1px solid var(--line)}
+.pillar h3{color:var(--ink);font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-.015em}
+.pillar p{font-size:14px;line-height:1.6;color:var(--muted)}
+
+.stack{
+  border-radius:var(--r-lg);
+  padding:28px 24px;
+}
+.vault__grid .stack.reveal{--d:120ms}
+
+.security{background:var(--white)}
+.security__head{max-width:680px;margin:0 auto 56px;text-align:center}
+.security__head .eyebrow{margin-left:auto;margin-right:auto}
+.security__head h2{margin-bottom:16px}
+.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(min-width:900px){.badges{grid-template-columns:repeat(4,1fr);gap:20px}}
+.badge{
+  position:relative;border-radius:var(--r-lg);
+  border:1px solid var(--line);
+  background:#fff;
+  padding:32px 22px 28px;text-align:center;overflow:hidden;
+  transition:transform .45s var(--ease-spring), box-shadow .45s var(--ease), border-color .35s;
+}
+.badge:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-card);border-color:transparent}
+.badge__ring{
+  width:64px;height:64px;margin:0 auto 18px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--ink);
+  position:relative;
+}
+.badge__ring::after{content:'';position:absolute;inset:4px;border-radius:50%;background:#fff}
+.badge__ring span{position:relative;z-index:1;font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+.badge h3{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:6px}
+.badge p{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.badges .badge:nth-child(2){--d:80ms}
+.badges .badge:nth-child(3){--d:160ms}
+.badges .badge:nth-child(4){--d:240ms}
+.compliance-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:48px}
+.compliance-chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-mid);border:1px solid var(--line);border-radius:9999px;
+  padding:8px 16px;background:#fff;
+  box-shadow:0 1px 2px rgba(30,36,48,.04);
+  transition:all .25s var(--ease);
+}
+.compliance-chip:hover{
+  transform:translateY(-2px);
+  border-color:var(--line-2);
+  background:var(--paper);
+  color:var(--ink);
+  box-shadow:0 2px 6px rgba(30,36,48,.06);
+}
+
+.pricing{background:var(--paper-2);padding:96px 0}
+.pricing-head{max-width:680px;margin:0 auto 56px;text-align:center}
+.pricing-head .eyebrow{margin-left:auto;margin-right:auto}
+.pricing-head h2{margin-bottom:16px}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:stretch}
+@media(min-width:900px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+.plan{
+  position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:34px 28px 30px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .55s var(--ease), box-shadow .55s var(--ease), border-color .4s;
+}
+.plan:hover{transform:translateY(-8px);box-shadow:var(--shadow-lift);border-color:transparent}
+.plan.featured{background:#fff;border:1px solid var(--ink)}
+.plan-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--red-soft);color:var(--red);
+  border:1px solid rgba(203,46,41,.18);
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:6px 14px;border-radius:8px;white-space:nowrap;
+}
+.plan-tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.plan-name{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:-.01em}
+.plan-desc{font-size:14px;color:var(--muted)}
+.plan-price{font-family:var(--display);font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;margin:6px 0 0;transition:transform .5s var(--ease-spring)}
+.plan:hover .plan-price{transform:scale(1.05)}
+.plan-price span{font-size:15px;color:var(--muted);font-weight:500;margin-left:4px}
+.plan-billed{font-size:13px;color:var(--muted)}
+.plan-feat{display:flex;flex-direction:column;gap:11px;margin:16px 0 8px;padding-top:18px;border-top:1px solid var(--line);flex:1}
+.plan-feat li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-mid);transition:transform .4s}
+.plan-feat li:hover{transform:translateX(3px)}
+.plan-feat svg{flex:none;margin-top:3px;color:var(--ink-mid)}
+.plan .btn{margin-top:8px;width:100%}
+.pricing-fineprint{margin:32px auto 0;max-width:840px;font-size:12px;line-height:1.6;color:var(--muted);text-align:center}
+.pricing-grid .plan:nth-child(2){--d:100ms}
+.pricing-grid .plan:nth-child(3){--d:200ms}
+
+.reviews{background:var(--paper);padding:96px 0;border-top:1px solid var(--line)}
+.reviews-head{text-align:center;max-width:640px;margin:0 auto 48px}
+.reviews-head .eyebrow{margin-left:auto;margin-right:auto}
+.reviews-head h2{margin:12px 0 0}
+.review-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:900px){.review-grid{grid-template-columns:repeat(3,1fr)}}
+.review{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;
+  display:flex;flex-direction:column;gap:16px;
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease), border-color .35s;
+}
+.review:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift);border-color:transparent}
+.review .stars{display:flex;gap:3px;color:var(--red)}
+.review .stars svg{width:14px;height:14px}
+.review p{font-size:14.5px;line-height:1.65;color:var(--ink)}
+.review-by{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid var(--line-soft)}
+.review-av{
+  width:38px;height:38px;border-radius:50%;background:var(--red-soft);color:var(--red);
+  display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:13px;
+  transition:transform .55s var(--ease-spring), background .35s, color .35s;
+}
+.review:hover .review-av{transform:scale(1.12) rotate(-8deg);background:var(--red);color:#fff}
+.review-name{font-weight:600;font-size:14px}
+.review-role{font-size:11px;color:var(--muted-soft);font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.reviews-disclaimer{margin-top:26px;font-size:12px;color:var(--muted-soft);text-align:center}
+.review-grid .review:nth-child(2){--d:100ms}
+.review-grid .review:nth-child(3){--d:200ms}
+
+.getstarted{background:var(--paper-2);padding:96px 0 104px;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.getstarted .wrap{position:relative;z-index:1}
+.getstarted-head{text-align:center;max-width:760px;margin:0 auto 56px}
+.getstarted-head .eyebrow{margin-left:auto;margin-right:auto}
+.getstarted-head h2{margin:14px 0 12px}
+.getstarted-head .accent{color:var(--red);position:relative;display:inline-block}
+.gs-grid{display:grid;grid-template-columns:1fr;gap:24px;align-items:stretch}
+@media(min-width:980px){.gs-grid{grid-template-columns:repeat(3,1fr)}}
+.gs-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:30px 26px 34px;display:flex;flex-direction:column;gap:18px;text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .55s var(--ease), box-shadow .55s var(--ease), border-color .4s;
+}
+.gs-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lift);border-color:transparent}
+.gs-num{
+  align-self:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--red);background:var(--red-soft);
+  padding:6px 14px;border-radius:8px;
+  transition:transform .5s var(--ease-spring), background .35s, color .35s;
+}
+.gs-card:hover .gs-num{transform:scale(1.06);background:var(--red);color:#fff}
+.gs-phone{position:relative;width:100%;max-width:220px;margin:6px auto;transition:transform .7s var(--ease-spring)}
+.gs-card:hover .gs-phone{transform:translateY(-4px) scale(1.03)}
+.gs-phone img{width:100%;height:auto;border-radius:var(--r-md);filter:drop-shadow(0 20px 40px rgba(30,36,48,.14))}
+.gs-card h3{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:-.015em;line-height:1.3;margin:4px 0 0}
+.gs-card p{font-size:14px;line-height:1.55;color:var(--muted);flex:1}
+.gs-cta{
+  display:inline-flex;align-items:center;justify-content:center;align-self:center;
+  margin-top:6px;padding:12px 24px;border-radius:8px;
+  background:var(--red);color:#fff;font-weight:600;font-size:14px;
+  box-shadow:none;
+  transition:transform .45s var(--ease-spring), background .3s, box-shadow .4s;
+}
+.gs-cta:hover{background:var(--red-dark);transform:translateY(-3px)}
+.gs-stores{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.gs-stores a{display:inline-block;height:40px;transition:transform .5s var(--ease-spring), filter .4s}
+.gs-stores a:hover{transform:translateY(-3px) scale(1.03)}
+.gs-stores span{display:inline-flex;align-items:center;height:100%;padding:0 16px;border-radius:10px;background:var(--ink);color:#fff;font-size:.8125rem;font-weight:600}
+.gs-icon{display:grid;place-items:center;aspect-ratio:1;max-width:150px;margin:0 auto;border-radius:var(--r-lg);background:var(--red-soft,#fdecea);color:var(--red,#cb2e29)}
+.gs-grid .gs-card:nth-child(2){--d:120ms}
+.gs-grid .gs-card:nth-child(3){--d:240ms}
+
+.closer{background:var(--paper);padding:96px 0 110px;position:relative}
+.closer::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23e5e5e5' fill-opacity='0.2' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+}
+.closer__card{
+  position:relative;overflow:hidden;border-radius:var(--r-xl);
+  background:#0e1016;
+  color:#fff;padding:64px 40px 56px;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset, 0 40px 80px -32px rgba(30,36,48,.4);
+  isolation:isolate;
+}
+.closer__card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.22;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 304 304' width='304' height='304'%3E%3Cpath fill='%23e5e5e5' fill-opacity='0.2' d='M44.1 224a5 5 0 1 1 0 2H0v-2h44.1zm160 48a5 5 0 1 1 0 2H82v-2h122.1zm57.8-46a5 5 0 1 1 0-2H304v2h-42.1zm0 16a5 5 0 1 1 0-2H304v2h-42.1zm6.2-114a5 5 0 1 1 0 2h-86.2a5 5 0 1 1 0-2h86.2zm-256-48a5 5 0 1 1 0 2H0v-2h12.1zm185.8 34a5 5 0 1 1 0-2h86.2a5 5 0 1 1 0 2h-86.2zM258 12.1a5 5 0 1 1-2 0V0h2v12.1zm-64 208a5 5 0 1 1-2 0v-54.2a5 5 0 1 1 2 0v54.2zm48-198.2V80h62v2h-64V21.9a5 5 0 1 1 2 0zm16 16V64h46v2h-48V37.9a5 5 0 1 1 2 0zm-128 96V208h16v12.1a5 5 0 1 1-2 0V210h-16v-76.1a5 5 0 1 1 2 0zm-5.9-21.9a5 5 0 1 1 0 2H114v48H85.9a5 5 0 1 1 0-2H112v-48h12.1zm-6.2 130a5 5 0 1 1 0-2H176v-74.1a5 5 0 1 1 2 0V242h-60.1zm-16-64a5 5 0 1 1 0-2H114v48h10.1a5 5 0 1 1 0 2H112v-48h-10.1zM66 284.1a5 5 0 1 1-2 0V274H50v30h-2v-32h18v12.1zM236.1 176a5 5 0 1 1 0 2H226v94h48v32h-2v-30h-48v-98h12.1zm25.8-30a5 5 0 1 1 0-2H274v44.1a5 5 0 1 1-2 0V146h-10.1zm-64 96a5 5 0 1 1 0-2H208v-80h16v-14h-42.1a5 5 0 1 1 0-2H226v18h-16v80h-12.1zm86.2-210a5 5 0 1 1 0 2H272V0h2v32h10.1zM98 101.9V146H53.9a5 5 0 1 1 0-2H96v-42.1a5 5 0 1 1 2 0zM53.9 34a5 5 0 1 1 0-2H80V0h2v34H53.9zm60.1 3.9V66H82v64H69.9a5 5 0 1 1 0-2H80V64h32V37.9a5 5 0 1 1 2 0zM101.9 82a5 5 0 1 1 0-2H128V37.9a5 5 0 1 1 2 0V82h-28.1zm16-64a5 5 0 1 1 0-2H146v44.1a5 5 0 1 1-2 0V18h-26.1zm102.2 270a5 5 0 1 1 0 2H98v14h-2v-16h124.1zM242 149.9V160h16v34h-16v62h48v48h-2v-46h-48v-66h16v-30h-16v-12.1a5 5 0 1 1 2 0zM53.9 18a5 5 0 1 1 0-2H64V2H48V0h18v18H53.9zm112 32a5 5 0 1 1 0-2H192V0h50v2h-48v48h-28.1zm-48-48a5 5 0 0 1-9.8-2h2.07a3 3 0 1 0 5.66 0H178v34h-18V21.9a5 5 0 1 1 2 0V32h14V2h-58.1zm0 96a5 5 0 1 1 0-2H137l32-32h39V21.9a5 5 0 1 1 2 0V66h-40.17l-32 32H117.9zm28.1 90.1a5 5 0 1 1-2 0v-76.51L175.59 80H224V21.9a5 5 0 1 1 2 0V82h-49.59L146 112.41v75.69zm16 32a5 5 0 1 1-2 0v-99.51L184.59 96H300.1a5 5 0 0 1 3.9-3.9v2.07a3 3 0 0 0 0 5.66v2.07a5 5 0 0 1-3.9-3.9H185.41L162 121.41v98.69zm-144-64a5 5 0 1 1-2 0v-3.51l48-48V48h32V0h2v50H66v55.41l-48 48v2.69zM50 53.9v43.51l-48 48V208h26.1a5 5 0 1 1 0 2H0v-65.41l48-48V53.9a5 5 0 1 1 2 0zm-16 16V89.41l-34 34v-2.82l32-32V69.9a5 5 0 1 1 2 0zM12.1 32a5 5 0 1 1 0 2H9.41L0 43.41V40.6L8.59 32h3.51zm265.8 18a5 5 0 1 1 0-2h18.69l7.41-7.41v2.82L297.41 50H277.9zm-16 160a5 5 0 1 1 0-2H288v-71.41l16-16v2.82l-14 14V210h-28.1zm-208 32a5 5 0 1 1 0-2H64v-22.59L40.59 194H21.9a5 5 0 1 1 0-2H41.41L66 216.59V242H53.9zm150.2 14a5 5 0 1 1 0 2H96v-56.6L56.6 162H37.9a5 5 0 1 1 0-2h19.5L98 200.6V256h106.1zm-150.2 2a5 5 0 1 1 0-2H80v-46.59L48.59 178H21.9a5 5 0 1 1 0-2H49.41L82 208.59V258H53.9zM34 39.8v1.61L9.41 66H0v-2h8.59L32 40.59V0h2v39.8zM2 300.1a5 5 0 0 1 3.9 3.9H3.83A3 3 0 0 0 0 302.17V256h18v48h-2v-46H2v42.1zM34 241v63h-2v-62H0v-2h34v1zM17 18H0v-2h16V0h2v18h-1zm273-2h14v2h-16V0h2v16zm-32 273v15h-2v-14h-14v14h-2v-16h18v1zM0 92.1A5.02 5.02 0 0 1 6 97a5 5 0 0 1-6 4.9v-2.07a3 3 0 1 0 0-5.66V92.1zM80 272h2v32h-2v-32zm37.9 32h-2.07a3 3 0 0 0-5.66 0h-2.07a5 5 0 0 1 9.8 0zM5.9 0A5.02 5.02 0 0 1 0 5.9V3.83A3 3 0 0 0 3.83 0H5.9zm294.2 0h2.07A3 3 0 0 0 304 3.83V5.9a5 5 0 0 1-3.9-5.9zm3.9 300.1v2.07a3 3 0 0 0-1.83 1.83h-2.07a5 5 0 0 1 3.9-3.9zM97 100a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-48 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 96a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-144a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm96 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM49 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-32 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM33 68a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 240a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm80-176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 48a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm112 176a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-16 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 180a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0-32a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM17 84a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm32 64a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm16-16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'%3E%3C/path%3E%3C/svg%3E");
+  background-size:304px 304px;
+  -webkit-mask-image:radial-gradient(circle at 85% 20%, #000, transparent 62%);
+  mask-image:radial-gradient(circle at 85% 20%, #000, transparent 62%);
+}
+@media(min-width:900px){.closer__card{padding:84px 72px 72px}}.closer__grid{display:grid;gap:44px;align-items:end}
+@media(min-width:900px){.closer__grid{grid-template-columns:1.1fr 1fr;gap:64px}}
+.closer h2{color:#fff;margin-bottom:16px}
+.closer .lede{color:rgba(255,255,255,.65)}
+.closer .eyebrow{background:rgba(224,90,85,.14);color:var(--red-tint);border-color:rgba(224,90,85,.28)}
+.closer__cards{display:grid;grid-template-columns:1fr;gap:14px;margin-top:6px}
+@media(min-width:560px){.closer__cards{grid-template-columns:repeat(3,1fr)}}
+.mini{
+  display:flex;flex-direction:column;gap:26px;
+  padding:22px 20px;border-radius:8px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(10px);
+  transition:background .25s, transform .35s var(--ease), border-color .25s;
+}
+.mini:hover{background:rgba(255,255,255,.09);transform:translateY(-3px);border-color:rgba(224,90,85,.4)}
+.mini__dots{display:grid;grid-template-columns:repeat(5,5px);grid-template-rows:repeat(5,5px);gap:3px}
+.mini__dots i{width:5px;height:5px;border-radius:1px;background:rgba(255,255,255,.14)}
+.mini__dots i.on{background:var(--red-tint)}
+.mini h3{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:-.01em;margin-bottom:4px;color:#fff}
+.mini p{font-size:12.5px;color:rgba(255,255,255,.55)}
+
+.footer{
+  background:#fff;color:var(--ink);
+  padding:72px 0 32px;position:relative;
+  border-top:1px solid var(--line);
+}
+.footer .wrap{position:relative;z-index:1}
+.footer__top{display:grid;grid-template-columns:1fr;gap:48px;padding-bottom:52px;border-bottom:1px solid var(--line)}
+@media(min-width:900px){.footer__top{grid-template-columns:1.4fr 2.6fr;gap:64px}}
+.footer__brand .brand{margin-bottom:18px;color:var(--ink)}
+.footer__brand p{font-size:13.5px;line-height:1.65;color:var(--muted);max-width:36ch}
+.footer__address{margin-top:14px;font-size:13px;color:var(--muted);line-height:1.6}
+.footer__legal{margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-soft)}
+.footer__cols{display:grid;grid-template-columns:repeat(2,1fr);gap:36px 24px}
+@media(min-width:640px){.footer__cols{grid-template-columns:repeat(4,1fr)}}
+.footer__col h6{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:16px}
+.footer__col li{margin-bottom:11px}
+.footer__col a{font-size:14px;color:var(--muted);transition:color .18s, transform .35s}
+.footer__col a:hover{color:var(--red);transform:translateX(3px);display:inline-block}
+.footer__bottom{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;padding-top:26px;font-size:13px;color:var(--muted-soft)}
+.social{display:flex;gap:8px}
+.social a{
+  width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line);color:var(--muted);
+  transition:background .25s, color .25s, border-color .25s, transform .5s var(--ease-spring);
+}
+.social a:hover{background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-4px) scale(1.08)}
+.social svg{width:15px;height:15px;fill:currentColor}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-soft), transform .9s var(--ease-spring);transition-delay:var(--d,0ms);will-change:opacity, transform}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+.tab-wrapper{
+  position:relative;
+  width:100%;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(24px,3vw,40px);
+  padding:clamp(16px,2.6vw,34px);
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fff;
+}
+
+.tab-wrapper .tabs{
+  margin:0 auto;
+  padding:10px;
+  gap:6px;
+  border-radius:12px;
+  align-content: center;
+}
+
+@media (max-width:900px){
+  .tab-wrapper{border-radius:14px}
+  .tab-wrapper .tabs{padding:8px}
+  .tab-wrapper .tab{padding:9px 14px}
+}
+
+@media (max-width:720px){
+  .tab-wrapper.wrap{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    align-items:stretch;
+    gap:14px;
+    margin-left:-24px;
+    margin-right:-24px;
+    width:calc(100% + 48px);
+    max-width:none;
+    padding:20px 0 28px;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    border-radius:0;
+    overflow-x:auto;
+    overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:20px;
+    scroll-padding-right:20px;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .tab-wrapper.wrap::-webkit-scrollbar{display:none}
+  .tab-wrapper .tabs{display:none !important}
+  .tab-wrapper .panel,
+  .tab-wrapper .panel[hidden]{
+    display:block !important;
+    flex:0 0 calc(100% - 80px);
+    max-width:360px;
+    scroll-snap-align:start;
+    background:#fff;
+    border-radius:16px;
+    padding:22px 18px 28px;
+    box-shadow:
+      0 1px 2px rgba(30,36,48,.04),
+      0 14px 34px -22px rgba(30,36,48,.22);
+    animation:none;
+    margin:0;
+    position:relative;
+  }
+  .tab-wrapper .panel:first-child{margin-left:20px}
+  .tab-wrapper .panel:last-child{margin-right:20px}
+  .tab-wrapper .panel__grid{grid-template-columns:1fr;gap:22px;}
+  .tab-wrapper .panel__copy h3{font-size:21px;line-height:1.2}
+  .tab-wrapper .panel__copy .lede{font-size:14.5px}
+  .tab-wrapper .panel__list li{font-size:14px;padding:9px 0}
+  .tab-wrapper .pull-quote{margin-top:22px}
+  .tab-wrapper .pull-quote__text{font-size:16px}
+  .tab-wrapper .chip-row{gap:6px;margin-top:16px}
+  .tab-wrapper .chip-sm{font-size:12px;padding:6px 12px;gap:6px}
+  .tab-wrapper .eyebrow{margin-bottom:14px}
+  .tab-wrapper .visual-scene{padding:16px 2px 30px}
+  .tab-wrapper .scene-badge{right:6px;bottom:-12px;padding:8px 12px}
+  .tab-wrapper .scene-badge .sb-value{font-size:13px}
+  .tab-wrapper .scene-badge .sb-label{font-size:11px}
+  .tab-wrapper.wrap::after{content:"";flex:0 0 1px;}
+}
+
+.usecases-section{
+  background:var(--paper);
+  padding:96px 0;
+  border-top:1px solid var(--line);
+}
+.usecases-section__head{
+  max-width:680px;
+  margin:0 auto 56px;
+  text-align:center;
+}
+.usecases-section__head .eyebrow{margin-left:auto;margin-right:auto}
+.usecases-section__head h2{margin:14px 0 16px}
+
+.usecase-row{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:40px;
+  align-items:center;
+  padding:64px 0;
+}
+.usecase-row:first-of-type{border-top:0;padding-top:0}
+@media(min-width:960px){
+  .usecase-row{grid-template-columns:1.05fr .95fr;gap:72px}
+  .usecase-row--reverse .usecase-row__copy{order:2}
+  .usecase-row--reverse .visual-scene{order:1}
+}
+
+.usecase-row__copy h3{
+  font-family:var(--display);
+  font-size:clamp(24px,2.8vw,33px);
+  font-weight:600;
+  letter-spacing:-.022em;
+  line-height:1.15;
+  margin-bottom:18px;
+}
+.usecase-row__copy .lede{margin-bottom:26px;max-width:56ch}
+
+.usecase-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.usecase-list li{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  font-size:14.5px;
+  line-height:1.55;
+  color:var(--ink-mid);
+  padding:11px 0;
+  border-bottom:1px solid var(--line-soft);
+  transition:transform .5s var(--ease), color .4s;
+}
+.usecase-list li:hover{transform:translateX(4px);color:var(--ink)}
+.usecase-list li:last-child{border-bottom:0}
+
+.usecase-check{
+  flex:none;width:20px;height:20px;border-radius:8px;margin-top:1px;
+  display:grid;place-items:center;
+  background:var(--red-soft);
+  border:1px solid rgba(203,46,41,.18);
+  transition:transform .5s var(--ease-spring), background .3s, border-color .3s;
+}
+.usecase-list li:hover .usecase-check{
+  transform:scale(1.12) rotate(-6deg);
+  background:var(--red);
+  border-color:var(--red);
+}
+.usecase-check svg{width:11px;height:11px;stroke:var(--red);stroke-width:2.4;fill:none;transition:stroke .3s}
+.usecase-list li:hover .usecase-check svg{stroke:#fff}
+
+.usecase-row__cta{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:28px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--ink);
+  border-bottom:1px solid rgba(30,36,48,.25);
+  padding-bottom:2px;
+  transition:border-color .2s, gap .2s, color .2s;
+}
+.usecase-row__cta:hover{border-color:var(--red);color:var(--red);gap:11px}
+
+.usecase-row .visual-scene.reveal{--d:120ms}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#top">Skip to main content</a>
+
+<header class="header" id="header">
+  <div class="wrap header__inner">
+    <a class="brand" href="#top" aria-label="Vigil home">
+      <img src="assets/shield-red.svg" alt="" width="24" height="24">
+      <span>VI<span class="accent">GIL</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#features">Protection</a>
+      <a href="#use-cases">Use cases</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#security">Security</a>
+      <a href="#getstarted">Get the app</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__signin" href="#">Login</a>
+      <a class="btn btn--light btn--sm" href="#pricing">
+        Start monitoring
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#features">Protection</a>
+    <a href="#use-cases">Use cases</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#security">Security</a>
+    <a href="#getstarted">Get the app</a>
+    <a href="#">Login</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <svg class="hero__grid-svg" aria-hidden="true" viewBox="0 0 1920 900" preserveAspectRatio="xMaxYMid slice">
+  <defs>
+    <pattern id="heroGridPattern" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M 0 0 H 72 M 0 0 V 72" fill="none" stroke="rgba(30,36,48,.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="0" y="0" width="1920" height="900" fill="url(#heroGridPattern)"/>
+ <path pathLength="100" class="hero__tracer hero__tracer--1" d="M 2160 144 L 1224 144 L 1224 288 L 864 288 L 864 432 L 504 432 L 504 576 L 144 576"/>
+<path pathLength="100" class="hero__tracer hero__tracer--2" d="M 1800 288 L 1512 288 L 1512 432 L 1080 432 L 1080 576 L 648 576 L 648 720 L 216 720"/>
+    <path pathLength="100" class="hero__tracer hero__tracer--3" d="M 1872 432 L 1368 432 L 1368 576 L 936 576 L 936 720 L 504 720 L 504 864 L 72 864"/></svg>
+  <div class="wrap hero__grid">
+
+    <div class="hero__copy">
+
+      <h1 class="h1">
+        Know within minutes if your <span class="red">identity is compromised</span>
+      </h1>
+
+      <p class="lede">
+        We watch the dark web, all three credit bureaus, and 120+ data brokers for signs of
+        fraud. You get an alert before the damage shows up on your credit.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#pricing">
+          Protect my family
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#pricing">See plans</a>
+      </div>
+
+      <div class="hero__note">
+        <span>Plans from <b>$11.99/mo</b></span>
+        <span>Families from <b>$29.99/mo</b></span>
+        <span>Cancel anytime</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="trust">
+    <div class="trust__label">Backed by the three major bureaus and 120+ data brokers</div>
+    <div class="trust__row">
+      <span class="trust__item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>TransUnion</span>
+      <span class="trust__item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Equifax</span>
+      <span class="trust__item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Experian</span>
+      <span class="trust__item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>$1M Recovery Insurance</span>
+      <span class="trust__item"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.65-4.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>120+ Data Brokers Scanned</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stats__grid">
+        <div class="stat reveal">
+          <span class="stat__num">$10.3B</span>
+          <span class="stat__label">Lost to fraud in 2023</span>
+          <span class="stat__src">Source: FTC</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">5.4M</span>
+          <span class="stat__label">Identity theft reports filed in 2023</span>
+          <span class="stat__src">Source: FTC</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">61%</span>
+          <span class="stat__label">Of victims struggled to cover basic needs</span>
+          <span class="stat__src">Source: ITRC</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">120+</span>
+          <span class="stat__label">Data brokers we scan every day</span>
+          <span class="stat__src">Continuous monitoring</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section usecases" id="features">
+  <div class="wrap">
+    <div class="reveal features-head">
+      <span class="eyebrow">What we watch</span>
+      <h2 class="h2" style="margin-bottom:16px">Everything we watch, in one place</h2>
+      <p class="lede">
+        Every plan includes all eight protections. Toggle through below to see what's
+        watching over you.
+      </p>
+    </div>
+
+<div class="tab-wrapper wrap">
+    <div class="tabs" role="tablist" aria-label="Protection features">
+      <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-id" id="tab-id" data-tab="id">Identity</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-credit" id="tab-credit" data-tab="credit">Credit</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-privacy" id="tab-privacy" data-tab="privacy">Privacy</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-info" id="tab-info" data-tab="info">Information</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-pw" id="tab-pw" data-tab="pw">Passwords</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-net" id="tab-net" data-tab="net">Network</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-doc" id="tab-doc" data-tab="doc">Documents</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-fam" id="tab-fam" data-tab="fam">Family</button>
+    </div>
+
+    <div class="panel is-active" id="panel-id" role="tabpanel" aria-labelledby="tab-id">
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Identity monitoring</span>
+          <h3 class="h3">We watch the dark web so you don't have to.</h3>
+          <p class="lede lede--mt">
+            Your email, SSN, and passwords end up on dark web marketplaces after a breach.
+            We watch those marketplaces and alert you the moment your data shows up.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Dark web exposure and breach detection</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>SSN trace and public record monitoring</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Lost wallet assistance and guided recovery</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">Dark web scan</span>
+            <span class="chip-sm">SSN trace</span>
+            <span class="chip-sm">Wallet recovery</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">The moment your data surfaces anywhere on the dark web, you're the first person to know.</p>
+            <p class="pull-quote__cap">Real-time breach and marketplace scanning</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80" alt="Dark web and cybersecurity monitoring" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Status</span><span class="sb-value">Mitigated</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-credit" role="tabpanel" aria-labelledby="tab-credit" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Credit Protect</span>
+          <h3 class="h3">All three bureaus, checked every day.</h3>
+          <p class="lede lede--mt">
+            We connect directly to TransUnion, Equifax, and Experian. When your score moves
+            or someone runs your credit, you hear about it within 24 hours.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>3-bureau credit report monitoring</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Score change and new inquiry alerts</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Credit score simulator and tracker</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">TransUnion</span>
+            <span class="chip-sm">Equifax</span>
+            <span class="chip-sm">Experian</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">Every score movement and every new inquiry is checked against all three bureaus, daily.</p>
+            <p class="pull-quote__cap">3-bureau monitoring, 24-hour alerts</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=8" alt="Credit score and financial monitoring charts" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Avg score</span><span class="sb-value">742</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-privacy" role="tabpanel" aria-labelledby="tab-privacy" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Privacy Protect</span>
+          <h3 class="h3">Get your data off the sites that sell it.</h3>
+          <p class="lede lede--mt">
+            Data brokers publish your address, phone number, and relatives for anyone to find.
+            We scan 120+ brokers and file removal requests on your behalf.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Automated removal from 120+ broker sites</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Public directory cleanup and safeguarding</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Re-listing monitoring and re-removal</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">120+ brokers</span>
+            <span class="chip-sm">Auto removal</span>
+            <span class="chip-sm">Re-listing watch</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">We don't just remove your data once. We keep checking that it stays removed.</p>
+            <p class="pull-quote__cap">Continuous data broker cleanup</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80" alt="Data privacy and personal information protection" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Removed</span><span class="sb-value">47 sites</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-info" role="tabpanel" aria-labelledby="tab-info" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Information Protect</span>
+          <h3 class="h3">Catch address, SSN, and title fraud early.</h3>
+          <p class="lede lede--mt">
+            Thieves change your address or open a payday loan in your name. We watch for those
+            signals before they hit your credit file.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Change of address tracking</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Comprehensive SSN monitoring</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Home title monitoring</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">Address</span>
+            <span class="chip-sm">SSN</span>
+            <span class="chip-sm">Home title</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">Address changes, loan applications, and title transfers are flagged before they become a mess to fix.</p>
+            <p class="pull-quote__cap">Full identity signal coverage</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80" alt="Personal records and identity information monitoring" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Status</span><span class="sb-value">All clear</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-pw" role="tabpanel" aria-labelledby="tab-pw" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Password Protect</span>
+          <h3 class="h3">One password unlocks everything else.</h3>
+          <p class="lede lede--mt">
+            A full password manager with zero-knowledge encryption. Browser autofill and email
+            aliases for every account you own.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Encrypted vault with zero-knowledge architecture</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Browser extension for autofill and capture</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Email aliases that hide your real address</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">Zero-knowledge vault</span>
+            <span class="chip-sm">Autofill</span>
+            <span class="chip-sm">Email aliases</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">One vault, zero-knowledge encryption. We couldn't read your passwords even if we wanted to.</p>
+            <p class="pull-quote__cap">Encrypted vault, built in</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=900&q=80" alt="Password manager and encrypted login security" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Secured</span><span class="sb-value">412 logins</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-net" role="tabpanel" aria-labelledby="tab-net" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Network Protect</span>
+          <h3 class="h3">A VPN in the same app.</h3>
+          <p class="lede lede--mt">
+            Encrypted browsing on every device. No separate subscription or app to remember.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Encrypted VPN traffic across your devices</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Included in your membership</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Safer browsing wherever you connect</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">Encrypted VPN</span>
+            <span class="chip-sm">Kill switch</span>
+            <span class="chip-sm">All devices</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">A VPN that's just... already there. No separate app, no separate bill.</p>
+            <p class="pull-quote__cap">Included on every plan</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" alt="Global encrypted network connection for VPN" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Connected</span><span class="sb-value">4 devices</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-doc" role="tabpanel" aria-labelledby="tab-doc" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Document Protect</span>
+          <h3 class="h3">Encrypted storage for passports, wills, and deeds.</h3>
+          <p class="lede lede--mt">
+            AES-256 encryption with keys that stay on your device. We can't read your files,
+            and neither can anyone else.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>AES-256 end-to-end encryption</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Secure sharing with family and agents</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Emergency access protocol</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">AES-256</span>
+            <span class="chip-sm">Secure sharing</span>
+            <span class="chip-sm">Emergency access</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">Passports, wills, and deeds, encrypted with keys that never leave your device.</p>
+            <p class="pull-quote__cap">We can't read your files. Neither can anyone else.</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=900&q=80" alt="Encrypted storage for important personal documents" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Encrypted</span><span class="sb-value">6 files</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-fam" role="tabpanel" aria-labelledby="tab-fam" hidden>
+      <div class="panel__grid">
+        <div class="panel__copy">
+          <span class="eyebrow">Family Protect</span>
+          <h3 class="h3">Protect your whole household.</h3>
+          <p class="lede lede--mt">
+            Two adults and up to three dependents. Every member gets credit monitoring, a
+            password vault, VPN, and document storage.
+          </p>
+          <ul class="panel__list">
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Full protection on both adult seats</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Dependents get identity, passwords, VPN, documents</li>
+            <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>Every member's status on one dashboard</li>
+          </ul>
+          <div class="chip-row">
+            <span class="chip-sm">2 adults</span>
+            <span class="chip-sm">3 dependents</span>
+            <span class="chip-sm">$1M per member</span>
+          </div>
+          <div class="pull-quote">
+            <p class="pull-quote__text">Every member of your household protected under one plan, one price, one dashboard.</p>
+            <p class="pull-quote__cap">Full coverage for the whole family</p>
+          </div>
+        </div>
+
+        <div class="visual-scene">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=900&q=80" alt="Family household identity protection" loading="lazy" decoding="async">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Protected</span><span class="sb-value">5 members</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="usecases-section" id="use-cases">
+  <div class="wrap">
+    <div class="usecases-section__head reveal">
+      <span class="eyebrow">Use cases</span>
+      <h2 class="h2">Three ways we have your back</h2>
+      <p class="lede lede--center">
+        Proactive monitoring, real-time alerts, and hands-on recovery, all under one membership.
+      </p>
+    </div>
+
+    <div class="usecase-row">
+      <div class="usecase-row__copy reveal">
+        <h3>Know within minutes if your identity is compromised</h3>
+        <p class="lede">
+          Your email, SSN, and passwords end up on dark web marketplaces after a breach.
+          We watch those marketplaces and alert you the moment your data shows up.
+        </p>
+        <ul class="usecase-list">
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Dark web and data breach monitoring
+          </li>
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Real-time alerts for exposures and potential threats
+          </li>
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Up to $1M identity theft reimbursement insurance
+          </li>
+        </ul>
+        <a class="usecase-row__cta" href="#pricing">
+          Explore identity protection
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+      </div>
+
+      <div class="visual-scene reveal">
+        <div class="codecard">
+          <picture>
+            <img class="codecard__img" src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=960&h=860&q=80" alt="" width="480" height="430" loading="lazy" style="aspect-ratio:480/430;object-fit:cover">
+          </picture>
+        </div>
+        <div class="scene-badge"><span class="sb-label">Status</span><span class="sb-value">Mitigated</span></div>
+      </div>
+    </div>
+
+    <div class="usecase-row usecase-row--reverse">
+      <div class="usecase-row__copy reveal">
+        <h3>Track every change across all three bureaus</h3>
+        <p class="lede">
+          We connect directly to TransUnion, Equifax, and Experian. When your score moves
+          or someone runs your credit, you hear about it within 24 hours.
+        </p>
+        <ul class="usecase-list">
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            3-bureau credit report monitoring
+          </li>
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Score change and new inquiry alerts
+          </li>
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Credit score simulator and tracker
+          </li>
+        </ul>
+        <a class="usecase-row__cta" href="#pricing">
+          Explore credit monitoring
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+      </div>
+
+      <div class="visual-scene reveal">
+        <div class="codecard">
+          <picture>
+            <img class="codecard__img" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=960&h=860&q=80" alt="" width="480" height="430" loading="lazy" style="aspect-ratio:480/430;object-fit:cover">
+          </picture>
+        </div>
+        <div class="scene-badge"><span class="sb-label">Avg score</span><span class="sb-value">742</span></div>
+      </div>
+    </div>
+
+    <div class="usecase-row">
+      <div class="usecase-row__copy reveal">
+        <h3>Get your data off the sites that sell it</h3>
+        <p class="lede">
+          Data brokers publish your address, phone number, and relatives for anyone to find.
+          We scan 120+ brokers and file removal requests on your behalf.
+        </p>
+        <ul class="usecase-list">
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Automated removal from 120+ broker sites
+          </li>
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Public directory cleanup and safeguarding
+          </li>
+          <li>
+            <span class="usecase-check"><svg viewBox="0 0 12 12"><path d="M2 6.2l2.6 2.6L10 3.4"/></svg></span>
+            Re-listing monitoring and re-removal
+          </li>
+        </ul>
+        <a class="usecase-row__cta" href="#pricing">
+          Explore privacy protection
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+      </div>
+
+      <div class="visual-scene reveal">
+        <div class="codecard">
+          <img class="codecard__img" src="https://images.unsplash.com/photo-1633265486064-086b219458ec?auto=format&fit=crop&w=960&h=860&q=80" alt="" width="480" height="430" loading="lazy" style="aspect-ratio:480/430;object-fit:cover">
+        </div>
+        <div class="scene-badge"><span class="sb-label">Removed</span><span class="sb-value">47 sites</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section vault" id="vault">
+  <div class="wrap">
+    <div class="vault__grid">
+      <div class="reveal">
+        <span class="eyebrow">How it works</span>
+        <h2 class="h2">How we keep your data out of everyone else's hands</h2>
+        <p class="lede">
+          Every membership is engineered with security first. Your data is encrypted with
+          zero-knowledge keys, and every layer of the stack is audited and monitored.
+        </p>
+
+        <div class="pillars">
+          <div class="pillar">
+            <div>
+              <h3>Your keys stay on your device</h3>
+              <p>We store ciphertext and can never read your data, even under subpoena.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div>
+              <h3>Direct bureau connections</h3>
+              <p>We sync with all three bureaus daily so nothing slips through.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div>
+              <h3>A named recovery agent</h3>
+              <p>If something goes wrong, one person works your case until it's resolved. Backed by $1M in insurance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack reveal">
+        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1000&h=1000&q=80" alt="" width="500" height="500" loading="lazy" style="width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:var(--r-lg)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section security" id="security">
+  <div class="wrap">
+    <div class="security__head reveal">
+      <span class="eyebrow">Trust &amp; compliance</span>
+      <h2 class="h2">Independently audited every year</h2>
+      <p class="lede lede--center">
+        SOC 2 Type II, ISO 27001, and PCI DSS Level 1. Our systems are checked by outside
+        firms, not just by us.
+      </p>
+    </div>
+
+    <div class="badges">
+      <div class="badge reveal">
+        <div class="badge__ring"><span>SOC</span></div>
+        <h3>SOC 2 Type II</h3>
+        <p>Audited annually</p>
+      </div>
+      <div class="badge reveal">
+        <div class="badge__ring"><span>ISO</span></div>
+        <h3>ISO 27001</h3>
+        <p>Certified</p>
+      </div>
+      <div class="badge reveal">
+        <div class="badge__ring"><span>PCI</span></div>
+        <h3>PCI DSS</h3>
+        <p>Level 1</p>
+      </div>
+      <div class="badge reveal">
+        <div class="badge__ring"><span>GDPR</span></div>
+        <h3>GDPR</h3>
+        <p>Compliant</p>
+      </div>
+    </div>
+
+    <div class="compliance-row reveal">
+      <span class="compliance-chip">CCPA</span>
+      <span class="compliance-chip">HIPAA</span>
+      <span class="compliance-chip">AES-256</span>
+      <span class="compliance-chip">Zero-Knowledge</span>
+      <span class="compliance-chip">Independently Pen-Tested</span>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="pricing-head reveal">
+      <span class="eyebrow">Plans</span>
+      <h2 class="h2">All 8 protections, every plan</h2>
+      <p class="lede lede--center">
+        No add-ons. No upsells. Cancel anytime.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <article class="plan reveal">
+        <span class="plan-tag">Individual</span>
+        <span class="plan-name">1 adult, full protection</span>
+        <span class="plan-desc">For one person who wants the full stack.</span>
+        <div class="plan-price">$11.99<span>/mo</span></div>
+        <span class="plan-billed">Billed annually. $13.99 if monthly.</span>
+        <ul class="plan-feat">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>3-bureau credit monitoring</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Dark web and privacy alerts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Passwords, VPN, document vault</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>$1M recovery insurance</li>
+        </ul>
+        <a class="btn btn--ghost" href="#">Choose Individual</a>
+      </article>
+
+      <article class="plan featured reveal">
+        <span class="plan-badge">Most popular</span>
+        <span class="plan-tag">Family</span>
+        <span class="plan-name">2 adults + up to 3 dependents</span>
+        <span class="plan-desc">Covers your whole household.</span>
+        <div class="plan-price">$29.99<span>/mo</span></div>
+        <span class="plan-billed">Billed annually. Household dashboard included.</span>
+        <ul class="plan-feat">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Full protection on both adult seats</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Dependents get identity, passwords, VPN, documents</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Per-member status on one dashboard</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>$1M recovery insurance per member</li>
+        </ul>
+        <a class="btn btn--primary" href="#">
+          Protect my family
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+      </article>
+
+      <article class="plan reveal">
+        <span class="plan-tag">Couple</span>
+        <span class="plan-name">2 adults, full protection</span>
+        <span class="plan-desc">For two people who want separate monitoring.</span>
+        <div class="plan-price">$21.99<span>/mo</span></div>
+        <span class="plan-billed">Billed annually. $25.99 if monthly.</span>
+        <ul class="plan-feat">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Full protection on both seats</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Independent credit monitoring</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Shared vault and documents</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>$1M recovery insurance each</li>
+        </ul>
+        <a class="btn btn--ghost" href="#">Choose Couple</a>
+      </article>
+    </div>
+
+    <p class="pricing-fineprint reveal">
+      Recovery insurance is provided by a third-party insurer and is subject to policy terms,
+      conditions, and exclusions. Not available in all jurisdictions. Pricing shown reflects
+      annual billing; monthly billing may differ.
+    </p>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="reviews-head reveal">
+      <span class="eyebrow">Trust</span>
+      <h2 class="h2">Backed by members. Built for peace of mind</h2>
+    </div>
+
+    <div class="review-grid">
+      <div class="review reveal">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+        </div>
+        <p>“Someone opened a phone line with my details. The alert reached me before the first bill did, and one call closed it.”</p>
+        <div class="review-by">
+          <span class="review-av" aria-hidden="true">MH</span>
+          <div>
+            <div class="review-name">Marcus Hale</div>
+            <div class="review-role">Individual plan member</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review reveal">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+        </div>
+        <p>“The family plan covered both kids without adding three separate bills. One dashboard keeps it simple.”</p>
+        <div class="review-by">
+          <span class="review-av" aria-hidden="true">AC</span>
+          <div>
+            <div class="review-name">Amanda Chen</div>
+            <div class="review-role">Family plan member</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review reveal">
+        <div class="stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7 7 .8-5.2 4.7L18 22l-6-3.5L6 22l1.2-7.5L2 9.8 9 9z"/></svg>
+        </div>
+        <p>“An alert came in on a Sunday. By Monday morning my recovery agent had contacted the bureaus and frozen everything.”</p>
+        <div class="review-by">
+          <span class="review-av" aria-hidden="true">DR</span>
+          <div>
+            <div class="review-name">Devon Reyes</div>
+            <div class="review-role">Individual plan member</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="reviews-disclaimer reveal">
+      Individual results may vary. Testimonials reflect the experience of the individuals shown
+      and are not a guarantee of future results.
+    </p>
+  </div>
+</section>
+
+<section class="getstarted" id="getstarted">
+  <div class="wrap">
+    <div class="getstarted-head reveal">
+      <span class="eyebrow">Setup</span>
+      <h2 class="h2">Set up protection in three steps</h2>
+    </div>
+
+    <div class="gs-grid">
+      <article class="gs-card reveal">
+        <span class="gs-num">Step 01</span>
+        <div class="gs-phone">
+          <div class="gs-icon"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M12 7v7m-3-3 3 3 3-3"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+        </div>
+        <h3>Get the app</h3>
+        <p>Get it from the App Store or Google Play. Setup takes about 5 minutes.</p>
+        <div class="gs-stores">
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+            <span>App Store</span>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play">
+            <span>Google Play</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="gs-card reveal">
+        <span class="gs-num">Step 02</span>
+        <div class="gs-phone">
+          <div class="gs-icon"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.5"/><path d="M5.5 16.5c.8-1.6 2-2.5 3.5-2.5s2.7.9 3.5 2.5"/><line x1="14" y1="10" x2="18" y2="10"/><line x1="14" y1="14" x2="18" y2="14"/></svg></div>
+        </div>
+        <h3>Verify your identity</h3>
+        <p>Confirm your name, address, and SSN so we can start monitoring.</p>
+        <a class="gs-cta" href="#pricing">Create your account</a>
+      </article>
+
+      <article class="gs-card reveal">
+        <span class="gs-num">Step 03</span>
+        <div class="gs-phone">
+          <div class="gs-icon"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        </div>
+        <h3>Start monitoring</h3>
+        <p>Alerts start within 24 hours. You'll get your first report the same day.</p>
+        <a class="gs-cta" href="#pricing">Start monitoring</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <div class="wrap">
+    <div class="closer__card reveal" id="closerCard">
+      <div class="closer__grid">
+        <div>
+          <span class="eyebrow">Get started</span>
+          <h2 class="h2">Protect your family in the next 5 minutes</h2>
+          <p class="lede">
+            One membership covers your whole household. Plans from $29.99/mo. Cancel anytime.
+          </p>
+          <div class="hero__actions hero__actions--spaced">
+            <a class="btn btn--primary" href="#pricing">
+              Protect my family
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 13l5-5-5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><path d="M12 8H2" stroke="currentColor" stroke-width="1.7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="closer__cards">
+          <a class="mini" href="#features">
+            <span class="mini__dots" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+              <i></i><i class="on"></i><i class="on"></i><i></i><i></i>
+              <i></i><i></i><i class="on"></i><i></i><i></i>
+              <i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <span>
+              <h3>Identity</h3>
+              <p>Dark web and breach alerts</p>
+            </span>
+          </a>
+
+          <a class="mini" href="#features">
+            <span class="mini__dots" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i class="on"></i><i></i><i></i>
+              <i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i>
+              <i></i><i></i><i class="on"></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <span>
+              <h3>Credit</h3>
+              <p>3-bureau monitoring</p>
+            </span>
+          </a>
+
+          <a class="mini" href="#pricing">
+            <span class="mini__dots" aria-hidden="true">
+              <i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+              <i></i><i></i><i class="on"></i><i></i><i></i>
+              <i class="on"></i><i></i><i></i><i></i><i class="on"></i>
+              <i></i><i></i><i class="on"></i><i></i><i></i>
+              <i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+            </span>
+            <span>
+              <h3>Family</h3>
+              <p>2 adults, 3 dependents</p>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="brand" href="#top" aria-label="Vigil home">
+          <img src="assets/shield-red.svg" alt="" width="24" height="24" loading="lazy" decoding="async">
+          <span>VI<span class="accent">GIL</span></span>
+        </a>
+        <p>Identity protection for consumers and families. Credit monitoring, passwords, VPN, and encrypted storage in one membership.</p>
+        <p class="footer__address">
+          100 Example Avenue, Suite 200<br>
+          Austin, TX 78701
+        </p>
+        <div class="footer__legal">© 2026 Vigil</div>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h6>Product</h6>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#use-cases">Use cases</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#security">Trust &amp; Security</a></li>
+            <li><a href="#getstarted">Download App</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h6>Protection</h6>
+          <ul>
+            <li><a href="#features">Identity</a></li>
+            <li><a href="#features">Credit</a></li>
+            <li><a href="#features">Privacy</a></li>
+            <li><a href="#features">Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h6>Support</h6>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="mailto:support@vigil.example">Contact Us</a></li>
+            <li><a href="tel:+15550100199">(555) 010-0199</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h6>Legal</h6>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Cookie Settings</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Vigil. Template by Arnel Colar.</span>
+      <div class="social">
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0022 12z"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.25.07 1.63.07 4.85s0 3.6-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.25.06-1.63.07-4.85.07s-3.6 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.2 8.8 2.2 12 2.2zm0 3.14A6.66 6.66 0 1018.66 12 6.66 6.66 0 0012 5.34zm0 10.98A4.32 4.32 0 1116.32 12 4.32 4.32 0 0112 16.32zm6.92-11.24a1.56 1.56 0 11-1.56-1.56 1.56 1.56 0 011.56 1.56z"/></svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.76V21h-4v-5.66c0-1.35-.03-3.09-1.98-3.09-1.98 0-2.28 1.47-2.28 2.99V21h-4z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var header = document.getElementById('header');
+  function onScrollHeader() {
+    if (window.scrollY > 12) header.classList.add('is-stuck');
+    else header.classList.remove('is-stuck');
+  }
+  window.addEventListener('scroll', onScrollHeader, { passive: true });
+  onScrollHeader();
+
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  menuBtn.addEventListener('click', function () {
+    var open = mobileNav.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  mobileNav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      mobileNav.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+
+  function activateTab(id) {
+    tabs.forEach(function (t) {
+      var active = t.dataset.tab === id;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', String(active));
+      t.setAttribute('tabindex', active ? '0' : '-1');
+    });
+    panels.forEach(function (p) {
+      var active = p.id === 'panel-' + id;
+      p.classList.toggle('is-active', active);
+      if (active) p.removeAttribute('hidden');
+      else p.setAttribute('hidden', '');
+    });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { activateTab(tab.dataset.tab); });
+  });
+
+  var tablist = document.querySelector('.tabs');
+  if (tablist) {
+    tablist.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i === -1) return;
+      var next = null;
+      if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === 'Home') next = tabs[0];
+      if (e.key === 'End') next = tabs[tabs.length - 1];
+      if (next) { e.preventDefault(); next.focus(); activateTab(next.dataset.tab); }
+    });
+  }
+
+  function animateCount(el) {
+    var text = el.textContent.trim();
+    var m = text.match(/^([^\d]*)([\d.,]+)(.*)$/);
+    if (!m) return;
+    var prefix = m[1], numStr = m[2], suffix = m[3];
+    var decimals = (numStr.split('.')[1] || '').length;
+    var target = parseFloat(numStr.replace(/,/g, ''));
+    if (isNaN(target)) return;
+    var start = performance.now();
+    var dur = 1200;
+    function tick(now) {
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          var num = entry.target.querySelector('.stat__num');
+          if (num) animateCount(num);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  if (!reduceMotion) {
+    document.addEventListener('pointerdown', function (e) {
+      var btn = e.target.closest('.btn, .gs-cta, .tab, .menu-btn');
+      if (!btn) return;
+      btn.style.transform = 'scale(0.97)';
+      var release = function () {
+        btn.style.transform = '';
+        btn.removeEventListener('pointerup', release);
+        btn.removeEventListener('pointercancel', release);
+      };
+      btn.addEventListener('pointerup', release);
+      btn.addEventListener('pointercancel', release);
+    }, true);
+  }
+
+})();
+</script>
+</body>
+</html>

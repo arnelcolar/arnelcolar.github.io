@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arnel Colar · Web design portfolio</title>
+<meta name="description" content="Landing pages, client portals, and calculators for finance and security products, designed and built by Arnel Colar.">
+<meta property="og:title" content="Arnel Colar · Web design portfolio">
+<meta property="og:description" content="Landing pages, client portals, and calculators for finance and security products.">
+<meta property="og:image" content="https://arnelcolar.github.io/assets/shots/wardline.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='22' font-family='Georgia' font-size='17' fill='%23fff' text-anchor='middle'>ac</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f3;--card:#fff;--ink:#141414;--muted:#6b6b68;--line:#e2e2de;--accent:#2f5bff;
+  --serif:"Instrument Serif",Georgia,serif;--sans:Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1120px,100% - 48px);margin-inline:auto}
+
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px}
+.name{font:400 22px/1 var(--serif);text-decoration:none}
+nav{display:flex;gap:24px;font-size:14px}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+.intro{padding:112px 0 88px}
+.intro h1{font:400 clamp(40px,6.4vw,76px)/1.04 var(--serif);letter-spacing:-.01em;max-width:15ch}
+.intro h1 em{color:var(--muted)}
+.intro p{margin-top:28px;max-width:52ch;color:var(--muted);font-size:18px}
+
+.label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#work{padding-bottom:40px}
+#work>.label{padding-bottom:20px;border-bottom:1px solid var(--line)}
+
+.project{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center;padding:72px 0;border-bottom:1px solid var(--line)}
+.project:nth-of-type(even) .shot{order:-1}
+.project h2{font:400 44px/1.05 var(--serif);margin:10px 0 16px}
+.project p{color:var(--muted);max-width:44ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px;padding:0;list-style:none}
+.tags li{font-size:12.5px;padding:4px 11px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
+.links{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:15px;font-weight:500}
+.links a{text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+.links a:first-child{color:var(--accent)}
+.links a:hover{border-bottom-width:2px}
+
+.shot{display:block;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.04),0 24px 48px -24px rgba(0,0,0,.22);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.shot:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(0,0,0,.04),0 36px 64px -28px rgba(0,0,0,.3)}
+.chrome{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.chrome i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.shot img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.minis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.minis .shot img{aspect-ratio:16/9}
+
+.about{display:grid;grid-template-columns:5fr 7fr;gap:56px;padding:104px 0}
+.about h2{font:400 44px/1.05 var(--serif)}
+.about p{color:var(--muted);margin-bottom:16px;max-width:56ch}
+.about ul{padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;margin:28px 0 36px}
+.about li{padding-top:10px;border-top:1px solid var(--line);font-size:15px}
+.cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:13px 22px;border-radius:99px;font-weight:500;font-size:15px}
+.cta:hover{background:#333}
+
+footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+@media (max-width:860px){
+  .intro{padding:72px 0 56px}
+  .project,.about{grid-template-columns:1fr;gap:28px}
+  .project{padding:48px 0}
+  .project:nth-of-type(even) .shot{order:0}
+  .project .shot,.project .shots{order:-1!important}
+  .project h2,.about h2{font-size:36px}
+  nav{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="name" href="#top">Arnel Colar</a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/arnelcolar">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap intro">
+    <h1>Web design for money, credit, and <em>security</em> products.</h1>
+    <p>I design and build landing pages, client portals, and calculators for fintech and consumer protection brands. Every project below is a working site you can click through.</p>
+  </section>
+
+  <section class="wrap" id="work" aria-label="Selected work">
+    <p class="label">Selected work · 2026</p>
+
+    <article class="project">
+      <div>
+        <p class="label">Debt relief · Multi-page site</p>
+        <h2>Evenkeel</h2>
+        <p>A full debt settlement brand: marketing pages, a savings calculator, a blog, an e-sign email, and a client portal where members track deposits, settlements, and approvals.</p>
+        <ul class="tags"><li>20+ pages</li><li>Client portal</li><li>Calculator</li><li>Email template</li></ul>
+        <div class="links">
+          <a href="work/evenkeel/">Open the site</a>
+          <a href="work/evenkeel/overview.html">Client portal</a>
+          <a href="work/evenkeel/cost-of-debt-calculator.html">Calculator</a>
+        </div>
+      </div>
+      <div class="shots">
+        <a class="shot" href="work/evenkeel/" aria-label="Open the Evenkeel site">
+          <div class="chrome"><i></i><i></i><i></i></div>
+          <img src="assets/shots/evenkeel.webp" alt="Evenkeel homepage with a savings slider over a sunrise photo" width="1440" height="900">
+        </a>
+        <div class="minis">
+          <a class="shot" href="work/evenkeel/overview.html" aria-label="Open the Evenkeel client portal"><img src="assets/shots/evenkeel-portal.webp" alt="Evenkeel client portal overview" width="1440" height="900" loading="lazy"></a>
+          <a class="shot" href="work/evenkeel/cost-of-debt-calculator.html" aria-label="Open the Evenkeel calculator"><img src="assets/shots/evenkeel-calc.webp" alt="Evenkeel cost of debt calculator" width="1440" height="900" loading="lazy"></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <p class="label">Identity protection · Landing page</p>
+        <h2>Wardline</h2>
+        <p>A dark, cinematic page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
+        <ul class="tags"><li>Single page</li><li>Tabbed features</li><li>Pricing</li><li>Motion</li></ul>
+        <div class="links"><a href="work/wardline.html">Open the page</a></div>
+      </div>
+      <a class="shot" href="work/wardline.html" aria-label="Open the Wardline page">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy">
+      </a>
+    </article>
+
+    <article class="project">
+      <div>
+        <p class="label">Identity monitoring · Landing page</p>
+        <h2>Vigil</h2>
+        <p>The same product category, taken in a lighter editorial direction. A circuit-trace hero, alternating use-case rows, compliance badges, and member reviews.</p>
+        <ul class="tags"><li>Single page</li><li>Editorial layout</li><li>Pricing</li></ul>
+        <div class="links"><a href="work/vigil.html">Open the page</a></div>
+      </div>
+      <a class="shot" href="work/vigil.html" aria-label="Open the Vigil page">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="assets/shots/vigil.webp" alt="Vigil hero with a red headline on a light background" width="1440" height="900" loading="lazy">
+      </a>
+    </article>
+
+    <article class="project">
+      <div>
+        <p class="label">Fintech infrastructure · Concept</p>
+        <h2>Vaultledger</h2>
+        <p>A developer-facing page for a ledger and tokenization API. Code samples sit next to uptime stats, and a live-looking vault panel shows how card data gets swapped for tokens.</p>
+        <ul class="tags"><li>Single page</li><li>Dark UI</li><li>Developer audience</li></ul>
+        <div class="links"><a href="work/vaultledger.html">Open the page</a></div>
+      </div>
+      <a class="shot" href="work/vaultledger.html" aria-label="Open the Vaultledger page">
+        <div class="chrome"><i></i><i></i><i></i></div>
+        <img src="assets/shots/vaultledger.webp" alt="Vaultledger hero with lime accents on a dark background" width="1440" height="900" loading="lazy">
+      </a>
+    </article>
+  </section>
+
+  <section class="wrap about" id="about">
+    <div>
+      <p class="label">About</p>
+      <h2>Design and code, from one person.</h2>
+    </div>
+    <div>
+      <p>I work where design meets the browser. I sketch the layout, pick the type and color, then write the HTML and CSS myself, so what you approve is what ships.</p>
+      <p>Most of my work is for finance and security brands, where trust has to show up in the details: clear pricing, honest disclaimers, and pages that stay fast on a phone.</p>
+      <ul>
+        <li>Landing pages</li>
+        <li>Client portals</li>
+        <li>Calculators and tools</li>
+        <li>WordPress themes</li>
+        <li>Redesigns</li>
+        <li>Email templates</li>
+      </ul>
+      <a class="cta" href="https://github.com/arnelcolar">Find me on GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Arnel Colar</span>
+    <span>Brands shown are fictional templates. Photos from Unsplash and Pexels.</span>
+  </div>
+</footer>
+
+</body>
+</html>

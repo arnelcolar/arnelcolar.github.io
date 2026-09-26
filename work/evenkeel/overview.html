@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evenkeel Client Portal — Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="portal-shell">
+
+  <header class="portal-header">
+    <div class="container portal-header-inner">
+      <div class="emblem">
+        <img src="assets/images/logo.svg" alt="Evenkeel logo">
+        <span class="emblem-word">Even<span class="accentpart">keel</span></span>
+      </div>
+      <a href="sign-in.html" class="portal-signout">Sign out</a>
+    </div>
+  </header>
+
+  <nav class="portal-nav">
+    <div class="container portal-nav-inner">
+      <a href="overview.html" class="portal-nav-link active">Overview</a>
+      <a href="debts.html" class="portal-nav-link">Your Debts</a>
+      <a href="deposits.html" class="portal-nav-link">Deposits</a>
+      <a href="approvals.html" class="portal-nav-link">Approvals</a>
+      <a href="tasks.html" class="portal-nav-link">Tasks</a>
+      <a href="documents.html" class="portal-nav-link">Documents</a>
+    </div>
+  </nav>
+
+  <main class="portal-main">
+    <div class="container" style="max-width:760px;">
+      <h1 class="portal-title">Hi Nora,</h1>
+      <p class="portal-sub">Here is where your program stands today.</p>
+
+      <div class="portal-card">
+        <div class="portal-card-row">
+          <h4>Approvals</h4>
+          <span class="portal-note">Nothing pending. You are all caught up. <a href="approvals.html">View approvals</a></span>
+        </div>
+      </div>
+
+      <div class="portal-stat-grid">
+        <div class="portal-stat-card">
+          <div class="portal-stat-label">Debts settled</div>
+          <div class="portal-stat-value">0 of 4</div>
+        </div>
+        <div class="portal-stat-card">
+          <div class="portal-stat-label">Saved so far</div>
+          <div class="portal-stat-value accent">$0</div>
+        </div>
+        <div class="portal-stat-card">
+          <div class="portal-stat-label">Deposits made</div>
+          <div class="portal-stat-value">0 ($0)</div>
+        </div>
+        <div class="portal-stat-card">
+          <div class="portal-stat-label">Next deposit</div>
+          <div class="portal-stat-value">2026-08-30</div>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <h4 style="margin-bottom:14px;">Your program</h4>
+        <div class="portal-list-row">
+          <span class="portal-list-label">Enrolled debt</span>
+          <span class="portal-list-value">$28,317</span>
+        </div>
+        <div class="portal-list-row">
+          <span class="portal-list-label">Monthly deposit</span>
+          <span class="portal-list-value">$577</span>
+        </div>
+        <div class="portal-list-row">
+          <span class="portal-list-label">Program length</span>
+          <span class="portal-list-value">36 months</span>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <h4 style="margin-bottom:14px;">Where your money goes</h4>
+        <div class="portal-list-row">
+          <div>
+            <div class="portal-list-label">Estimated creditor settlements</div>
+            <div class="portal-list-sub">What we expect your creditors to accept, across all your enrolled debts</div>
+          </div>
+          <span class="portal-list-value">$14,159</span>
+        </div>
+        <div class="portal-list-row">
+          <div>
+            <div class="portal-list-label">Program fee</div>
+            <div class="portal-list-sub">22% of your enrolled debt, charged only after a debt settles</div>
+          </div>
+          <span class="portal-list-value">$6,230</span>
+        </div>
+        <div class="portal-list-row">
+          <div>
+            <div class="portal-list-label">Dedicated account fee</div>
+            <div class="portal-list-sub">$10.75 per month for 36 months, paid to the bank that holds your account</div>
+          </div>
+          <span class="portal-list-value">$387</span>
+        </div>
+        <div class="portal-list-row">
+          <span class="portal-list-label" style="font-weight:800;">Estimated total program cost</span>
+          <span class="portal-list-value total">$20,775</span>
+        </div>
+        <div class="portal-list-row">
+          <div>
+            <div class="portal-list-label" style="font-weight:800;">Estimated savings</div>
+            <div class="portal-list-sub">Compared to paying your full $28,317 enrolled debt</div>
+          </div>
+          <span class="portal-list-value total accent">$7,542</span>
+        </div>
+        <p class="portal-note" style="margin-top:14px;line-height:1.6;">Your monthly deposit builds your settlement fund. The money in your dedicated account is yours. Our fee is charged only after a debt is settled, you approve the settlement, and at least one payment is made toward it. Settlement amounts depend on what each creditor accepts, so the figures marked as estimates are estimates, not promises. Your actual numbers may differ.</p>
+      </div>
+
+      <div class="portal-card">
+        <h4 style="margin-bottom:10px;">Good to know</h4>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6;">Collection calls and letters may continue while we work. That is normal. If a collector contacts you, do not agree to anything; call us first and we will handle it together. The money in your dedicated account is yours.</p>
+      </div>
+    </div>
+  </main>
+
+  <p class="portal-login-footer" style="padding-bottom:40px;">Questions? Call us at <b>(555) 010-0142</b>. We are here to help.</p>
+
+</body>
+</html>

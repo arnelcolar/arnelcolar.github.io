@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evenkeel — Take Control Of Your Debt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" type="image/svg+xml" href="assets/images/logo.svg"> 
+</head>
+<body>
+
+  <div id="siteHeaderInclude" data-base=""></div>
+<script src="assets/js/mega-menu.js"></script>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="assets/images/hero.jpg" alt="A person standing on a rock outdoors with arms raised, a moment of relief">
+    <div class="container hero-inner">
+      <span class="hero-eyebrow">★ Rated 4.9 by 12,000+ Americans</span>
+      <h1>Take Control Of<span class="accentline">Your Debt</span></h1>
+      <p class="lede">Evenkeel negotiates directly with your creditors to settle unsecured debt for less than the full balance, and you pay nothing until a debt is settled and you approve it.</p>
+
+      <div class="hero-card-wrap">
+        <div class="savings-card">
+          <span class="label">See What You Could Save</span>
+          <div class="amount-pill">$<span id="amtOut">20,000</span></div>
+          <input type="range" id="debtSlider" min="10000" max="100000" step="1000" value="20000" oninput="updateEstimator(this.value)">
+          <div class="range-labels"><span>$10,000</span><span>$100,000</span></div>
+          <div class="route-preview">Estimated savings: <b><span id="pctOut">60%</span></b> · Debt-free in <b><span id="yearsOut">3-5 years</span></b></div>
+          <a href="landing.html" class="cta-btn">See If You Qualify →</a>
+          <a href="tel:+18005550100" class="phone-inline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.31 1.6.57 2.36a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.72-1.14a2 2 0 0 1 2.11-.45c.76.26 1.55.45 2.36.57A2 2 0 0 1 22 16.92z"/></svg>
+            (800) 555-0100
+          </a>
+          <p class="fine">*Won't affect your credit score*</p>
+        </div>
+      </div>
+
+      <div class="badge-row-hero">
+        <div class="badge-chip"><span class="stars">★★★★★</span> 683 reviews on Trustpilot</div>
+        <div class="badge-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Google Rated 4.9</div>
+        <div class="badge-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"/></svg> BBB Accredited Business</div>
+        <div class="badge-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"/></svg> FDIC-Insured Account</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-band">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5a3 3 0 0 1 3-1.5c1.66 0 3 1 3 2.5s-1.34 2.5-3 2.5-3 1-3 2.5 1.34 2.5 3 2.5a3 3 0 0 0 3-1.5"/></svg></div><div><div class="num"><span>$</span>850M<span>+</span></div><div class="cap">Debt Enrolled Into Relief Programs</div></div></div>
+        <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2v3l-3-3H9a2 2 0 0 1-2-2v-1M17 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h1v3l3-3h3"/></svg></div><div><div class="num">250K<span>+</span></div><div class="cap">Americans Helped</div></div></div>
+        <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l1.5 4.5H18l-3.75 2.75L15.5 14 12 11.25 8.5 14l1.25-4.75L6 6.5h4.5z"/></svg></div><div><div class="num">4.9<span>★</span></div><div class="cap">Average Customer Rating</div></div></div>
+        <div class="stat-item"><div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11v10H4V11zm4-9h3l-1 6h5.5a2 2 0 0 1 1.9 2.6l-2.3 7A2 2 0 0 1 15.2 21H9a2 2 0 0 1-2-2v-8.5a2 2 0 0 1 .5-1.3z"/></svg></div><div><div class="num">12K<span>+</span></div><div class="cap">Verified Reviews</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="wm-outer">
+    <div class="wm-strip"><span class="watermark">How It Works</span></div>
+    <div class="container">
+      <div class="section-head">
+        <h2>Finding Debt Relief Is Easier <span class="accentpart">Than You Think</span></h2>
+        <p>Answer a few quick questions and discover whether a debt relief program may help you reduce what you owe.</p>
+      </div>
+
+      <div class="steps-wrap">
+        <div class="steps-connector"></div>
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-icon-wrap">
+              <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+              <span class="step-badge">01</span>
+            </div>
+            <h3>Free Evaluation</h3>
+            <p>Tell us about your debts. A debt specialist reviews your situation and explains whether settlement is a fit, and when it isn't, we'll say so.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon-wrap">
+              <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2 4 4 10-10 2 2L9 18z"/></svg></div>
+              <span class="step-badge">02</span>
+            </div>
+            <h3>A Plan Built Around Your Budget</h3>
+            <p>You make one monthly deposit you can afford into an FDIC-insured account that you own and control. Those funds power your settlements.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-icon-wrap">
+              <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+              <span class="step-badge">03</span>
+            </div>
+            <h3>We Negotiate. You Approve.</h3>
+            <p>Our negotiators work your debts one by one. Every settlement requires your approval before a dollar moves, and our fee applies only after a debt settles.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-cta">
+        <a href="landing.html" class="cta-btn" style="width:auto;padding:14px 26px;">Start Free Evaluation →</a>
+        <div class="hero-ratings" style="margin-top:0;">
+          <span>Excellent 683 reviews on Trustpilot</span><span class="stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section id="compare" class="wm-outer" style="background:#fff;">
+    <div class="wm-strip"><span class="watermark">Savings</span></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow-dark">Comparison</span>
+        <h2>Compare Your Potential <span class="accentpart">Debt Relief Options</span></h2>
+        <p>See how different approaches can impact your repayment journey.</p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"/></svg></div>
+          <h4>Minimum Payments Only</h4>
+          <hr>
+          <span class="compare-badge">22 Years</span>
+          <div class="compare-label">Estimated Resolution Time</div>
+          <hr>
+          <div class="compare-amount">$71,500</div>
+          <div class="compare-label">Estimated Total Cost</div>
+          <div class="compare-learn">Learn More →</div>
+        </div>
+
+        <div class="compare-card featured">
+          <div class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h4>Evenkeel</h4>
+          <div class="sub">One affordable monthly deposit.</div>
+          <hr>
+          <span class="compare-badge">3–5 Years</span>
+          <div class="compare-label">Estimated Resolution Time</div>
+          <hr>
+          <div class="compare-amount">$24,500</div>
+          <div class="compare-label">Estimated Total Cost</div>
+          <div class="compare-learn">Learn More →</div>
+        </div>
+
+        <div class="compare-card">
+          <div class="compare-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z"/></svg></div>
+          <h4>Debt Consolidation Loan</h4>
+          <hr>
+          <span class="compare-badge">7 Years</span>
+          <div class="compare-label">Estimated Resolution Time</div>
+          <hr>
+          <div class="compare-amount">$48,900</div>
+          <div class="compare-label">Estimated Total Cost</div>
+          <div class="compare-learn">Learn More →</div>
+        </div>
+      </div>
+
+      <div class="center-cta">
+        <div class="hero-ratings" style="margin-top:0;">
+          <span>Excellent 683 reviews on Trustpilot</span><span class="stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="wm-outer">
+    <div class="wm-strip"><span class="watermark">Testimonials</span></div>
+    <div class="container">
+      <div class="section-head">
+        <h2>Real People <span class="accentpart">Real Debt Relief Results</span></h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-resolved">Debt Resolved: <b>$28,000</b></div>
+          <p class="testi-quote">"I was overwhelmed with credit card debt and couldn't see a way out. Evenkeel connected me with a program that reduced my payments and finally gave me breathing room."</p>
+          <div class="testi-foot"><div class="testi-avatar">SM</div><div><div class="testi-name">Sarah Mentola</div><div class="testi-date">May 16, 2026</div></div></div>
+          <span class="testi-quotemark">"</span>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-resolved">Debt Resolved: <b>$32,500</b></div>
+          <p class="testi-quote">"Within a year, my first card was paid off. Then the second, then the third. After only a few years, all my debts were paid off."</p>
+          <div class="testi-foot"><div class="testi-avatar">MD</div><div><div class="testi-name">Mento Dikosta</div><div class="testi-date">May 28, 2026</div></div></div>
+          <span class="testi-quotemark">"</span>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-resolved">Debt Resolved: <b>$16,250</b></div>
+          <p class="testi-quote">"I finally had a plan on paper instead of just dread every time the mail came. That made the difference for us."</p>
+          <div class="testi-foot"><div class="testi-avatar">PK</div><div><div class="testi-name">Philinus Karlos</div><div class="testi-date">Jun 02, 2026</div></div></div>
+          <span class="testi-quotemark">"</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="wm-outer" style="background:#fff;">
+    <div class="wm-strip"><span class="watermark">FAQ</span></div>
+    <div class="container">
+      <div class="faq-grid">
+        <div class="faq-left">
+          <h2>Frequently Asked <span class="accentpart">Questions</span></h2>
+          <div class="faq-cta">
+            <a href="landing.html" class="cta-btn" style="width:auto;padding:14px 26px;">Start Free Evaluation →</a>
+            <div class="hero-ratings" style="margin-top:0;">
+              <span>Excellent 683 reviews on Trustpilot</span><span class="stars">★★★★★</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <details open>
+            <summary>01. What does it cost?</summary>
+            <p>Evenkeel charges a percentage of enrolled debt only after a settlement is reached and you approve it. There are no upfront fees. Our fee structure is clearly explained during your free consultation.</p>
+          </details>
+          <details>
+            <summary>02. What kinds of debt qualify?</summary>
+            <p>Unsecured debts: credit cards, personal loans, medical bills, and most collection accounts. Secured debts like mortgages and auto loans don't qualify, and federal student loans generally don't either.</p>
+          </details>
+          <details>
+            <summary>03. Will this hurt my credit?</summary>
+            <p>Debt settlement may have a temporary negative impact on your credit score. Many clients find that resolving their debt burden allows them to rebuild credit more effectively over time compared to staying in debt.</p>
+          </details>
+          <details>
+            <summary>04. Do I qualify?</summary>
+            <p>Generally, if you have $10,000 or more in unsecured debt and are experiencing a financial hardship such as loss of income, medical bills, or an unexpected life event, you may qualify for our program.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta-wrap">
+    <div class="container">
+      <div class="final-cta-card">
+        <div class="final-photo">
+          <img src="assets/images/cta.jpg" alt="A middle-aged couple embracing, content and relieved">
+          <svg class="seal" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="46" fill="rgba(10,28,54,0.55)" stroke="#fff" stroke-width="1.5"/>
+            <path d="M50 20 L74 28 V46 C74 62 64 72 50 78 C36 72 26 62 26 46 V28 Z" fill="none" stroke="#fff" stroke-width="1.6"/>
+            <g fill="#fff"><circle cx="40" cy="38" r="1.6"/><circle cx="46" cy="35" r="1.6"/><circle cx="54" cy="35" r="1.6"/><circle cx="60" cy="38" r="1.6"/></g>
+            <g stroke="#fff" stroke-width="1.4"><line x1="36" y1="52" x2="64" y2="52"/><line x1="36" y1="58" x2="64" y2="58"/><line x1="36" y1="64" x2="60" y2="64"/></g>
+          </svg>
+        </div>
+        <div class="final-copy">
+          <h2>You Don't Have To<span class="accentpart">Face Debt Alone</span></h2>
+          <p>Find out whether you qualify for a debt relief program that could help you reduce payments and resolve debt faster.</p>
+          <div class="final-btns">
+            <a href="landing.html" class="btn-solid">See If You Qualify</a>
+            <a href="tel:+18005550100" class="btn-outline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.31 1.6.57 2.36a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.72-1.14a2 2 0 0 1 2.11-.45c.76.26 1.55.45 2.36.57A2 2 0 0 1 22 16.92z"/></svg>
+              (800) 555-0100
+            </a>
+          </div>
+          <div class="final-ratings">★★★★★ Excellent 683 reviews on Trustpilot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <div class="emblem" style="margin-bottom:10px;"><img src="assets/images/logo.svg" alt="Evenkeel logo"><span class="emblem-word">Even<span class="accentpart">keel</span></span></div>
+          <p>If you have $10,000 or more in credit card or unsecured debt, Evenkeel may help you reduce monthly payments and resolve debt faster than making minimum payments alone.</p>
+          <a href="landing.html" class="cta-btn" style="width:auto;padding:12px 22px;margin-top:14px;display:inline-flex;">See If You Qualify →</a>
+        </div>
+        <div><h5>Company</h5><ul><li><a href="index.html">Home</a></li><li><a href="how-it-works.html">How It Works</a></li><li><a href="about.html">About</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h5>Get Started</h5><ul><li><a href="landing.html">See If You Qualify</a></li><li><a href="#faq">Frequently Asked Questions</a></li><li><a href="#">Client Login</a></li></ul></div>
+      </div>
+      <div class="legal">
+        Evenkeel, LLC provides debt settlement services. We do not provide legal, tax, or credit-repair advice. Debt settlement programs are not available in all states, do not stop collection activity or lawsuits, and typically have a negative impact on credit. Results vary by individual circumstances and are not guaranteed. Fees are charged only after a debt is settled, you approve the settlement, and at least one payment has been made toward it.
+        <br><br>© 2026 Evenkeel, LLC. All rights reserved.
+      </div>
+    </div>
+      </footer>
+
+  <div class="sticky-cta">
+    <a href="tel:+18005550100" class="call">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.31 1.6.57 2.36a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.72-1.14a2 2 0 0 1 2.11-.45c.76.26 1.55.45 2.36.57A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
+    <a href="landing.html" class="qualify">See If You Qualify</a>
+  </div>
+
+<script src="assets/js/script.js"></script>
+
+</body>
+</html>
