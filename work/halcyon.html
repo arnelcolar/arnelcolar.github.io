@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halcyon H16: product launch template</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000; --panel: #181818; --panel-2: #202020;
+    --text: #f7f7f7; --muted: #b3b3b3; --dim: #8f8f8f;
+    --accent: #fa5c00;
+    --max: 1280px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body { background: var(--bg); color: var(--text); font: 16px/1.6 "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  .media { background: #140a04 center / cover no-repeat; }
+  .hero .media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #000 8%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2)); }
+
+  /* Sticky product nav */
+  .pnav { position: sticky; top: 0; z-index: 50; background: rgba(0,0,0,.8); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+  .pnav .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .pnav strong { font-size: 18px; letter-spacing: .02em; white-space: nowrap; }
+  .pnav ul { display: flex; gap: 24px; list-style: none; overflow-x: auto; flex: 1; scrollbar-width: none; }
+  .pnav ul a { font-size: 14px; color: var(--muted); white-space: nowrap; padding: 20px 0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+  .pnav ul a:hover, .pnav ul a.active { color: var(--text); border-color: var(--accent); }
+  .btn { display: inline-block; background: var(--accent); color: #000; font-weight: 600; font-size: 14px; padding: 10px 22px; border-radius: 2px; white-space: nowrap; transition: filter .2s; }
+  .btn:hover { filter: brightness(1.15); }
+  .btn-ghost { background: none; color: var(--text); border: 1px solid var(--muted); }
+
+  /* Hero */
+  .hero { position: relative; min-height: calc(100vh - 64px); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+  .hero .media { position: absolute; inset: 0; }
+  .hero .wrap { position: relative; width: 100%; padding-bottom: 48px; }
+  .eyebrow { color: var(--accent); font-size: 14px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(48px, 8vw, 112px); line-height: 1; font-weight: 800; letter-spacing: -.02em; margin: 12px 0 16px; }
+  .hero p { color: var(--muted); font-size: 20px; max-width: 560px; }
+  .hero .ctas { display: flex; gap: 12px; margin: 32px 0 56px; }
+  .kv-features { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #333; }
+  .kv-features div { padding: 20px 20px 0 0; }
+  .kv-features b { display: block; font-size: 15px; }
+  .kv-features span { color: var(--dim); font-size: 13px; }
+
+  /* Feature section: slogan + title + stats */
+  .feature { padding: 160px 0 80px; text-align: center; }
+  .slogan { font-size: clamp(36px, 5vw, 72px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
+  .slogan em { font-style: normal; color: var(--accent); }
+  .title { color: var(--muted); font-size: 18px; max-width: 680px; margin: 20px auto 0; }
+  .feature .media { aspect-ratio: 16/8; margin-top: 64px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: #262626; margin-top: 64px; text-align: left; }
+  .stats div { background: var(--bg); padding: 32px 24px; }
+  .stats b { display: block; font-size: 44px; font-weight: 800; line-height: 1; }
+  .stats b small { font-size: 18px; color: var(--accent); margin-left: 4px; }
+  .stats span { color: var(--muted); font-size: 14px; }
+
+  /* Horizontal card slider */
+  .slider { padding: 40px 0 120px; }
+  .track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 max(32px, calc((100vw - var(--max)) / 2 + 32px)) 16px; scrollbar-width: thin; scrollbar-color: #444 transparent; }
+  .card { flex: 0 0 min(420px, 80vw); scroll-snap-align: start; background: var(--panel); border-radius: 4px; overflow: hidden; }
+  .card .media { aspect-ratio: 4/3; }
+  .card div:last-child { padding: 24px; }
+  .card h3 { font-size: 20px; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 14px; }
+
+  /* Sticky parallax (display) */
+  .parallax { position: relative; }
+  .parallax .stage { position: sticky; top: 64px; height: calc(100vh - 64px); }
+  .parallax .stage .media { height: 100%; }
+  .parallax .panes { position: relative; margin-top: calc(-100vh + 64px); }
+  .parallax .pane { min-height: 100vh; display: flex; align-items: center; }
+  .parallax .pane > div { max-width: 460px; background: rgba(0,0,0,.6); backdrop-filter: blur(8px); padding: 40px; border-left: 2px solid var(--accent); }
+  .parallax .pane:nth-child(even) { justify-content: flex-end; }
+  .parallax .slogan { font-size: clamp(28px, 3.5vw, 48px); }
+  .parallax .title { margin: 12px 0 0; font-size: 16px; }
+
+  /* Split block (design story, portability) */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 120px 0; }
+  .split .media { aspect-ratio: 1; }
+  .split .slogan, .split .title { text-align: left; margin-left: 0; }
+
+  /* Ports */
+  .ports { background: var(--panel); padding: 120px 0; text-align: center; }
+  .ports .media { aspect-ratio: 16/5; margin: 56px 0 40px; }
+  .port-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 32px; text-align: left; list-style: none; }
+  .port-list li { color: var(--muted); font-size: 14px; padding: 12px 0; border-bottom: 1px solid #2a2a2a; }
+  .port-list b { color: var(--text); margin-right: 8px; }
+
+  /* FAQ */
+  .faq { padding: 120px 0; }
+  .faq .slogan { text-align: center; margin-bottom: 48px; }
+  .faq details { border-bottom: 1px solid #262626; max-width: 880px; margin: 0 auto; }
+  .faq summary { cursor: pointer; list-style: none; padding: 24px 0; font-size: 18px; font-weight: 600; display: flex; justify-content: space-between; }
+  .faq summary::after { content: "+"; color: var(--accent); font-size: 24px; line-height: 1; transition: transform .2s; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { color: var(--muted); padding-bottom: 24px; }
+
+  footer { border-top: 1px solid #222; padding: 48px 0; color: var(--dim); font-size: 13px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+
+  @media (max-width: 800px) {
+    .wrap { padding: 0 20px; }
+    .pnav ul { display: none; }
+    .pnav .wrap { justify-content: space-between; }
+    .kv-features { grid-template-columns: repeat(2, 1fr); }
+    .split { grid-template-columns: 1fr; gap: 32px; padding: 80px 0; }
+    .feature { padding: 100px 0 60px; }
+    .parallax .pane { justify-content: center !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav class="pnav" aria-label="Product sections">
+  <div class="wrap">
+    <strong>Halcyon H16</strong>
+    <ul>
+      <li><a href="#performance">Performance</a></li>
+      <li><a href="#display">Display</a></li>
+      <li><a href="#cooling">Cooling</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#audio">Audio</a></li>
+      <li><a href="#portability">Portability</a></li>
+      <li><a href="#ports">Ports</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn" href="#buy">Buy now</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=2000&q=70')"></div>
+  <div class="wrap">
+    <h1>Halcyon H16</h1>
+    <p>A 16-inch creator laptop you can carry all day, with the power to edit, render, and play at full speed.</p>
+    <div class="ctas">
+      <a class="btn" href="#buy">Buy now</a>
+      <a class="btn btn-ghost" href="#performance">Explore</a>
+    </div>
+    <div class="kv-features">
+      <div><b>Next-gen processor</b><span>Built for 4K timelines and heavy exports</span></div>
+      <div><b>16" OLED, 240Hz</b><span>Deep blacks and true color out of the box</span></div>
+      <div><b>1.6 cm thin</b><span>Thin enough for a sleeve, tough enough for a commute</span></div>
+      <div><b>20-hour battery</b><span>A full day of editing on one charge</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="feature" id="performance">
+  <div class="wrap">
+    <h2 class="slogan">Power that <em>keeps up</em></h2>
+    <p class="title">A 16-core chip and fast memory mean exports finish while you grab a coffee, not while you wait for lunch.</p>
+    <div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="stats">
+      <div><b>16<small>cores</small></b><span>Up to 5.4 GHz boost</span></div>
+      <div><b>64<small>GB</small></b><span>LPDDR5X at 7500 MT/s</span></div>
+      <div><b>2<small>TB</small></b><span>PCIe 4.0 SSD</span></div>
+      <div><b>+40<small>%</small></b><span>Compared with last generation</span></div>
+    </div>
+  </div>
+</section>
+<section class="slider" aria-label="Performance details">
+  <div class="track">
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Photo editing</h3><p>Scrub through 100-megapixel RAW files without a stutter.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=900&q=70')"></div><div><h3>3D and rendering</h3><p>Preview scenes in real time, then render overnight in half the time.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Gaming</h3><p>High frame rates at native resolution, plugged in or not.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Code</h3><p>Compile large projects and run local containers side by side.</p></div></article>
+  </div>
+</section>
+
+<section class="feature" id="display">
+  <div class="wrap">
+    <h2 class="slogan">See <em>every</em> detail</h2>
+    <p class="title">A 16-inch OLED panel with the brightness for a sunny café and the color for print work.</p>
+  </div>
+</section>
+<section class="parallax" aria-label="Display highlights">
+  <div class="stage"><div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=2000&q=70')"></div></div>
+  <div class="panes wrap">
+    <div class="pane"><div><h3 class="slogan">1100 nits</h3><p class="title">HDR highlights stay bright, and the screen is readable next to a window.</p></div></div>
+    <div class="pane"><div><h3 class="slogan">240Hz</h3><p class="title">Scrolling, scrubbing, and gaming all feel smooth.</p></div></div>
+    <div class="pane"><div><h3 class="slogan">100% DCI-P3</h3><p class="title">Factory calibrated, so what you grade is what your client sees.</p></div></div>
+  </div>
+</section>
+
+<section class="feature" id="cooling">
+  <div class="wrap">
+    <h2 class="slogan">Runs <em>cool</em>, stays quiet</h2>
+    <p class="title">Three fans and a full-width vapor chamber keep the chip at full speed without the jet-engine noise.</p>
+    <div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="stats">
+      <div><b>3<small>fans</small></b><span>Liquid-metal thermal compound</span></div>
+      <div><b>0<small>dB</small></b><span>Silent mode under light loads</span></div>
+      <div><b>-8<small>°C</small></b><span>Compared with last generation</span></div>
+    </div>
+  </div>
+</section>
+<section class="slider" aria-label="Cooling details">
+  <div class="track">
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Vapor chamber</h3><p>Spreads heat across the whole base instead of one hot spot.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Quiet mode</h3><p>Fans stay off for writing, browsing, and calls.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Cool keyboard</h3><p>Air is pulled in under the deck, so the keys stay comfortable.</p></div></article>
+  </div>
+</section>
+
+<section id="design">
+  <div class="wrap split">
+    <div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1629131726692-1accd0c53ce0?auto=format&fit=crop&w=1200&q=70')"></div>
+    <div>
+      <span class="eyebrow">Design</span>
+      <h2 class="slogan">Made from a single piece of aluminum</h2>
+      <p class="title">The chassis is milled from one block of recycled aluminum, then bead-blasted to a soft matte finish that hides fingerprints.</p>
+    </div>
+  </div>
+</section>
+
+<section class="feature" id="audio">
+  <div class="wrap">
+    <h2 class="slogan">Sound you can <em>feel</em></h2>
+    <p class="title">Six speakers and a three-mic array, tuned for music, movies, and meetings.</p>
+  </div>
+</section>
+<section class="slider" aria-label="Audio details">
+  <div class="track">
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Six speakers</h3><p>Two woofers and four tweeters tuned for voices and music.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Spatial audio</h3><p>Wide, room-filling sound from a laptop you can lift with one hand.</p></div></article>
+    <article class="card"><div class="media" style="background-image:url('https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=900&q=70')"></div><div><h3>Studio mics</h3><p>Three-mic array with noise reduction for clear calls.</p></div></article>
+  </div>
+</section>
+
+<section id="portability">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Portability</span>
+      <h2 class="slogan">1.85 kg. Built to go anywhere.</h2>
+      <p class="title">Weight, battery life, and fast charging. The details that matter when you work away from your desk.</p>
+      <div class="stats">
+        <div><b>90<small>Wh</small></b><span>Battery</span></div>
+        <div><b>50<small>%</small></b><span>Charge in 30 min</span></div>
+      </div>
+    </div>
+    <div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1484788984921-03950022c9ef?auto=format&fit=crop&w=1200&q=70')"></div>
+  </div>
+</section>
+
+<section class="ports" id="ports">
+  <div class="wrap">
+    <h2 class="slogan">Every port you need</h2>
+    <div class="media" aria-hidden="true" style="background-image:url('https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=2000&q=70')"></div>
+    <ul class="port-list">
+      <li><b>1×</b>Thunderbolt / USB-C</li>
+      <li><b>1×</b>USB-C with charging</li>
+      <li><b>2×</b>USB-A</li>
+      <li><b>1×</b>HDMI</li>
+      <li><b>1×</b>SD card reader</li>
+      <li><b>1×</b>3.5 mm audio jack</li>
+    </ul>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2 class="slogan">FAQ</h2>
+    <details><summary>Can I upgrade the memory?</summary><p>Memory is soldered for speed and battery life. Choose 32 GB or 64 GB when you order.</p></details>
+    <details><summary>Does it charge over USB-C?</summary><p>Yes. Either USB-C port accepts power, and the included 140 W charger reaches 50% in 30 minutes.</p></details>
+    <details><summary>What comes in the box?</summary><p>The laptop, a 140 W USB-C charger, a braided cable, and a quick start guide.</p></details>
+    <details><summary>What warranty is included?</summary><p>Two years of parts and labor, with the option to extend to four.</p></details>
+  </div>
+</section>
+
+<footer id="buy">
+  <div class="wrap">
+    <span>© 2026 Halcyon. A fictional product. Template by Arnel Colar.</span>
+    <a class="btn" href="#">Buy now</a>
+  </div>
+</footer>
+
+<script>
+  // Scrollspy: highlight the nav link for the section in view
+  const links = document.querySelectorAll('.pnav ul a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.hash === '#' + e.target.id));
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  links.forEach(a => obs.observe(document.querySelector(a.hash)));
+</script>
+</body>
+</html>

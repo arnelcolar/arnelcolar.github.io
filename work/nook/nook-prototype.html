@@ -1,0 +1,860 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NOOK</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #EDEDED; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Work Sans', Arial, sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; }
+  img { display:block; }
+  a { color:#A16207; text-decoration:none; }
+  button { font-family:'Work Sans', Arial, sans-serif; border:none; cursor:pointer; background:none; }
+  input::placeholder { color:#8A8A8A; }
+
+  :root {
+    --bg:#FFFFFF; --surface:#FAFAFA; --ink:#171717; --ink-soft:#404040; --muted:#8A8A8A; --border:#E5E5E5; --accent:#A16207;
+  }
+
+  .phone.dark {
+    --bg:#141414; --surface:#1E1E1E; --ink:#F2F2F2; --ink-soft:#CCCCCC; --muted:#8F8F8F; --border:#2E2E2E;
+  }
+  .phone, .phone * { transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+
+  .skeleton { background:linear-gradient(90deg, var(--surface) 25%, var(--border) 37%, var(--surface) 63%); background-size:400% 100%; animation:shimmer 1.4s ease infinite; }
+  @keyframes shimmer { 0% { background-position:100% 50%; } 100% { background-position:0 50%; } }
+
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--border); }
+  .dot.active { width:18px; border-radius:3px; background:var(--ink); }
+
+  .cat-tab { flex-shrink:0; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--muted); white-space:nowrap; padding-bottom:11px; margin-bottom:-11px; border-bottom:2px solid transparent; cursor:pointer; }
+  .cat-tab.active { font-weight:700; color:var(--ink); border-bottom-color:var(--ink); }
+
+  .toggle-switch { width:40px; height:24px; border-radius:12px; background:var(--border); position:relative; cursor:pointer; flex-shrink:0; }
+  .toggle-switch.on { background:var(--ink); }
+  .toggle-knob { width:18px; height:18px; border-radius:50%; background:#fff; position:absolute; top:3px; left:3px; transition:left 0.2s ease; box-shadow:0 1px 2px rgba(0,0,0,0.25); }
+  .toggle-switch.on .toggle-knob { left:19px; }
+
+  .phone {
+    width:390px; height:844px; background:var(--bg); position:relative; overflow:hidden;
+    border-radius:36px; box-shadow:0 30px 80px rgba(0,0,0,0.35); border:8px solid #111;
+  }
+  .screen { position:absolute; inset:0; overflow:hidden; display:none; background:var(--bg); }
+  .screen.active { display:block; }
+  .screen-scroll { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; }
+
+  .sticky-top { position:sticky; top:0; z-index:10; background:var(--bg); }
+  .sticky-bottom { position:absolute; left:0; right:0; bottom:0; z-index:10; background:var(--bg); }
+
+  .tag { font-size:10px; font-weight:700; letter-spacing:2px; color:var(--muted); }
+  .h-outfit { font-family:'Outfit', Arial, sans-serif; }
+  .toast {
+    position:absolute; left:50%; bottom:100px; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:#fff; font-size:12px; font-weight:600; padding:12px 20px; border-radius:2px;
+    opacity:0; pointer-events:none; transition:opacity 0.25s ease, transform 0.25s ease; z-index:50; white-space:nowrap;
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .badge {
+    position:absolute; top:-5px; right:-5px; width:17px; height:17px; border-radius:50%;
+    background:var(--accent); color:#fff; font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+
+  .navbtn { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .navbtn .dash { width:14px; height:2px; }
+  .navbtn.active .dash { background:var(--ink); }
+
+  .grid-cell { border-right:1px solid var(--border); border-bottom:1px solid var(--border); cursor:pointer; }
+  .grid-cell:active { opacity:0.85; }
+
+  .swatch { width:34px; height:34px; border-radius:50%; border:none; padding:0; cursor:pointer; }
+  .chip { padding:9px 16px; border-radius:2px; font-size:12px; font-weight:600; cursor:pointer; }
+
+  ::-webkit-scrollbar { width:0; height:0; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- ============ SPLASH SCREEN ============ -->
+  <div class="screen active" id="screen-splash" style="cursor:pointer;" onclick="goOnboarding()">
+    <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--ink);position:relative;">
+      <div class="h-outfit" style="font-weight:700;font-size:34px;letter-spacing:4px;color:#fff;">NOOK</div>
+      <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.55);margin-top:10px;text-transform:uppercase;">Furniture, considered</div>
+      <div style="position:absolute;bottom:56px;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:1px;">Tap to continue</div>
+    </div>
+  </div>
+
+  <!-- ============ ONBOARDING SCREEN ============ -->
+  <div class="screen" id="screen-onboarding">
+    <div style="height:100%;display:flex;flex-direction:column;">
+      <div style="display:flex;justify-content:flex-end;padding:20px 20px 0;">
+        <div style="font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;" onclick="skipOnboarding()">Skip</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 36px;text-align:center;">
+        <img id="onboard-img" src="" style="width:220px;height:220px;object-fit:cover;border-radius:4px;margin-bottom:28px;" />
+        <div class="h-outfit" id="onboard-title" style="font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-0.3px;"></div>
+        <div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6;" id="onboard-body"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:22px;padding:0 20px 36px;">
+        <div style="display:flex;gap:6px;" id="onboard-dots"></div>
+        <div style="width:100%;height:50px;border-radius:2px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="onboardNext()" id="onboard-cta">Next</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ LOGIN SCREEN ============ -->
+  <div class="screen" id="screen-login">
+    <div style="height:100%;display:flex;flex-direction:column;padding:64px 28px 36px;">
+      <div class="h-outfit" style="font-weight:700;font-size:15px;letter-spacing:3px;color:var(--ink);">NOOK</div>
+      <div class="h-outfit" style="font-weight:700;font-size:26px;color:var(--ink);margin-top:28px;letter-spacing:-0.4px;">Welcome back</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px;">Sign in to track orders and save favorites.</div>
+
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;">Email</div>
+          <input type="email" value="jordan@example.com" style="width:100%;height:46px;border:1px solid var(--border);border-radius:2px;padding:0 14px;font-size:13px;color:var(--ink);background:var(--bg);outline:none;" />
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;">Password</div>
+          <input type="password" value="password123" style="width:100%;height:46px;border:1px solid var(--border);border-radius:2px;padding:0 14px;font-size:13px;color:var(--ink);background:var(--bg);outline:none;" />
+        </div>
+      </div>
+
+      <div style="text-align:right;margin-top:12px;font-size:11px;color:var(--muted);">Forgot password?</div>
+
+      <div style="margin-top:28px;height:50px;border-radius:2px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="doLogin()">Log In</div>
+
+      <div style="display:flex;align-items:center;gap:12px;margin-top:24px;">
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+        <div style="font-size:10px;color:var(--muted);letter-spacing:1px;">OR</div>
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+      </div>
+
+      <div style="margin-top:24px;height:50px;border-radius:2px;border:1px solid var(--ink);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="continueAsGuest()">Continue as Guest</div>
+
+      <div style="flex:1;"></div>
+      <div style="text-align:center;font-size:12px;color:var(--muted);">Don't have an account? <span style="color:var(--accent);font-weight:600;">Sign up</span></div>
+    </div>
+  </div>
+
+  <!-- ============ SEARCH SCREEN ============ -->
+  <div class="screen" id="screen-search">
+    <div class="screen-scroll">
+    <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;" onclick="goHome()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </div>
+        <div style="flex:1;height:46px;border:1px solid var(--ink);border-radius:2px;display:flex;align-items:center;padding:0 14px;gap:10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg>
+          <input id="search-input" type="text" placeholder="Search chairs, tables, lamps..." style="border:none;background:transparent;outline:none;font-size:13px;color:var(--ink);flex:1;padding:0;" oninput="onSearchInput()" />
+        </div>
+      </div>
+    </div>
+    <div style="padding:20px;">
+      <div id="search-grid" style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));border-top:1px solid var(--border);border-left:1px solid var(--border);"></div>
+      <div id="search-empty" style="display:none;padding:70px 20px;text-align:center;">
+        <div style="font-size:13px;color:var(--ink);font-weight:600;">No results found</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6;">Try a different search term, or browse by category from Home.</div>
+      </div>
+      <div style="height:90px;"></div>
+    </div>
+    </div>
+    <div id="navbar-search"></div>
+  </div>
+
+  <!-- ============ SAVED SCREEN ============ -->
+  <div class="screen" id="screen-saved">
+    <div class="screen-scroll">
+    <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);">
+      <div class="h-outfit" style="font-weight:700;font-size:19px;letter-spacing:-0.2px;color:var(--ink);">Saved</div>
+    </div>
+    <div style="padding:20px;">
+      <div id="saved-grid" style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));border-top:1px solid var(--border);border-left:1px solid var(--border);"></div>
+      <div id="saved-empty" style="display:none;padding:70px 20px;text-align:center;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 16px;display:block;"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4A5 5 0 0 1 12 7a5 5 0 0 1 6.6-3c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+        <div style="font-size:13px;color:var(--ink);font-weight:600;">Nothing saved yet</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6;">Tap the heart on any product to save it here.</div>
+      </div>
+      <div style="height:90px;"></div>
+    </div>
+    </div>
+    <div id="navbar-saved"></div>
+  </div>
+
+  <!-- ============ PROFILE SCREEN ============ -->
+  <div class="screen" id="screen-profile">
+    <div class="screen-scroll">
+    <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);">
+      <div class="h-outfit" style="font-weight:700;font-size:19px;letter-spacing:-0.2px;color:var(--ink);">Profile</div>
+    </div>
+    <div style="padding:24px 20px 20px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;" class="h-outfit">J</div>
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--ink);">Jordan Casey</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">jordan@example.com</div>
+        </div>
+      </div>
+
+      <div style="margin-top:26px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">Account</div>
+      <div style="margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);"><div style="font-size:13px;font-weight:500;color:var(--ink);">Order History</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);"><div style="font-size:13px;font-weight:500;color:var(--ink);">Shipping Addresses</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);"><div style="font-size:13px;font-weight:500;color:var(--ink);">Payment Methods</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+      </div>
+
+      <div style="margin-top:22px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">Preferences</div>
+      <div style="margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:500;color:var(--ink);">Dark Mode</div>
+          <div id="toggle-dark" class="toggle-switch" onclick="toggleDarkMode()"><div class="toggle-knob"></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:500;color:var(--ink);">Push Notifications</div>
+          <div class="toggle-switch on"><div class="toggle-knob"></div></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:500;color:var(--ink);">Simulate Offline <span style="color:var(--muted);font-weight:400;">(demo)</span></div>
+          <div id="toggle-offline" class="toggle-switch" onclick="toggleOffline()"><div class="toggle-knob"></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;height:48px;border-radius:2px;border:1px solid var(--border);color:var(--ink-soft);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:0.3px;cursor:pointer;" onclick="logOut()">Log Out</div>
+      <div style="height:90px;"></div>
+    </div>
+    </div>
+    <div id="navbar-profile"></div>
+  </div>
+
+  <!-- ============ HOME SCREEN ============ -->
+  <div class="screen" id="screen-home">
+    <div class="screen-scroll">
+    <div class="sticky-top" style="padding:24px 20px 0;border-bottom:1px solid var(--border);">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="h-outfit" style="font-weight:700;font-size:18px;letter-spacing:2px;color:var(--ink);">NOOK</div>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;background:var(--bg);border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="goCart()">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 13H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <div class="badge" id="cart-badge-home" style="display:none;">0</div>
+        </div>
+      </div>
+
+      <div class="h-outfit" style="font-weight:700;font-size:27px;line-height:1.15;letter-spacing:-0.5px;color:var(--ink);margin-top:16px;width:90%;">Find pieces that feel like home.</div>
+
+      <div style="margin-top:16px;height:46px;border:1px solid var(--ink);border-radius:2px;display:flex;align-items:center;padding:0 14px;gap:10px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg>
+        <input type="text" placeholder="Search chairs, tables, lamps..." style="border:none;background:transparent;outline:none;font-size:13px;color:var(--ink);flex:1;padding:0;" />
+      </div>
+
+      <div style="margin-top:18px;display:flex;gap:22px;overflow-x:auto;padding-bottom:11px;">
+        <div class="cat-tab active" data-cat="All" onclick="selectCategory('All')">All</div>
+        <div class="cat-tab" data-cat="SEATING" onclick="selectCategory('SEATING')">Seating</div>
+        <div class="cat-tab" data-cat="TABLES" onclick="selectCategory('TABLES')">Tables</div>
+        <div class="cat-tab" data-cat="LIGHTING" onclick="selectCategory('LIGHTING')">Lighting</div>
+        <div class="cat-tab" data-cat="STORAGE" onclick="selectCategory('STORAGE')">Storage</div>
+      </div>
+    </div>
+
+    <div style="padding:20px;">
+      <div style="position:relative;height:210px;overflow:hidden;">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=780&h=420&fit=crop&q=70&fm=jpg" style="width:100%;height:100%;object-fit:cover;" />
+        <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0) 100%);"></div>
+        <div style="position:absolute;left:20px;bottom:18px;right:20px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.7);">AUTUMN EDIT</div>
+          <div class="h-outfit" style="font-weight:700;font-size:24px;color:#fff;line-height:1.1;margin-top:6px;letter-spacing:-0.3px;">Warm tones,<br/>natural materials.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 20px;display:flex;justify-content:space-between;align-items:baseline;">
+      <div class="h-outfit" style="font-weight:700;font-size:19px;color:var(--ink);letter-spacing:-0.2px;">New Arrivals</div>
+    </div>
+
+    <div style="padding:0 20px;margin-top:16px;">
+      <div id="product-grid" style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));border-top:1px solid var(--border);border-left:1px solid var(--border);"></div>
+    </div>
+
+    <div style="height:90px;"></div>
+    </div>
+
+    <div id="navbar-home"></div>
+  </div>
+
+  <!-- ============ PRODUCT DETAIL SCREEN ============ -->
+  <div class="screen" id="screen-detail">
+    <div id="detail-skeleton" style="position:absolute;inset:0;background:var(--bg);z-index:20;display:none;">
+      <div class="skeleton" style="height:400px;width:100%;"></div>
+      <div style="padding:24px 20px;">
+        <div class="skeleton" style="height:10px;width:80px;border-radius:2px;margin-bottom:12px;"></div>
+        <div class="skeleton" style="height:22px;width:70%;border-radius:2px;margin-bottom:14px;"></div>
+        <div class="skeleton" style="height:14px;width:40%;border-radius:2px;margin-bottom:20px;"></div>
+        <div class="skeleton" style="height:24px;width:30%;border-radius:2px;"></div>
+      </div>
+    </div>
+    <div class="screen-scroll">
+    <div style="position:relative;height:400px;overflow:hidden;border-bottom:1px solid var(--border);">
+      <img id="detail-img" src="" style="width:100%;height:100%;object-fit:cover;" />
+      <div style="position:absolute;top:16px;left:20px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="goHome()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </div>
+      <div id="detail-heart-btn" style="position:absolute;top:16px;right:20px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="toggleWishlist(state.productId)">
+        <svg id="detail-heart-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4A5 5 0 0 1 12 7a5 5 0 0 1 6.6-3c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>
+      </div>
+    </div>
+
+    <div style="padding:24px 20px 140px;">
+      <div class="tag" id="detail-category">SEATING</div>
+      <div class="h-outfit" id="detail-name" style="font-weight:700;font-size:26px;color:var(--ink);margin-top:6px;letter-spacing:-0.3px;line-height:1.1;">Product Name</div>
+
+      <div style="display:flex;align-items:center;gap:5px;margin-top:12px;">
+        <div id="detail-stars"></div>
+        <div style="font-size:11px;color:var(--muted);margin-left:5px;" id="detail-reviews"></div>
+      </div>
+
+      <div style="font-size:22px;font-weight:800;color:var(--ink);margin-top:16px;" id="detail-price"></div>
+
+      <div style="height:1px;background:var(--border);margin-top:20px;"></div>
+
+      <div style="margin-top:20px;" id="detail-finish-block">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);">Finish</div>
+          <div style="font-size:12px;color:var(--muted);" id="detail-finish-name"></div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:14px;" id="detail-finish-swatches"></div>
+      </div>
+
+      <div style="margin-top:24px;" id="detail-config-block">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);">Configuration</div>
+        <div style="display:flex;gap:8px;margin-top:14px;" id="detail-config-chips"></div>
+      </div>
+
+      <div style="margin-top:24px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink);">Quantity</div>
+        <div style="display:flex;align-items:center;gap:16px;border:1px solid var(--border);border-radius:2px;padding:8px 14px;">
+          <button onclick="changeQty(-1)" style="width:18px;height:18px;display:flex;align-items:center;justify-content:center;color:var(--ink);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div style="font-size:13px;font-weight:600;width:16px;text-align:center;color:var(--ink);" id="detail-qty">1</div>
+          <button onclick="changeQty(1)" style="width:18px;height:18px;display:flex;align-items:center;justify-content:center;color:var(--ink);">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--border);margin-top:24px;"></div>
+
+      <div style="margin-top:24px;">
+        <div class="h-outfit" style="font-weight:600;font-size:17px;color:var(--ink);margin-bottom:8px;letter-spacing:-0.2px;">Description</div>
+        <div style="font-size:13px;line-height:1.7;color:var(--ink-soft);" id="detail-desc"></div>
+      </div>
+
+      <div style="margin-top:24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:500;color:var(--ink);">Dimensions</div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);">
+          <div style="font-size:13px;font-weight:500;color:var(--ink);">Materials &amp; Care</div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;">
+          <div style="font-size:13px;font-weight:500;color:var(--ink);">Shipping &amp; Returns</div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="sticky-bottom" style="border-top:1px solid var(--border);padding:16px 20px 20px;display:flex;align-items:center;gap:12px;">
+      <div style="display:flex;flex-direction:column;">
+        <div style="font-size:10px;color:var(--muted);">Total</div>
+        <div style="font-size:17px;font-weight:700;color:var(--ink);" id="detail-total">$0</div>
+      </div>
+      <div style="flex:1;height:50px;border-radius:2px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="addToCart()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 13H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        Add to Cart
+      </div>
+    </div>
+
+    <div class="toast" id="toast-detail">Added to cart</div>
+  </div>
+
+  <!-- ============ CART SCREEN ============ -->
+  <div class="screen" id="screen-cart">
+    <div class="screen-scroll">
+    <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+      <div style="width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="goHome()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </div>
+      <div class="h-outfit" style="font-weight:700;font-size:19px;letter-spacing:-0.2px;color:var(--ink);">Your Cart (<span id="cart-count">0</span>)</div>
+      <div style="width:38px;height:38px;"></div>
+    </div>
+
+    <div style="padding:4px 20px 0;">
+      <div id="cart-items"></div>
+      <div id="cart-empty" style="display:none;padding:60px 0;text-align:center;color:var(--muted);font-size:13px;">Your cart is empty.</div>
+
+      <div id="cart-summary-block">
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <input type="text" placeholder="Enter promo code" style="flex:1;height:44px;border:1px solid var(--border);border-radius:2px;padding:0 14px;font-size:12px;background:#fff;color:var(--ink);outline:none;" />
+          <button style="height:44px;padding:0 18px;border:1px solid var(--ink);border-radius:2px;background:transparent;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ink);">Apply</button>
+        </div>
+
+        <div style="height:1px;background:var(--border);margin-top:24px;"></div>
+
+        <div style="margin-top:18px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:11px;">
+            <div style="font-size:12px;color:var(--muted);">Subtotal</div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);" id="cart-subtotal">$0.00</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:11px;">
+            <div style="font-size:12px;color:var(--muted);">Shipping</div>
+            <div style="font-size:13px;font-weight:600;color:var(--ink);">Free</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:11px;">
+            <div style="font-size:12px;color:var(--muted);">Estimated Tax</div>
+            <div style="font-size:13px;font-weight:500;color:var(--ink);" id="cart-tax">$0.00</div>
+          </div>
+          <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="h-outfit" style="font-weight:700;font-size:17px;color:var(--ink);letter-spacing:-0.2px;">Total</div>
+            <div style="font-size:19px;font-weight:700;color:var(--ink);" id="cart-total">$0.00</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;margin-top:18px;padding:13px 14px;border:1px solid var(--border);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h11v10H2z"/><path d="M13 10h4l4 3v4h-8z"/><circle cx="6" cy="18.5" r="1.6"/><circle cx="17" cy="18.5" r="1.6"/></svg>
+          <div style="font-size:11px;color:var(--muted);">Estimated delivery: Oct 12&ndash;18</div>
+        </div>
+      </div>
+
+      <div style="height:130px;"></div>
+    </div>
+    </div>
+
+    <div class="sticky-bottom" id="cart-checkout-bar" style="border-top:1px solid var(--border);padding:16px 20px 20px;">
+      <div style="height:50px;border-radius:2px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="checkout()">
+        Checkout &middot; <span id="cart-checkout-total">$0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ORDER CONFIRMATION SCREEN ============ -->
+  <div class="screen" id="screen-confirm">
+    <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 40px;text-align:center;">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <div class="h-outfit" style="font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-0.3px;">Order placed</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:10px;line-height:1.6;">Thanks for shopping with NOOK. A confirmation has been sent to your email, with delivery tracking to follow.</div>
+      <div style="margin-top:32px;height:50px;padding:0 28px;border-radius:2px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="resetAndGoHome()">
+        Continue Shopping
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OFFLINE OVERLAY (demo toggle, from Profile) ============ -->
+  <div id="offline-overlay" style="position:absolute;inset:0;background:var(--bg);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:0 40px;text-align:center;">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:20px;"><path d="M1 9a17 17 0 0 1 22 0M5 13a11 11 0 0 1 14 0M8.5 17a6 6 0 0 1 7 0"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+    <div class="h-outfit" style="font-weight:700;font-size:18px;color:var(--ink);">No internet connection</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:10px;line-height:1.6;">Check your connection and try again. Your cart has been saved.</div>
+    <div style="margin-top:26px;height:46px;padding:0 26px;border-radius:2px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;cursor:pointer;" onclick="retryConnection()">Retry</div>
+  </div>
+
+</div>
+
+<script>
+var PRODUCTS = [{"id": "sofa", "name": "Marlow Sofa", "category": "SEATING", "tag": "Sofas", "price": 1449, "img": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=760&h=700&fit=crop&q=70&fm=jpg", "rating": 4.8, "reviews": 214, "desc": "A low-slung, deep-seated sofa built for slow afternoons. Kiln-dried hardwood frame, high-density foam over pocket springs, and a hand-finished linen-blend upholstery that softens with wear.", "finishes": [{"name": "Terracotta", "color": "#B5613F"}, {"name": "Charcoal", "color": "#3A3A3A"}, {"name": "Oat", "color": "#D8CFC0"}, {"name": "Forest", "color": "#3E4E3D"}], "configs": ["2-Seat", "3-Seat", "Sectional"], "defaultConfig": 1}, {"id": "lamp", "name": "Arc Floor Lamp", "category": "LIGHTING", "tag": "Lighting", "price": 189, "img": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.6, "reviews": 98, "desc": "A sweeping brass arc lamp that casts warm, even light over a reading chair or sofa end. Weighted marble base keeps it steady; the arm adjusts to reach exactly where you need it.", "finishes": [{"name": "Brass", "color": "#B08D57"}, {"name": "Matte Black", "color": "#1E1E1E"}]}, {"id": "armchair", "name": "Britt Armchair", "category": "SEATING", "tag": "Chairs", "price": 599, "img": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.7, "reviews": 156, "desc": "A compact accent chair with a gently curved back and tapered oak legs. Sized for small rooms without giving up depth of comfort.", "finishes": [{"name": "Camel", "color": "#B98A4E"}, {"name": "Charcoal", "color": "#3A3A3A"}, {"name": "Sage", "color": "#8A9A7E"}]}, {"id": "chair", "name": "Nova Dining Chair", "category": "SEATING", "tag": "Dining", "price": 219, "img": "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.9, "reviews": 312, "desc": "A sculptural dining chair in solid ash with a woven cord seat. Stackable, durable, and light enough to move around the table without a scrape.", "finishes": [{"name": "Natural Ash", "color": "#C9A876"}, {"name": "Walnut", "color": "#5B4130"}, {"name": "Black Stain", "color": "#232323"}]}, {"id": "stool", "name": "Birch Counter Stool", "category": "SEATING", "tag": "Dining", "price": 149, "img": "https://images.unsplash.com/photo-1503602642458-232111445657?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1503602642458-232111445657?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.5, "reviews": 87, "desc": "A simple counter-height stool turned from solid birch. Footrest ring and a slightly dished seat keep it comfortable through a long dinner.", "finishes": [{"name": "Natural Birch", "color": "#D9C4A0"}, {"name": "Espresso", "color": "#3E2C22"}]}, {"id": "cabinet", "name": "Reed Storage Cabinet", "category": "STORAGE", "tag": "Storage", "price": 389, "img": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.7, "reviews": 64, "desc": "A low storage cabinet with reeded fluted doors and brass hardware. Adjustable interior shelf, soft-close hinges, solid oak veneer.", "finishes": [{"name": "Natural Oak", "color": "#C9A876"}, {"name": "Smoked Oak", "color": "#5B4130"}]}];
+
+var ONBOARD_SLIDES = [
+  { img: PRODUCTS[0].detailImg, title: 'Curated, not endless', body: 'A tight collection of considered pieces — no infinite scroll, no decision fatigue.' },
+  { img: PRODUCTS[2].detailImg, title: 'See it before you buy it', body: 'Real photography, true finishes, and dimensions you can trust.' },
+  { img: PRODUCTS[5].detailImg, title: 'Checkout in under a minute', body: 'A minimal cart and saved details mean fewer taps between browsing and delivery.' },
+];
+
+var NAV_ITEMS = [
+  { key:'home', action:'goHome()', icon:'home' },
+  { key:'search', action:'goSearch()', icon:'search' },
+  { key:'saved', action:'goSaved()', icon:'heart' },
+  { key:'cart', action:'goCart()', icon:'cart' },
+  { key:'profile', action:'goProfile()', icon:'profile' },
+];
+
+var state = { screen:'screen-splash', productId:null, finishIdx:0, configIdx:null, qty:1, cart:[], onboardIdx:0, searchQuery:'', saved:[], darkMode:false, offline:false, category:'All' };
+
+function findProduct(id){ return PRODUCTS.find(function(p){ return p.id===id; }); }
+
+function starsSvg(filled){
+  var color = filled ? 'var(--accent)' : 'var(--border)';
+  return '<svg width="12" height="12" viewBox="0 0 24 24" fill="'+color+'" stroke="none" style="display:inline-block;margin-right:2px;"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17.1 5.9 20.5l1.5-6.8L2.2 9l6.9-.7L12 2Z"/></svg>';
+}
+
+function money(n){ return '$' + n.toLocaleString('en-US'); }
+function money2(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+function renderGridCell(p){
+  var isSaved = state.saved.indexOf(p.id) !== -1;
+  var heartFill = isSaved ? 'var(--accent)' : 'none';
+  var heartStroke = isSaved ? 'var(--accent)' : 'var(--ink)';
+  return '' +
+    '<div class="grid-cell" onclick="openProduct(\'' + p.id + '\')">' +
+      '<div style="position:relative;aspect-ratio:1/1;overflow:hidden;">' +
+        '<img src="' + p.img + '" style="width:100%;height:100%;object-fit:cover;" />' +
+        '<div style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;" onclick="event.stopPropagation();toggleWishlist(\'' + p.id + '\')">' +
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="' + heartFill + '" stroke="' + heartStroke + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4A5 5 0 0 1 12 7a5 5 0 0 1 6.6-3c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>' +
+        '</div>' +
+      '</div>' +
+      '<div style="padding:14px;">' +
+        '<div style="font-size:13px;font-weight:600;color:var(--ink);line-height:1.3;">' + p.name + '</div>' +
+        '<div style="font-size:14px;font-weight:700;color:var(--ink);margin-top:4px;">' + money(p.price) + '</div>' +
+        '<div style="font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);margin-top:6px;">' + p.tag + '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+function selectCategory(cat){
+  state.category = cat;
+  var tabs = document.querySelectorAll('.cat-tab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.toggle('active', tabs[i].getAttribute('data-cat') === cat);
+  }
+  renderGrid();
+}
+
+function renderGrid(){
+  var cat = state.category || 'All';
+  var list = cat === 'All' ? PRODUCTS : PRODUCTS.filter(function(p){ return p.category === cat; });
+  var grid = document.getElementById('product-grid');
+  if (list.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;padding:48px 8px;text-align:center;">' +
+      '<div style="font-size:13px;font-weight:600;color:var(--ink);">No pieces in this category yet</div>' +
+      '<div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6;">Check back soon, or browse another category.</div>' +
+    '</div>';
+    return;
+  }
+  document.getElementById('product-grid').innerHTML = list.map(renderGridCell).join('');
+}
+
+function toggleWishlist(id){
+  var idx = state.saved.indexOf(id);
+  if (idx === -1) state.saved.push(id); else state.saved.splice(idx, 1);
+  renderGrid();
+  if (state.screen === 'screen-search') renderSearchResults();
+  if (state.screen === 'screen-saved') renderSaved();
+  if (state.productId === id) {
+    var isSaved = state.saved.indexOf(id) !== -1;
+    var heartSvg = document.getElementById('detail-heart-svg');
+    heartSvg.setAttribute('fill', isSaved ? 'var(--accent)' : 'none');
+    heartSvg.setAttribute('stroke', isSaved ? 'var(--accent)' : 'var(--ink)');
+  }
+}
+
+function navIconSvg(key, color){
+  switch(key){
+    case 'home': return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg>';
+    case 'search': return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg>';
+    case 'heart': return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.8 2 4.5 5.4 4A5 5 0 0 1 12 7a5 5 0 0 1 6.6-3c3.4.5 5 3.8 3.4 7.2-2.5 4.7-10 9.3-10 9.3Z"/></svg>';
+    case 'cart': return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 13H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
+    case 'profile': return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.4 4-5 7-5s5.8 1.6 7 5"/></svg>';
+  }
+}
+
+function renderNavBar(activeKey){
+  return '<div class="sticky-bottom" style="border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:12px 12px 14px;">' +
+    NAV_ITEMS.map(function(item){
+      var isActive = item.key === activeKey;
+      var color = isActive ? 'var(--ink)' : 'var(--muted)';
+      var badge = item.key === 'cart' ? '<div class="badge nav-cart-badge" style="display:none;top:-8px;right:-8px;">0</div>' : '';
+      return '<div class="navbtn' + (isActive?' active':'') + '" style="cursor:pointer;" onclick="' + item.action + '">' +
+        '<div style="position:relative;">' + navIconSvg(item.icon, color) + badge + '</div>' +
+        '<div class="dash" style="background:' + (isActive ? 'var(--ink)' : 'transparent') + ';"></div>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  var el = document.getElementById(id);
+  el.classList.add('active');
+  var scroller = el.querySelector('.screen-scroll');
+  if (scroller) scroller.scrollTop = 0; else el.scrollTop = 0;
+  state.screen = id;
+}
+
+function goHome(){ showScreen('screen-home'); }
+
+function openProduct(id){
+  var p = findProduct(id);
+  state.productId = id;
+  state.finishIdx = 0;
+  state.configIdx = p.configs ? p.defaultConfig : null;
+  state.qty = 1;
+  document.getElementById('detail-skeleton').style.display = 'block';
+  showScreen('screen-detail');
+  setTimeout(function(){
+    renderDetail();
+    document.getElementById('detail-skeleton').style.display = 'none';
+  }, 380);
+}
+
+function renderDetail(){
+  var p = findProduct(state.productId);
+  document.getElementById('detail-img').src = p.detailImg;
+  var isSaved = state.saved.indexOf(p.id) !== -1;
+  var heartSvg = document.getElementById('detail-heart-svg');
+  heartSvg.setAttribute('fill', isSaved ? 'var(--accent)' : 'none');
+  heartSvg.setAttribute('stroke', isSaved ? 'var(--accent)' : 'var(--ink)');
+  document.getElementById('detail-category').textContent = p.category;
+  document.getElementById('detail-name').textContent = p.name;
+  document.getElementById('detail-reviews').textContent = p.rating.toFixed(1) + ' (' + p.reviews + ' reviews)';
+  var full = Math.round(p.rating);
+  var starsHtml = '';
+  for (var i=0;i<5;i++){ starsHtml += starsSvg(i < full); }
+  document.getElementById('detail-stars').innerHTML = starsHtml;
+  document.getElementById('detail-price').textContent = money(p.price);
+  document.getElementById('detail-desc').textContent = p.desc;
+  document.getElementById('detail-qty').textContent = state.qty;
+  document.getElementById('detail-total').textContent = money(p.price * state.qty);
+
+  var finishBlock = document.getElementById('detail-finish-block');
+  if (p.finishes && p.finishes.length > 1) {
+    finishBlock.style.display = '';
+    document.getElementById('detail-finish-name').textContent = p.finishes[state.finishIdx].name;
+    document.getElementById('detail-finish-swatches').innerHTML = p.finishes.map(function(f, i){
+      var ring = i === state.finishIdx
+        ? 'box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--accent);'
+        : 'box-shadow:0 0 0 2px var(--bg), 0 0 0 1px var(--border);';
+      return '<button class="swatch" style="background:' + f.color + ';' + ring + '" onclick="pickFinish(' + i + ')"></button>';
+    }).join('');
+  } else {
+    finishBlock.style.display = 'none';
+  }
+
+  var configBlock = document.getElementById('detail-config-block');
+  if (p.configs) {
+    configBlock.style.display = '';
+    document.getElementById('detail-config-chips').innerHTML = p.configs.map(function(label, i){
+      var style = i === state.configIdx
+        ? 'background:var(--ink);color:#fff;border:1px solid var(--ink);'
+        : 'background:#fff;color:var(--ink);border:1px solid var(--border);';
+      return '<button class="chip" style="' + style + '" onclick="pickConfig(' + i + ')">' + label + '</button>';
+    }).join('');
+  } else {
+    configBlock.style.display = 'none';
+  }
+}
+
+function pickFinish(i){ state.finishIdx = i; renderDetail(); }
+function pickConfig(i){ state.configIdx = i; renderDetail(); }
+function changeQty(delta){
+  state.qty = Math.max(1, Math.min(9, state.qty + delta));
+  renderDetail();
+}
+
+function addToCart(){
+  var p = findProduct(state.productId);
+  var existing = state.cart.find(function(c){
+    return c.productId === state.productId && c.finishIdx === state.finishIdx && c.configIdx === state.configIdx;
+  });
+  if (existing) {
+    existing.qty += state.qty;
+  } else {
+    state.cart.push({ productId: state.productId, finishIdx: state.finishIdx, configIdx: state.configIdx, qty: state.qty });
+  }
+  updateCartBadges();
+  var toast = document.getElementById('toast-detail');
+  toast.classList.add('show');
+  setTimeout(function(){
+    toast.classList.remove('show');
+    goCart();
+  }, 700);
+}
+
+function updateCartBadges(){
+  var count = state.cart.reduce(function(sum, c){ return sum + c.qty; }, 0);
+  var homeBadge = document.getElementById('cart-badge-home');
+  if (homeBadge) { homeBadge.textContent = count; homeBadge.style.display = count > 0 ? 'flex' : 'none'; }
+  document.querySelectorAll('.nav-cart-badge').forEach(function(b){
+    b.textContent = count;
+    b.style.display = count > 0 ? 'flex' : 'none';
+  });
+}
+
+function goCart(){ renderCart(); showScreen('screen-cart'); }
+
+function cartLineLabel(c){
+  var p = findProduct(c.productId);
+  var parts = [];
+  if (p.finishes && p.finishes.length > 1) parts.push(p.finishes[c.finishIdx].name);
+  if (p.configs) parts.push(p.configs[c.configIdx]);
+  return parts.length ? parts.join(' · ') : (p.finishes ? p.finishes[0].name : '');
+}
+
+function renderCart(){
+  var container = document.getElementById('cart-items');
+  var emptyMsg = document.getElementById('cart-empty');
+  var summary = document.getElementById('cart-summary-block');
+  var checkoutBar = document.getElementById('cart-checkout-bar');
+
+  document.getElementById('cart-count').textContent = state.cart.reduce(function(s,c){return s+c.qty;}, 0);
+
+  if (state.cart.length === 0) {
+    container.innerHTML = '';
+    emptyMsg.style.display = 'block';
+    summary.style.display = 'none';
+    checkoutBar.style.display = 'none';
+    return;
+  }
+  emptyMsg.style.display = 'none';
+  summary.style.display = '';
+  checkoutBar.style.display = '';
+
+  container.innerHTML = state.cart.map(function(c, idx){
+    var p = findProduct(c.productId);
+    return '' +
+      '<div style="display:flex;gap:12px;padding:16px 0;border-bottom:1px solid var(--border);">' +
+        '<div style="width:74px;height:74px;flex-shrink:0;overflow:hidden;"><img src="' + p.img + '" style="width:100%;height:100%;object-fit:cover;" /></div>' +
+        '<div style="flex:1;display:flex;flex-direction:column;gap:4px;min-width:0;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">' +
+            '<div style="font-size:13px;font-weight:600;color:var(--ink);">' + p.name + '</div>' +
+            '<button onclick="removeFromCart(' + idx + ')" style="padding:4px;color:var(--muted);flex-shrink:0;">' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>' +
+            '</button>' +
+          '</div>' +
+          '<div style="font-size:11px;color:var(--muted);">' + cartLineLabel(c) + '</div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto;">' +
+            '<div style="font-size:13px;font-weight:700;color:var(--ink);">' + money(p.price) + '</div>' +
+            '<div style="display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:2px;padding:5px 10px;">' +
+              '<button onclick="changeCartQty(' + idx + ',-1)" style="width:15px;height:15px;display:flex;align-items:center;justify-content:center;color:var(--ink);">' +
+                '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+              '</button>' +
+              '<div style="font-size:12px;font-weight:600;width:14px;text-align:center;color:var(--ink);">' + c.qty + '</div>' +
+              '<button onclick="changeCartQty(' + idx + ',1)" style="width:15px;height:15px;display:flex;align-items:center;justify-content:center;color:var(--ink);">' +
+                '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+              '</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }).join('');
+
+  var subtotal = state.cart.reduce(function(sum, c){ return sum + findProduct(c.productId).price * c.qty; }, 0);
+  var tax = subtotal * 0.08;
+  var total = subtotal + tax;
+  document.getElementById('cart-subtotal').textContent = money2(subtotal);
+  document.getElementById('cart-tax').textContent = money2(tax);
+  document.getElementById('cart-total').textContent = money2(total);
+  document.getElementById('cart-checkout-total').textContent = money2(total);
+}
+
+function changeCartQty(idx, delta){
+  state.cart[idx].qty = Math.max(1, state.cart[idx].qty + delta);
+  updateCartBadges();
+  renderCart();
+}
+function removeFromCart(idx){
+  state.cart.splice(idx, 1);
+  updateCartBadges();
+  renderCart();
+}
+
+function checkout(){
+  if (state.cart.length === 0) return;
+  showScreen('screen-confirm');
+}
+
+function resetAndGoHome(){
+  state.cart = [];
+  updateCartBadges();
+  goHome();
+}
+
+/* ---------- Onboarding / Auth ---------- */
+function goOnboarding(){ state.onboardIdx = 0; renderOnboard(); showScreen('screen-onboarding'); }
+function renderOnboard(){
+  var s = ONBOARD_SLIDES[state.onboardIdx];
+  document.getElementById('onboard-img').src = s.img;
+  document.getElementById('onboard-title').textContent = s.title;
+  document.getElementById('onboard-body').textContent = s.body;
+  document.getElementById('onboard-dots').innerHTML = ONBOARD_SLIDES.map(function(_, i){
+    return '<div class="dot' + (i === state.onboardIdx ? ' active' : '') + '"></div>';
+  }).join('');
+  document.getElementById('onboard-cta').textContent = state.onboardIdx === ONBOARD_SLIDES.length - 1 ? 'Get Started' : 'Next';
+}
+function onboardNext(){
+  if (state.onboardIdx < ONBOARD_SLIDES.length - 1) { state.onboardIdx++; renderOnboard(); }
+  else { goLogin(); }
+}
+function skipOnboarding(){ goLogin(); }
+function goLogin(){ showScreen('screen-login'); }
+function doLogin(){ goHome(); }
+function continueAsGuest(){ goHome(); }
+function logOut(){
+  state.cart = [];
+  updateCartBadges();
+  showScreen('screen-login');
+}
+
+/* ---------- Search ---------- */
+function goSearch(){
+  document.getElementById('search-input').value = state.searchQuery;
+  renderSearchResults();
+  showScreen('screen-search');
+  setTimeout(function(){ document.getElementById('search-input').focus(); }, 50);
+}
+function onSearchInput(){
+  state.searchQuery = document.getElementById('search-input').value;
+  renderSearchResults();
+}
+function renderSearchResults(){
+  var q = state.searchQuery.trim().toLowerCase();
+  var results = q === '' ? PRODUCTS : PRODUCTS.filter(function(p){
+    return p.name.toLowerCase().indexOf(q) !== -1 || p.category.toLowerCase().indexOf(q) !== -1 || p.tag.toLowerCase().indexOf(q) !== -1;
+  });
+  document.getElementById('search-grid').innerHTML = results.map(renderGridCell).join('');
+  document.getElementById('search-grid').style.display = results.length ? 'grid' : 'none';
+  document.getElementById('search-empty').style.display = results.length ? 'none' : 'block';
+}
+
+/* ---------- Saved / Wishlist ---------- */
+function goSaved(){ renderSaved(); showScreen('screen-saved'); }
+function renderSaved(){
+  var items = PRODUCTS.filter(function(p){ return state.saved.indexOf(p.id) !== -1; });
+  document.getElementById('saved-grid').innerHTML = items.map(renderGridCell).join('');
+  document.getElementById('saved-grid').style.display = items.length ? 'grid' : 'none';
+  document.getElementById('saved-empty').style.display = items.length ? 'none' : 'block';
+}
+
+/* ---------- Profile / Settings ---------- */
+function goProfile(){ showScreen('screen-profile'); }
+function toggleDarkMode(){
+  state.darkMode = !state.darkMode;
+  document.querySelector('.phone').classList.toggle('dark', state.darkMode);
+  document.getElementById('toggle-dark').classList.toggle('on', state.darkMode);
+}
+function toggleOffline(){
+  state.offline = !state.offline;
+  document.getElementById('toggle-offline').classList.toggle('on', state.offline);
+  document.getElementById('offline-overlay').style.display = state.offline ? 'flex' : 'none';
+}
+function retryConnection(){
+  state.offline = false;
+  document.getElementById('toggle-offline').classList.toggle('on', false);
+  document.getElementById('offline-overlay').style.display = 'none';
+}
+
+renderGrid();
+document.getElementById('navbar-home').innerHTML = renderNavBar('home');
+document.getElementById('navbar-search').innerHTML = renderNavBar('search');
+document.getElementById('navbar-saved').innerHTML = renderNavBar('saved');
+document.getElementById('navbar-profile').innerHTML = renderNavBar('profile');
+updateCartBadges();
+</script>
+</body>
+</html>

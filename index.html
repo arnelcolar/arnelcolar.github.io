@@ -4,82 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arnel Colar · Web design portfolio</title>
-<meta name="description" content="Landing pages, client portals, and calculators for finance and security products, designed and built by Arnel Colar.">
+<meta name="description" content="Landing pages, client portals, product launches, and app prototypes, designed and built by Arnel Colar.">
 <meta property="og:title" content="Arnel Colar · Web design portfolio">
-<meta property="og:description" content="Landing pages, client portals, and calculators for finance and security products.">
-<meta property="og:image" content="https://arnelcolar.github.io/assets/shots/wardline.webp">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='22' font-family='Georgia' font-size='17' fill='%23fff' text-anchor='middle'>ac</text></svg>">
+<meta property="og:description" content="Landing pages, client portals, product launches, and app prototypes.">
+<meta property="og:image" content="https://arnelcolar.github.io/assets/shots/halcyon.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='21' font-family='Arial' font-weight='700' font-size='14' fill='%23fff' text-anchor='middle'>AC</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f5f5f3;--card:#fff;--ink:#141414;--muted:#6b6b68;--line:#e2e2de;--accent:#2f5bff;
-  --serif:"Instrument Serif",Georgia,serif;--sans:Inter,system-ui,sans-serif;
-}
-*{box-sizing:border-box;margin:0}
+:root{--ink:#111;--muted:#6e6e6e;--line:#e8e8e8;--soft:#f6f6f6}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:inherit}
+body{background:#fff;color:var(--ink);font:400 16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .wrap{width:min(1120px,100% - 48px);margin-inline:auto}
 
-header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;height:60px}
-.name{font:400 22px/1 var(--serif);text-decoration:none}
-nav{display:flex;gap:24px;font-size:14px}
-nav a{text-decoration:none;color:var(--muted)}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop-filter:blur(10px)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px;font-size:14px}
+.name{font-weight:600}
+nav{display:flex;gap:28px;color:var(--muted)}
 nav a:hover{color:var(--ink)}
 
-.intro{padding:112px 0 88px}
-.intro h1{font:400 clamp(40px,6.4vw,76px)/1.04 var(--serif);letter-spacing:-.01em;max-width:15ch}
-.intro h1 em{color:var(--muted)}
-.intro p{margin-top:28px;max-width:52ch;color:var(--muted);font-size:18px}
+.intro{padding:120px 0 96px}
+.intro h1{font-size:clamp(34px,5vw,56px);line-height:1.1;font-weight:500;letter-spacing:-.035em;max-width:18ch}
+.intro p{margin-top:24px;max-width:50ch;color:var(--muted);font-size:18px}
 
-.label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-#work{padding-bottom:40px}
-#work>.label{padding-bottom:20px;border-bottom:1px solid var(--line)}
+.label{font-size:13px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:32px 0 120px;border-top:1px solid var(--line)}
+.project .shot{display:block;border-radius:10px;overflow:hidden;background:var(--soft);border:1px solid var(--line)}
+.project .shot img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.project .shot:hover img{transform:scale(1.02)}
+.meta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:20px}
+.project h2{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.project p{margin-top:6px;color:var(--muted);font-size:15px;max-width:52ch}
+.links{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:14px;font-size:14px;font-weight:500}
+.links a{border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .2s}
+.links a:hover{border-color:var(--ink)}
 
-.project{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center;padding:72px 0;border-bottom:1px solid var(--line)}
-.project:nth-of-type(even) .shot{order:-1}
-.project h2{font:400 44px/1.05 var(--serif);margin:10px 0 16px}
-.project p{color:var(--muted);max-width:44ch}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px;padding:0;list-style:none}
-.tags li{font-size:12.5px;padding:4px 11px;border:1px solid var(--line);border-radius:99px;background:var(--card)}
-.links{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:15px;font-weight:500}
-.links a{text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
-.links a:first-child{color:var(--accent)}
-.links a:hover{border-bottom-width:2px}
-
-.shot{display:block;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,.04),0 24px 48px -24px rgba(0,0,0,.22);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
-.shot:hover{transform:translateY(-4px);box-shadow:0 1px 2px rgba(0,0,0,.04),0 36px 64px -28px rgba(0,0,0,.3)}
-.chrome{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
-.chrome i{width:9px;height:9px;border-radius:50%;background:var(--line)}
-.shot img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top}
-.minis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-.minis .shot img{aspect-ratio:16/9}
-
-.about{display:grid;grid-template-columns:5fr 7fr;gap:56px;padding:104px 0}
-.about h2{font:400 44px/1.05 var(--serif)}
-.about p{color:var(--muted);margin-bottom:16px;max-width:56ch}
-.about ul{padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;margin:28px 0 36px}
-.about li{padding-top:10px;border-top:1px solid var(--line);font-size:15px}
-.cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:13px 22px;border-radius:99px;font-weight:500;font-size:15px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:56px 0 120px;border-top:1px solid var(--line)}
+.about h2{font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.2;margin-top:8px}
+.about p{color:var(--muted);margin-bottom:16px;max-width:52ch}
+.about ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:28px 0 36px;font-size:15px}
+.about li{padding:10px 0;border-top:1px solid var(--line)}
+.cta{display:inline-block;background:var(--ink);color:#fff;padding:12px 22px;border-radius:99px;font-size:14px;font-weight:500}
 .cta:hover{background:#333}
 
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 
-@media (max-width:860px){
-  .intro{padding:72px 0 56px}
-  .project,.about{grid-template-columns:1fr;gap:28px}
-  .project{padding:48px 0}
-  .project:nth-of-type(even) .shot{order:0}
-  .project .shot,.project .shots{order:-1!important}
-  .project h2,.about h2{font-size:36px}
-  nav{gap:16px}
+@media (max-width:760px){
+  .intro{padding:72px 0 64px}
+  .grid,.about{grid-template-columns:1fr}
+  .grid{gap:56px}
+  nav{gap:18px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -99,78 +80,63 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 
 <main id="top">
   <section class="wrap intro">
-    <h1>Web design for money, credit, and <em>security</em> products.</h1>
-    <p>I design and build landing pages, client portals, and calculators for fintech and consumer protection brands. Every project below is a working site you can click through.</p>
+    <h1>Websites and product pages for fintech, security, and consumer brands.</h1>
+    <p>I design and build landing pages, client portals, product launches, and app prototypes. Every project below is a working page you can click through.</p>
   </section>
 
   <section class="wrap" id="work" aria-label="Selected work">
-    <p class="label">Selected work · 2026</p>
+    <div class="grid">
 
-    <article class="project">
-      <div>
-        <p class="label">Debt relief · Multi-page site</p>
-        <h2>Evenkeel</h2>
-        <p>A full debt settlement brand: marketing pages, a savings calculator, a blog, an e-sign email, and a client portal where members track deposits, settlements, and approvals.</p>
-        <ul class="tags"><li>20+ pages</li><li>Client portal</li><li>Calculator</li><li>Email template</li></ul>
+      <article class="project">
+        <a class="shot" href="work/evenkeel/" aria-label="Open the Evenkeel site"><img src="assets/shots/evenkeel.webp" alt="Evenkeel homepage with a savings slider over a sunrise photo" width="1440" height="900"></a>
+        <div class="meta"><h2>Evenkeel</h2><span class="label">Debt relief · Multi-page site</span></div>
+        <p>A full debt settlement brand: marketing pages, a savings calculator, a blog, an e-sign email, and a client portal for tracking deposits and settlements.</p>
         <div class="links">
           <a href="work/evenkeel/">Open the site</a>
           <a href="work/evenkeel/overview.html">Client portal</a>
           <a href="work/evenkeel/cost-of-debt-calculator.html">Calculator</a>
         </div>
-      </div>
-      <div class="shots">
-        <a class="shot" href="work/evenkeel/" aria-label="Open the Evenkeel site">
-          <div class="chrome"><i></i><i></i><i></i></div>
-          <img src="assets/shots/evenkeel.webp" alt="Evenkeel homepage with a savings slider over a sunrise photo" width="1440" height="900">
-        </a>
-        <div class="minis">
-          <a class="shot" href="work/evenkeel/overview.html" aria-label="Open the Evenkeel client portal"><img src="assets/shots/evenkeel-portal.webp" alt="Evenkeel client portal overview" width="1440" height="900" loading="lazy"></a>
-          <a class="shot" href="work/evenkeel/cost-of-debt-calculator.html" aria-label="Open the Evenkeel calculator"><img src="assets/shots/evenkeel-calc.webp" alt="Evenkeel cost of debt calculator" width="1440" height="900" loading="lazy"></a>
+      </article>
+
+      <article class="project">
+        <a class="shot" href="work/nook/" aria-label="Open the NOOK case study"><img src="assets/shots/nook.webp" alt="NOOK app onboarding screen showing a leather sofa" width="1440" height="900"></a>
+        <div class="meta"><h2>NOOK</h2><span class="label">Mobile app · UX case study</span></div>
+        <p>A furniture shopping app, from problem statement and persona to wireframes, a design system, and a clickable prototype that runs in the browser.</p>
+        <div class="links">
+          <a href="work/nook/">Read the case study</a>
+          <a href="work/nook/nook-prototype.html">Open the prototype</a>
         </div>
-      </div>
-    </article>
+      </article>
 
-    <article class="project">
-      <div>
-        <p class="label">Identity protection · Landing page</p>
-        <h2>Wardline</h2>
-        <p>A dark, cinematic page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
-        <ul class="tags"><li>Single page</li><li>Tabbed features</li><li>Pricing</li><li>Motion</li></ul>
+      <article class="project">
+        <a class="shot" href="work/halcyon.html" aria-label="Open the Halcyon page"><img src="assets/shots/halcyon.webp" alt="Halcyon H16 launch page hero with an orange-lit laptop keyboard" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2>Halcyon H16</h2><span class="label">Product launch · Single page</span></div>
+        <p>A launch page for a 16-inch laptop. Sticky section nav with scrollspy, a pinned display story, swipeable feature cards, and an FAQ.</p>
+        <div class="links"><a href="work/halcyon.html">Open the page</a></div>
+      </article>
+
+      <article class="project">
+        <a class="shot" href="work/wardline.html" aria-label="Open the Wardline page"><img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2>Wardline</h2><span class="label">Identity protection · Landing page</span></div>
+        <p>A dark page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
         <div class="links"><a href="work/wardline.html">Open the page</a></div>
-      </div>
-      <a class="shot" href="work/wardline.html" aria-label="Open the Wardline page">
-        <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy">
-      </a>
-    </article>
+      </article>
 
-    <article class="project">
-      <div>
-        <p class="label">Identity monitoring · Landing page</p>
-        <h2>Vigil</h2>
-        <p>The same product category, taken in a lighter editorial direction. A circuit-trace hero, alternating use-case rows, compliance badges, and member reviews.</p>
-        <ul class="tags"><li>Single page</li><li>Editorial layout</li><li>Pricing</li></ul>
+      <article class="project">
+        <a class="shot" href="work/vigil.html" aria-label="Open the Vigil page"><img src="assets/shots/vigil.webp" alt="Vigil hero with a red headline on a light background" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2>Vigil</h2><span class="label">Identity monitoring · Landing page</span></div>
+        <p>The same product category in a lighter direction. A circuit-trace hero, alternating use-case rows, compliance badges, and member reviews.</p>
         <div class="links"><a href="work/vigil.html">Open the page</a></div>
-      </div>
-      <a class="shot" href="work/vigil.html" aria-label="Open the Vigil page">
-        <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="assets/shots/vigil.webp" alt="Vigil hero with a red headline on a light background" width="1440" height="900" loading="lazy">
-      </a>
-    </article>
+      </article>
 
-    <article class="project">
-      <div>
-        <p class="label">Fintech infrastructure · Concept</p>
-        <h2>Vaultledger</h2>
-        <p>A developer-facing page for a ledger and tokenization API. Code samples sit next to uptime stats, and a live-looking vault panel shows how card data gets swapped for tokens.</p>
-        <ul class="tags"><li>Single page</li><li>Dark UI</li><li>Developer audience</li></ul>
+      <article class="project">
+        <a class="shot" href="work/vaultledger.html" aria-label="Open the Vaultledger page"><img src="assets/shots/vaultledger.webp" alt="Vaultledger hero with lime accents on a dark background" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2>Vaultledger</h2><span class="label">Fintech infrastructure · Concept</span></div>
+        <p>A developer-facing page for a ledger and tokenization API. Code samples sit next to uptime stats, and a vault panel shows card data swapped for tokens.</p>
         <div class="links"><a href="work/vaultledger.html">Open the page</a></div>
-      </div>
-      <a class="shot" href="work/vaultledger.html" aria-label="Open the Vaultledger page">
-        <div class="chrome"><i></i><i></i><i></i></div>
-        <img src="assets/shots/vaultledger.webp" alt="Vaultledger hero with lime accents on a dark background" width="1440" height="900" loading="lazy">
-      </a>
-    </article>
+      </article>
+
+    </div>
   </section>
 
   <section class="wrap about" id="about">
@@ -184,10 +150,10 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
       <ul>
         <li>Landing pages</li>
         <li>Client portals</li>
+        <li>Product launches</li>
+        <li>App prototypes</li>
         <li>Calculators and tools</li>
         <li>WordPress themes</li>
-        <li>Redesigns</li>
-        <li>Email templates</li>
       </ul>
       <a class="cta" href="https://github.com/arnelcolar">Find me on GitHub</a>
     </div>
