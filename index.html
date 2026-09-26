@@ -28,9 +28,12 @@ nav{display:flex;gap:16px;color:var(--muted)}
 nav a{padding:8px 6px}
 nav a:hover{color:var(--ink)}
 
-.intro{padding:96px 0 88px}
-.intro h1{font-size:clamp(34px,5vw,56px);line-height:1.1;font-weight:500;letter-spacing:-.035em;max-width:22em}
-.intro p{margin-top:24px;max-width:50ch;color:var(--muted);font-size:18px}
+.intro{padding:64px 0 112px}
+.intro h1{font-size:clamp(52px,15.4vw,226px);line-height:.95;font-weight:600;letter-spacing:-.055em;white-space:nowrap}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px;padding-top:28px;border-top:1px solid var(--ink)}
+.split .lede{font-size:clamp(24px,2.6vw,32px);line-height:1.2;font-weight:500;letter-spacing:-.025em;max-width:18em;color:var(--ink)}
+.split p{color:var(--muted);font-size:17px;max-width:44ch}
+.split .cta{margin-top:24px}
 
 .label{font-size:13px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:32px 0 72px;border-top:1px solid var(--line)}
@@ -44,15 +47,22 @@ nav a:hover{color:var(--ink)}
 .links a{border-bottom:1px solid var(--line);padding-bottom:1px;transition:border-color .2s}
 .links a:hover{border-color:var(--ink)}
 
-.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:16px}
-.head h2{font-size:24px;font-weight:500;letter-spacing:-.02em}
-.grid.three{grid-template-columns:repeat(3,1fr);gap:56px 28px}
-.three .meta{flex-direction:column;gap:2px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px}
+.head h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.count{font-size:15px;color:var(--muted)}
+.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rows{border-top:1px solid var(--line);padding-bottom:72px}
+.row{display:grid;grid-template-columns:64px 1fr 1.7fr;gap:32px;padding:32px 0 40px;border-bottom:1px solid var(--line)}
+.row .num{padding-top:4px}
+.row .meta{flex-direction:column;gap:2px;margin-top:0}
+.meta .num{margin-right:10px}
 
-.skills{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px;padding-bottom:96px}
-.skills li{border-top:1px solid var(--line);padding:24px 0 32px}
+.skills{list-style:none;padding-bottom:96px}
+.skills li{display:grid;grid-template-columns:64px 1fr 1.7fr;gap:32px;border-top:1px solid var(--line);padding:28px 0 32px}
+.skills .num{padding-top:4px}
+.skills p{margin-top:0}
 .skills h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
-.skills p{margin-top:6px;color:var(--muted);font-size:15px}
+.skills p{color:var(--muted);font-size:15px;max-width:60ch}
 .tools{list-style:none;display:grid;grid-template-columns:repeat(7,1fr);gap:0 32px;padding-bottom:96px}
 .tools li{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding:24px 0 8px;font-size:14px;font-weight:500}
 .tools img{width:28px;height:28px}
@@ -69,15 +79,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 
 @media (max-width:760px){
-  .intro{padding:72px 0 64px}
-  .grid,.grid.three,.skills,.about{grid-template-columns:1fr}
+  .intro{padding:40px 0 72px}
+  .split,.row,.skills li,.grid,.about{grid-template-columns:1fr}
+  .split,.row,.skills li{gap:12px}
+  .row .shot{order:-1;margin-bottom:8px}
   .tools{grid-template-columns:1fr 1fr;gap:0 20px}
   .grid{gap:56px}
   nav{gap:0}
 }
 .cta:active{transform:scale(.97)}
-.intro h1,.intro p{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
-.intro p{animation-delay:.12s}
+.intro h1,.split{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
+.split{animation-delay:.12s}
 @keyframes rise{from{opacity:0;transform:translateY(28px);clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 -20% 0)}}
 @supports (animation-timeline:view()){
   .project .shot{animation:open linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
@@ -87,7 +99,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;scroll-behavior:auto!important}
-  .intro h1,.intro p{animation-name:fade}
+  .intro h1,.split{animation-name:fade}
   .project .shot,.tools li{animation:none}
   @keyframes fade{from{opacity:0}}
 }
@@ -109,45 +121,60 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
 <main id="top">
   <section class="wrap intro">
-    <h1>Clean, focused websites for finance, security, and product brands.</h1>
-    <p>I design each page and write the code myself: landing pages, WordPress themes, calculators, and small automations. Every project below is live or clickable.</p>
+    <h1>Arnel Colar</h1>
+    <div class="split">
+      <p class="lede">Clean, focused websites for finance, security, and product brands.</p>
+      <div>
+        <p>I design each page and write the code myself: landing pages, WordPress themes, calculators, and small automations. Every project below is live or clickable.</p>
+        <a class="cta" href="#work">See the work</a>
+      </div>
+    </div>
   </section>
 
   <section class="wrap" id="work" aria-labelledby="live-title">
-    <div class="head"><h2 id="live-title">Live client sites</h2></div>
-    <div class="grid three">
+    <div class="head"><h2 id="live-title">Live client sites</h2><span class="count">(03)</span></div>
+    <div class="rows">
 
-      <article class="project">
-        <a class="shot" href="https://debtfix.com/" aria-label="Open debtfix.com"><img src="assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></a>
+      <article class="project row">
+        <span class="num">01</span>
+        <div>
         <div class="meta"><h2>DebtFix</h2><span class="label">Debt relief</span></div>
         <p>A debt settlement company's site. The homepage slider estimates a monthly deposit, and I also built its cost-of-debt calculator.</p>
         <div class="links"><a href="https://debtfix.com/">Visit debtfix.com</a></div>
+        </div>
+        <a class="shot" href="https://debtfix.com/" aria-label="Open debtfix.com"><img src="assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></a>
       </article>
 
-      <article class="project">
-        <a class="shot" href="https://wisestwallet.com/" aria-label="Open wisestwallet.com"><img src="assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></a>
+      <article class="project row">
+        <span class="num">02</span>
+        <div>
         <div class="meta"><h2>WisestWallet</h2><span class="label">Personal finance · WordPress</span></div>
         <p>A custom WordPress theme for a personal finance blog. I wrote its four calculators: debt payoff, emergency fund, loan cost, and credit utilization.</p>
         <div class="links"><a href="https://wisestwallet.com/">Visit wisestwallet.com</a></div>
+        </div>
+        <a class="shot" href="https://wisestwallet.com/" aria-label="Open wisestwallet.com"><img src="assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></a>
       </article>
 
-      <article class="project">
-        <a class="shot" href="https://resourcehelpnetwork.com/" aria-label="Open resourcehelpnetwork.com"><img src="assets/shots/resourcehelpnetwork.webp" alt="Resource Help Network homepage with topic cards for bills, credit, jobs, health, and money" width="1440" height="900"></a>
+      <article class="project row">
+        <span class="num">03</span>
+        <div>
         <div class="meta"><h2>Resource Help Network</h2><span class="label">Guides · WordPress</span></div>
         <p>A WordPress site with step-by-step guides on bills, credit, jobs, and health coverage, grouped by topic.</p>
         <div class="links"><a href="https://resourcehelpnetwork.com/">Visit the site</a></div>
+        </div>
+        <a class="shot" href="https://resourcehelpnetwork.com/" aria-label="Open resourcehelpnetwork.com"><img src="assets/shots/resourcehelpnetwork.webp" alt="Resource Help Network homepage with topic cards for bills, credit, jobs, health, and money" width="1440" height="900"></a>
       </article>
 
     </div>
   </section>
 
   <section class="wrap" id="templates" aria-labelledby="templates-title">
-    <div class="head"><h2 id="templates-title">Templates and concepts</h2></div>
+    <div class="head"><h2 id="templates-title">Templates and concepts</h2><span class="count">(06)</span></div>
     <div class="grid">
 
       <article class="project">
         <a class="shot" href="work/nook/" aria-label="Open the NOOK case study"><img src="assets/shots/nook.webp" alt="NOOK app onboarding screen showing a leather sofa" width="1440" height="900"></a>
-        <div class="meta"><h2>NOOK</h2><span class="label">Mobile app · UX case study</span></div>
+        <div class="meta"><h2><span class="num">04</span>NOOK</h2><span class="label">Mobile app · UX case study</span></div>
         <p>A furniture shopping app. The case study covers the problem, a persona, wireframes, and a design system. The prototype runs in your browser.</p>
         <div class="links">
           <a href="work/nook/">Read the case study</a>
@@ -157,35 +184,35 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
       <article class="project">
         <a class="shot" href="work/halcyon.html" aria-label="Open the Halcyon page"><img src="assets/shots/halcyon.webp" alt="Halcyon H16 launch page hero with an orange-lit laptop keyboard" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2>Halcyon H16</h2><span class="label">Product launch · Single page</span></div>
+        <div class="meta"><h2><span class="num">05</span>Halcyon H16</h2><span class="label">Product launch · Single page</span></div>
         <p>A launch page for a 16-inch laptop. Sticky section nav with scrollspy, a pinned display story, swipeable feature cards, and an FAQ.</p>
         <div class="links"><a href="work/halcyon.html">Open the page</a></div>
       </article>
 
       <article class="project">
         <a class="shot" href="work/wardline.html" aria-label="Open the Wardline page"><img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2>Wardline</h2><span class="label">Identity protection · Landing page</span></div>
+        <div class="meta"><h2><span class="num">06</span>Wardline</h2><span class="label">Identity protection · Landing page</span></div>
         <p>A dark page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
         <div class="links"><a href="work/wardline.html">Open the page</a></div>
       </article>
 
       <article class="project">
         <a class="shot" href="work/vigil.html" aria-label="Open the Vigil page"><img src="assets/shots/vigil.webp" alt="Vigil hero with a red headline on a light background" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2>Vigil</h2><span class="label">Identity monitoring · Landing page</span></div>
+        <div class="meta"><h2><span class="num">07</span>Vigil</h2><span class="label">Identity monitoring · Landing page</span></div>
         <p>The same product category in a lighter direction. A circuit-trace hero, alternating use-case rows, compliance badges, and member reviews.</p>
         <div class="links"><a href="work/vigil.html">Open the page</a></div>
       </article>
 
       <article class="project">
         <a class="shot" href="work/vaultledger.html" aria-label="Open the Vaultledger page"><img src="assets/shots/vaultledger.webp" alt="Vaultledger hero with lime accents on a dark background" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2>Vaultledger</h2><span class="label">Fintech infrastructure · Concept</span></div>
+        <div class="meta"><h2><span class="num">08</span>Vaultledger</h2><span class="label">Fintech infrastructure · Concept</span></div>
         <p>A page for developers evaluating a ledger and tokenization API. It pairs code samples with uptime stats, and a vault panel shows card numbers swapped for tokens.</p>
         <div class="links"><a href="work/vaultledger.html">Open the page</a></div>
       </article>
 
       <article class="project">
         <a class="shot" href="work/cafe-bot/" aria-label="Open the Corner Cup Bot case study"><img src="assets/shots/cafebot.webp" alt="Corner Cup Bot case study with a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2>Corner Cup Bot</h2><span class="label">Automation · Apps Script</span></div>
+        <div class="meta"><h2><span class="num">09</span>Corner Cup Bot</h2><span class="label">Automation · Apps Script</span></div>
         <p>A Telegram bot that logs a café's orders, expenses, and stock to Google Sheets, and reads supplier receipts with a vision model.</p>
         <div class="links"><a href="work/cafe-bot/">Read the case study</a></div>
       </article>
@@ -194,43 +221,61 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </section>
 
   <section class="wrap" id="skills" aria-labelledby="skills-title">
-    <div class="head"><h2 id="skills-title">Skills</h2></div>
+    <div class="head"><h2 id="skills-title">Skills</h2><span class="count">(06)</span></div>
     <ul class="skills">
       <li>
+        <span class="num">01</span>
         <h3>Financial calculators</h3>
-        <p>Calculators for debt cost, payoff dates, emergency fund targets, and credit utilization, written in plain JavaScript.</p>
-        <div class="links"><a href="https://debtfix.com/calculators/cost-of-debt">DebtFix cost of debt</a><a href="https://wisestwallet.com/debt-payoff-calculator/">WisestWallet debt payoff</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund</a></div>
+        <div>
+          <p>Calculators for debt cost, payoff dates, emergency fund targets, and credit utilization, written in plain JavaScript.</p>
+          <div class="links"><a href="https://debtfix.com/calculators/cost-of-debt">DebtFix cost of debt</a><a href="https://wisestwallet.com/debt-payoff-calculator/">WisestWallet debt payoff</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund</a></div>
+        </div>
       </li>
       <li>
+        <span class="num">02</span>
         <h3>WordPress themes and Next.js</h3>
-        <p>Themes made for one site each, with topic pages, guide and blog templates, and calculators built in. On my own time, I moved a WordPress site over to Next.js and React. It was practice, so it isn't published.</p>
-        <div class="links"><a href="https://wisestwallet.com/">WisestWallet</a><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></div>
+        <div>
+          <p>Themes made for one site each, with topic pages, guide and blog templates, and calculators built in. On my own time, I moved a WordPress site over to Next.js and React. It was practice, so it isn't published.</p>
+          <div class="links"><a href="https://wisestwallet.com/">WisestWallet</a><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></div>
+        </div>
       </li>
       <li>
+        <span class="num">03</span>
         <h3>Landing pages</h3>
-        <p>Pages with one job, usually getting a visitor to apply or call. Pricing and trust badges go near the buttons.</p>
-        <div class="links"><a href="https://debtfix.com/">DebtFix</a><a href="work/wardline.html">Wardline</a><a href="work/vigil.html">Vigil</a></div>
+        <div>
+          <p>Pages with one job, usually getting a visitor to apply or call. Pricing and trust badges go near the buttons.</p>
+          <div class="links"><a href="https://debtfix.com/">DebtFix</a><a href="work/wardline.html">Wardline</a><a href="work/vigil.html">Vigil</a></div>
+        </div>
       </li>
       <li>
+        <span class="num">04</span>
         <h3>Hand-coded front end</h3>
-        <p>HTML, CSS, and JavaScript with no framework. Halcyon has scrollspy navigation, a pinned scroll story, and swipeable cards.</p>
-        <div class="links"><a href="work/halcyon.html">Halcyon H16</a><a href="work/vaultledger.html">Vaultledger</a></div>
+        <div>
+          <p>HTML, CSS, and JavaScript with no framework. Halcyon has scrollspy navigation, a pinned scroll story, and swipeable cards.</p>
+          <div class="links"><a href="work/halcyon.html">Halcyon H16</a><a href="work/vaultledger.html">Vaultledger</a></div>
+        </div>
       </li>
       <li>
+        <span class="num">05</span>
         <h3>UX research and prototyping</h3>
-        <p>Personas, wireframes, a small design system, and a prototype people can click through before any real code exists.</p>
-        <div class="links"><a href="work/nook/">NOOK case study</a><a href="work/nook/nook-prototype.html">Prototype</a></div>
+        <div>
+          <p>Personas, wireframes, a small design system, and a prototype people can click through before any real code exists.</p>
+          <div class="links"><a href="work/nook/">NOOK case study</a><a href="work/nook/nook-prototype.html">Prototype</a></div>
+        </div>
       </li>
       <li>
+        <span class="num">06</span>
         <h3>Scripting and automation</h3>
-        <p>Google Apps Script connected to Telegram, Google Sheets, and an AI model. Café staff log sales and receipts by sending a message.</p>
-        <div class="links"><a href="work/cafe-bot/">Corner Cup Bot</a></div>
+        <div>
+          <p>Google Apps Script connected to Telegram, Google Sheets, and an AI model. Café staff log sales and receipts by sending a message.</p>
+          <div class="links"><a href="work/cafe-bot/">Corner Cup Bot</a></div>
+        </div>
       </li>
     </ul>
   </section>
 
   <section class="wrap" id="tools" aria-labelledby="tools-title">
-    <div class="head"><h2 id="tools-title">Tools I use</h2></div>
+    <div class="head"><h2 id="tools-title">Tools I use</h2><span class="count">(14)</span></div>
     <ul class="tools">
       <li><img src="assets/icons/html5.svg" alt="" width="28" height="28">HTML5</li>
       <li><img src="assets/icons/css.svg" alt="" width="28" height="28">CSS</li>
