@@ -25,15 +25,22 @@ header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop
 .bar{display:flex;align-items:center;justify-content:space-between;height:64px;font-size:14px}
 .name{font-weight:600;white-space:nowrap}
 nav{display:flex;gap:16px;color:var(--muted)}
-nav a{padding:8px 6px}
+nav a{padding:8px 6px;white-space:nowrap}
 nav a:hover{color:var(--ink)}
+nav .hire{color:var(--ink);font-weight:500}
 
 .intro{padding:64px 0 112px}
-.intro h1{font-size:clamp(52px,15.4vw,226px);line-height:.95;font-weight:600;letter-spacing:-.055em;white-space:nowrap}
+.intro h1{font-size:clamp(56px,11vw,150px);line-height:.95;font-weight:600;letter-spacing:-.055em;white-space:nowrap}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px;padding-top:28px;border-top:1px solid var(--ink)}
 .split .lede{font-size:clamp(24px,2.6vw,32px);line-height:1.2;font-weight:500;letter-spacing:-.025em;max-width:18em;color:var(--ink)}
 .split p{color:var(--muted);font-size:17px;max-width:44ch}
-.split .cta{margin-top:24px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:24px}
+.plain{font-size:14px;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:1px}
+.plain:hover{border-color:var(--ink)}
+.process{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:8px 0 96px}
+.process li{border-top:1px solid var(--ink);padding-top:16px}
+.process h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:6px 0}
+.process p{color:var(--muted);font-size:15px}
 
 .label{font-size:13px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:32px 0 72px;border-top:1px solid var(--line)}
@@ -80,12 +87,16 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
 @media (max-width:760px){
   .intro{padding:40px 0 72px}
-  .split,.row,.skills li,.grid,.about{grid-template-columns:1fr}
+  .split,.row,.skills li,.grid,.about,.process{grid-template-columns:1fr}
   .split,.row,.skills li{gap:12px}
   .row .shot{order:-1;margin-bottom:8px}
   .tools{grid-template-columns:1fr 1fr;gap:0 20px}
   .grid{gap:56px}
   nav{gap:0}
+  nav a[href="#skills"]{display:none}
+}
+@media (max-width:400px){
+  nav a[href*="github.com"]{display:none}
 }
 .cta:active{transform:scale(.97)}
 .intro h1,.split{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
@@ -115,6 +126,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       <a href="#skills">Skills</a>
       <a href="#about">About</a>
       <a href="https://github.com/arnelcolar">GitHub</a>
+      <a class="hire" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a>
     </nav>
   </div>
 </header>
@@ -126,7 +138,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       <p class="lede">Clean, focused websites for finance, security, and product brands.</p>
       <div>
         <p>I design each page and write the code myself: landing pages, WordPress themes, calculators, and small automations. Every project below is live or clickable.</p>
-        <a class="cta" href="#work">See the work</a>
+        <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a><a class="plain" href="#work">See the work</a></div>
       </div>
     </div>
   </section>
@@ -294,6 +306,15 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </ul>
   </section>
 
+  <section class="wrap" id="process" aria-labelledby="process-title">
+    <div class="head"><h2 id="process-title">How we work together</h2><span class="count">(03)</span></div>
+    <ol class="process">
+      <li><span class="num">01</span><h3>Sketch</h3><p>I sketch the layout and pick the type and colors for your page.</p></li>
+      <li><span class="num">02</span><h3>Review</h3><p>You look it over, ask for changes, and approve it.</p></li>
+      <li><span class="num">03</span><h3>Build and launch</h3><p>I write the HTML and CSS myself. The page you approve is the page that goes live.</p></li>
+    </ol>
+  </section>
+
   <section class="wrap about" id="about">
     <div>
       <p class="label">About</p>
@@ -301,16 +322,15 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </div>
     <div>
       <p>I keep my designs minimal, with plenty of white space and one strong color per page.</p>
-      <p>I sketch the layout, pick the type and colors, then write the HTML and CSS myself. The page you approve is the page that goes live.</p>
       <p>Most of my client work is in personal finance and debt relief. Those readers are careful with money, so I keep pricing plain and disclaimers honest.</p>
-      <a class="cta" href="https://github.com/arnelcolar">Find me on GitHub</a>
+      <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a><a class="plain" href="https://github.com/arnelcolar">Find me on GitHub</a></div>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Arnel Colar</span>
+    <span>© 2026 Arnel Colar · <a href="mailto:arnelcolar@gmail.com">arnelcolar@gmail.com</a></span>
     <span>Template brands are fictional. Template photos from Unsplash and Pexels.</span>
   </div>
 </footer>
