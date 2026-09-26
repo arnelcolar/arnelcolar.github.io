@@ -53,6 +53,9 @@ nav a:hover{color:var(--ink)}
 .skills li{border-top:1px solid var(--line);padding:24px 0 32px}
 .skills h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
 .skills p{margin-top:6px;color:var(--muted);font-size:15px}
+.tools{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:0 32px;padding-bottom:96px}
+.tools li{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding:24px 0 8px;font-size:14px;font-weight:500}
+.tools img{width:28px;height:28px}
 
 .about{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:56px 0 120px;border-top:1px solid var(--line)}
 .about h2{font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1.2;margin-top:8px}
@@ -68,6 +71,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 @media (max-width:760px){
   .intro{padding:72px 0 64px}
   .grid,.grid.three,.skills,.about{grid-template-columns:1fr}
+  .tools{grid-template-columns:repeat(3,1fr);gap:0 20px}
   .grid{gap:56px}
   nav{gap:0}
 }
@@ -78,11 +82,13 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 @supports (animation-timeline:view()){
   .project .shot{animation:open linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
   @keyframes open{from{clip-path:inset(7% 7% round 10px);opacity:.4}to{clip-path:inset(0 round 10px);opacity:1}}
+  .tools li{animation:up linear both;animation-timeline:view();animation-range:entry 10% cover 30%}
+  @keyframes up{from{opacity:0;transform:translateY(20px)}}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;scroll-behavior:auto!important}
   .intro h1,.intro p{animation-name:fade}
-  .project .shot{animation:none}
+  .project .shot,.tools li{animation:none}
   @keyframes fade{from{opacity:0}}
 }
 </style>
@@ -220,6 +226,24 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         <p>Google Apps Script connected to Telegram, Google Sheets, and an AI model. Café staff log sales and receipts by sending a message.</p>
         <div class="links"><a href="work/cafe-bot/">Corner Cup Bot</a></div>
       </li>
+    </ul>
+  </section>
+
+  <section class="wrap" id="tools" aria-labelledby="tools-title">
+    <div class="head"><h2 id="tools-title">Tools I use</h2></div>
+    <ul class="tools">
+      <li><img src="assets/icons/html5.svg" alt="" width="28" height="28">HTML5</li>
+      <li><img src="assets/icons/css.svg" alt="" width="28" height="28">CSS</li>
+      <li><img src="assets/icons/javascript.svg" alt="" width="28" height="28">JavaScript</li>
+      <li><img src="assets/icons/php.svg" alt="" width="28" height="28">PHP</li>
+      <li><img src="assets/icons/wordpress.svg" alt="" width="28" height="28">WordPress</li>
+      <li><img src="assets/icons/nextdotjs.svg" alt="" width="28" height="28">Next.js</li>
+      <li><img src="assets/icons/react.svg" alt="" width="28" height="28">React</li>
+      <li><img src="assets/icons/googleappsscript.svg" alt="" width="28" height="28">Apps Script</li>
+      <li><img src="assets/icons/googlesheets.svg" alt="" width="28" height="28">Google Sheets</li>
+      <li><img src="assets/icons/telegram.svg" alt="" width="28" height="28">Telegram Bot API</li>
+      <li><img src="assets/icons/git.svg" alt="" width="28" height="28">Git</li>
+      <li><img src="assets/icons/github.svg" alt="" width="28" height="28">GitHub</li>
     </ul>
   </section>
 
