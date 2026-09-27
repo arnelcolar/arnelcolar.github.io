@@ -106,7 +106,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       <div class="msg me">How do I replace the ball joint?</div>
       <div class="msg bot">1. Remove the knuckle, then the hub unit (page 664).
 2. Pry the set ring off and remove the boot.
-3. Press the ball joint out with the special tools…<span class="page"><span aria-hidden="true"></span>Manual page 664</span></div>
+3. Press the ball joint out with the special tools…<span class="page"><span aria-hidden="true"></span>Page 664</span></div>
       <div class="msg me">Who won the 1998 World Cup?</div>
       <div class="msg bot">I am sorry, but I can only answer questions using our official documentation.</div>
     </div>
@@ -119,7 +119,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
   <section class="block">
     <div class="head"><h2>How it works</h2><span class="num">01 / 04</span></div>
-    <p class="lede">A small Python server and one HTML page. Pointing it at a different document takes a new PDF, a new title and set of suggested questions, and one line in the prompt.</p>
+    <p class="lede">A small Python server and one HTML page. To point it at a different document, you swap the PDF and edit one settings file with the bot's name, logo, suggested questions, and relevance cut-off.</p>
     <ol class="steps">
       <li><b>Index</b>The server splits the PDF into passages (2,389 for the manual) and turns them into vectors with a small open model. It builds the index once, in about five minutes for 1,379 pages, and loads it in about ten seconds after that.</li>
       <li><b>Retrieve</b>Each question pulls the 20 closest passages. NVIDIA's reranker reads them against the question and keeps the best five.</li>
@@ -206,7 +206,7 @@ images = extract_images(pages) if (intent_has_visual or context_has_phrase) and 
   </section>
 </main>
 
-<footer><div class="wrap">The test document is the Honda Accord service manual for 1994 to 1997 models. I don't reproduce its pages here, and the source code stays private. Honda and the H mark belong to Honda Motor Co.; this is an independent project.</div></footer>
+<footer><div class="wrap">The test document is a scanned car service manual. I don't reproduce its pages here, and the source code stays private.</div></footer>
 
 </body>
 </html>
