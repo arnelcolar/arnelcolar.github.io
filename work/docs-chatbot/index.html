@@ -57,8 +57,8 @@ th,td{text-align:left;padding:10px 0;border-top:1px solid var(--line);vertical-a
 th{font-size:13px;font-weight:500;color:var(--muted)}
 td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16px}
 .note{color:var(--muted);font-size:15px;margin-top:20px;max-width:60ch}
-.compare th,.compare td{width:40%;padding-right:24px}
-.compare th:first-child,.compare td:first-child{width:20%;font-weight:600;color:var(--ink)}
+.compare th,.compare td{width:28%;padding-right:24px}
+.compare th:first-child,.compare td:first-child{width:16%;font-weight:600;color:var(--ink)}
 .compare td{color:var(--muted)}
 .compare td:last-child,.compare th:last-child{text-align:left;white-space:normal;padding-left:0}
 .advice{margin-top:32px;padding:20px 24px;background:var(--soft);border:1px solid var(--line);border-radius:12px;max-width:72ch}
@@ -183,7 +183,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   <section class="block">
     <div class="head"><h2>Your documents stay yours</h2><span class="num">03 / 07</span></div>
     <ol class="steps">
-      <li><b>On your server</b>The PDF and its search index live on the machine that runs the assistant. For each answer, only the question and the five best-matching passages go to the AI provider.</li>
+      <li><b>On your server</b>The PDF and its search index live on the machine that runs the assistant. With a hosted AI model, only the question and the five best-matching passages leave it. With a local model, nothing does.</li>
       <li><b>Keys kept private</b>The AI service key sits in the server's settings. It never appears in the page or the code.</li>
       <li><b>Password if you want one</b>Put the whole chat behind a password when it's for staff or a pilot group.</li>
       <li><b>No outside requests</b>The chat page loads no scripts, fonts, or trackers from other sites.</li>
@@ -201,21 +201,23 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </section>
 
   <section class="block">
-    <div class="head"><h2>Free or paid AI?</h2><span class="num">05 / 07</span></div>
-    <p class="lede">The assistant calls an AI model for each answer, and that model can run on a free plan or a paid one. Free is tempting, and it's how I built and tested this one. The trade-offs show up once real people rely on it.</p>
+    <div class="head"><h2>Free, paid, or local AI?</h2><span class="num">05 / 07</span></div>
+    <p class="lede">The assistant needs an AI model to write each answer. The model can be a free hosted one, a paid hosted one, or one that runs on your own server. I first ran this one on a local model on my own computer. It was too slow on that machine, so I moved it to a free hosted model, and the same setup can switch to a paid or local model again.</p>
     <table class="compare">
-      <thead><tr><th></th><th>Free developer tier</th><th>Paid plan</th></tr></thead>
+      <thead><tr><th></th><th>Free hosted</th><th>Paid hosted</th><th>Local, on your server</th></tr></thead>
       <tbody>
-        <tr><td>Cost</td><td data-k="Free">Nothing per question.</td><td data-k="Paid">Billed per use, by how much text goes in and out.</td></tr>
-        <tr><td>Speed</td><td data-k="Free">Shared capacity. Answers took 20 seconds to 2 minutes in testing, and some calls timed out when the service was busy.</td><td data-k="Paid">You pay for capacity instead of sharing it, so response times are usually steadier.</td></tr>
-        <tr><td>Limits</td><td data-k="Free">About 40 requests a minute per model, fine for a demo and tight for a busy site.</td><td data-k="Paid">Higher limits that grow with the plan.</td></tr>
-        <tr><td>Reliability</td><td data-k="Free">No uptime promise. During testing, some requests timed out and one of the models returned server errors.</td><td data-k="Paid">Business plans usually come with uptime commitments.</td></tr>
-        <tr><td>Terms</td><td data-k="Free">Meant for prototyping and testing, not a live customer service.</td><td data-k="Paid">Written for production use. Check how each provider handles your data before you choose.</td></tr>
+        <tr><td>Privacy</td><td data-k="Free">Your question and the five matching passages go to the provider. Check its terms for how it treats trial data.</td><td data-k="Paid">The same data leaves your server, under the provider's business terms.</td><td data-k="Local">Nothing leaves your server. The documents, questions, and answers stay in-house.</td></tr>
+        <tr><td>Cost</td><td data-k="Free">Nothing per question.</td><td data-k="Paid">Billed per use, by how much text goes in and out.</td><td data-k="Local">No per-question fee. You pay for the hardware, or a rented GPU server, and its upkeep.</td></tr>
+        <tr><td>Speed</td><td data-k="Free">Shared capacity. Answers took 20 seconds to 2 minutes in testing, and some calls timed out when the service was busy.</td><td data-k="Paid">You pay for capacity instead of sharing it, so response times are usually steadier.</td><td data-k="Local">Depends on your machine. Without a graphics card (GPU), answers can be slow.</td></tr>
+        <tr><td>Answer quality</td><td data-k="Free">Large hosted models, limited to the provider's free list.</td><td data-k="Paid">Any model the provider sells, including the largest.</td><td data-k="Local">Smaller open models that fit on one machine. They need more testing on your document before launch.</td></tr>
+        <tr><td>Limits</td><td data-k="Free">About 40 requests a minute per model, fine for a demo and tight for a busy site.</td><td data-k="Paid">Higher limits that grow with the plan.</td><td data-k="Local">Only what your hardware can handle.</td></tr>
+        <tr><td>Reliability</td><td data-k="Free">No uptime promise. During testing, some requests timed out and one of the models returned server errors.</td><td data-k="Paid">Business plans usually come with uptime commitments.</td><td data-k="Local">No outside outages, but someone has to keep the server running and updated.</td></tr>
+        <tr><td>Terms</td><td data-k="Free">Meant for prototyping and testing, not a live customer service.</td><td data-k="Paid">Written for production use. Check how each provider handles your data before you choose.</td><td data-k="Local">Each open model has its own licence. Check that it allows business use.</td></tr>
       </tbody>
     </table>
     <div class="advice">
       <b>What I'd recommend</b>
-      <p>Start free for a demo or a pilot with your own team, so you can see real answers before spending anything. Move to a paid plan before customers depend on it. Your documents, search index, and chat page stay the same; only the connection to the AI model changes.</p>
+      <p>Start free for a demo or a pilot with your own team, so you can see real answers before spending anything. Move to a paid plan before customers depend on it. If your documents can't leave your building, such as internal, medical, or legal records, run a local model on your own server and budget for the hardware and extra testing. Your documents, search index, and chat page stay the same in every case; only the AI model behind them changes.</p>
     </div>
   </section>
 
@@ -224,7 +226,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <ul class="faq">
       <li><b>Does it work with scanned PDFs?</b><p>Yes, if the scan has a text layer, which most OCR'd scans do. The test manual was 1,379 scanned pages.</p></li>
       <li><b>How fast are the answers?</b><p>In testing on free-tier AI plans, answers took about 20 seconds to 2 minutes. Short lookups came back fastest; long procedures took the longest.</p></li>
-      <li><b>Can I switch AI providers later?</b><p>Yes. The search runs on your own server, so a switch only changes which model writes the answers. Your documents and setup carry over.</p></li>
+      <li><b>Can I switch AI providers later?</b><p>Yes, including to a local model. The search runs on your own server, so a switch only changes which model writes the answers. Your documents and setup carry over.</p></li>
       <li><b>Can it read more than one document?</b><p>This version reads one PDF per assistant.</p></li>
     </ul>
   </section>
