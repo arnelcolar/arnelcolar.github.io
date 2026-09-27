@@ -57,6 +57,13 @@ th,td{text-align:left;padding:10px 0;border-top:1px solid var(--line);vertical-a
 th{font-size:13px;font-weight:500;color:var(--muted)}
 td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16px}
 .note{color:var(--muted);font-size:15px;margin-top:20px;max-width:60ch}
+.compare th,.compare td{width:40%;padding-right:24px}
+.compare th:first-child,.compare td:first-child{width:20%;font-weight:600;color:var(--ink)}
+.compare td{color:var(--muted)}
+.compare td:last-child,.compare th:last-child{text-align:left;white-space:normal;padding-left:0}
+.advice{margin-top:32px;padding:20px 24px;background:var(--soft);border:1px solid var(--line);border-radius:12px;max-width:72ch}
+.advice b{display:block;margin-bottom:4px}
+.advice p{color:var(--muted);font-size:15px}
 
 .faq{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}
 .faq li{padding:18px 0;border-top:1px solid var(--line)}
@@ -89,6 +96,11 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 @media (max-width:760px){
   .hero,.steps,.steps.two,.code,.uses,.faq{grid-template-columns:1fr}
+  .compare th,.compare td{display:block;width:auto!important;padding:4px 0}
+  .compare thead{display:none}
+  .compare tr{display:block;padding:12px 0;border-top:1px solid var(--line)}
+  .compare td{border:0}
+  .compare td[data-k]::before{content:attr(data-k) ": ";color:var(--ink);font-weight:500}
   .hero{padding:32px 0 56px;gap:40px}
   .code{gap:16px}
 }
@@ -132,7 +144,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </figure>
 
   <section class="block">
-    <div class="head"><h2>What it does for you</h2><span class="num">01 / 06</span></div>
+    <div class="head"><h2>What it does for you</h2><span class="num">01 / 07</span></div>
     <ol class="steps two">
       <li><b>Takes the repeat questions</b>The assistant answers the specs, steps, and policy details your team looks up again and again, straight from the document, at any hour it's running.</li>
       <li><b>Gives answers people can check</b>Each answer names its page, so a customer or technician can open the document and confirm it.</li>
@@ -151,7 +163,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </section>
 
   <section class="block">
-    <div class="head"><h2>Will it make things up?</h2><span class="num">02 / 06</span></div>
+    <div class="head"><h2>Will it make things up?</h2><span class="num">02 / 07</span></div>
     <p class="lede">I tried ten ways to push the assistant off the document, from reworded jailbreaks to "search the internet". It refused all ten and still answered the real questions.</p>
     <table>
       <thead><tr><th>What I tried</th><th>Result</th></tr></thead>
@@ -169,7 +181,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </section>
 
   <section class="block">
-    <div class="head"><h2>Your documents stay yours</h2><span class="num">03 / 06</span></div>
+    <div class="head"><h2>Your documents stay yours</h2><span class="num">03 / 07</span></div>
     <ol class="steps">
       <li><b>On your server</b>The PDF and its search index live on the machine that runs the assistant. For each answer, only the question and the five best-matching passages go to the AI provider.</li>
       <li><b>Keys kept private</b>The AI service key sits in the server's settings. It never appears in the page or the code.</li>
@@ -179,7 +191,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </section>
 
   <section class="block">
-    <div class="head"><h2>How a project would run</h2><span class="num">04 / 06</span></div>
+    <div class="head"><h2>How a project would run</h2><span class="num">04 / 07</span></div>
     <ol class="steps">
       <li><b>You send the document</b>Your PDF, your logo, and a handful of questions your customers or staff ask most.</li>
       <li><b>I set it up</b>Your name and logo on the chat page, suggested questions that lead to real answers, and the off-topic filter tuned to your document.</li>
@@ -189,17 +201,36 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   </section>
 
   <section class="block">
-    <div class="head"><h2>Good to know</h2><span class="num">05 / 06</span></div>
+    <div class="head"><h2>Free or paid AI?</h2><span class="num">05 / 07</span></div>
+    <p class="lede">The assistant calls an AI model for each answer, and that model can run on a free plan or a paid one. Free is tempting, and it's how I built and tested this one. The trade-offs show up once real people rely on it.</p>
+    <table class="compare">
+      <thead><tr><th></th><th>Free developer tier</th><th>Paid plan</th></tr></thead>
+      <tbody>
+        <tr><td>Cost</td><td data-k="Free">Nothing per question.</td><td data-k="Paid">Billed per use, by how much text goes in and out.</td></tr>
+        <tr><td>Speed</td><td data-k="Free">Shared capacity. Answers took 20 seconds to 2 minutes in testing, and some calls timed out when the service was busy.</td><td data-k="Paid">You pay for capacity instead of sharing it, so response times are usually steadier.</td></tr>
+        <tr><td>Limits</td><td data-k="Free">About 40 requests a minute per model, fine for a demo and tight for a busy site.</td><td data-k="Paid">Higher limits that grow with the plan.</td></tr>
+        <tr><td>Reliability</td><td data-k="Free">No uptime promise. During testing, some requests timed out and one of the models returned server errors.</td><td data-k="Paid">Business plans usually come with uptime commitments.</td></tr>
+        <tr><td>Terms</td><td data-k="Free">Meant for prototyping and testing, not a live customer service.</td><td data-k="Paid">Written for production use. Check how each provider handles your data before you choose.</td></tr>
+      </tbody>
+    </table>
+    <div class="advice">
+      <b>What I'd recommend</b>
+      <p>Start free for a demo or a pilot with your own team, so you can see real answers before spending anything. Move to a paid plan before customers depend on it. Your documents, search index, and chat page stay the same; only the connection to the AI model changes.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Good to know</h2><span class="num">06 / 07</span></div>
     <ul class="faq">
       <li><b>Does it work with scanned PDFs?</b><p>Yes, if the scan has a text layer, which most OCR'd scans do. The test manual was 1,379 scanned pages.</p></li>
       <li><b>How fast are the answers?</b><p>In testing on free-tier AI plans, answers took about 20 seconds to 2 minutes. Short lookups came back fastest; long procedures took the longest.</p></li>
-      <li><b>What does it cost to run?</b><p>This build runs on NVIDIA's free developer tier, which is meant for prototyping, and the search runs on the server itself. A bot for daily use would move to a paid AI plan, plus hosting.</p></li>
+      <li><b>Can I switch AI providers later?</b><p>Yes. The search runs on your own server, so a switch only changes which model writes the answers. Your documents and setup carry over.</p></li>
       <li><b>Can it read more than one document?</b><p>This version reads one PDF per assistant.</p></li>
     </ul>
   </section>
 
   <section class="block">
-    <div class="head"><h2>Under the hood</h2><span class="num">06 / 06</span></div>
+    <div class="head"><h2>Under the hood</h2><span class="num">07 / 07</span></div>
     <p class="lede">For the technical reader. A small Python server (FastAPI, LangChain, Chroma) and one HTML page. DeepSeek writes the answers, and NVIDIA's reranker picks the passages. To point it at a different document, you swap the PDF and edit one settings file with the name, logo, suggested questions, and relevance cut-off.</p>
     <ol class="steps">
       <li><b>Index</b>The server splits the PDF into passages (2,389 for the manual) and turns them into vectors with a small open model. It builds the index once, in about five minutes for 1,379 pages, and loads it in about ten seconds after that.</li>
@@ -212,7 +243,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <ol class="steps two">
       <li><b>"Sorry," with a picture attached</b>The model only reads text, so it refused diagram requests while the image code showed pictures anyway. Now each passage carries its page number, the prompt tells the model the app will show the page, and the app shows images only for pages the answer cites.</li>
       <li><b>Blank answers</b>DeepSeek thinks before it answers, and it used up the default 1,024-token limit before writing a word. With thinking turned off, one procedure answer went from 201 seconds to 43.</li>
-      <li><b>A retired endpoint</b>NVIDIA shut down the first reranker model on 25 August 2026. I switched models and added a fallback, so the next retirement changes the search order instead of breaking the chat.</li>
+      <li><b>Too many pictures</b>Early answers showed every page the search touched, including pages the answer never used. Now the app reads the page numbers in the answer and shows only those.</li>
       <li><b>Scanned text</b>OCR adds typos. The prompt tells the model to read past them but copy specs and part numbers exactly. I also took "emergency" off the blocklist, because it blocked "emergency brake" questions.</li>
     </ol>
 
@@ -244,7 +275,7 @@ images = extract_images(pages) if (intent_has_visual or context_has_phrase) and 
     <div class="code">
       <div>
         <h3>When the reranker fails</h3>
-        <p>NVIDIA retires hosted models. If the reranker call fails, the assistant keeps the top five search hits and carries on.</p>
+        <p>If the reranker call fails, the assistant keeps the top five search hits and carries on, so one slow or failing service doesn't break the chat.</p>
       </div>
 <pre><code>class SafeRerank(BaseDocumentCompressor):
     def compress_documents(self, documents, query, callbacks=None):
@@ -261,7 +292,7 @@ images = extract_images(pages) if (intent_has_visual or context_has_phrase) and 
       <h2>Want one for your site?</h2>
       <p>Send me the manual or handbook your team answers questions from, and a few of the questions that come up most.</p>
     </div>
-    <a class="cta" href="https://github.com/arnelcolar">Find me on GitHub</a>
+    <a class="cta" href="mailto:arnelcolar@gmail.com?subject=Support%20assistant%20for%20my%20site">Email me</a>
   </section>
 </main>
 
