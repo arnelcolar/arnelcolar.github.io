@@ -115,7 +115,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 <main class="wrap">
   <section class="hero">
     <div>
-      <p class="label">Case study · AI support assistant</p>
+      <p class="label">Case study · Support assistant</p>
       <h1>A support assistant that answers from your documents, and nothing else.</h1>
       <p>Your customers and staff ask questions in plain language. The assistant answers from your manual, handbook, or policy PDF, tells them which page it used, and shows the diagram when one helps. When your document doesn't cover something, it says so instead of making up an answer.</p>
       <ul class="facts">
@@ -183,14 +183,14 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         <tr><td>Hidden code in the question, and a part that doesn't exist</td><td>Refused</td></tr>
       </tbody>
     </table>
-    <p class="note">Four checks do this. A relevance score turns away off-topic questions before the AI model sees them. Strict instructions tell the model to answer only from the passages it gets. A blocklist catches 95 known jailbreak phrases. The page cleans every answer before showing it, so it can't run hidden code.</p>
+    <p class="note">Four checks do this. A relevance score turns away off-topic questions before the model sees them. Strict instructions tell the model to answer only from the passages it gets. A blocklist catches 95 known jailbreak phrases. The page cleans every answer before showing it, so it can't run hidden code.</p>
   </section>
 
   <section class="block">
     <div class="head"><h2>Your documents stay yours</h2><span class="num">03 / 07</span></div>
     <ol class="steps">
-      <li><b>On your server</b>The PDF and its search index live on the machine that runs the assistant. With a hosted AI model, only the question and the five best-matching passages leave it. With a local model, nothing does.</li>
-      <li><b>Keys kept private</b>The AI service key sits in the server's settings. It never appears in the page or the code.</li>
+      <li><b>On your server</b>The PDF and its search index live on the machine that runs the assistant. With a hosted model, only the question and the five best-matching passages leave it. With a local model, nothing does.</li>
+      <li><b>Keys kept private</b>The API key sits in the server's settings. It never appears in the page or the code.</li>
       <li><b>Password if you want one</b>Put the whole chat behind a password when it's for staff or a pilot group.</li>
       <li><b>No outside requests</b>The chat page loads no scripts, fonts, or trackers from other sites.</li>
     </ol>
@@ -208,7 +208,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
 
   <section class="block">
     <div class="head"><h2>Free API, paid API, or local model?</h2><span class="num">05 / 07</span></div>
-    <p class="lede">The assistant needs an AI model to write each answer. The model can be a free hosted one, a paid hosted one, or one that runs on your own server. I first ran this one on a local model on my own computer. It was too slow on that machine, so I moved it to a free hosted model, and the same setup can switch to a paid or local model again.</p>
+    <p class="lede">The assistant needs a model to write each answer. The model can be a free hosted one, a paid hosted one, or one that runs on your own server. Which one fits comes down to three things: how private your documents are, how many questions you expect each day, and what you want to spend.</p>
     <table class="compare">
       <thead><tr><th></th><th>Free API</th><th>Paid API</th><th>Local model, on your server</th></tr></thead>
       <tbody>
@@ -223,7 +223,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </table>
     <div class="advice">
       <b>What I'd recommend</b>
-      <p>Start free for a demo or a pilot with your own team, so you can see real answers before spending anything. Move to a paid plan before customers depend on it. If your documents can't leave your building, such as internal, medical, or legal records, run a local model on your own server and budget for the hardware and extra testing. Your documents, search index, and chat page stay the same in every case; only the AI model behind them changes.</p>
+      <p>Start free for a demo or a pilot with your own team, so you can see real answers before spending anything. Move to a paid plan before customers depend on it. If your documents can't leave your building, such as internal, medical, or legal records, run a local model on your own server and budget for the hardware and extra testing. Your documents, search index, and chat page stay the same in every case; only the model behind them changes.</p>
     </div>
   </section>
 
@@ -231,8 +231,8 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <div class="head"><h2>Good to know</h2><span class="num">06 / 07</span></div>
     <ul class="faq">
       <li><b>Does it work with scanned PDFs?</b><p>Yes, if the scan has a text layer, which most OCR'd scans do. The test manual was 1,379 scanned pages.</p></li>
-      <li><b>How fast are the answers?</b><p>In testing on free-tier AI plans, answers took about 20 seconds to 2 minutes. Short lookups came back fastest; long procedures took the longest.</p></li>
-      <li><b>Can I switch AI providers later?</b><p>Yes, including to a local model. The search runs on your own server, so a switch only changes which model writes the answers. Your documents and setup carry over.</p></li>
+      <li><b>How fast are the answers?</b><p>In testing on free-tier API plans, answers took about 20 seconds to 2 minutes. Short lookups came back fastest; long procedures took the longest.</p></li>
+      <li><b>Can I switch model providers later?</b><p>Yes, including to a local model. The search runs on your own server, so a switch only changes which model writes the answers. Your documents and setup carry over.</p></li>
       <li><b>Can it read more than one document?</b><p>This version reads one PDF per assistant.</p></li>
     </ul>
   </section>
