@@ -23,7 +23,6 @@
   .media { background: #140a04 center / cover no-repeat; }
   .hero .media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, #000 8%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2)); }
 
-  /* Sticky product nav */
   .pnav { position: sticky; top: 0; z-index: 50; background: rgba(0,0,0,.8); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
   .pnav .wrap { display: flex; align-items: center; gap: 32px; height: 64px; }
   .pnav strong { font-size: 18px; letter-spacing: .02em; white-space: nowrap; }
@@ -34,7 +33,6 @@
   .btn:hover { filter: brightness(1.15); }
   .btn-ghost { background: none; color: var(--text); border: 1px solid var(--muted); }
 
-  /* Hero */
   .hero { position: relative; min-height: calc(100vh - 64px); display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
   .hero .media { position: absolute; inset: 0; }
   .hero .wrap { position: relative; width: 100%; padding-bottom: 48px; }
@@ -47,7 +45,6 @@
   .kv-features b { display: block; font-size: 15px; }
   .kv-features span { color: var(--dim); font-size: 13px; }
 
-  /* Feature section: slogan + title + stats */
   .feature { padding: 160px 0 80px; text-align: center; }
   .slogan { font-size: clamp(36px, 5vw, 72px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
   .slogan em { font-style: normal; color: var(--accent); }
@@ -59,7 +56,6 @@
   .stats b small { font-size: 18px; color: var(--accent); margin-left: 4px; }
   .stats span { color: var(--muted); font-size: 14px; }
 
-  /* Horizontal card slider */
   .slider { padding: 40px 0 120px; }
   .track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 max(32px, calc((100vw - var(--max)) / 2 + 32px)) 16px; scrollbar-width: thin; scrollbar-color: #444 transparent; }
   .card { flex: 0 0 min(420px, 80vw); scroll-snap-align: start; background: var(--panel); border-radius: 4px; overflow: hidden; }
@@ -68,7 +64,6 @@
   .card h3 { font-size: 20px; margin-bottom: 8px; }
   .card p { color: var(--muted); font-size: 14px; }
 
-  /* Sticky parallax (display) */
   .parallax { position: relative; }
   .parallax .stage { position: sticky; top: 64px; height: calc(100vh - 64px); }
   .parallax .stage .media { height: 100%; }
@@ -79,19 +74,16 @@
   .parallax .slogan { font-size: clamp(28px, 3.5vw, 48px); }
   .parallax .title { margin: 12px 0 0; font-size: 16px; }
 
-  /* Split block (design story, portability) */
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 120px 0; }
   .split .media { aspect-ratio: 1; }
   .split .slogan, .split .title { text-align: left; margin-left: 0; }
 
-  /* Ports */
   .ports { background: var(--panel); padding: 120px 0; text-align: center; }
   .ports .media { aspect-ratio: 16/5; margin: 56px 0 40px; }
   .port-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 32px; text-align: left; list-style: none; }
   .port-list li { color: var(--muted); font-size: 14px; padding: 12px 0; border-bottom: 1px solid #2a2a2a; }
   .port-list b { color: var(--text); margin-right: 8px; }
 
-  /* FAQ */
   .faq { padding: 120px 0; }
   .faq .slogan { text-align: center; margin-bottom: 48px; }
   .faq details { border-bottom: 1px solid #262626; max-width: 880px; margin: 0 auto; }
@@ -282,7 +274,7 @@
 </footer>
 
 <script>
-  // Scrollspy: highlight the nav link for the section in view
+
   const links = document.querySelectorAll('.pnav ul a');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
