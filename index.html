@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arnel Colar · Web design portfolio</title>
-<meta name="description" content="Landing pages, client portals, product launches, and app prototypes, designed and built by Arnel Colar.">
+<meta name="description" content="Arnel Colar designs and builds websites, WordPress themes, calculators, and support chatbots. Six years in web design, based in the Philippines.">
 <meta property="og:title" content="Arnel Colar · Web design portfolio">
-<meta property="og:description" content="Landing pages, client portals, product launches, and app prototypes.">
-<meta property="og:image" content="https://arnelcolar.github.io/assets/shots/halcyon.webp">
+<meta property="og:description" content="Websites, WordPress themes, calculators, and support chatbots, designed and built by Arnel Colar.">
+<meta property="og:image" content="https://arnelcolar.github.io/assets/shots/debtfix.webp">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='21' font-family='Arial' font-weight='700' font-size='14' fill='%23fff' text-anchor='middle'>AC</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,7 @@ nav .hire{color:var(--ink);font-weight:500}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px;padding-top:28px;border-top:1px solid var(--ink)}
 .split .lede{font-size:clamp(24px,2.6vw,32px);line-height:1.2;font-weight:500;letter-spacing:-.025em;max-width:18em;color:var(--ink)}
 .split p{color:var(--muted);font-size:17px;max-width:44ch}
+.split .where{margin-top:12px;font-size:14px}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:24px}
 .plain{font-size:14px;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:1px}
 .plain:hover{border-color:var(--ink)}
@@ -95,9 +96,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
   nav{gap:0}
   nav a[href="#skills"]{display:none}
 }
-@media (max-width:400px){
-  nav a[href*="github.com"]{display:none}
-}
 .cta:active{transform:scale(.97)}
 .intro h1,.split{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
 .split{animation-delay:.12s}
@@ -125,7 +123,6 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       <a href="#work">Work</a>
       <a href="#skills">Skills</a>
       <a href="#about">About</a>
-      <a href="https://github.com/arnelcolar">GitHub</a>
       <a class="hire" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a>
     </nav>
   </div>
@@ -137,7 +134,8 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <div class="split">
       <p class="lede">Clean, focused websites for finance, security, and product brands.</p>
       <div>
-        <p>I design each page and write the code myself: landing pages, WordPress themes, calculators, support chatbots, and small automations. Every project below is live or clickable.</p>
+        <p>I've designed and built websites for six years. I design each page and write the code myself: landing pages, WordPress themes, calculators, support chatbots, and small automations.</p>
+        <p class="where">Based in the Philippines. Available 9 AM to 5 PM Philippine time (UTC+8).</p>
         <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a><a class="plain" href="#work">See the work</a></div>
       </div>
     </div>
@@ -151,7 +149,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         <span class="num">01</span>
         <div>
         <div class="meta"><h2>DebtFix</h2><span class="label">Debt relief</span></div>
-        <p>A debt settlement company's site. The homepage slider estimates a monthly deposit, and I also built its cost-of-debt calculator.</p>
+        <p>A debt settlement company looked at many designers for its redesign, including a 99designs contest, and chose mine. The old site had no calculators, so I added a homepage slider that estimates a monthly deposit and a cost-of-debt calculator.</p>
         <div class="links"><a href="https://debtfix.com/">Visit debtfix.com</a></div>
         </div>
         <a class="shot" href="https://debtfix.com/" aria-label="Open debtfix.com"><img src="assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></a>
@@ -161,7 +159,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         <span class="num">02</span>
         <div>
         <div class="meta"><h2>WisestWallet</h2><span class="label">Personal finance · WordPress</span></div>
-        <p>A custom WordPress theme for a personal finance blog. I wrote its four calculators: debt payoff, emergency fund, loan cost, and credit utilization.</p>
+        <p>A personal finance blog that loaded slowly and needed an advertiser's approval. I built a custom WordPress theme, calculators for debt payoff, emergency funds, loan cost, and credit utilization, and topic hub pages, and rewrote older posts with sources.</p>
         <div class="links"><a href="https://wisestwallet.com/">Visit wisestwallet.com</a></div>
         </div>
         <a class="shot" href="https://wisestwallet.com/" aria-label="Open wisestwallet.com"><img src="assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></a>
@@ -180,46 +178,43 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     </div>
   </section>
 
-  <section class="wrap" id="templates" aria-labelledby="templates-title">
-    <div class="head"><h2 id="templates-title">Templates and concepts</h2><span class="count">(06)</span></div>
+  <section class="wrap" id="projects" aria-labelledby="projects-title">
+    <div class="head"><h2 id="projects-title">Own projects</h2><span class="count">(02)</span></div>
     <div class="grid">
 
       <article class="project">
-        <a class="shot" href="work/nook/" aria-label="Open the NOOK case study"><img src="assets/shots/nook.webp" alt="NOOK app onboarding screen showing a leather sofa" width="1440" height="900"></a>
-        <div class="meta"><h2><span class="num">04</span>NOOK</h2><span class="label">Mobile app · UX case study</span></div>
-        <p>A furniture shopping app. The case study covers the problem, a persona, wireframes, and a design system. The prototype runs in your browser.</p>
-        <div class="links">
-          <a href="work/nook/">Read the case study</a>
-          <a href="work/nook/nook-prototype.html">Open the prototype</a>
-        </div>
-      </article>
-
-      <article class="project">
-        <a class="shot" href="work/docs-chatbot/" aria-label="Open the docs-only chatbot case study"><img src="assets/shots/docs-chatbot.webp" alt="Chat page with a question box and six suggested questions about a car service manual" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2>Docs-only chatbot</h2><span class="label">Support bot · Case study</span></div>
+        <a class="shot" href="work/docs-chatbot/" aria-label="Open the docs-only chatbot case study"><img src="assets/shots/docs-chatbot.webp" alt="Chat page with a question box and six suggested questions about a car service manual" width="1440" height="900"></a>
+        <div class="meta"><h2><span class="num">04</span>Docs-only chatbot</h2><span class="label">Support bot · Python</span></div>
         <p>A support assistant that answers your customers' and staff's questions from your own PDF, names the page, and won't make things up. Tested on a 1,379-page scanned manual.</p>
         <div class="links"><a href="work/docs-chatbot/">Read the case study</a></div>
       </article>
 
       <article class="project">
+        <a class="shot" href="work/cafe-bot/" aria-label="Open the Corner Cup Bot case study"><img src="assets/shots/cafebot.webp" alt="Corner Cup Bot case study with a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2><span class="num">05</span>Corner Cup Bot</h2><span class="label">Automation · Our own café</span></div>
+        <p>A Telegram bot I built for our own small café. It logs orders, expenses, and stock to Google Sheets, and reads supplier receipts with a vision model.</p>
+        <div class="links"><a href="work/cafe-bot/">Read the case study</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap" id="templates" aria-labelledby="templates-title">
+    <div class="head"><h2 id="templates-title">Templates and concepts</h2><span class="count">(04)</span></div>
+    <div class="grid">
+
+      <article class="project">
         <a class="shot" href="work/halcyon.html" aria-label="Open the Halcyon page"><img src="assets/shots/halcyon.webp" alt="Halcyon H16 launch page hero with an orange-lit laptop keyboard" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2><span class="num">05</span>Halcyon H16</h2><span class="label">Product launch · Single page</span></div>
+        <div class="meta"><h2><span class="num">06</span>Halcyon H16</h2><span class="label">Product launch · Single page</span></div>
         <p>A launch page for a 16-inch laptop. Sticky section nav with scrollspy, a pinned display story, swipeable feature cards, and an FAQ.</p>
         <div class="links"><a href="work/halcyon.html">Open the page</a></div>
       </article>
 
       <article class="project">
         <a class="shot" href="work/wardline.html" aria-label="Open the Wardline page"><img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2><span class="num">06</span>Wardline</h2><span class="label">Identity protection · Landing page</span></div>
+        <div class="meta"><h2><span class="num">07</span>Wardline</h2><span class="label">Identity protection · Landing page</span></div>
         <p>A dark page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
         <div class="links"><a href="work/wardline.html">Open the page</a></div>
-      </article>
-
-      <article class="project">
-        <a class="shot" href="work/vigil.html" aria-label="Open the Vigil page"><img src="assets/shots/vigil.webp" alt="Vigil hero with a red headline on a light background" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2><span class="num">07</span>Vigil</h2><span class="label">Identity monitoring · Landing page</span></div>
-        <p>The same product category in a lighter direction. A circuit-trace hero, alternating use-case rows, compliance badges, and member reviews.</p>
-        <div class="links"><a href="work/vigil.html">Open the page</a></div>
       </article>
 
       <article class="project">
@@ -230,10 +225,13 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
       </article>
 
       <article class="project">
-        <a class="shot" href="work/cafe-bot/" aria-label="Open the Corner Cup Bot case study"><img src="assets/shots/cafebot.webp" alt="Corner Cup Bot case study with a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></a>
-        <div class="meta"><h2><span class="num">09</span>Corner Cup Bot</h2><span class="label">Automation · Apps Script</span></div>
-        <p>A Telegram bot that logs a café's orders, expenses, and stock to Google Sheets, and reads supplier receipts with a vision model.</p>
-        <div class="links"><a href="work/cafe-bot/">Read the case study</a></div>
+        <a class="shot" href="work/nook/" aria-label="Open the NOOK case study"><img src="assets/shots/nook.webp" alt="NOOK app onboarding screen showing a leather sofa" width="1440" height="900" loading="lazy"></a>
+        <div class="meta"><h2><span class="num">09</span>NOOK</h2><span class="label">Mobile app · UX case study</span></div>
+        <p>A furniture shopping app. The case study covers the problem, a persona, wireframes, and a design system. The prototype runs in your browser.</p>
+        <div class="links">
+          <a href="work/nook/">Read the case study</a>
+          <a href="work/nook/nook-prototype.html">Open the prototype</a>
+        </div>
       </article>
 
     </div>
@@ -286,7 +284,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
         <span class="num">06</span>
         <h3>Scripting and automation</h3>
         <div>
-          <p>Google Apps Script connected to Telegram, Google Sheets, and an AI model. Café staff log sales and receipts by sending a message.</p>
+          <p>Google Apps Script connected to Telegram, Google Sheets, and a vision model. Café staff log sales and receipts by sending a message.</p>
           <div class="links"><a href="work/cafe-bot/">Corner Cup Bot</a></div>
         </div>
       </li>
@@ -345,7 +343,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4p
     <div>
       <p>I keep my designs minimal, with plenty of white space and one strong color per page.</p>
       <p>Most of my client work is in personal finance and debt relief. Those readers are careful with money, so I keep pricing plain and disclaimers honest.</p>
-      <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a><a class="plain" href="https://github.com/arnelcolar">Find me on GitHub</a></div>
+      <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a></div>
     </div>
   </section>
 </main>
