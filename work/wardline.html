@@ -2220,7 +2220,7 @@ button:focus-visible,
 </div>
 
 <script>
-// Instant button feedback on pointer-down
+
 (function () {
   var prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
@@ -2237,7 +2237,6 @@ button:focus-visible,
   }, true);
 })();
 
-// Tab management with keyboard navigation
 (function () {
   var tablist = document.querySelector('.tablist');
   if (!tablist) return;
@@ -2346,7 +2345,6 @@ button:focus-visible,
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 
-  // Close menu when a link is clicked
   document.querySelectorAll('.mobile-menu a').forEach(function (a) {
     a.addEventListener('click', function () {
       isOpen = false;
@@ -2355,7 +2353,6 @@ button:focus-visible,
     });
   });
 
-  // Close menu on Escape
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen) {
       isOpen = false;
@@ -2495,7 +2492,6 @@ button:focus-visible,
       el.style.setProperty('--mx', x + 'px');
       el.style.setProperty('--my', y + 'px');
 
-      // Track velocity for future momentum animations
       if (lastTime > 0) {
         var dt = Math.max(1, now - lastTime);
         var vx = (x - lastX) / dt;

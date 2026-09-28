@@ -80,7 +80,6 @@
 
 <div class="phone">
 
-  <!-- ============ SPLASH SCREEN ============ -->
   <div class="screen active" id="screen-splash" style="cursor:pointer;" onclick="goOnboarding()">
     <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--ink);position:relative;">
       <div class="h-outfit" style="font-weight:700;font-size:34px;letter-spacing:4px;color:#fff;">NOOK</div>
@@ -89,7 +88,6 @@
     </div>
   </div>
 
-  <!-- ============ ONBOARDING SCREEN ============ -->
   <div class="screen" id="screen-onboarding">
     <div style="height:100%;display:flex;flex-direction:column;">
       <div style="display:flex;justify-content:flex-end;padding:20px 20px 0;">
@@ -107,7 +105,6 @@
     </div>
   </div>
 
-  <!-- ============ LOGIN SCREEN ============ -->
   <div class="screen" id="screen-login">
     <div style="height:100%;display:flex;flex-direction:column;padding:64px 28px 36px;">
       <div class="h-outfit" style="font-weight:700;font-size:15px;letter-spacing:3px;color:var(--ink);">NOOK</div>
@@ -142,7 +139,6 @@
     </div>
   </div>
 
-  <!-- ============ SEARCH SCREEN ============ -->
   <div class="screen" id="screen-search">
     <div class="screen-scroll">
     <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);">
@@ -168,7 +164,6 @@
     <div id="navbar-search"></div>
   </div>
 
-  <!-- ============ SAVED SCREEN ============ -->
   <div class="screen" id="screen-saved">
     <div class="screen-scroll">
     <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);">
@@ -187,7 +182,6 @@
     <div id="navbar-saved"></div>
   </div>
 
-  <!-- ============ PROFILE SCREEN ============ -->
   <div class="screen" id="screen-profile">
     <div class="screen-scroll">
     <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);">
@@ -232,7 +226,6 @@
     <div id="navbar-profile"></div>
   </div>
 
-  <!-- ============ HOME SCREEN ============ -->
   <div class="screen" id="screen-home">
     <div class="screen-scroll">
     <div class="sticky-top" style="padding:24px 20px 0;border-bottom:1px solid var(--border);">
@@ -285,7 +278,6 @@
     <div id="navbar-home"></div>
   </div>
 
-  <!-- ============ PRODUCT DETAIL SCREEN ============ -->
   <div class="screen" id="screen-detail">
     <div id="detail-skeleton" style="position:absolute;inset:0;background:var(--bg);z-index:20;display:none;">
       <div class="skeleton" style="height:400px;width:100%;"></div>
@@ -384,7 +376,6 @@
     <div class="toast" id="toast-detail">Added to cart</div>
   </div>
 
-  <!-- ============ CART SCREEN ============ -->
   <div class="screen" id="screen-cart">
     <div class="screen-scroll">
     <div class="sticky-top" style="padding:22px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
@@ -444,7 +435,6 @@
     </div>
   </div>
 
-  <!-- ============ ORDER CONFIRMATION SCREEN ============ -->
   <div class="screen" id="screen-confirm">
     <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 40px;text-align:center;">
       <div style="width:64px;height:64px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
@@ -458,7 +448,6 @@
     </div>
   </div>
 
-  <!-- ============ OFFLINE OVERLAY (demo toggle, from Profile) ============ -->
   <div id="offline-overlay" style="position:absolute;inset:0;background:var(--bg);z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:0 40px;text-align:center;">
     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:20px;"><path d="M1 9a17 17 0 0 1 22 0M5 13a11 11 0 0 1 14 0M8.5 17a6 6 0 0 1 7 0"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
     <div class="h-outfit" style="font-weight:700;font-size:18px;color:var(--ink);">No internet connection</div>
@@ -472,7 +461,7 @@
 var PRODUCTS = [{"id": "sofa", "name": "Marlow Sofa", "category": "SEATING", "tag": "Sofas", "price": 1449, "img": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=760&h=700&fit=crop&q=70&fm=jpg", "rating": 4.8, "reviews": 214, "desc": "A low-slung, deep-seated sofa built for slow afternoons. Kiln-dried hardwood frame, high-density foam over pocket springs, and a hand-finished linen-blend upholstery that softens with wear.", "finishes": [{"name": "Terracotta", "color": "#B5613F"}, {"name": "Charcoal", "color": "#3A3A3A"}, {"name": "Oat", "color": "#D8CFC0"}, {"name": "Forest", "color": "#3E4E3D"}], "configs": ["2-Seat", "3-Seat", "Sectional"], "defaultConfig": 1}, {"id": "lamp", "name": "Arc Floor Lamp", "category": "LIGHTING", "tag": "Lighting", "price": 189, "img": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.6, "reviews": 98, "desc": "A sweeping brass arc lamp that casts warm, even light over a reading chair or sofa end. Weighted marble base keeps it steady; the arm adjusts to reach exactly where you need it.", "finishes": [{"name": "Brass", "color": "#B08D57"}, {"name": "Matte Black", "color": "#1E1E1E"}]}, {"id": "armchair", "name": "Britt Armchair", "category": "SEATING", "tag": "Chairs", "price": 599, "img": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.7, "reviews": 156, "desc": "A compact accent chair with a gently curved back and tapered oak legs. Sized for small rooms without giving up depth of comfort.", "finishes": [{"name": "Camel", "color": "#B98A4E"}, {"name": "Charcoal", "color": "#3A3A3A"}, {"name": "Sage", "color": "#8A9A7E"}]}, {"id": "chair", "name": "Nova Dining Chair", "category": "SEATING", "tag": "Dining", "price": 219, "img": "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.9, "reviews": 312, "desc": "A sculptural dining chair in solid ash with a woven cord seat. Stackable, durable, and light enough to move around the table without a scrape.", "finishes": [{"name": "Natural Ash", "color": "#C9A876"}, {"name": "Walnut", "color": "#5B4130"}, {"name": "Black Stain", "color": "#232323"}]}, {"id": "stool", "name": "Birch Counter Stool", "category": "SEATING", "tag": "Dining", "price": 149, "img": "https://images.unsplash.com/photo-1503602642458-232111445657?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1503602642458-232111445657?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.5, "reviews": 87, "desc": "A simple counter-height stool turned from solid birch. Footrest ring and a slightly dished seat keep it comfortable through a long dinner.", "finishes": [{"name": "Natural Birch", "color": "#D9C4A0"}, {"name": "Espresso", "color": "#3E2C22"}]}, {"id": "cabinet", "name": "Reed Storage Cabinet", "category": "STORAGE", "tag": "Storage", "price": 389, "img": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=350&h=350&fit=crop&q=68&fm=jpg", "detailImg": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=700&h=640&fit=crop&q=68&fm=jpg", "rating": 4.7, "reviews": 64, "desc": "A low storage cabinet with reeded fluted doors and brass hardware. Adjustable interior shelf, soft-close hinges, solid oak veneer.", "finishes": [{"name": "Natural Oak", "color": "#C9A876"}, {"name": "Smoked Oak", "color": "#5B4130"}]}];
 
 var ONBOARD_SLIDES = [
-  { img: PRODUCTS[0].detailImg, title: 'Curated, not endless', body: 'A tight collection of considered pieces — no infinite scroll, no decision fatigue.' },
+  { img: PRODUCTS[0].detailImg, title: 'A short list', body: 'A small, hand-picked collection with no endless scroll.' },
   { img: PRODUCTS[2].detailImg, title: 'See it before you buy it', body: 'Real photography, true finishes, and dimensions you can trust.' },
   { img: PRODUCTS[5].detailImg, title: 'Checkout in under a minute', body: 'A minimal cart and saved details mean fewer taps between browsing and delivery.' },
 ];
@@ -775,7 +764,6 @@ function resetAndGoHome(){
   goHome();
 }
 
-/* ---------- Onboarding / Auth ---------- */
 function goOnboarding(){ state.onboardIdx = 0; renderOnboard(); showScreen('screen-onboarding'); }
 function renderOnboard(){
   var s = ONBOARD_SLIDES[state.onboardIdx];
@@ -801,7 +789,6 @@ function logOut(){
   showScreen('screen-login');
 }
 
-/* ---------- Search ---------- */
 function goSearch(){
   document.getElementById('search-input').value = state.searchQuery;
   renderSearchResults();
@@ -822,7 +809,6 @@ function renderSearchResults(){
   document.getElementById('search-empty').style.display = results.length ? 'none' : 'block';
 }
 
-/* ---------- Saved / Wishlist ---------- */
 function goSaved(){ renderSaved(); showScreen('screen-saved'); }
 function renderSaved(){
   var items = PRODUCTS.filter(function(p){ return state.saved.indexOf(p.id) !== -1; });
@@ -831,7 +817,6 @@ function renderSaved(){
   document.getElementById('saved-empty').style.display = items.length ? 'none' : 'block';
 }
 
-/* ---------- Profile / Settings ---------- */
 function goProfile(){ showScreen('screen-profile'); }
 function toggleDarkMode(){
   state.darkMode = !state.darkMode;
