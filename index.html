@@ -4,447 +4,375 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arnel Colar · Web design portfolio</title>
-<meta name="description" content="Arnel Colar designs and builds websites, WordPress themes, client portals and document assistants. Six years in web design, based in the Philippines.">
+<meta name="description" content="Arnel Colar designs and builds websites, WordPress themes, calculators, and document support assistants. Six years in web design, based in the Philippines.">
 <meta property="og:title" content="Arnel Colar · Web design portfolio">
-<meta property="og:description" content="Websites, WordPress themes, client portals and document assistants, designed and built by Arnel Colar.">
+<meta property="og:description" content="Websites, WordPress themes, calculators, and document support assistants, designed and built by Arnel Colar.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arnelcolar.github.io/">
 <meta property="og:image" content="https://arnelcolar.github.io/assets/shots/debtfix.webp">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23232a38'/><text x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23f7f8fa' text-anchor='middle'>AC</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='21' font-family='Arial' font-weight='700' font-size='14' fill='%23fff' text-anchor='middle'>AC</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-/* Hallmark · shape: Photographic · genre: editorial · theme: Studio (deal 3/3, seed web-designer-portfolio-client-4548·eaa997f3·2026-10-26·r0) · redesign: full
- * hero: Poster (swapped from Corridor) · nav: edge-aligned (swapped from search-led) · footer: letter close · imagery: screenshots of the work · signature: an index of twelve that opens in place
- * axes: light/roman-serif/warm · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P paper-not-white, H one idea per screen, E every shot is the real page, S the index carries the mass, R one orange fill · weakest: the hero's caption, cut rather than guessed */
-@import url("./tokens.css");
-@import url("./base.css");
+a{color:inherit;text-decoration:none}
+:root{--gap:clamp(72px,9vw,120px)}
 
-html { scroll-behavior: smooth; }
+header{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:18px;color:var(--muted)}
+nav a{padding:6px 2px;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+nav .hire{color:var(--ink);font-weight:500}
 
-.nav {
-  position: sticky; top: 0; z-index: var(--z-sticky-nav);
-  background: var(--color-paper);
-  background-image: radial-gradient(circle at 1px 1px, var(--color-dot) 1px, transparent 1.4px);
-  background-size: 24px 24px;
-  border-bottom: var(--rule-hair) solid var(--color-rule);
+.hero{padding:clamp(36px,6vw,80px) 0 clamp(48px,7vw,84px)}
+.hero h1{font-size:clamp(46px,10.4vw,124px);line-height:.92;font-weight:600;letter-spacing:-.05em}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,64px);margin-top:clamp(28px,4vw,44px);align-items:start}
+.lede{font-size:clamp(22px,2.5vw,31px);line-height:1.2;font-weight:500;letter-spacing:-.025em;max-width:19em;text-wrap:balance}
+.sub{color:var(--muted);font-size:17px;max-width:46ch}
+.sub + .sub{margin-top:14px}
+.where{font-size:14px;color:var(--muted);margin-top:16px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:26px}
+.plain{font-size:14px;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:1px}
+.plain:hover{border-color:var(--ink)}
+
+.proof{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,32px);margin-top:clamp(32px,4.5vw,56px);padding-top:20px;border-top:1px solid var(--ink)}
+.proof li{display:flex;flex-direction:column;gap:3px}
+.proof b{font:500 15px/1.3 var(--mono);letter-spacing:-.01em}
+.proof span{font-size:14px;color:var(--muted)}
+
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:18px;margin-bottom:clamp(20px,2.4vw,28px);border-bottom:1px solid var(--ink)}
+.head h2{font-size:clamp(30px,3.6vw,46px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.count{font:500 13px/1 var(--mono);color:var(--muted);letter-spacing:.08em}
+
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,1.6vw,22px);padding-bottom:var(--gap)}
+.card{grid-column:span 6;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .3s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+.card:hover{border-color:var(--a,var(--ink))}
+.card .shot{display:block;overflow:hidden;background:var(--soft);height:clamp(200px,23vw,320px)}
+.card .shot img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,top);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.card:hover .shot img{transform:scale(1.022)}
+.card.s7{grid-column:span 7}
+.card.s5{grid-column:span 5}
+.card.s4{grid-column:span 4}
+.s4 .shot{height:clamp(200px,20vw,280px)}
+.body{padding:clamp(16px,1.7vw,22px);display:flex;flex-direction:column;gap:9px;flex:1}
+.meta{display:flex;align-items:center;gap:10px;font:500 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.idx{color:var(--muted)}
+.type::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--a,currentColor);margin-right:8px;vertical-align:1px}
+.card h3{font-size:clamp(19px,1.7vw,24px);font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.card h3 a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;text-decoration-color:var(--a,currentColor)}
+.card p{color:var(--muted);font-size:15px;max-width:52ch}
+.links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:auto;padding-top:12px;font-size:14px;font-weight:500}
+.links a{border-bottom:1px solid var(--line);padding-bottom:1px}
+.links a:hover{border-color:var(--a,var(--ink))}
+
+.card.dark{background:#0f0f0f;border-color:#242424;color:#f4f4f4}
+.card.dark .shot{background:#171717}
+.card.dark p,.card.dark .meta{color:#9c9c9c}
+.card.dark .idx{color:var(--a)}
+.card.dark .links a{border-color:#333}
+.card.dark .links a:hover{border-color:var(--a)}
+.card.dark a:focus-visible{outline-color:#f4f4f4}
+
+.caps{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,56px);padding-bottom:clamp(28px,3vw,36px)}
+.caps li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:26px 0;border-top:1px solid var(--line)}
+.caps .idx{font:500 12px/1.7 var(--mono);padding-top:3px}
+.caps h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.caps p{color:var(--muted);font-size:15px;max-width:50ch}
+
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:9px 20px;list-style:none;padding:22px 0 var(--gap);border-top:1px solid var(--line);font:500 12px/1 var(--mono);letter-spacing:.02em;color:var(--muted)}
+.tools .toolhead{color:var(--ink);letter-spacing:.09em;margin-right:4px}
+.tools li{display:flex;align-items:center;gap:7px}
+.tools img{width:16px;height:16px;opacity:.7}
+
+.process{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,32px);padding-bottom:var(--gap)}
+.process li{border-top:1px solid var(--ink);padding-top:16px}
+.process .idx{font:500 12px/1 var(--mono);color:var(--muted);letter-spacing:.08em}
+.process h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:8px 0 6px}
+.process p{color:var(--muted);font-size:15px}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);padding:56px 0 112px}
+.about h2{font-size:clamp(26px,2.6vw,32px);font-weight:500;letter-spacing:-.03em;line-height:1.2;margin-top:10px;max-width:16em}
+.about p{color:var(--muted);max-width:52ch}
+.about p + p{margin-top:14px}
+.about .actions{margin-top:26px}
+
+@media (max-width:820px){
+  .hero-grid,.caps,.process,.about{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .card,.card.s7,.card.s5,.card.s4{grid-column:1/-1}
+  .card .shot,.s4 .shot{height:auto;aspect-ratio:16/10}
+  .proof{grid-template-columns:1fr;gap:0}
+  .proof li{flex-direction:row;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+  .proof li:first-child{border-top:0;padding-top:0}
+  .proof li:last-child{padding-bottom:0}
+  nav{gap:13px;font-size:13px}
 }
-.nav-in { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); height: 68px; }
-.wordmark { font-family: var(--font-display); font-size: 1.125rem; letter-spacing: -0.01em; text-decoration: none; }
-.nav-links { display: flex; align-items: center; gap: var(--space-lg); font-size: var(--text-sm); font-weight: 500; }
-.nav-links a { color: var(--color-ink-2); text-decoration: none; }
-.nav-links a:hover { color: var(--color-ink); box-shadow: inset 0 -1px 0 var(--color-accent); }
-.nav-links a.action { color: var(--color-ink); }
-
-.hero {
-  min-height: calc(100svh - 68px);
-  background: var(--color-paper);
-  background-image: radial-gradient(circle at 1px 1px, var(--color-dot) 1px, transparent 1.4px);
-  background-size: 24px 24px;
-  border-bottom: var(--rule-hair) solid var(--color-rule);
-}
-.hero-in {
-  display: grid; grid-template-rows: minmax(220px, 1fr) auto;
-  gap: var(--space-xl); padding-block: var(--space-2xl) var(--space-xl);
-  min-height: calc(100svh - 68px);
-}
-.sheet { display: flex; flex-direction: column; min-height: 0; margin: 0; }
-.sheet-img {
-  position: relative; flex: 1; min-height: 0; background: var(--color-paper-3);
-  outline: 1px solid color-mix(in oklab, var(--color-ink) 12%, transparent); outline-offset: -1px;
-  box-shadow: var(--shadow-sheet);
-}
-.sheet-img.crop::before { inset: 8px; }
-.sheet-img picture { position: absolute; inset: 0; }
-.sheet-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
-.sheet figcaption { padding-top: var(--space-sm); color: var(--color-muted); font-size: var(--text-sm); }
-
-.plate { position: relative; width: 100%; }
-.plate h1 { font-size: var(--text-display); line-height: 0.98; max-width: 20ch; }
-.plate .lead { margin-top: var(--space-md); color: var(--color-ink-2); max-width: 34ch; }
-.plate .go { display: flex; align-items: center; gap: var(--space-lg); margin-top: var(--space-lg); }
-
-.crop { --l: 14px; --o: 20px; }
-.crop::before {
-  content: ""; position: absolute; inset: calc(-1 * var(--o)); pointer-events: none; --c: var(--color-mark);
-  background:
-    linear-gradient(var(--c), var(--c)) 0 var(--o) / var(--l) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) var(--o) 0 / 1px var(--l) no-repeat,
-    linear-gradient(var(--c), var(--c)) 100% var(--o) / var(--l) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) calc(100% - var(--o)) 0 / 1px var(--l) no-repeat,
-    linear-gradient(var(--c), var(--c)) 0 calc(100% - var(--o)) / var(--l) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) var(--o) 100% / 1px var(--l) no-repeat,
-    linear-gradient(var(--c), var(--c)) 100% calc(100% - var(--o)) / var(--l) 1px no-repeat,
-    linear-gradient(var(--c), var(--c)) calc(100% - var(--o)) 100% / 1px var(--l) no-repeat;
-}
-
-.btn {
-  position: relative; display: inline-flex; align-items: center; justify-content: center;
-  min-height: 48px; padding: 0 var(--space-lg);
-  border: var(--rule-hair) solid var(--color-ink); border-radius: 2px;
-  font-weight: 500; font-size: var(--text-sm); text-decoration: none;
-}
-.btn::after { content: ""; position: absolute; inset: 2px; border: var(--rule-hair) solid var(--color-mark); pointer-events: none; }
-.btn-primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-accent-ink); }
-.btn-primary::after { border-color: color-mix(in oklab, var(--color-accent-ink) 30%, transparent); }
-.btn:hover { background: var(--color-ink); color: var(--color-paper); }
-.btn:active { transform: translateY(1px); box-shadow: none; }
-.btn-primary:hover { background: var(--color-accent); color: var(--color-accent-ink); box-shadow: inset 0 -3px 0 color-mix(in oklab, var(--color-ink) 85%, transparent); }
-
-.quiet { color: var(--color-muted); font-size: var(--text-sm); text-decoration: none; }
-.quiet:hover { color: var(--color-ink); box-shadow: inset 0 -1px 0 var(--color-accent); }
-.quiet:active { box-shadow: inset 0 -2px 0 var(--color-accent); }
-
-
-.section { padding-block: var(--section-gap-s); }
-.section + .section { border-top: var(--rule-hair) solid var(--color-rule); }
-
-.head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md);
-  padding-bottom: var(--space-sm); border-bottom: var(--rule-hair) solid var(--color-ink); }
-.head h2 { font-size: var(--text-section); }
-.head .count { font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
-
-.index { list-style: none; margin: 0; padding: 0; }
-.row { border-bottom: var(--rule-hair) solid var(--color-rule); }
-.row > summary { display: grid; grid-template-columns: 3rem minmax(0, 1fr) 13rem 1.25rem; gap: var(--gap-columns);
-  align-items: baseline; padding-block: var(--space-lg) var(--space-sm); cursor: pointer; list-style: none; }
-.row > summary::-webkit-details-marker { display: none; }
-.row .n { font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
-.row h3 { font-size: var(--text-title); letter-spacing: -0.005em; }
-.row .kind { font-size: var(--text-sm); color: var(--color-muted); }
-.row .mark { justify-self: end; color: var(--color-muted); font-size: var(--text-md); }
-.row .mark::after { content: "+"; }
-.row[open] .mark::after { content: "\2212"; }
-.row > summary:hover h3 { color: var(--color-ink-2); box-shadow: inset 0 -1px 0 var(--color-accent); }
-.row[open] > summary { border-bottom: var(--rule-hair) solid var(--color-rule); }
-
-details:not([open]) > .case { display: none; }
-.case { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--gap-columns);
-  padding-block: var(--space-sm) var(--space-2xl); }
-.case figure { margin: 0; }
-.case img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top center;
-  outline: 1px solid color-mix(in oklab, var(--color-ink) 12%, transparent); outline-offset: -1px; box-shadow: var(--shadow-sheet); }
-.case .txt { display: flex; flex-direction: column; gap: var(--space-md); }
-.case p { color: var(--color-ink-2); }
-.case .act { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2xs); font-size: var(--text-sm); font-weight: 500; }
-.case .act a { text-decoration: none; box-shadow: inset 0 -1px 0 var(--color-rule); padding-bottom: 1px; }
-.case .act a:hover { box-shadow: inset 0 -1px 0 var(--color-accent); }
-
-.split { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--gap-columns); align-items: start; }
-.split .head-block { position: sticky; top: calc(68px + var(--space-lg)); }
-.head-block h2 { font-size: var(--text-section); }
-.head-block .lead { margin-top: var(--space-sm); color: var(--color-ink-2); }
-
-.caps { list-style: none; margin: 0; padding: 0; }
-.caps li { padding-block: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); }
-.caps li:first-child { border-top: var(--rule-hair) solid var(--color-ink); }
-.caps h3 { font-size: var(--text-lg); }
-.caps p { margin-top: var(--space-2xs); color: var(--color-muted); max-width: 52ch; }
-.caps .links { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-md); margin-top: var(--space-sm); font-size: var(--text-sm); }
-.caps .links a { text-decoration: none; box-shadow: inset 0 -1px 0 var(--color-rule); padding-bottom: 1px; }
-.caps .links a:hover { box-shadow: inset 0 -1px 0 var(--color-accent); }
-.tools { margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: var(--rule-hair) solid var(--color-rule);
-  font-size: var(--text-sm); color: var(--color-muted); }
-.tools b { color: var(--color-ink-2); font-weight: 500; }
-
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-columns); }
-.steps li { border-top: var(--rule-hair) solid var(--color-ink); padding-top: var(--space-md); }
-.steps .n { font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
-.steps h3 { font-size: var(--text-lg); margin-top: var(--space-2xs); }
-.steps p { margin-top: var(--space-2xs); color: var(--color-muted); }
-
-.about { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--gap-columns); align-items: start; }
-.about h2 { font-size: var(--text-section); }
-.about p { color: var(--color-ink-2); }
-.about p + p { margin-top: var(--space-md); }
-.contact { margin-top: var(--space-xl); padding-top: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-md) var(--space-lg); }
-.contact .where { color: var(--color-muted); font-size: var(--text-sm); margin: 0; }
-
-.foot { background-image: radial-gradient(circle at 1px 1px, var(--color-dot) 1px, transparent 1.4px); background-size: 24px 24px; border-top: var(--rule-hair) solid var(--color-ink); padding-block: var(--space-2xl) var(--space-xl); }
-.foot .sign { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--space-md); }
-.foot .sign b { font-family: var(--font-display); font-weight: var(--display-weight); font-size: var(--text-xl); letter-spacing: -0.015em; }
-.foot .sign span { color: var(--color-muted); font-size: var(--text-sm); }
-.foot p { margin-top: var(--space-lg); color: var(--color-muted); font-size: var(--text-sm); max-width: 70ch; }
-.foot a { text-decoration: none; box-shadow: inset 0 -1px 0 var(--color-rule); }
-.foot a:hover { box-shadow: inset 0 -1px 0 var(--color-accent); color: var(--color-ink); }
-
-@media (max-width: 60rem) {
-  .row > summary { grid-template-columns: 2.5rem minmax(0, 1fr) 1.25rem; gap: var(--space-sm); }
-  .row .kind { display: none; }
-  .case { grid-template-columns: minmax(0, 1fr); padding-bottom: var(--space-xl); }
-  .split, .about { grid-template-columns: 1fr; gap: var(--space-lg); }
-  .split .head-block { position: static; }
-  .steps { grid-template-columns: 1fr; gap: 0; }
-  .steps li { padding-block: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); }
-  .steps li:first-child { border-top: var(--rule-hair) solid var(--color-ink); }
+@media (max-width:420px){
+  .wrap{width:calc(100% - 36px)}
+  .name{font-size:13px}
+  nav{gap:9px;font-size:12px}
 }
 
-@media (max-width: 60rem) {
-  .hero-in { grid-template-rows: minmax(220px, 1fr) auto; gap: var(--space-lg); padding-block: var(--space-lg); }
-  .sheet-img { flex: none; aspect-ratio: 600 / 812; }
-  .sheet-img img { object-position: top center; }
-  .plate h1 { font-size: clamp(2.5rem, 11vw, 4rem); }
-  .crop { --o: 12px; --l: 10px; }
-}
-@media (max-width: 40rem) {
-  .nav-links { gap: var(--space-md); }
-  .nav-links a[href="#what"], .nav-links a[href="#about"] { display: none; }
-  .plate .go { flex-wrap: wrap; gap: var(--space-md); }
+.card{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% cover 26%}
+@keyframes reveal{from{opacity:.25}}
+.hero h1,.hero-grid{animation:enter .8s cubic-bezier(.16,1,.3,1) both}
+.hero-grid{animation-delay:.1s}
+@keyframes enter{from{opacity:0;transform:translateY(24px)}}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+  .card,.hero h1,.hero-grid{animation:none}
 }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="container nav-in">
-    <a class="wordmark" href="#top">Arnel Colar</a>
-    <nav class="nav-links" aria-label="Primary">
+<header>
+  <div class="wrap bar">
+    <a class="name" href="#top">Arnel Colar</a>
+    <nav aria-label="Primary">
       <a href="#work">Work</a>
-      <a href="#what">What I do</a>
+      <a href="#skills">Skills</a>
       <a href="#about">About</a>
-      <a class="action" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a>
+      <a class="hire" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
 
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="container hero-in">
-      <figure class="sheet">
-        <div class="sheet-img crop">
-          <picture>
-            <source media="(max-width: 60rem)" srcset="assets/shots/debtfix-hero-mobile.webp">
-            <img src="assets/shots/debtfix-hero.webp" alt="The DebtFix homepage: a debt slider comparing minimum payments with one monthly program deposit, beside a portrait of a couple" width="1440" height="412" fetchpriority="high">
-          </picture>
-        </div>
-        <figcaption>DebtFix, live at debtfix.com</figcaption>
-      </figure>
-      <div class="plate">
-        <h1 id="hero-title">Websites, WordPress themes and client portals.</h1>
-        <p class="lead">Designed and built by one person, from the Philippines.</p>
-        <div class="go">
-          <a class="btn btn-primary" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a>
-          <a class="quiet" href="#work">See the work</a>
+  <section class="wrap hero">
+    <h1>Arnel Colar</h1>
+    <div class="hero-grid">
+      <p class="lede">Clean, focused websites for finance, security, and product brands.</p>
+      <div>
+        <p class="sub">Six years designing and building. I design each page and write the code myself.</p>
+        <p class="where">Based in the Philippines. Available 9 AM to 5 PM Philippine time (UTC+8).</p>
+        <div class="actions">
+          <a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a>
+          <a class="plain" href="#work">See the work</a>
         </div>
       </div>
     </div>
+    <ul class="proof">
+      <li><b>6 years</b><span>Designing and building sites</span></li>
+      <li><b>03 live</b><span>Client sites in production</span></li>
+      <li><b>12 shown</b><span>Client work, projects, templates</span></li>
+    </ul>
   </section>
 
-  <section class="section" id="work" aria-labelledby="work-title">
-    <div class="container">
-      <div class="head">
-        <h2 id="work-title">Selected work</h2>
-        <span class="count">12 projects</span>
-      </div>
-      <ol class="index">
+  <section class="wrap" id="work" aria-labelledby="work-title">
+    <div class="head"><h2 id="work-title">Selected work</h2><span class="count">12</span></div>
+    <div class="bento">
 
-        <li><details class="row" open>
-            <summary><span class="n">01</span><h3>DebtFix</h3><span class="kind">Live client site</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/debtfix.webp" alt="The DebtFix homepage with the debt slider and a portrait of a couple" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A fast, clean site built around one moment: pick how much you owe, then compare your minimum payments with one monthly program deposit. I built its cost-of-debt calculator too. DebtFix chose this design over many others, including 99designs entries.</p>
-                <div class="act"><a href="https://debtfix.com/">Visit debtfix.com</a><a href="https://debtfix.com/calculators/cost-of-debt">Cost-of-debt calculator</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">02</span><h3>WisestWallet</h3><span class="kind">Live client site</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/wisestwallet.webp" alt="The WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A personal finance blog that loaded slowly and needed an advertiser’s approval. I built a custom WordPress theme, four calculators and topic hubs, then rewrote older posts with sources.</p>
-                <div class="act"><a href="https://wisestwallet.com/">Visit wisestwallet.com</a><a href="https://wisestwallet.com/debt-payoff-calculator/">Debt payoff calculator</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund calculator</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">03</span><h3>Resource Help Network</h3><span class="kind">Live client site</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/resourcehelpnetwork.webp" alt="The Resource Help Network homepage with topic cards for bills, credit, jobs, health and money" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>Step-by-step guides on bills, credit, jobs and health coverage, grouped by topic and built as a WordPress theme.</p>
-                <div class="act"><a href="https://resourcehelpnetwork.com/">Visit the site</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">04</span><h3>DebtFix client portal</h3><span class="kind">Client product</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/portal.webp" alt="The DebtFix client portal overview: program progress, deposits and the breakdown of where the money goes" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>The signed-in side of DebtFix: program progress, deposits, documents, tasks, and settlement approvals a member signs off on. Six screens, written in plain language and honest about what the numbers are estimates.</p>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">05</span><h3>IdentityProtect</h3><span class="kind">Client homepage</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/identityprotect.webp" alt="An identity-protection homepage with a serif headline and a floating dashboard panel" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A homepage for an identity-protection product, rebuilt to a reference the client shared. It carries five colour themes from one file, so the same page can be shown in each before a direction is picked.</p>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">06</span><h3>Docs-only chatbot</h3><span class="kind">Own project</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/docs-chatbot.webp" alt="A chat page with a question box and suggested questions about a car service manual" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A support assistant that answers your customers’ and staff’s questions from your own PDF, names the page, and won’t make things up. Tested on a 1,379-page scanned manual.</p>
-                <div class="act"><a href="work/docs-chatbot/">Read the case study</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">07</span><h3>Corner Cup Bot</h3><span class="kind">Own project</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/cafebot.webp" alt="A case study page showing a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A Telegram bot I built for our own small café. It logs orders, expenses and stock to Google Sheets, and reads supplier receipts with a vision model.</p>
-                <div class="act"><a href="work/cafe-bot/">Read the case study</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">08</span><h3>Pawgoods</h3><span class="kind">Own project</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/pawgoods.webp" alt="A pet-accessories storefront with a full-bleed hero photograph of a dog" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A pet-accessories storefront with no build step: every brand string in one config file, a local-storage cart, and Stripe Payment Links for checkout. A margin script reads the catalogue and exits non-zero if a product can’t sell at its price.</p>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">09</span><h3>Halcyon H16</h3><span class="kind">Template</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/halcyon.webp" alt="The Halcyon H16 launch page hero with an orange-lit laptop keyboard" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A launch page for a 16-inch laptop: sticky section navigation with scrollspy, a pinned display story, and swipeable feature cards.</p>
-                <div class="act"><a href="work/halcyon.html">Open the page</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">10</span><h3>Wardline</h3><span class="kind">Template</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/wardline.webp" alt="A dark red identity-protection hero with a network graphic" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A dark page for a household protection plan: an animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
-                <div class="act"><a href="work/wardline.html">Open the page</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">11</span><h3>Vaultledger</h3><span class="kind">Template</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/vaultledger.webp" alt="A dark fintech hero with lime accents and a card-tokenisation panel" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A page for developers evaluating a ledger and tokenisation API: code samples sit beside uptime stats, and a vault panel shows card numbers swapped for tokens.</p>
-                <div class="act"><a href="work/vaultledger.html">Open the page</a></div>
-              </div>
-            </div>
-          </details></li>
-
-        <li><details class="row">
-            <summary><span class="n">12</span><h3>NOOK</h3><span class="kind">Template</span><span class="mark" aria-hidden="true"></span></summary>
-            <div class="case">
-              <figure><img src="assets/shots/nook.webp" alt="A furniture app onboarding screen showing a leather sofa" width="1440" height="900" loading="lazy"></figure>
-              <div class="txt">
-                <p>A furniture shopping app. The case study covers the problem, user flow, wireframes and a design system, and the prototype runs in your browser.</p>
-                <div class="act"><a href="work/nook/">Read the case study</a><a href="work/nook/nook-prototype.html">Open the prototype</a></div>
-              </div>
-            </div>
-          </details></li>
-
-      </ol>
-    </div>
-  </section>
-
-  <section class="section" id="what" aria-labelledby="what-title">
-    <div class="container split">
-      <div class="head-block">
-        <h2 id="what-title">What I do</h2>
-        <p class="lead">Four kinds of work, and the pages that prove each one.</p>
-        <p class="tools"><b>Tools:</b> HTML, CSS, JavaScript, PHP, WordPress, Next.js, React, Apps Script, Telegram Bot API, Python, FastAPI, LangChain, NVIDIA, Docker, Git and GitHub.</p>
-      </div>
-      <div>
-        <ul class="caps">
-          <li>
-            <h3>Financial calculators</h3>
-            <p>Debt cost, payoff dates, emergency fund targets and credit utilisation, written in plain JavaScript.</p>
-            <div class="links"><a href="https://debtfix.com/calculators/cost-of-debt">DebtFix cost of debt</a><a href="https://wisestwallet.com/debt-payoff-calculator/">WisestWallet debt payoff</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund</a></div>
-          </li>
-          <li>
-            <h3>WordPress themes and Next.js</h3>
-            <p>Themes made for one site each, with topic pages, guide and blog templates, and calculators built in. On my own time I moved a WordPress site over to Next.js and React.</p>
-            <div class="links"><a href="https://wisestwallet.com/">WisestWallet</a><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></div>
-          </li>
-          <li>
-            <h3>Hand-coded front end</h3>
-            <p>HTML, CSS and JavaScript with no framework. Halcyon has scrollspy navigation, a pinned scroll story and swipeable cards.</p>
-            <div class="links"><a href="work/halcyon.html">Halcyon H16</a><a href="work/vaultledger.html">Vaultledger</a></div>
-          </li>
-          <li>
-            <h3>Document assistants and automation</h3>
-            <p>A chat assistant that answers only from a client’s own PDF, plus Apps Script jobs that turn a Telegram message into a Google Sheets row.</p>
-            <div class="links"><a href="work/docs-chatbot/">Docs-only chatbot</a><a href="work/cafe-bot/">Corner Cup Bot</a></div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="how-title">
-    <div class="container">
-      <div class="head"><h2 id="how-title">How we work together</h2><span class="count">3 steps</span></div>
-      <ol class="steps" style="margin-top: var(--space-xl)">
-        <li><span class="n">01</span><h3>Sketch</h3><p>I sketch the layout and pick the type and colours for your page.</p></li>
-        <li><span class="n">02</span><h3>Review</h3><p>You look it over, ask for changes, and approve it.</p></li>
-        <li><span class="n">03</span><h3>Build and launch</h3><p>I write the HTML and CSS myself. The page you approve is the page that goes live.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section" id="about" aria-labelledby="about-title">
-    <div class="container about">
-      <div>
-        <h2 id="about-title">Design and code, from one person.</h2>
-      </div>
-      <div>
-        <p>I keep my designs minimal, with plenty of white space and one strong colour per page.</p>
-        <p>Most of my client work is in personal finance and debt relief. Those readers are careful with money, so I keep pricing plain and disclaimers honest.</p>
-        <div class="contact">
-          <a class="btn btn-primary" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a>
-          <p class="where">Based in the Philippines. Available 9 AM to 5 PM Philippine time (UTC+8).</p>
+      <article class="card s7" style="--a:#1f7a5a">
+        <a class="shot" href="https://debtfix.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">01</span><span class="type">Live client · Debt relief</span></div>
+          <h3><a href="https://debtfix.com/">DebtFix</a></h3>
+          <p>A fast, clean site built around one moment: pick how much you owe, then compare your minimum payments with one monthly program deposit. I built its cost-of-debt calculator too. DebtFix chose this design over many others, including 99designs entries.</p>
+          <div class="links"><a href="https://debtfix.com/">Visit debtfix.com</a></div>
         </div>
-      </div>
+      </article>
+
+      <article class="card s5" style="--a:#b07d0a">
+        <a class="shot" href="https://wisestwallet.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">02</span><span class="type">Live client · WordPress</span></div>
+          <h3><a href="https://wisestwallet.com/">WisestWallet</a></h3>
+          <p>A personal finance blog that loaded slowly and needed an advertiser's approval. I built a custom theme, four calculators, and topic hubs, then rewrote older posts with sources.</p>
+          <div class="links"><a href="https://wisestwallet.com/">Visit wisestwallet.com</a></div>
+        </div>
+      </article>
+
+      <article class="card s5" style="--a:#1f5fa8">
+        <a class="shot" href="https://resourcehelpnetwork.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/resourcehelpnetwork.webp" alt="Resource Help Network homepage with topic cards for bills, credit, jobs, health, and money" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">03</span><span class="type">Live client · Guides</span></div>
+          <h3><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></h3>
+          <p>Step-by-step guides on bills, credit, jobs, and health coverage, grouped by topic and built as a WordPress theme.</p>
+          <div class="links"><a href="https://resourcehelpnetwork.com/">Visit the site</a></div>
+        </div>
+      </article>
+
+      <article class="card s7" style="--a:#3b5bdb">
+        <a class="shot" href="work/docs-chatbot/" tabindex="-1" aria-hidden="true"><img src="assets/shots/docs-chatbot.webp" alt="Chat page with a question box and six suggested questions about a car service manual" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">04</span><span class="type">Own project · Python</span></div>
+          <h3><a href="work/docs-chatbot/">Docs-only chatbot</a></h3>
+          <p>A support assistant that answers your customers' and staff's questions from your own PDF, names the page, and won't make things up. Tested on a 1,379-page scanned manual.</p>
+          <div class="links"><a href="work/docs-chatbot/">Read the case study</a></div>
+        </div>
+      </article>
+
+<article class="card s4" style="--a:#2f6f8f">
+        <a class="shot" href="work/docs-chatbot/" tabindex="-1" aria-hidden="true"><img src="assets/shots/portal.webp" alt="The DebtFix client portal overview: program progress, deposits, and where the money goes" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">05</span><span class="type">Client product · DebtFix</span></div>
+          <h3>DebtFix client portal</h3>
+          <p>The signed-in side of DebtFix: program progress, deposits, documents, and the settlement approvals a member signs off on.</p>
+        </div>
+      </article>
+
+      <article class="card s4" style="--a:#b5352f">
+        <a class="shot" href="https://identityprotect.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/identityprotect.webp" alt="An identity-protection homepage with a serif headline and a floating dashboard panel" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">06</span><span class="type">Client · Identity protection</span></div>
+          <h3>IdentityProtect</h3>
+          <p>A homepage rebuilt to a reference the client shared, carrying five colour themes from one file.</p>
+        </div>
+      </article>
+
+      <article class="card s4" style="--a:#a9744f;--pos:left top">
+        <a class="shot" href="work/cafe-bot/" tabindex="-1" aria-hidden="true"><img src="assets/shots/pawgoods.webp" alt="A pet-accessories storefront with a full-bleed hero photograph of a dog" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">07</span><span class="type">Own project · Storefront</span></div>
+          <h3>Pawgoods</h3>
+          <p>A storefront with no build step: one config file, a local-storage cart, Stripe Payment Links, and a margin check that fails on unviable products.</p>
+        </div>
+      </article>
+
+      <article class="card s4 dark" style="--a:#e0813a">
+        <a class="shot" href="work/halcyon.html" tabindex="-1" aria-hidden="true"><img src="assets/shots/halcyon.webp" alt="Halcyon H16 launch page hero with an orange-lit laptop keyboard" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">08</span><span class="type">Template · Product launch</span></div>
+          <h3><a href="work/halcyon.html">Halcyon H16</a></h3>
+          <p>A launch page for a 16-inch laptop. Sticky section nav with scrollspy, a pinned display story, and swipeable feature cards.</p>
+          <div class="links"><a href="work/halcyon.html">Open the page</a></div>
+        </div>
+      </article>
+
+      <article class="card s4 dark" style="--a:#e05a5a">
+        <a class="shot" href="work/wardline.html" tabindex="-1" aria-hidden="true"><img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">09</span><span class="type">Template · Identity</span></div>
+          <h3><a href="work/wardline.html">Wardline</a></h3>
+          <p>A dark page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
+          <div class="links"><a href="work/wardline.html">Open the page</a></div>
+        </div>
+      </article>
+
+      <article class="card s4 dark" style="--a:#b6c74a">
+        <a class="shot" href="work/vaultledger.html" tabindex="-1" aria-hidden="true"><img src="assets/shots/vaultledger.webp" alt="Vaultledger hero with lime accents on a dark background" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">10</span><span class="type">Template · Fintech</span></div>
+          <h3><a href="work/vaultledger.html">Vaultledger</a></h3>
+          <p>A page for developers evaluating a ledger and tokenization API. Code samples sit beside uptime stats, and a vault panel shows card numbers swapped for tokens.</p>
+          <div class="links"><a href="work/vaultledger.html">Open the page</a></div>
+        </div>
+      </article>
+
+      <article class="card s6" style="--a:#4c9a2a">
+        <a class="shot" href="work/cafe-bot/" tabindex="-1" aria-hidden="true"><img src="assets/shots/cafebot.webp" alt="Corner Cup Bot case study with a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">11</span><span class="type">Own project · Automation</span></div>
+          <h3><a href="work/cafe-bot/">Corner Cup Bot</a></h3>
+          <p>A Telegram bot I built for our own small café. It logs orders, expenses, and stock to Google Sheets, and reads supplier receipts with a vision model.</p>
+          <div class="links"><a href="work/cafe-bot/">Read the case study</a></div>
+        </div>
+      </article>
+
+      <article class="card s6" style="--a:#9a6b45">
+        <a class="shot" href="work/nook/" tabindex="-1" aria-hidden="true"><img src="assets/shots/nook.webp" alt="NOOK app onboarding screen showing a leather sofa" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">12</span><span class="type">Template · UX case study</span></div>
+          <h3><a href="work/nook/">NOOK</a></h3>
+          <p>A furniture shopping app. The case study covers the problem, user flow, wireframes, and a design system. The prototype runs in your browser.</p>
+          <div class="links">
+            <a href="work/nook/">Read the case study</a>
+            <a href="work/nook/nook-prototype.html">Open the prototype</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap" id="skills" aria-labelledby="skills-title">
+    <div class="head"><h2 id="skills-title">What I do</h2><span class="count">04</span></div>
+    <ul class="caps">
+      <li>
+        <span class="idx">01</span>
+        <div>
+          <h3>Financial calculators</h3>
+          <p>Debt cost, payoff dates, emergency fund targets, and credit utilization, written in plain JavaScript.</p>
+          <div class="links"><a href="https://debtfix.com/calculators/cost-of-debt">DebtFix cost of debt</a><a href="https://wisestwallet.com/debt-payoff-calculator/">WisestWallet debt payoff</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="idx">02</span>
+        <div>
+          <h3>WordPress themes and Next.js</h3>
+          <p>Themes made for one site each, with topic pages, guide and blog templates, and calculators built in. On my own time, I moved a WordPress site over to Next.js and React.</p>
+          <div class="links"><a href="https://wisestwallet.com/">WisestWallet</a><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="idx">03</span>
+        <div>
+          <h3>Hand-coded front end</h3>
+          <p>HTML, CSS, and JavaScript with no framework. Halcyon has scrollspy navigation, a pinned scroll story, and swipeable cards.</p>
+          <div class="links"><a href="work/halcyon.html">Halcyon H16</a><a href="work/vaultledger.html">Vaultledger</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="idx">04</span>
+        <div>
+          <h3>Document assistants and automation</h3>
+          <p>A chat assistant that answers only from a client's own PDF, plus Apps Script jobs that turn a Telegram message into a Google Sheets row.</p>
+          <div class="links"><a href="work/docs-chatbot/">Docs-only chatbot</a><a href="work/cafe-bot/">Corner Cup Bot</a></div>
+        </div>
+      </li>
+    </ul>
+    <ul class="tools">
+      <li class="toolhead">TOOLS</li>
+      <li><img src="assets/icons/html5.svg" alt="" width="16" height="16">HTML5</li>
+      <li><img src="assets/icons/css.svg" alt="" width="16" height="16">CSS</li>
+      <li><img src="assets/icons/javascript.svg" alt="" width="16" height="16">JavaScript</li>
+      <li><img src="assets/icons/php.svg" alt="" width="16" height="16">PHP</li>
+      <li><img src="assets/icons/wordpress.svg" alt="" width="16" height="16">WordPress</li>
+      <li><img src="assets/icons/nextdotjs.svg" alt="" width="16" height="16">Next.js</li>
+      <li><img src="assets/icons/react.svg" alt="" width="16" height="16">React</li>
+      <li><img src="assets/icons/googleappsscript.svg" alt="" width="16" height="16">Apps Script</li>
+      <li><img src="assets/icons/telegram.svg" alt="" width="16" height="16">Telegram Bot API</li>
+      <li><img src="assets/icons/python.svg" alt="" width="16" height="16">Python</li>
+      <li><img src="assets/icons/fastapi.svg" alt="" width="16" height="16">FastAPI</li>
+      <li><img src="assets/icons/langchain.svg" alt="" width="16" height="16">LangChain</li>
+      <li><img src="assets/icons/nvidia.svg" alt="" width="16" height="16">NVIDIA</li>
+      <li><img src="assets/icons/docker.svg" alt="" width="16" height="16">Docker</li>
+      <li><img src="assets/icons/git.svg" alt="" width="16" height="16">Git</li>
+    </ul>
+  </section>
+
+  <section class="wrap" id="process" aria-labelledby="process-title">
+    <div class="head"><h2 id="process-title">How we work together</h2><span class="count">03</span></div>
+    <ol class="process">
+      <li><span class="idx">01</span><h3>Sketch</h3><p>I sketch the layout and pick the type and colors for your page.</p></li>
+      <li><span class="idx">02</span><h3>Review</h3><p>You look it over, ask for changes, and approve it.</p></li>
+      <li><span class="idx">03</span><h3>Build and launch</h3><p>I write the HTML and CSS myself. The page you approve is the page that goes live.</p></li>
+    </ol>
+  </section>
+
+  <section class="wrap about" id="about">
+    <div>
+      <p class="label">About</p>
+      <h2>Design and code, from one person.</h2>
+    </div>
+    <div>
+      <p>I keep my designs minimal, with plenty of white space and one strong color per page.</p>
+      <p>Most of my client work is in personal finance and debt relief. Those readers are careful with money, so I keep pricing plain and disclaimers honest.</p>
+      <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Email me</a></div>
     </div>
   </section>
 
 </main>
 
-<footer class="foot">
-  <div class="container">
-    <div class="sign">
-      <b>Arnel Colar</b>
-      <span>Websites, WordPress themes and client portals · October 2026</span>
-    </div>
-    <p>Template brands and template photographs are fictional, from Unsplash and Pexels. Everything live here is a real client site. <a href="mailto:arnelcolar@gmail.com">arnelcolar@gmail.com</a></p>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Arnel Colar · <a href="mailto:arnelcolar@gmail.com">arnelcolar@gmail.com</a></span>
+    <span>Template brands are fictional. Template photos from Unsplash and Pexels.</span>
   </div>
 </footer>
 
