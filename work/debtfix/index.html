@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>DebtFix: a debt relief site built around one calculation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+a{color:inherit}
+.bar a{text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:64px 0 96px}
+h1{font-size:clamp(32px,4.4vw,48px);line-height:1.1;font-weight:500;letter-spacing:-.035em;margin-top:10px}
+.hero p{margin-top:20px;color:var(--muted);font-size:17px;max-width:48ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;list-style:none;font-size:13px}
+.facts li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+.shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--soft)}
+.shot img{width:100%}
+
+section.block{padding:56px 0 64px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
+h3{font-size:17px;font-weight:600;margin-bottom:6px}
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;list-style:none}
+.topics li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
+.topics b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+ul.list{max-width:64ch;color:var(--muted);font-size:15px;line-height:1.7;padding-left:18px}
+ul.list li{margin-bottom:8px}
+ul.list b{color:var(--ink);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:8px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:0}
+td{color:var(--muted)}
+td b{color:var(--ink);font-weight:500}
+.next{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+
+@media (max-width:760px){
+  .hero,.topics{grid-template-columns:1fr}
+  .hero{padding:32px 0 64px;gap:32px}
+  table,thead,tbody,tr,th,td{display:block}
+  th{border:0;padding-bottom:2px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap bar"><a href="../../"><b>Arnel Colar</b></a><span><a class="back" href="../../#work">All work</a> &nbsp; <a class="back" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a></span></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="label">Case study · Live client</p>
+      <h1>A debt relief site built around one calculation.</h1>
+      <p>DebtFix settles unsecured debt for less than the full balance. The page had to answer one question before anything else: how much is this person paying now, and what would one program deposit be instead. Everything below that supports the answer.</p>
+      <ul class="facts">
+        <li>Design</li>
+        <li>Front-end build</li>
+        <li>Cost-of-debt calculator</li>
+        <li>Debt relief</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="../../assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The brief</h2><span class="num">01 / 04</span></div>
+    <p class="lede">Somebody with $20,000 of card debt does not read a page. They look for their own number in it. So the whole page is one comparison, with trust proof stacked underneath.</p>
+    <ul class="topics">
+      <li><b>One action</b>A slider, two figures, one button. No form before the payoff.</li>
+      <li><b>Their number</b>The output changes with the slider, so the visitor sees themselves in it.</li>
+      <li><b>No false promise</b>"Estimates from our plan model, not a quote" sits under the figure.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What I built</h2><span class="num">02 / 04</span></div>
+    <ol class="topics">
+      <li><b>The homepage</b>Hero comparison, how-it-works steps, testimonial, and the accreditation and account-safety proof a debt company needs to convert.</li>
+      <li><b>The calculator</b>A separate cost-of-debt page for people who want to work it out properly before they talk to anyone.</li>
+      <li><b>The pages around it</b>About, how it works, articles, and the contact path, all sharing one header and calculator link.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The calculator</h2><span class="num">03 / 04</span></div>
+    <p class="lede">A visitor adds each debt they hold: name, balance, APR, monthly payment. The output is total interest scheduled and months to payoff at the payment they are already making, before they speak to a salesperson. That is the honest framing, and it is also the argument for the product.</p>
+    <table>
+      <thead><tr><th>Input</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td><b>Balance, APR</b></td><td>Required per debt row. Rows can be added for each card or loan.</td></tr>
+        <tr><td><b>Monthly payment</b></td><td>Typed by the visitor, or switched to the issuer minimum.</td></tr>
+        <tr><td><b>Minimum payment</b></td><td>4% of the current balance or $25, whichever is greater, recalculated every month as the balance falls.</td></tr>
+        <tr><td><b>Output</b></td><td>Total interest and payoff date at the current payment, so the visitor sees the cost of standing still.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What's live</h2><span class="num">04 / 04</span></div>
+    <p class="lede">Both pages are in production and can be checked directly. The design was one of several on the table, including entries from 99designs, and it is the one DebtFix chose.</p>
+    <div class="next">
+      <a class="cta" href="https://debtfix.com/">debtfix.com</a>
+      <a class="cta" href="https://debtfix.com/calculators/cost-of-debt">Cost of debt calculator</a>
+    </div>
+    <p style="color:var(--muted);font-size:14px;margin-top:28px;max-width:60ch;">Two things I did not measure and so do not claim: conversion rate before and after, and a paid-hours figure. Any programme cost a visitor sees comes from DebtFix's own plan model, not from me.</p>
+  </section>
+</main>
+
+<footer><div class="wrap">DebtFix is a real client site. Screenshot from the live page.</div></footer>
+
+</body>
+</html>

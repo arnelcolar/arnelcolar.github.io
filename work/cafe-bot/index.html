@@ -111,7 +111,18 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>How it works</h2><span class="num">01 / 03</span></div>
+    <div class="head"><h2>The brief</h2><span class="num">01 / 05</span></div>
+    <p class="lede">One person maintains this, the staff already had Telegram open all day, and the café had no budget for a subscription. Those three constraints decided almost everything about how it is built.</p>
+    <ul class="steps">
+      <li><b>No server</b>The whole thing runs in Apps Script on the free quota, against the café's own Google Sheet. Nothing to host, nothing to renew.</li>
+      <li><b>No new app</b>Orders are typed the way staff already speak. There is no screen to learn and no barcode to scan.</li>
+      <li><b>No redeploy</b>Items, prices, and recipes are rows in a sheet, so a menu change is a cell edit.</li>
+      <li><b>No silent guessing</b>The model may only return items that already exist on the menu, and a wrong receipt line is fixed with one follow-up sentence.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>How it works</h2><span class="num">02 / 05</span></div>
     <p class="lede">Everything runs in Google Apps Script, so there is no server to host or pay for.</p>
     <ol class="steps">
       <li><b>Poll or push</b>A time trigger polls Telegram for fifty seconds at a time, then hands back to the trigger. The offset is saved in Script Properties so nothing is logged twice. A webhook mode does the same job without the wait.</li>
@@ -122,7 +133,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Commands</h2><span class="num">02 / 03</span></div>
+    <div class="head"><h2>Commands</h2><span class="num">03 / 05</span></div>
     <p class="lede">Staff send these as plain messages. Anything else goes to the model as a question, and menu changes need no redeploy.</p>
     <ul class="cmds">
       <li><code>1 latte 16</code>log an order</li>
@@ -141,7 +152,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Selected code</h2><span class="num">03 / 03</span></div>
+    <div class="head"><h2>Selected code</h2><span class="num">04 / 05</span></div>
     <p class="lede">Four excerpts. The full script stays private because a real café runs on it.</p>
 
     <div class="code">
@@ -211,6 +222,17 @@ if (start !== -1 &amp;&amp; end &gt; start) {
 
 var resultJson = JSON.parse(textResponse);</code></pre>
     </div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Limits</h2><span class="num">05 / 05</span></div>
+    <p class="lede">What it does not do, written down so nobody assumes otherwise.</p>
+    <ul class="steps">
+      <li><b>Polling has a wait</b>The time trigger holds the connection for fifty seconds, so a reply can lag a poll behind. Webhook mode removes the wait but needs a public endpoint.</li>
+      <li><b>The model can still misread</b>It is constrained to the menu, not guaranteed correct. Receipt photos need a readable total line; a folded, dim receipt gets a correction request instead of a guess.</li>
+      <li><b>One café, one Sheet</b>Two branches would share the same tabs. It is a small-shop tool, not a point-of-sale system.</li>
+      <li><b>No reports</b>Numbers land in Sheets already, so anything longer than a daily total is done there rather than in the bot.</li>
+    </ul>
   </section>
 </main>
 

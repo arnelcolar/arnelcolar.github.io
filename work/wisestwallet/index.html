@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>WisestWallet: a WordPress theme, four calculators, and rewritten posts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+a{color:inherit}
+.bar a{text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:64px 0 96px}
+h1{font-size:clamp(32px,4.4vw,48px);line-height:1.1;font-weight:500;letter-spacing:-.035em;margin-top:10px}
+.hero p{margin-top:20px;color:var(--muted);font-size:17px;max-width:48ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;list-style:none;font-size:13px}
+.facts li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+.shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--soft)}
+.shot img{width:100%}
+
+section.block{padding:56px 0 64px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;list-style:none}
+.topics li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
+.topics b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+.calcs{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;list-style:none;font-size:15px;color:var(--muted)}
+.calcs li{padding:16px 0;border-top:1px solid var(--line)}
+.calcs b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+.next{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+
+@media (max-width:760px){
+  .hero,.topics,.calcs{grid-template-columns:1fr}
+  .hero{padding:32px 0 64px;gap:32px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap bar"><a href="../../"><b>Arnel Colar</b></a><span><a class="back" href="../../#work">All work</a> &nbsp; <a class="back" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a></span></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="label">Case study · Live client</p>
+      <h1>A finance blog that was too slow to sell against.</h1>
+      <p>WisestWallet publishes plain-language money guides. The site loaded slowly, advertisers would not approve it in that state, and the older posts carried claims without sources. I rebuilt the theme, added four calculators, and rewrote the posts that were holding the site back.</p>
+      <ul class="facts">
+        <li>WordPress</li>
+        <li>Custom theme</li>
+        <li>Four calculators</li>
+        <li>Content rewrite</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="../../assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The brief</h2><span class="num">01 / 04</span></div>
+    <p class="lede">A magazine-shaped blog on a slow theme is a bad combination: every new post inherits the weight. The job was to make the site fast and legible enough to pass an advertiser's review, without losing the archive.</p>
+    <ul class="topics">
+      <li><b>Speed</b>A theme built for one site rather than a marketplace theme carrying everything.</li>
+      <li><b>Approval</b>Clean structure, visible authorship, and no claims that cannot be backed.</li>
+      <li><b>Useful next step</b>A calculator under every guide, so a reader does something with the advice.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The theme</h2><span class="num">02 / 04</span></div>
+    <p class="lede">One custom theme, built for this site only. Topic hubs group the archive by what a reader is trying to do, and each guide and blog template reuses the same structure so a new post costs the same weight as an old one.</p>
+    <ol class="topics">
+      <li><b>Topic hubs</b>Credit, budget, and general finances, each with a landing page that links into the guides.</li>
+      <li><b>Guide and blog templates</b>Two layouts, shared typography and spacing, no per-post layout decisions.</li>
+      <li><b>Authorship</b>Posts carry a named author, which is what a review looks for on a YMYL topic.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The four calculators</h2><span class="num">03 / 04</span></div>
+    <p class="lede">Each one answers a question the articles already raise. They are plain JavaScript, not a plugin, so the maths and the labels stay under the site's control.</p>
+    <ul class="calcs">
+      <li><b>Debt payoff</b>Snowball against avalanche on the reader's own balances, with the payoff date for each.</li>
+      <li><b>Emergency fund</b>How much to hold and how long it takes to get there at a given monthly saving.</li>
+      <li><b>Loan cost</b>The real APR once fees are included, so two offers can be compared fairly.</li>
+      <li><b>Credit utilization</b>How far a balance has to come down to reach 30% and then 10%.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What's live</h2><span class="num">04 / 04</span></div>
+    <p class="lede">The theme, the hubs, and the calculators are in production. The older posts were rewritten against sources, with the outdated figures replaced rather than lightened.</p>
+    <div class="next">
+      <a class="cta" href="https://wisestwallet.com/">wisestwallet.com</a>
+      <a class="cta" href="https://wisestwallet.com/debt-payoff-calculator/">Debt payoff calculator</a>
+      <a class="cta" href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund calculator</a>
+    </div>
+    <p style="color:var(--muted);font-size:14px;margin-top:28px;max-width:60ch;">What I did not keep: a before-and-after PageSpeed number, and the advertiser's review outcome. Both would be the strongest evidence on this page and neither was recorded at the time.</p>
+  </section>
+</main>
+
+<footer><div class="wrap">WisestWallet is a real client site. Screenshot from the live page.</div></footer>
+
+</body>
+</html>
