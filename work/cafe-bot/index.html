@@ -49,12 +49,12 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
 .msg{animation:pop .45s cubic-bezier(.16,1,.3,1) both}
 .me{transform-origin:100% 100%}
 .bot{transform-origin:0 100%}
-.msg:nth-child(2){animation-delay:1s}
-.msg:nth-child(3){animation-delay:2s}
-.msg:nth-child(4){animation-delay:3s}
-.msg:nth-child(5){animation-delay:3.9s}
-.msg:nth-child(6){animation-delay:4.6s}
-.msg:first-child{animation-delay:.3s}
+.msg:nth-child(1){animation-delay:.1s}
+.msg:nth-child(2){animation-delay:.35s}
+.msg:nth-child(3){animation-delay:.8s}
+.msg:nth-child(4){animation-delay:1.05s}
+.msg:nth-child(5){animation-delay:1.5s}
+.msg:nth-child(6){animation-delay:1.75s}
 @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.9)}}
 @media (max-width:760px){
   .hero,.steps,.cmds,.code{grid-template-columns:1fr}
@@ -62,8 +62,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   .code{gap:16px}
 }
 @media (prefers-reduced-motion:reduce){
-  .msg{animation-name:fade}
-  @keyframes fade{from{opacity:0}}
+  .msg{animation:none}
 }
 </style>
 </head>
@@ -76,7 +75,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
     <div>
       <p class="label">Case study · Google Apps Script</p>
       <h1>A café's sales, costs, and stock, logged from Telegram.</h1>
-      <p>Staff type orders into Telegram the way they'd say them out loud. The bot prices each item from a menu sheet, logs it to Google Sheets, deducts stock, and replies with a total. A photo of a supplier receipt becomes an itemized expense.</p>
+      <p>Staff type orders into Telegram the way they'd say them out loud, or ask for several in one sentence. The bot prices each item from a menu sheet, logs it to Google Sheets, deducts stock, and replies with a total. Ask for a drink recipe and it reads the recipe sheet. A photo of a supplier receipt becomes an itemized expense.</p>
       <ul class="facts">
         <li>Apps Script</li>
         <li>Telegram Bot API</li>
@@ -86,24 +85,28 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
       </ul>
     </div>
     <div class="chat" aria-label="Example conversation with the bot">
-      <div class="msg me">1 latte 16, 1 kani-mango s</div>
+      <div class="msg me">add kani xl, kani m to my sales</div>
       <div class="msg bot">✅ Logged 2 item(s):
-• 1x Coffee: latte (16) = Php 120
-• 1x Rice bowl: kani-mango (s) = Php 150
+• 1x Rice bowl: kani (xl) = Php 180
+• 1x Rice bowl: kani (m) = Php 160
 
-💰 Grand Total: Php 270.00</div>
+💰 Grand Total: Php 340.00</div>
+      <div class="msg me">recipe spanish latte</div>
+      <div class="msg bot">☕ SPANISH LATTE (16)
+
+• Espresso: 2 shots
+• Sweetener/Syrup: 20ml
+• Milk: 160ml
+• Ice: 1 cup
+
+👨‍🍳 Build the ice, pour the milk, then the shots.</div>
       <div class="msg me photo"><span aria-hidden="true"></span>receipt.jpg</div>
-      <div class="msg bot">💸 Auto-logged expense and restocked:
+      <div class="msg bot">💸 Auto-logged and restocked:
 • Fresh milk 1L: Php 98.00
 • Crab sticks 250g: Php 145.00
 💰 Total: Php 243.00
 
 🚫 Excluded: bottled soda (personal)</div>
-      <div class="msg me">profit today</div>
-      <div class="msg bot">💰 Today's Profit
-Revenue: Php 4,860.00
-Expenses: Php 1,275.00
-Profit: Php 3,585.00</div>
     </div>
   </section>
 
@@ -111,32 +114,35 @@ Profit: Php 3,585.00</div>
     <div class="head"><h2>How it works</h2><span class="num">01 / 03</span></div>
     <p class="lede">Everything runs in Google Apps Script, so there is no server to host or pay for.</p>
     <ol class="steps">
-      <li><b>Poll</b>A time trigger runs every minute and checks Telegram for new messages every ten seconds, saving its place in Script Properties so nothing is logged twice.</li>
-      <li><b>Parse</b>A message splits on commas and new lines. Each piece is read as quantity, item, and size, then priced from the Menu sheet.</li>
+      <li><b>Poll or push</b>A time trigger polls Telegram for fifty seconds at a time, then hands back to the trigger. The offset is saved in Script Properties so nothing is logged twice. A webhook mode does the same job without the wait.</li>
+      <li><b>Parse</b>A typed line splits into quantity, item, and size, then gets priced from the Menu sheet. Sentences that do not fit, like "add kani xl, kani m to my sales", go to the model, which may only answer with items already on the menu.</li>
       <li><b>Log</b>Sales, expenses, and inventory live in separate tabs. Each sale deducts ingredients and warns when something drops below its minimum.</li>
-      <li><b>Read receipts</b>Photos go to a vision model that returns JSON. Personal items are dropped, and shop supplies are logged and restocked.</li>
+      <li><b>Read receipts</b>Photos go to a vision model that returns JSON. Personal items are dropped, shop supplies are logged and restocked, and one follow-up sentence corrects a wrong call.</li>
     </ol>
   </section>
 
   <section class="block">
     <div class="head"><h2>Commands</h2><span class="num">02 / 03</span></div>
-    <p class="lede">Staff send these as plain messages.</p>
+    <p class="lede">Staff send these as plain messages. Anything else goes to the model as a question, and menu changes need no redeploy.</p>
     <ul class="cmds">
       <li><code>1 latte 16</code>log an order</li>
+      <li><code>add kani xl, kani m to my sales</code>several at once</li>
       <li><code>expense 588 beans</code>log a cost</li>
+      <li><code>recipe spanish latte</code>drink build</li>
       <li><code>stock</code>inventory levels</li>
       <li><code>today</code><code>week</code><code>month</code>sales</li>
       <li><code>best</code>top sellers today</li>
       <li><code>profit today</code>revenue minus costs</li>
       <li><code>expenses today</code>cost total</li>
+      <li><code>menu add</code><code>menu list</code><code>menu delete</code>edit the menu</li>
       <li><code>undo</code>remove the last sale</li>
-      <li><code>help</code>command list</li>
+      <li><code>undo expense</code>remove the last cost</li>
     </ul>
   </section>
 
   <section class="block">
     <div class="head"><h2>Selected code</h2><span class="num">03 / 03</span></div>
-    <p class="lede">Three excerpts. The full script stays private because a real café runs on it.</p>
+    <p class="lede">Four excerpts. The full script stays private because a real café runs on it.</p>
 
     <div class="code">
       <div>
@@ -167,6 +173,25 @@ var OPENROUTER_API_KEY = PROPS.getProperty("OPENROUTER_API_KEY");</code></pre>
     error: null
   };
 }</code></pre>
+    </div>
+
+    <div class="code">
+      <div>
+        <h3>Only menu items count</h3>
+        <p>A sentence with several drinks has no fixed shape, so the menu is handed to the model with the message and the model may only answer with names and sizes that already exist. Anything missing from the reply is dropped rather than guessed.</p>
+      </div>
+<pre><code>var prompt = "Parse the user's message into a JSON list of orders.\n" +
+  "Available menu items (name (size)): " + menuList.join(", ") + "\n" +
+  "Return ONLY valid JSON: " +
+  "{\"orders\":[{\"qty\":number,\"item\":\"menu item\",\"size\":\"size\"}]}\n" +
+  "Only include items that exist in the available menu list.";
+
+var payload = {
+  model: "minimax/minimax-m3.1-flash:free",
+  response_format: { type: "json_object" },
+  temperature: 0,
+  messages: [{ role: "user", content: prompt }]
+};</code></pre>
     </div>
 
     <div class="code">
