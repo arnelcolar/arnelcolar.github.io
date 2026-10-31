@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A Telegram bot that drafts a bakery's social captions, checks them against the actual cake photo, and publishes on one tap. Built with n8n, the Telegram Bot API and the Meta Graph API.">
+<title>Bakeshop Bot: captions approved in Telegram, posted to Facebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+a{color:inherit}
+.bar a{text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:64px 0 96px}
+h1{font-size:clamp(32px,4.4vw,48px);line-height:1.1;font-weight:500;letter-spacing:-.035em;margin-top:10px}
+.hero p{margin-top:20px;color:var(--muted);font-size:17px;max-width:48ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;list-style:none;font-size:13px}
+.facts li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+
+.chat{background:#e6ebf0;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5}
+.msg{max-width:86%;padding:9px 13px;border-radius:14px;white-space:pre-line}
+.me{align-self:flex-end;background:#d9f5c6;border-bottom-right-radius:4px}
+.bot{align-self:flex-start;background:#fff;border-bottom-left-radius:4px}
+.thumb{display:flex;align-items:center;gap:8px}
+.thumb span{width:36px;height:44px;border-radius:4px;background:repeating-linear-gradient(#fff 0 5px,#e4e4e4 5px 6px);border:1px solid #cfcfcf}
+.keys{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.keys i{font-style:normal;font-size:12px;border:1px solid #d7dee7;background:#f7f9fc;border-radius:8px;padding:5px 9px}
+.keys i.p{border-color:#bcd7a6;background:#eaf5e1}
+a.link{text-decoration:underline;text-underline-offset:2px;font-size:13px}
+
+section.block{padding:56px 0 64px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
+.steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
+.steps b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+
+.gates{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px;list-style:none;font-size:15px;color:var(--muted)}
+.gates li{padding:12px 0;border-top:1px solid var(--line)}
+.gates b{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+
+.code{display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;padding:28px 0;border-top:1px solid var(--line)}
+.code:first-of-type{border-top:0;padding-top:0}
+.code h3{font-size:17px;font-weight:600;margin-bottom:6px}
+.code p{color:var(--muted);font-size:15px}
+pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:18px 20px;overflow:auto;font:13px/1.6 ui-monospace,monospace}
+
+.msg{animation:pop .45s cubic-bezier(.16,1,.3,1) both}
+.me{transform-origin:100% 100%}
+.bot{transform-origin:0 100%}
+.msg:nth-child(1){animation-delay:.1s}
+.msg:nth-child(2){animation-delay:.35s}
+.msg:nth-child(3){animation-delay:.8s}
+.msg:nth-child(4){animation-delay:1.05s}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.9)}}
+@media (max-width:760px){
+  .hero,.steps,.gates,.code{grid-template-columns:1fr}
+  .hero{padding:32px 0 64px;gap:40px}
+  .code{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  .msg{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap bar"><a href="../../"><b>Arnel Colar</b></a><span><a class="back" href="../../#work">All work</a> &nbsp; <a class="back" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry">Get in touch</a></span></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="label">Case study · Telegram, n8n, Meta Graph API</p>
+      <h1>A bakery's captions, drafted, approved, and posted from Telegram.</h1>
+      <p>Nobody at the bakery wants to open a scheduler. They already have Telegram on the phone, so the whole workflow lives there: a draft arrives with the photo, one tap publishes it to the Facebook Page, the other tap rejects it with a reason. The bot writes the caption in the shop's own Taglish voice, and refuses to describe a cake that is not in the picture.</p>
+      <ul class="facts">
+        <li>n8n</li>
+        <li>Telegram Bot API</li>
+        <li>Meta Graph API</li>
+        <li>Google Drive and Sheets</li>
+        <li>Self-hosted model gateway</li>
+      </ul>
+    </div>
+    <div class="chat" aria-label="Example approval message from the bot">
+      <div class="msg thumb"><span aria-hidden="true"></span>chocolate-drip.jpg</div>
+      <div class="msg bot">Chocolate drip cake para sa maliit na celebration.
+
+Two layers ng moist chocolate cake, finished with ganache na hindi sobrang tamis.
+
+Perfect para sa birthday na hindi kailangan ng malaking handaan.
+
+Made fresh today, ready for pickup.
+
+#ChocolateDripCake #CelebrationCake #HomeBakery #FreshlyBaked
+        <div class="keys"><i class="p">Post to Facebook</i><i>Not on brand</i></div>
+      </div>
+      <div class="msg me">Post to Facebook</div>
+      <div class="msg bot">Posted to 1 of 1 platform.
+
+facebook  post 100064512881002_918447362152938
+<a class="link" href="https://www.facebook.com/100064512881002_918447362152938">Open the post</a>
+
+Send any message for the next one.</div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The brief</h2><span class="num">01 / 05</span></div>
+    <p class="lede">The bakery had photos, a voice, and no time. The job was not to write a scheduler, it was to make the decision to post take one tap while keeping the words and the picture honest.</p>
+    <ul class="steps">
+      <li><b>No new app</b>The owner already answers customers in Telegram all day. Approvals arrive where the conversation already is.</li>
+      <li><b>No blank page</b>Captions are drafted ahead of time, so the choice is approve or reject, not write something from scratch.</li>
+      <li><b>No wrong cake</b>Every caption is checked against a description of the actual photo before it is offered.</li>
+      <li><b>No silent double post</b>A row can only be published once, even when a tap is retried or a request times out.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>How it runs</h2><span class="num">02 / 05</span></div>
+    <p class="lede">A queue file on the server is the source of truth. Generation happens on a timer; the approval loop is the only interactive part; publishing is a single Graph API call.</p>
+    <ul class="steps">
+      <li><b>Draft</b>A cron job asks the model for a caption in the shop's voice, validates it, and adds it to the queue with its photo.</li>
+      <li><b>Review</b>The bot sends the photo and the caption with two buttons, and remembers which row is on screen.</li>
+      <li><b>Publish</b>An approve tap posts the photo to the Page, then replies with the public link.</li>
+      <li><b>Record</b>The row is marked posted and mirrored to a Published tab; rejections go to a Rejected tab with the reason.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What the model is allowed to write</h2><span class="num">03 / 05</span></div>
+    <p class="lede">A caption is only useful if it is true. Three gates run before a draft ever reaches the phone, and a draft that fails is thrown away rather than sent with a warning.</p>
+
+    <div class="code">
+      <div>
+        <h3>Grounded in the photo</h3>
+        <p>A vision pass describes each photo in the Drive folder once and caches the note. A caption must share at least one concrete subject with that note, so a "strawberry cake" caption cannot be attached to a chocolate one.</p>
+      </div>
+<pre><code>const shared = subject_words(caption)
+  .filter(w =&gt; photo_words.has(w));
+
+if (!shared.length) {
+  reject('caption does not match the photo');
+}</code></pre>
+    </div>
+
+    <div class="code">
+      <div>
+        <h3>Written like the shop talks</h3>
+        <p>Taglish, one clause per line, four PascalCase hashtags at the end, no questions. The rules are checked mechanically, so a draft cannot drift toward marketing-speak over time.</p>
+      </div>
+<pre><code>rules: words 20..80
+       hashtags === 4, PascalCase
+       lines &gt;= 5, one clause each
+       no question marks
+       banned: "elevate", "indulge", "—"</code></pre>
+    </div>
+
+    <div class="code">
+      <div>
+        <h3>Cleaned before it is judged</h3>
+        <p>Long dashes are rewritten to commas before validation, so a correct caption is not lost to a typographic habit. The same cleanup runs on redrafts and on the queue.</p>
+      </div>
+<pre><code>text.replace(/\s*[—–]\s*/g, ', ')</code></pre>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Publishing without duplicates</h2><span class="num">04 / 05</span></div>
+    <p class="lede">The tap is the fragile part. Telegram retries, requests time out, and an ack can arrive after the post is already live. The rules below keep one row from becoming two posts.</p>
+
+    <div class="code">
+      <div>
+        <h3>One call to the Page</h3>
+        <p>The photo is uploaded to the Page's photos edge with the caption attached, which returns a post id. That id is what the confirmation links to.</p>
+      </div>
+<pre><code>POST /{page-id}/photos
+  url      = {public image url}
+  caption  = {approved caption}
+  access_token = {page token}
+
+-&gt; { id, post_id }</code></pre>
+    </div>
+
+    <div class="code">
+      <div>
+        <h3>Acknowledge, never abort</h3>
+        <p>The tap must be answered or the button spins forever. That acknowledgement is allowed to fail without taking the rest of the run with it, because the post may already exist by then.</p>
+      </div>
+<pre><code>{
+  "node": "Send ack",
+  "onError": "continueRegularOutput"
+}</code></pre>
+    </div>
+
+    <div class="code">
+      <div>
+        <h3>Recover a stalled row</h3>
+        <p>A row is marked Publishing before the call. If the confirmation never lands, a sweep returns it to Queued after a timeout, so the next approval starts from a known state instead of a stuck one.</p>
+      </div>
+<pre><code>if (status === 'Publishing'
+    &amp;&amp; age &gt; 10 * 60 * 1000) {
+  status = 'Queued';
+}</code></pre>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Limits</h2><span class="num">05 / 05</span></div>
+    <p class="lede">What it does not do, written down so nobody assumes otherwise.</p>
+    <ul class="gates">
+      <li><b>One channel live</b>Facebook is connected and posting. The approval loop and the archive are channel-agnostic, but Instagram needs the Page to be shared with us, and TikTok forces private posts until its audit passes. Both are next, neither is on yet.</li>
+      <li><b>The token expires</b>The Page token is short-lived and has to be exchanged for a long-lived one. Until that is automated, publishing fails quietly the morning it lapses, so the token check is part of the routine.</li>
+      <li><b>Photos need a description</b>A row with no photo note cannot be grounded, so it is held back rather than guessed at. Filling the notes is a background job, and rows queue up behind it.</li>
+      <li><b>Taglish is a decision</b>The voice is set per deployment. Switching it to English changes the prompt and the grounding vocabulary, not just the output language.</li>
+    </ul>
+  </section>
+</main>
+
+<footer><div class="wrap">Bakeshop is a stand-in name for a real client. Captions and post ids in the chat are examples. Build by Arnel Colar.</div></footer>
+
+</body>
+</html>
