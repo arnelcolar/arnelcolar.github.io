@@ -213,10 +213,10 @@ if (!shared.length) {
     <div class="head"><h2>Limits</h2><span class="num">05 / 05</span></div>
     <p class="lede">What it does not do, written down so nobody assumes otherwise.</p>
     <ul class="gates">
-      <li><b>One channel live</b>Facebook is connected and posting. The approval loop and the archive are channel-agnostic, but Instagram needs the Page to be shared with us, and TikTok forces private posts until its audit passes. Both are next, neither is on yet.</li>
-      <li><b>The token expires</b>The Page token is short-lived and has to be exchanged for a long-lived one. Until that is automated, publishing fails quietly the morning it lapses, so the token check is part of the routine.</li>
-      <li><b>Photos need a description</b>A row with no photo note cannot be grounded, so it is held back rather than guessed at. Filling the notes is a background job, and rows queue up behind it.</li>
-      <li><b>Taglish is a decision</b>The voice is set per deployment. Switching it to English changes the prompt and the grounding vocabulary, not just the output language.</li>
+      <li><b>One photo per post</b>Each post carries a single picture. Several shots of the same cake go out as separate posts, because albums are not built.</li>
+      <li><b>Every photo has to be looked at first</b>A photo needs a description on file before it can be captioned, so a fresh batch waits its turn and takes a little while to become postable.</li>
+      <li><b>The words are set per shop</b>The voice is chosen once when the bot is set up. Changing the language or the tone means rewriting the instructions it works from, not flipping a switch.</li>
+      <li><b>Someone still approves</b>Nothing goes out on its own. The owner keeps the last word, which also means nothing is posted on a day nobody checks Telegram.</li>
     </ul>
   </section>
 </main>
