@@ -27,6 +27,10 @@ body{
 .cta{display:inline-block;background:var(--ink);color:#fff;padding:12px 22px;border-radius:99px;font-size:14px;font-weight:500;text-decoration:none}
 .cta:hover{background:#333}
 .cta:active{transform:scale(.97)}
+.endcard{border-top:1px solid currentColor;padding-top:28px}
+.endcard h2{font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:-.03em;margin:0 0 10px}
+.endcard p{color:var(--muted,#6b6b6b);max-width:56ch;margin:0 0 18px}
+.endcard .more{margin-left:22px;font-size:14px;border-bottom:1px solid currentColor;padding-bottom:1px}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
