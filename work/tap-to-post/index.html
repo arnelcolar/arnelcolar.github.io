@@ -60,6 +60,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
 @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.9)}}
 @media (max-width:760px){
   .hero,.steps,.gates,.code{grid-template-columns:1fr}
+  .hero>*,.steps>*,.gates>*,.code>*{min-width:0}
   .hero{padding:32px 0 64px;gap:40px}
   .code{gap:16px}
 }

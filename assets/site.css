@@ -30,10 +30,19 @@ body{
 .endcard{border-top:1px solid currentColor;padding-top:28px}
 .endcard h2{font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:-.03em;margin:0 0 10px}
 .endcard p{color:var(--muted,#6b6b6b);max-width:56ch;margin:0 0 18px}
-.endcard .more{margin-left:22px;font-size:14px;border-bottom:1px solid currentColor;padding-bottom:1px}
+.endcard .more{margin-left:22px;font-size:14px;text-decoration:underline;text-underline-offset:3px}
 a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+/* Small links stay visually the same but get a thumb-sized target (44px tall) via an invisible overlay */
+.bar>a,.bar .back,.endcard .more,.plain,.link,footer a{position:relative}
+.bar>a::after,.bar .back::after,.endcard .more::after,.plain::after,.link::after,footer a::after{content:"";position:absolute;inset:-12px 0}
+footer a::after{inset:-14px 0}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:600px){
+  /* Stacked under the pill on a phone, so it gets real height and a gap instead of an overlay */
+  .endcard .more{display:inline-block;margin-left:0;padding-block:12px}
+  .endcard .more::after{content:none}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
