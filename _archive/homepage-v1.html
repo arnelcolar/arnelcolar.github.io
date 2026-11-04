@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="/">
+<meta name="robots" content="noindex">
+<!-- Archived homepage, replaced 2026-11-05. Not linked from the site. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arnel Colar · Automation for small businesses</title>
+<meta name="description" content="I build the small tools that take the repetitive work off your team: answers from your own documents, orders and receipts logged from Telegram, captions approved in one tap. Sites for finance and debt relief too.">
+<meta property="og:title" content="Arnel Colar · Automation for small businesses">
+<meta property="og:description" content="Answers from your own documents, orders and receipts logged from Telegram, captions approved in one tap. One person designs it, builds it, and keeps it running.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arnelcolar.is-a.dev/">
+<link rel="canonical" href="https://arnelcolar.is-a.dev/">
+<meta property="og:image" content="https://arnelcolar.is-a.dev/assets/shots/debtfix.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23111'/><text x='16' y='21' font-family='Arial' font-weight='700' font-size='14' fill='%23fff' text-anchor='middle'>AC</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+a{color:inherit;text-decoration:none}
+:root{--gap:clamp(72px,9vw,120px)}
+section[id]{scroll-margin-top:80px}
+
+header{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:18px;color:var(--muted)}
+nav a{padding:6px 2px;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+nav .hire{color:var(--ink);font-weight:500}
+
+.hero{padding:clamp(36px,6vw,80px) 0 clamp(48px,7vw,84px)}
+.hero h1{font-size:clamp(46px,10.4vw,124px);line-height:.92;font-weight:600;letter-spacing:-.05em}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,64px);margin-top:clamp(28px,4vw,44px);align-items:start}
+.lede{font-size:clamp(22px,2.5vw,31px);line-height:1.2;font-weight:500;letter-spacing:-.025em;max-width:19em;text-wrap:balance}
+.sub{color:var(--muted);font-size:17px;max-width:46ch}
+.sub + .sub{margin-top:14px}
+.where{font-size:14px;color:var(--muted);margin-top:16px}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:26px}
+.plain{font-size:14px;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:1px}
+.plain:hover{border-color:var(--ink)}
+
+.proof{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,32px);margin-top:clamp(32px,4.5vw,56px);padding-top:20px;border-top:1px solid var(--ink)}
+.proof li{display:flex;flex-direction:column;gap:3px}
+.proof b{font:500 15px/1.3 var(--mono);letter-spacing:-.01em;white-space:nowrap}
+.proof span{font-size:14px;color:var(--muted)}
+
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:18px;margin-bottom:clamp(20px,2.4vw,28px);border-bottom:1px solid var(--ink)}
+.head h2{font-size:clamp(30px,3.6vw,46px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.count{font:500 13px/1 var(--mono);color:var(--muted);letter-spacing:.08em}
+
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,1.6vw,22px);padding-bottom:var(--gap)}
+.card{grid-column:span 6;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .3s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+.card:hover{border-color:var(--a,var(--ink))}
+.card .shot{display:block;overflow:hidden;background:var(--soft);height:clamp(200px,23vw,320px)}
+.card .shot img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,top);transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.card:hover .shot img{transform:scale(1.022)}
+.card.s7{grid-column:span 7}
+.card.s5{grid-column:span 5}
+.card.s4{grid-column:span 4}
+.card.s12{grid-column:span 12}
+.card.s12 .shot{height:clamp(240px,34vw,460px)}
+.card.s12 .body{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(20px,4vw,56px);align-items:end}
+.card.s12 .body>.meta,.card.s12 .body>h3,.card.s12 .body>p{grid-column:1}
+.card.s12 .links{grid-column:2;grid-row:1/span 3;align-self:end;margin-top:0;padding-top:0}
+.s4 .shot{height:clamp(200px,20vw,280px)}
+.grp{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:16px;border-top:1px solid var(--line)}
+.grp:first-child{padding-top:0;border-top:0}
+.grp b{font:500 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink)}
+.grp span{font:500 11px/1 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.body{padding:clamp(16px,1.7vw,22px);display:flex;flex-direction:column;gap:9px;flex:1}
+.meta{display:flex;align-items:center;gap:10px;font:500 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.idx{color:var(--muted)}
+.type::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--a,currentColor);margin-right:8px;vertical-align:1px}
+.card h3{font-size:clamp(19px,1.7vw,24px);font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.card h3 a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;text-decoration-color:var(--a,currentColor)}
+.card p{color:var(--muted);font-size:15px;max-width:52ch}
+.links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:auto;padding-top:12px;font-size:14px;font-weight:500}
+.links a{border-bottom:1px solid var(--line);padding-bottom:1px}
+.links a:hover{border-color:var(--a,var(--ink))}
+
+.card.dark{background:#0f0f0f;border-color:#242424;color:#f4f4f4}
+.card.dark .shot{background:#171717}
+.card.dark p,.card.dark .meta{color:#9c9c9c}
+.card.dark .idx{color:var(--a)}
+.card.dark .links a{border-color:#333}
+.card.dark .links a:hover{border-color:var(--a)}
+.card.dark a:focus-visible{outline-color:#f4f4f4}
+
+.caps{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,56px);padding-bottom:clamp(28px,3vw,36px)}
+.caps li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:26px 0;border-top:1px solid var(--line)}
+.caps .idx{font:500 12px/1.7 var(--mono);padding-top:3px}
+.caps h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+.caps p{color:var(--muted);font-size:15px;max-width:50ch}
+
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:9px 20px;list-style:none;padding:22px 0 var(--gap);border-top:1px solid var(--line);font:500 12px/1 var(--mono);letter-spacing:.02em;color:var(--muted)}
+.tools .toolhead{color:var(--ink);letter-spacing:.09em;margin-right:4px}
+.tools li{display:flex;align-items:center;gap:7px}
+.tools img{width:16px;height:16px;opacity:.7}
+
+.process{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,32px);padding-bottom:var(--gap)}
+.process li{border-top:1px solid var(--ink);padding-top:16px}
+.process .idx{font:500 12px/1 var(--mono);color:var(--muted);letter-spacing:.08em}
+.process h3{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:8px 0 6px}
+.process p{color:var(--muted);font-size:15px}
+
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,56px);padding-bottom:var(--gap)}
+.faq > div{border-top:1px solid var(--line);padding:20px 0}
+.faq dt{font-weight:600;font-size:15px;margin-bottom:5px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);padding:56px 0 112px}
+.about h2{font-size:clamp(26px,2.6vw,32px);font-weight:500;letter-spacing:-.03em;line-height:1.2;margin-top:10px;max-width:16em}
+.about p{color:var(--muted);max-width:52ch}
+.about p + p{margin-top:14px}
+.about .actions{margin-top:26px}
+
+@media (max-width:820px){
+  .hero-grid,.caps,.process,.about,.faq{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .card,.card.s7,.card.s5,.card.s4,.card.s12{grid-column:1/-1}
+  .card .shot,.s4 .shot,.card.s12 .shot{height:auto;aspect-ratio:16/10}
+  /* The wide card's two-column body squeezed its text to one word a line on a phone */
+  .card.s12 .body{grid-template-columns:1fr}
+  .card.s12 .links{grid-column:1;grid-row:auto;margin-top:12px;padding-top:0}
+  .proof{grid-template-columns:1fr;gap:0}
+  .proof li{flex-direction:row;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+  .proof li:first-child{border-top:0;padding-top:0}
+  .proof li:last-child{padding-bottom:0}
+  nav{gap:13px;font-size:13px}
+  nav a{display:inline-flex;align-items:center;min-height:44px}
+}
+@media (max-width:520px){
+  /* Stacked reads better than a label and a description fighting for one row */
+  .proof li{flex-direction:column;align-items:flex-start;gap:2px}
+}
+@media (max-width:420px){
+  .wrap{width:calc(100% - 36px)}
+  .name{font-size:13px}
+  nav{gap:9px;font-size:12px}
+}
+
+.card{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% cover 26%}
+@keyframes reveal{from{opacity:.25}}
+.hero h1,.hero-grid{animation:enter .8s cubic-bezier(.16,1,.3,1) both}
+.hero-grid{animation-delay:.1s}
+@keyframes enter{from{opacity:0;transform:translateY(24px)}}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+  .card,.hero h1,.hero-grid{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="name" href="#top">Arnel Colar</a>
+    <nav aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#skills">Services</a>
+      <a href="#about">About</a>
+      <a class="hire" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry&body=Page%20needed%3A%0ADeadline%3A%0ABudget%3A">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="wrap hero">
+    <h1>Arnel Colar</h1>
+    <div class="hero-grid">
+      <p class="lede">I make the repetitive part of your business run without you.</p>
+      <div>
+        <p class="sub">Support questions answered from your own documents, orders and receipts logged from Telegram, captions approved in one tap. One person designs it, builds it, and keeps it running.</p>
+        <p class="where">Based in the Philippines (UTC+8). I reply within one working day.</p>
+        <div class="actions">
+          <a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry&body=Page%20needed%3A%0ADeadline%3A%0ABudget%3A">Get in touch</a>
+          <a class="plain" href="#work">See the work</a>
+        </div>
+      </div>
+    </div>
+    <ul class="proof">
+      <li><b>3 client sites</b><span>In production, still maintained by me</span></li>
+      <li><b>1,379 pages</b><span>Manual indexed, answers in about 3 seconds</span></li>
+      <li><b>1 person</b><span>Sketch to deploy, no handoff, no agency markup</span></li>
+    </ul>
+  </section>
+
+  <section class="wrap" id="work" aria-labelledby="work-title">
+    <div class="head"><h2 id="work-title">Selected work</h2><span class="count">12</span></div>
+    <div class="bento">
+
+      <div class="grp"><b>Automation and support tools</b><span>Small teams, in apps they already use</span></div>
+
+      <article class="card s12" style="--a:#3b5bdb">
+        <a class="shot" href="work/docs-chatbot/" tabindex="-1" aria-hidden="true"><img src="assets/shots/docs-chatbot.webp" alt="Chat page with a question box and six suggested questions about a car service manual" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">01</span><span class="type">Own project · Python</span></div>
+          <h3><a href="work/docs-chatbot/">Docs-only chatbot</a></h3>
+          <p>Every price, spec or policy question your team re-answers is paid time. This answers them from your own PDF, names the page it used, and says so when the document does not cover it. Tested on a 1,379-page scanned manual.</p>
+          <div class="links"><a href="work/docs-chatbot/">Read the case study</a></div>
+        </div>
+      </article>
+
+      <article class="card s6" style="--a:#4c9a2a">
+        <a class="shot" href="work/cafe-bot/" tabindex="-1" aria-hidden="true"><img src="assets/shots/cafebot.webp" alt="Corner Cup Bot case study with a Telegram chat logging café orders" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">02</span><span class="type">Own project · Automation</span></div>
+          <h3><a href="work/cafe-bot/">Corner Cup Bot</a></h3>
+          <p>Orders, stock and supplier receipts logged from Telegram, priced from a menu sheet. It replaces the notebook and the end-of-day tally, and a photo of a receipt becomes an itemised cost instead of a manual entry.</p>
+          <div class="links"><a href="work/cafe-bot/">Read the case study</a></div>
+        </div>
+      </article>
+
+      <article class="card s6" style="--a:#8a5a3b">
+        <a class="shot" href="work/tap-to-post/" tabindex="-1" aria-hidden="true"><img src="assets/shots/tap-to-post.webp" alt="Tap to Post case study showing a Telegram message with a cake caption and a Post to Facebook button" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">03</span><span class="type">Client project · Approval and publishing</span></div>
+          <h3><a href="work/tap-to-post/">Tap to Post</a></h3>
+          <p>Captions drafted in the shop's voice, checked against the actual photo, then approved or rejected in one tap. It removes the blank page and blocks a caption that describes a cake which is not in the picture.</p>
+          <div class="links"><a href="work/tap-to-post/">Read the case study</a></div>
+        </div>
+      </article>
+
+      <div class="grp"><b>Live client work</b><span>Finance and debt relief</span></div>
+
+      <article class="card s12" style="--a:#1f7a5a">
+        <a class="shot" href="https://debtfix.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/debtfix.webp" alt="DebtFix homepage with a debt slider and a couple's portrait" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">04</span><span class="type">Live client · Design, build, calculator</span></div>
+          <h3><a href="https://debtfix.com/">DebtFix</a></h3>
+          <p>Visitors work out what their debt actually costs before they contact anyone. The calculator answers that first question, so you are not paying a person to answer it.</p>
+          <div class="links"><a href="work/debtfix/">Read the case study</a><a href="https://debtfix.com/">Visit debtfix.com</a></div>
+        </div>
+      </article>
+
+      <article class="card s6" style="--a:#b07d0a">
+        <a class="shot" href="https://wisestwallet.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/wisestwallet.webp" alt="WisestWallet homepage with a budget spreadsheet on a tablet" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">05</span><span class="type">Live client · Theme, calculators, content</span></div>
+          <h3><a href="https://wisestwallet.com/">WisestWallet</a></h3>
+          <p>A slow theme was blocking an advertiser's approval. I rebuilt the theme, added four calculators, and rewrote the older posts whose claims had no sources.</p>
+          <div class="links"><a href="work/wisestwallet/">Read the case study</a><a href="https://wisestwallet.com/">Visit wisestwallet.com</a></div>
+        </div>
+      </article>
+
+      <article class="card s6" style="--a:#1f5fa8">
+        <a class="shot" href="https://resourcehelpnetwork.com/" tabindex="-1" aria-hidden="true"><img src="assets/shots/resourcehelpnetwork.webp" alt="Resource Help Network homepage with topic cards for bills, credit, jobs, health, and money" width="1440" height="900"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">06</span><span class="type">Live client · Theme and topic hubs</span></div>
+          <h3><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></h3>
+          <p>Step-by-step guides on bills, credit, jobs and health coverage, built as a WordPress theme and grouped into topic hubs. A new guide inherits the layout instead of starting from scratch.</p>
+          <div class="links"><a href="https://resourcehelpnetwork.com/">Visit the site</a></div>
+        </div>
+      </article>
+
+      <div class="grp"><b>Own projects, templates and studies</b><span>Built to test, and to show the work</span></div>
+
+      <article class="card s4 dark" style="--a:#e0813a">
+        <a class="shot" href="work/halcyon.html" tabindex="-1" aria-hidden="true"><img src="assets/shots/halcyon.webp" alt="Halcyon H16 launch page hero with an orange-lit laptop keyboard" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">07</span><span class="type">Template · Product launch</span></div>
+          <h3><a href="work/halcyon.html">Halcyon H16</a></h3>
+          <p>A launch page for a 16-inch laptop. Sticky section nav with scrollspy, a pinned display story, and swipeable feature cards.</p>
+          <div class="links"><a href="work/halcyon.html">Open the page</a></div>
+        </div>
+      </article>
+
+      <article class="card s4 dark" style="--a:#e05a5a">
+        <a class="shot" href="work/wardline.html" tabindex="-1" aria-hidden="true"><img src="assets/shots/wardline.webp" alt="Wardline hero in dark red with a network graphic" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">08</span><span class="type">Template · Identity</span></div>
+          <h3><a href="work/wardline.html">Wardline</a></h3>
+          <p>A dark page for a household protection plan. An animated network hero, an eight-layer feature explorer, pricing tiers, and a three-step setup flow.</p>
+          <div class="links"><a href="work/wardline.html">Open the page</a></div>
+        </div>
+      </article>
+
+      <article class="card s4 dark" style="--a:#b6c74a">
+        <a class="shot" href="work/vaultledger.html" tabindex="-1" aria-hidden="true"><img src="assets/shots/vaultledger.webp" alt="Vaultledger hero with lime accents on a dark background" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">09</span><span class="type">Template · Fintech</span></div>
+          <h3><a href="work/vaultledger.html">Vaultledger</a></h3>
+          <p>A page for developers evaluating a ledger and tokenization API. Code samples sit beside uptime stats, and a vault panel shows card numbers swapped for tokens.</p>
+          <div class="links"><a href="work/vaultledger.html">Open the page</a></div>
+        </div>
+      </article>
+
+      <article class="card s4" style="--a:#1e3a8a;--pos:left top">
+        <a class="shot" href="https://arnelcolar.github.io/finance-site/" tabindex="-1" aria-hidden="true"><img src="assets/shots/finance.webp" alt="A consumer finance comparison hub with a navy header and a grid of credit-card, bank and insurance topics" width="1440" height="760" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">10</span><span class="type">Own project · Live site</span></div>
+          <h3>Finance Site</h3>
+          <p>A consumer finance hub across four pages: credit cards, banks, insurance and retirement, with comparison tables and an accessibility pass on every page.</p>
+          <div class="links"><a href="https://arnelcolar.github.io/finance-site/">Visit the site</a></div>
+        </div>
+      </article>
+
+      <article class="card s4" style="--a:#a9744f;--pos:left top">
+        <a class="shot" href="https://arnelcolar.github.io/pawgoods/" tabindex="-1" aria-hidden="true"><img src="assets/shots/pawgoods.webp" alt="A pet-accessories storefront with a full-bleed hero photograph of a dog" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">11</span><span class="type">Own project · Live demo</span></div>
+          <h3>Pawgoods</h3>
+          <p>A storefront with no build step: one config file, a local-storage cart, and a margin check that fails a product you cannot sell at a profit.</p>
+          <div class="links"><a href="https://arnelcolar.github.io/pawgoods/">Open the store</a></div>
+        </div>
+      </article>
+
+      <article class="card s4" style="--a:#9a6b45">
+        <a class="shot" href="work/nook/" tabindex="-1" aria-hidden="true"><img src="assets/shots/nook.webp" alt="NOOK app onboarding screen showing a leather sofa" width="1440" height="900" loading="lazy"></a>
+        <div class="body">
+          <div class="meta"><span class="idx">12</span><span class="type">Template · UX case study</span></div>
+          <h3><a href="work/nook/">NOOK</a></h3>
+          <p>A furniture shopping app. The case study covers the problem, user flow, wireframes, and a design system. The prototype runs in your browser.</p>
+          <div class="links">
+            <a href="work/nook/">Read the case study</a>
+            <a href="work/nook/nook-prototype.html">Open the prototype</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap" id="skills" aria-labelledby="skills-title">
+    <div class="head"><h2 id="skills-title">What you get</h2><span class="count">04</span></div>
+    <ul class="caps">
+      <li>
+        <span class="idx">01</span>
+        <div>
+          <h3>Repeat questions answered from your own documents</h3>
+          <p>A support assistant that answers only from your manual, handbook or policy PDF, names the page it used, and says so when the document does not cover something. The AI stays inside your documents instead of guessing.</p>
+          <div class="links"><a href="work/docs-chatbot/">Docs-only chatbot</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="idx">02</span>
+        <div>
+          <h3>Orders, receipts and posts, handled in Telegram</h3>
+          <p>Staff type an order or photograph a receipt the way they already do, and it lands in a sheet, priced and counted. Captions are drafted in the shop's voice, checked against the actual photo, and published from one tap.</p>
+          <div class="links"><a href="work/cafe-bot/">Corner Cup Bot</a><a href="work/tap-to-post/">Tap to Post</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="idx">03</span>
+        <div>
+          <h3>Calculators that answer before the call</h3>
+          <p>Debt cost, payoff dates, emergency fund targets and credit utilisation, in plain JavaScript. The visitor gets their number on the page, so you are not paying a person to answer it first.</p>
+          <div class="links"><a href="https://debtfix.com/calculators/cost-of-debt">DebtFix cost of debt</a><a href="https://wisestwallet.com/debt-payoff-calculator/">WisestWallet debt payoff</a><a href="https://wisestwallet.com/emergency-fund-calculator/">Emergency fund</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="idx">04</span>
+        <div>
+          <h3>A theme built for one site</h3>
+          <p>No marketplace theme carrying features you never use. Faster pages help an advertiser approve you, and a new guide or topic page inherits the layout instead of starting from scratch.</p>
+          <div class="links"><a href="https://wisestwallet.com/">WisestWallet</a><a href="https://resourcehelpnetwork.com/">Resource Help Network</a></div>
+        </div>
+      </li>
+    </ul>
+    <ul class="tools">
+      <li class="toolhead">TOOLS</li>
+      <li><img src="assets/icons/html5.svg" alt="" width="16" height="16">HTML5</li>
+      <li><img src="assets/icons/css.svg" alt="" width="16" height="16">CSS</li>
+      <li><img src="assets/icons/javascript.svg" alt="" width="16" height="16">JavaScript</li>
+      <li><img src="assets/icons/php.svg" alt="" width="16" height="16">PHP</li>
+      <li><img src="assets/icons/wordpress.svg" alt="" width="16" height="16">WordPress</li>
+      <li><img src="assets/icons/nextdotjs.svg" alt="" width="16" height="16">Next.js</li>
+      <li><img src="assets/icons/react.svg" alt="" width="16" height="16">React</li>
+      <li><img src="assets/icons/googleappsscript.svg" alt="" width="16" height="16">Apps Script</li>
+      <li><img src="assets/icons/telegram.svg" alt="" width="16" height="16">Telegram Bot API</li>
+      <li><img src="assets/icons/n8n.svg" alt="" width="16" height="16">n8n</li>
+      <li><img src="assets/icons/facebook.svg" alt="" width="16" height="16">Meta Graph API</li>
+      <li><img src="assets/icons/python.svg" alt="" width="16" height="16">Python</li>
+      <li><img src="assets/icons/fastapi.svg" alt="" width="16" height="16">FastAPI</li>
+      <li><img src="assets/icons/langchain.svg" alt="" width="16" height="16">LangChain</li>
+      <li><img src="assets/icons/docker.svg" alt="" width="16" height="16">Docker</li>
+      <li><img src="assets/icons/git.svg" alt="" width="16" height="16">Git</li>
+    </ul>
+  </section>
+
+  <section class="wrap" id="process" aria-labelledby="process-title">
+    <div class="head"><h2 id="process-title">How we work together</h2><span class="count">03</span></div>
+    <ol class="process">
+      <li><span class="idx">01</span><h3>Scope</h3><p>One call, fixed scope, fixed price. You get the page list and the number before I start.</p></li>
+      <li><span class="idx">02</span><h3>Approve</h3><p>I sketch, you approve, I build. One revision round is included, so there is no hourly surprise.</p></li>
+      <li><span class="idx">03</span><h3>Launch</h3><p>Live on the date we agree. You own the code and the repo, and small changes after launch are a flat fee.</p></li>
+    </ol>
+  </section>
+
+  <section class="wrap" id="faq" aria-labelledby="faq-title">
+    <div class="head"><h2 id="faq-title">Before you ask</h2><span class="count">05</span></div>
+    <dl class="faq">
+      <div><dt>It uses AI. Won't it make things up?</dt><dd>That is the whole job. It answers only from passages in your document, shows the page each answer came from, and refuses what the document does not cover. If it cannot find the answer, it says so instead of guessing.</dd></div>
+      <div><dt>How much does it cost?</dt><dd>A fixed fee from the scope. You get the number before I start, and it does not move unless the scope does.</dd></div>
+      <div><dt>How long does it take?</dt><dd>We agree a launch date at the start and I work to it.</dd></div>
+      <div><dt>Who owns the code?</dt><dd>You do. The repo is handed over at launch.</dd></div>
+      <div><dt>What about changes after launch?</dt><dd>Small changes are a flat fee. Larger work is a new, separately quoted scope.</dd></div>
+    </dl>
+  </section>
+
+  <section class="wrap about" id="about">
+    <div>
+      <p class="label">About</p>
+      <h2>One person, from the problem to the running tool.</h2>
+    </div>
+    <div>
+      <p>You deal with the person doing the work. No account manager, no handoff, no surprise invoice: the quote is the price.</p>
+      <p>I started out editing HTML, WordPress and Shopify sites in 2017, and have been designing and building full sites since 2020.</p>
+      <p>Most projects start with the same question: what does your team do over and over that a small tool could do instead? The café bot came out of our own counter.</p>
+      <p>The client sites are mostly personal finance and debt relief. Those readers are careful with money, so I keep pricing plain and disclaimers honest.</p>
+      <div class="actions"><a class="cta" href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry&body=Page%20needed%3A%0ADeadline%3A%0ABudget%3A">Email me</a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Arnel Colar · <a href="mailto:arnelcolar@gmail.com">arnelcolar@gmail.com</a></span>
+    <span>Template brands are fictional. Template photos from Unsplash and Pexels.</span>
+  </div>
+</footer>
+
+</body>
+</html>
