@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arnelcolar.is-a.dev/sitemap.xml
