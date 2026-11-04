@@ -78,7 +78,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
     <div>
       <p class="label">Case study · Telegram, n8n, Meta Graph API</p>
       <h1>A bakery's captions, drafted, approved, and posted from Telegram.</h1>
-      <p>Nobody at the bakery wants to open a scheduler. They already have Telegram on the phone, so the whole workflow lives there: a draft arrives with the photo, one tap publishes it to the Facebook Page, the other tap rejects it with a reason. The bot writes the caption in the shop's own Taglish voice, and refuses to describe a cake that is not in the picture.</p>
+      <p>Nobody at the bakery wants to open a scheduler. They already have Telegram on the phone, so the whole workflow lives there: a draft arrives with the photo, one tap publishes it to the Facebook Page, the other tap rejects it with a reason. The bot writes the caption in Taglish, because pure Tagalog reads as machine-written to a Filipino audience and plain English does not sound like the shop. It also refuses to describe a cake that is not in the picture.</p>
       <ul class="facts">
         <li>n8n</li>
         <li>Telegram Bot API</li>
@@ -123,11 +123,11 @@ Send any message for the next one.</div>
 
   <section class="block">
     <div class="head"><h2>How it runs</h2><span class="num">02 / 05</span></div>
-    <p class="lede">A queue file on the server is the source of truth. Generation happens on a timer; the approval loop is the only interactive part; publishing is a single Graph API call.</p>
+    <p class="lede">A queue file on the server is the source of truth. Generation happens on a timer, the approval loop is the only interactive part, and publishing fans out per platform, because Facebook, Threads and Instagram each want a different call.</p>
     <ul class="steps">
       <li><b>Draft</b>A cron job asks the model for a caption in the shop's voice, validates it, and adds it to the queue with its photo.</li>
       <li><b>Review</b>The bot sends the photo and the caption with two buttons, and remembers which row is on screen.</li>
-      <li><b>Publish</b>An approve tap posts the photo to the Page, then replies with the public link.</li>
+      <li><b>Publish</b>An approve tap fans out to whichever platforms are configured. Facebook takes one call; Instagram has to create a container, wait for it, then publish it.</li>
       <li><b>Record</b>The row is marked posted and mirrored to a Published tab; rejections go to a Rejected tab with the reason.</li>
     </ul>
   </section>
@@ -139,34 +139,40 @@ Send any message for the next one.</div>
     <div class="code">
       <div>
         <h3>Grounded in the photo</h3>
-        <p>A vision pass describes each photo in the Drive folder once and caches the note. A caption must share at least one concrete subject with that note, so a "strawberry cake" caption cannot be attached to a chocolate one.</p>
+        <p>Each photo is looked at once by a vision pass, and the observation is cached against its file id. The caption is then written from that note and nothing else, so it cannot describe a cake that is not in the picture. The note also refuses to assert an occasion: a birthday is recorded as "not visibly signalled" unless the photo shows one, because the folder is called Bakeshop Images.</p>
       </div>
-<pre><code>const shared = subject_words(caption)
-  .filter(w =&gt; photo_words.has(w));
+<pre><code># describe.py: one vision call per photo
+ASK = """Catalogue this photo for a bakery.
+Describe only what is visible."""
 
-if (!shared.length) {
-  reject('caption does not match the photo');
-}</code></pre>
+NOT_SIGNALLED = "not visibly signalled"
+
+# refill.py: the description is the only
+# source of truth about the image.</code></pre>
     </div>
 
     <div class="code">
       <div>
         <h3>Written like the shop talks</h3>
-        <p>Taglish, one clause per line, four PascalCase hashtags at the end, no questions. The rules are checked mechanically, so a draft cannot drift toward marketing-speak over time.</p>
+        <p>Taglish, warm and celebratory: an emoji-led opener, one short clause per line, a direct "DM us to order" close, four PascalCase hashtags on the last line, never a question. The rules are checked mechanically, so a draft cannot drift toward marketing-speak over time.</p>
       </div>
-<pre><code>rules: words 20..80
-       hashtags === 4, PascalCase
-       lines &gt;= 5, one clause each
-       no question marks
-       banned: "elevate", "indulge", "—"</code></pre>
+<pre><code>words     30 .. 130
+hashtags  3 .. 6, PascalCase
+lines     &gt;= 5, one clause each
+longest   line &lt;= 34 words
+last      line is the hashtag block
+no        question marks
+banned    "—", "click here", "link in bio",
+          "www.", "other bakers"</code></pre>
     </div>
 
     <div class="code">
       <div>
         <h3>Cleaned before it is judged</h3>
-        <p>Long dashes are rewritten to commas before validation, so a correct caption is not lost to a typographic habit. The same cleanup runs on redrafts and on the queue.</p>
+        <p>An em dash is on the banned list, and one model reaches for it far more than another did. Rejecting a whole caption over a punctuation character wasted three attempts and produced nothing, so dashes are rewritten to commas before validation instead. The same cleanup runs on redrafts and on the queue.</p>
       </div>
-<pre><code>text.replace(/\s*[—–]\s*/g, ', ')</code></pre>
+<pre><code># normalize() runs before validate()
+out = re.sub(r"\s*[\u2014\u2013]\s*", ", ", out)</code></pre>
     </div>
   </section>
 
@@ -201,11 +207,11 @@ if (!shared.length) {
     <div class="code">
       <div>
         <h3>Recover a stalled row</h3>
-        <p>A row is marked Publishing before the call. If the confirmation never lands, a sweep returns it to Queued after a timeout, so the next approval starts from a known state instead of a stuck one.</p>
+        <p>A row is marked Publishing before the call. A crash between that mark and the result strands it with nobody left to finish it, and it used to heal only when a human sent a message. A sweep now returns it to Queued after ten minutes, so the next approval starts from a known state.</p>
       </div>
-<pre><code>if (status === 'Publishing'
-    &amp;&amp; age &gt; 10 * 60 * 1000) {
-  status = 'Queued';
+<pre><code>if (q.status === 'Publishing'
+    &amp;&amp; now - started &gt; 10 * 60 * 1000) {
+  q.status = 'Queued';
 }</code></pre>
     </div>
   </section>
