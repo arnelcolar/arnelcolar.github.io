@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One spreadsheet row in, one live landing page out</title>
+<meta name="description" content="A publishing pipeline that turns a tracking link in a shared spreadsheet into a finished, site-styled WordPress landing page with its images and mobile redirect, in one poll cycle. Case study by Arnel Colar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+.bar a{text-decoration:none}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:64px 0 72px}
+h1{font-size:clamp(32px,4.4vw,48px);line-height:1.1;font-weight:500;letter-spacing:-.035em;margin-top:10px}
+.hero p{margin-top:20px;color:var(--muted);font-size:17px;max-width:50ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;list-style:none;font-size:13px}
+.facts li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+
+.row{background:var(--soft);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:13px}
+.row-head{display:flex;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--muted);align-items:center}
+.row-head i{width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block}
+.row-body{padding:14px}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;font-size:11px;color:var(--muted);margin-bottom:10px}
+.grid5 span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell{border:1px solid var(--line);border-radius:6px;padding:7px 8px;background:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;line-height:1.35;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell.link{color:#3a5bd9}
+.cell.done{color:#16794a;background:#f2fbf5;border-color:#cbe9d7}
+.shotline{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--muted)}
+.shotline b{color:var(--ink);font-weight:600}
+
+figure.ui{padding-bottom:40px}
+figure.ui .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--soft)}
+figcaption{font-size:13px;color:var(--muted);margin-top:12px}
+
+section.block{padding:56px 0 64px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
+.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
+.steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
+.steps b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+.steps.two{grid-template-columns:repeat(2,1fr);gap:28px 32px}
+.steps.five{grid-template-columns:repeat(5,1fr)}
+h3.sub{font-size:17px;font-weight:600;margin:48px 0 16px}
+h3.sub:first-child{margin-top:0}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 0;border-top:1px solid var(--line);vertical-align:top}
+th{font-size:13px;font-weight:500;color:var(--muted)}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16px}
+.note{color:var(--muted);font-size:15px;margin-top:20px;max-width:64ch}
+.advice{margin-top:32px;padding:20px 24px;background:var(--soft);border:1px solid var(--line);border-radius:12px;max-width:72ch}
+.advice b{display:block;margin-bottom:4px}
+.advice p{color:var(--muted);font-size:15px}
+
+@media (max-width:60rem){
+  .hero{grid-template-columns:1fr;gap:32px;padding:40px 0 48px}
+  .steps,.steps.five,.steps.two{grid-template-columns:1fr;gap:18px}
+  h2{font-size:clamp(28px,7vw,40px)}
+  .grid5{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap bar"><a href="../../"><b>Arnel Colar</b></a><a class="back" href="../../#work">All work</a></div>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="label">Case study · Publishing automation</p>
+      <h1>One spreadsheet row in. One live landing page out.</h1>
+      <p>A publisher drops an offer's tracking link into a shared sheet. Nobody opens WordPress. Within one poll cycle the page is live on the right storefront: that site's colours and type, the offer's product images pulled into its own media library, copy limited to what the offer page actually states, and the mobile redirect registered.</p>
+      <ul class="facts">
+        <li>One row = one page</li>
+        <li>Five storefronts</li>
+        <li>19 layouts</li>
+        <li>Images pulled in, not hotlinked</li>
+        <li>Re-runs update, never duplicate</li>
+      </ul>
+    </div>
+    <div class="row" aria-label="The sheet is the queue">
+      <div class="row-head"><i></i><i></i><i></i><span style="margin-left:8px">New offers</span></div>
+      <div class="row-body">
+        <div class="grid5"><span>Offer</span><span>Storefront A</span><span>Storefront B</span><span>Storefront C</span><span>Storefront D</span></div>
+        <div class="cell link">link/9f2c1a</div>
+        <div class="cell done" style="margin-top:6px">/new-wordpress-offer-page/</div>
+        <div class="shotline"><b>Empty cell</b> beside a link means the page does not exist yet. The URL written back is the receipt.</div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="ui">
+    <div class="frame"><img src="../../assets/shots/offer-pipeline-figure.webp" alt="The five stages of the pipeline: read the queue, pull the offer, write the copy, dress it, publish and record" width="1440" height="421" loading="lazy"></div>
+    <figcaption>The whole run, per row. Steps 3 and 4 are the only places a model is involved; everything else is deterministic.</figcaption>
+  </figure>
+
+  <section class="block">
+    <div class="head"><h2>What it replaced</h2><span class="num">01 / 05</span></div>
+    <p class="lede">Every offer used to mean a hand-built page: open the tracking link, read the offer, write the copy, assemble the blocks, upload the product shots, publish, then add the mobile redirect by hand. Twenty-five offers went through the new pipeline before I called it done.</p>
+    <ol class="steps two">
+      <li><b>Same page, every storefront</b>Each storefront has its own palette, fonts and layout set. A page built for one never looks pasted into another.</li>
+      <li><b>The offer decides the copy</b>The model works from the offer page and returns a fixed JSON shape. If a price, a shipping cost or a guarantee is not in the source, it is not on the page.</li>
+      <li><b>The sheet is the state</b>No database, no dashboard. A filled cell means done; an empty one means build it. The publisher can see the queue at a glance and add rows from a phone.</li>
+      <li><b>Nothing to hand over</b>The run books itself: page URL written back, redirect entry merged, and a re-run of the same row updates that page instead of creating a second one.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>The parts that were actually hard</h2><span class="num">02 / 05</span></div>
+    <p class="lede">Four problems took most of the build. None of them were the model.</p>
+
+    <h3 class="sub">The offer's images refuse to load</h3>
+    <p class="note">Most offer pages sit behind a bot filter that answers <code>403</code> to anything from a data-centre address: the raw fetch, a real Chrome, and an anti-detect browser all got the same refusal. A screenshot was never an option either, for the same reason. So the page is not asked to fetch the image at all. WordPress pulls it through its own hosting address, which the filter allows, and stores it as a normal media item — reusing the existing attachment when the same filename has been imported before, so repeated runs do not fill the library with copies.</p>
+
+    <h3 class="sub">Layout slots versus what the model returns</h3>
+    <p class="note">A model is happy to put an image in section one; a layout may only keep image slots in section three. The first build dropped every image silently because of that mismatch. The fix is unglamorous: collect every image the model returns into one ordered list, then fill the layout's slots in document order. When an offer brings five or more images, the run switches to a layout built for them — hero image, a three-across strip, and a closing banner.</p>
+
+    <h3 class="sub">Redirects, without losing a file</h3>
+    <p class="note">Each storefront keeps its page-to-offer map in a JSON file, and the filename differs per site. The merge reads the file, adds one key, and writes it back with the original two-space formatting and key order, so a one-line change stays a one-line change. It refuses to write at all if the JSON does not parse, swaps the file atomically, and keeps a backup — three ways a corrupted file would otherwise have wiped a hundred-plus mappings.</p>
+
+    <h3 class="sub">One bad offer must not stall the queue</h3>
+    <p class="note">Offers that are region-locked, dead, or unreadable get a note in their own sheet cell instead of blocking the rest. The poller works on a time-sliced rotation, so a failing row is retried on a later cycle while the others keep flowing.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What one page gets</h2><span class="num">03 / 05</span></div>
+    <table>
+      <thead><tr><th>Part</th><th>Rule the pipeline enforces</th></tr></thead>
+      <tbody>
+        <tr><td>Copy</td><td>Only facts present in the offer page; 3–6 sections; a button label of five words or fewer</td></tr>
+        <tr><td>Spec table</td><td>Added only when the source states real specs, sizes or prices</td></tr>
+        <tr><td>Colour and type</td><td>That storefront's palette and font pair, taken from its own published pages</td></tr>
+        <tr><td>Button contrast</td><td>Label and fill kept at 4.5:1 or better, checked at build time</td></tr>
+        <tr><td>Images</td><td>Imported into the site's media library and referenced host-relative, never hotlinked</td></tr>
+        <tr><td>Re-runs</td><td>The slug already in the sheet is reused, so the page is updated rather than duplicated</td></tr>
+        <tr><td>Mobile</td><td>Visitors on a phone are forwarded to the offer; desktop visitors read the page</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Nineteen layouts across five storefronts, including a handful that carry no images at all for offers whose shots cannot be imported.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What it does not do</h2><span class="num">04 / 05</span></div>
+    <ol class="steps two">
+      <li><b>It does not invent offers</b>If the offer page cannot be read, no page is published. A blank cell in the sheet is better than a page making claims the advertiser never made.</li>
+      <li><b>It does not chase approvals</b>Pages go live in the same cycle. Nothing is held in draft for review — that was a deliberate choice for this publisher's workflow.</li>
+      <li><b>It does not manage the offer itself</b>Prices, stock and deadlines belong to the advertiser. The page links out; it never restates a number it was not given.</li>
+      <li><b>It does not replace design</b>The layouts were designed once, by hand, and the pipeline reuses them. It decides which one fits, not how it looks.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What stays private</h2><span class="num">05 / 05</span></div>
+    <p class="lede">This page shows the design and the decisions, not the delivery.</p>
+    <ol class="steps">
+      <li><b>The source</b>The workflow, the layout files and the site-side endpoints are not published, because they run a live commercial pipeline.</li>
+      <li><b>The client</b>The stores are described here as A–D. Their names, offers and traffic are not mine to publish.</li>
+      <li><b>Credentials</b>Every key, token and per-site password lives in the deployment, never in this page.</li>
+      <li><b>The numbers</b>Row counts and layout counts above are what the system reports about itself. There are no invented revenue or traffic figures.</li>
+    </ol>
+  </section>
+</main>
+<footer><div class="wrap">The storefronts are referred to as A–D at the publisher's request. The pipeline, layouts and site-side endpoints stay private because they run a live commercial operation.</div></footer>
+
+</body>
+</html>
