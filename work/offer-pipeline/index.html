@@ -39,7 +39,6 @@ figcaption{font-size:13px;color:var(--muted);margin-top:12px}
 section.block{padding:56px 0 64px}
 .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
 h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
-.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
 .steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
@@ -80,6 +79,7 @@ td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16p
         <li>19 layouts</li>
         <li>Images pulled in, not hotlinked</li>
         <li>Re-runs update, never duplicate</li>
+        <li>Operator manual handed over</li>
       </ul>
     </div>
     <div class="row" aria-label="The sheet is the queue">
@@ -99,7 +99,19 @@ td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16p
   </figure>
 
   <section class="block">
-    <div class="head"><h2>What it replaced</h2><span class="num">01 / 05</span></div>
+    <div class="head"><h2>The whole job, from the operator's side</h2></div>
+    <p class="lede">This is the instruction sheet that went with the handover. Four lines, and one warning.</p>
+    <ol class="steps">
+      <li><b>Paste the link</b>Into the column of the storefront you want it on. The nearest site label above the link decides where the page goes, which is why the label row has to stay intact.</li>
+      <li><b>Check the cell beside it is empty</b>An empty cell is the only thing that makes a row pickable. If there is already an address there, the row counts as finished and is skipped.</li>
+      <li><b>Wait one cycle</b>One link every five minutes, so five links is about twenty-five minutes. Nothing to open, nothing to click.</li>
+      <li><b>Read the receipt</b>The finished page address appears in the cell beside the link. That cell is the record that the page went live.</li>
+    </ol>
+    <p class="note"><b>There is no review step.</b> A page publishes the moment it is built, which is why the instruction sheet opens with checking the link and the row before pasting.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What it replaced</h2></div>
     <p class="lede">Every offer used to mean a hand-built page: open the tracking link, read the offer, write the copy, assemble the blocks, upload the product shots, publish, then add the mobile redirect by hand. Twenty-five offers went through the new pipeline before I called it done.</p>
     <ol class="steps two">
       <li><b>Same page, every storefront</b>Each storefront has its own palette, fonts and layout set. A page built for one never looks pasted into another.</li>
@@ -110,7 +122,7 @@ td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16p
   </section>
 
   <section class="block">
-    <div class="head"><h2>The parts that were actually hard</h2><span class="num">02 / 05</span></div>
+    <div class="head"><h2>The parts that were actually hard</h2></div>
     <p class="lede">Four problems took most of the build. None of them were the model.</p>
 
     <h3 class="sub">The offer's images refuse to load</h3>
@@ -127,7 +139,7 @@ td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16p
   </section>
 
   <section class="block">
-    <div class="head"><h2>What one page gets</h2><span class="num">03 / 05</span></div>
+    <div class="head"><h2>What one page gets</h2></div>
     <table>
       <thead><tr><th>Part</th><th>Rule the pipeline enforces</th></tr></thead>
       <tbody>
@@ -144,7 +156,7 @@ td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16p
   </section>
 
   <section class="block">
-    <div class="head"><h2>What it does not do</h2><span class="num">04 / 05</span></div>
+    <div class="head"><h2>What it does not do</h2></div>
     <ol class="steps two">
       <li><b>It does not invent offers</b>If the offer page cannot be read, no page is published. A blank cell in the sheet is better than a page making claims the advertiser never made.</li>
       <li><b>It does not chase approvals</b>Pages go live in the same cycle. Nothing is held in draft for review — that was a deliberate choice for this publisher's workflow.</li>
@@ -154,7 +166,13 @@ td:last-child,th:last-child{text-align:right;white-space:nowrap;padding-left:16p
   </section>
 
   <section class="block">
-    <div class="head"><h2>What stays private</h2><span class="num">05 / 05</span></div>
+    <div class="head"><h2>Who this is for</h2></div>
+    <p class="lede">A publisher or affiliate operator with more offers than staff: several storefronts, well over a hundred landing pages already live, and one person rebuilding each new page by hand in the WordPress editor. It also suits an agency producing campaign pages at volume, where the layout is already settled and only the copy and the assets change.</p>
+    <p class="note">It is a poor fit when every page needs a bespoke design, or when pages have to be signed off one by one before they go live. The pipeline publishes immediately by design, and that is the trade it makes for speed.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What stays private</h2></div>
     <p class="lede">This page shows the design and the decisions, not the delivery.</p>
     <ol class="steps">
       <li><b>The source</b>The workflow, the layout files and the site-side endpoints are not published, because they run a live commercial pipeline.</li>
