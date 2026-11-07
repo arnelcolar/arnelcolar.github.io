@@ -46,7 +46,6 @@ figcaption{font-size:13px;color:var(--muted);margin-top:12px}
 section.block{padding:56px 0 64px}
 .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
 h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
-.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
 .steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
@@ -145,7 +144,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </figure>
 
   <section class="block">
-    <div class="head"><h2>What it does for you</h2><span class="num">01 / 07</span></div>
+    <div class="head"><h2>What it does for you</h2></div>
     <ol class="steps two">
       <li><b>Takes the repeat questions</b>The assistant answers the specs, steps, and policy details your team looks up again and again, straight from the document, at any hour it's running.</li>
       <li><b>Gives answers people can check</b>Each answer names its page, so a customer or technician can open the document and confirm it.</li>
@@ -170,7 +169,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Will it make things up?</h2><span class="num">02 / 07</span></div>
+    <div class="head"><h2>Will it make things up?</h2></div>
     <p class="lede">I tried ten ways to push the assistant off the document, from reworded jailbreaks to "search the internet". It refused all ten and still answered the real questions.</p>
     <table>
       <thead><tr><th>What I tried</th><th>Result</th></tr></thead>
@@ -188,7 +187,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Your documents stay yours</h2><span class="num">03 / 07</span></div>
+    <div class="head"><h2>Your documents stay yours</h2></div>
     <ol class="steps">
       <li><b>On your server</b>The PDF and its search index live on the machine that runs the assistant. With a hosted model, only the question and the five best-matching passages leave it. With a local model, nothing does.</li>
       <li><b>Keys kept private</b>The API key sits in the server's settings. It never appears in the page or the code.</li>
@@ -198,7 +197,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>How a project would run</h2><span class="num">04 / 07</span></div>
+    <div class="head"><h2>How a project would run</h2></div>
     <ol class="steps">
       <li><b>You send the document</b>Your PDF, your logo, and a handful of questions your customers or staff ask most.</li>
       <li><b>I set it up</b>Your name and logo on the chat page, suggested questions that lead to real answers, and the off-topic filter tuned to your document.</li>
@@ -208,7 +207,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Free API, paid API, or local model?</h2><span class="num">05 / 07</span></div>
+    <div class="head"><h2>Free API, paid API, or local model?</h2></div>
     <p class="lede">The assistant needs a model to write each answer. The model can be a free hosted one, a paid hosted one, or one that runs on your own server. Which one fits comes down to three things: how private your documents are, how many questions you expect each day, and what you want to spend.</p>
     <table class="compare">
       <thead><tr><th></th><th>Free API</th><th>Paid API</th><th>Local model, on your server</th></tr></thead>
@@ -229,7 +228,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Good to know</h2><span class="num">06 / 07</span></div>
+    <div class="head"><h2>Good to know</h2></div>
     <ul class="faq">
       <li><b>Does it work with scanned PDFs?</b><p>Yes, if the scan has a text layer, which most OCR'd scans do. The test manual was 1,379 scanned pages.</p></li>
       <li><b>How fast are the answers?</b><p>In testing on free-tier API plans, answers took about 20 seconds to 2 minutes. Short lookups came back fastest; long procedures took the longest.</p></li>
@@ -239,7 +238,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Under the hood</h2><span class="num">07 / 07</span></div>
+    <div class="head"><h2>Under the hood</h2></div>
     <p class="lede">For the technical reader. A small Python server (FastAPI, LangChain, Chroma) and one HTML page. DeepSeek writes the answers, and NVIDIA's reranker picks the passages. To point it at a different document, you swap the PDF and edit one settings file with the name, logo, suggested questions, and relevance cut-off.</p>
     <ol class="steps">
       <li><b>Index</b>The server splits the PDF into passages (2,389 for the manual) and turns them into vectors with a small open model. It builds the index once, in about five minutes for 1,379 pages, and loads it in about ten seconds after that.</li>
