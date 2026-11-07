@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13191f;
+    --muted:#4d535a;
+    --line:#e2e9eb;
+    --soft:#eff4f6;
+    --paper:#f1f7f8;
+    --accent:#006435;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px}
+  body{
+    background:var(--paper);
+    font-family:"Geologica",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    color:var(--ink);
+    position:relative;
+    overflow:hidden;
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:56px 64px 48px;
+  }
+  /* dot grid, same texture as the site */
+  body::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(#d9dee6 1px,transparent 1px);
+    background-size:22px 22px;
+    -webkit-mask-image:linear-gradient(160deg,rgba(0,0,0,.55),rgba(0,0,0,.12) 60%,transparent 85%);
+            mask-image:linear-gradient(160deg,rgba(0,0,0,.55),rgba(0,0,0,.12) 60%,transparent 85%);
+    pointer-events:none;
+  }
+  .top{display:flex;justify-content:space-between;align-items:baseline;position:relative}
+  .name{font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .where{font-size:15px;color:var(--muted)}
+  .mid{position:relative;max-width:1000px}
+  .eyebrow{
+    font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+    font-weight:600;margin-bottom:20px;
+  }
+  h1{
+    font-size:76px;line-height:.98;letter-spacing:-.045em;font-weight:500;
+    max-width:19ch;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+  .sub{margin-top:24px;font-size:21px;line-height:1.4;color:var(--muted);max-width:52ch}
+  .foot{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-top:1px solid var(--line);padding-top:18px;position:relative;
+  }
+  .tags{display:flex;gap:10px;list-style:none;font-size:14px}
+  .tags li{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;color:var(--ink)}
+  .url{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+  <div class="top">
+    <span class="name">Arnel Colar</span>
+    <span class="where">arnelcolar.is-a.dev</span>
+  </div>
+
+  <div class="mid">
+    <p class="eyebrow">Support assistants · automation · sites</p>
+    <h1>Answers from your documents. <em>Refuses the rest.</em></h1>
+    <p class="sub">Document assistants, Telegram workflows and publishing pipelines, built end to end and handed over running.</p>
+  </div>
+
+  <div class="foot">
+    <ul class="tags">
+      <li>Built end to end</li>
+      <li>Handed over running</li>
+      <li>Remote from UTC+8</li>
+    </ul>
+    <span class="url">arnelcolar@gmail.com</span>
+  </div>
+</body>
+</html>
