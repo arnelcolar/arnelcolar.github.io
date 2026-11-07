@@ -42,7 +42,6 @@ h1{font-size:clamp(32px,4.4vw,48px);line-height:1.1;font-weight:500;letter-spaci
 section.block{padding:56px 0 64px}
 .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
 h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
-.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
 .steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
@@ -123,7 +122,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>The brief</h2><span class="num">01 / 05</span></div>
+    <div class="head"><h2>The brief</h2></div>
     <p class="lede">One person maintains this, the staff already had Telegram open all day, and the café had no budget for a subscription. Those three constraints decided almost everything about how it is built.</p>
     <ul class="steps">
       <li><b>No server</b>The whole thing runs in Apps Script on the free quota, against the café's own Google Sheet. Nothing to host, nothing to renew.</li>
@@ -134,7 +133,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>How it works</h2><span class="num">02 / 05</span></div>
+    <div class="head"><h2>How it works</h2></div>
     <p class="lede">Everything runs in Google Apps Script, so there is no server to host or pay for.</p>
     <ol class="steps">
       <li><b>Poll or push</b>A time trigger polls Telegram for fifty seconds at a time, then hands back to the trigger. The offset is saved in Script Properties so nothing is logged twice. A webhook mode does the same job without the wait.</li>
@@ -145,7 +144,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Commands</h2><span class="num">03 / 05</span></div>
+    <div class="head"><h2>Commands</h2></div>
     <p class="lede">Staff send these as plain messages. Anything else goes to the model as a question, and menu changes need no redeploy.</p>
     <ul class="cmds">
       <li><code>1 latte 16</code>log an order</li>
@@ -164,7 +163,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
   </section>
 
   <section class="block">
-    <div class="head"><h2>Selected code</h2><span class="num">04 / 05</span></div>
+    <div class="head"><h2>Selected code</h2></div>
     <p class="lede">Four excerpts. The full script stays private because a real café runs on it.</p>
 
     <div class="code">
@@ -226,7 +225,7 @@ if (!result.shop_relevant)
   </section>
 
   <section class="block">
-    <div class="head"><h2>Limits</h2><span class="num">05 / 05</span></div>
+    <div class="head"><h2>Limits</h2></div>
     <p class="lede">What it does not do, written down so nobody assumes otherwise.</p>
     <ul class="steps">
       <li><b>Polling has a wait</b>The time trigger holds the connection for fifty seconds, so a reply can lag a poll behind. Webhook mode removes the wait but needs a public endpoint.</li>

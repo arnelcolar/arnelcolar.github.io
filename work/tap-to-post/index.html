@@ -46,7 +46,6 @@ a.link{text-decoration:underline;text-underline-offset:2px;font-size:13px}
 section.block{padding:56px 0 64px}
 .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--line)}
 h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spacing:-.04em}
-.num{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lede{color:var(--muted);max-width:60ch;margin-bottom:32px}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
 .steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
@@ -123,7 +122,7 @@ Send any message for the next one.</div>
   </section>
 
   <section class="block">
-    <div class="head"><h2>The brief</h2><span class="num">01 / 05</span></div>
+    <div class="head"><h2>The brief</h2></div>
     <p class="lede">The bakery had photos, a voice, and no time. The job was not to write a scheduler, it was to make the decision to post take one tap while keeping the words and the picture honest.</p>
     <ul class="steps">
       <li><b>No new app</b>The owner already answers customers in Telegram all day. Approvals arrive where the conversation already is.</li>
@@ -134,7 +133,7 @@ Send any message for the next one.</div>
   </section>
 
   <section class="block">
-    <div class="head"><h2>How it runs</h2><span class="num">02 / 05</span></div>
+    <div class="head"><h2>How it runs</h2></div>
     <p class="lede">A queue file on the server is the source of truth. Generation happens on a timer, the approval loop is the only interactive part, and publishing fans out per platform, because Facebook, Threads and Instagram each want a different call.</p>
     <ul class="steps">
       <li><b>Draft</b>A cron job asks the model for a caption in the shop's voice, validates it, and adds it to the queue with its photo.</li>
@@ -145,7 +144,7 @@ Send any message for the next one.</div>
   </section>
 
   <section class="block">
-    <div class="head"><h2>What the model is allowed to write</h2><span class="num">03 / 05</span></div>
+    <div class="head"><h2>What the model is allowed to write</h2></div>
     <p class="lede">A caption is only useful if it is true. Three gates run before a draft ever reaches the phone, and a draft that fails is thrown away rather than sent with a warning.</p>
 
     <div class="code">
@@ -189,7 +188,7 @@ out = re.sub(r"\s*[\u2014\u2013]\s*", ", ", out)</code></pre>
   </section>
 
   <section class="block">
-    <div class="head"><h2>Publishing without duplicates</h2><span class="num">04 / 05</span></div>
+    <div class="head"><h2>Publishing without duplicates</h2></div>
     <p class="lede">The tap is the fragile part. Telegram retries, requests time out, and an ack can arrive after the post is already live. The rules below keep one row from becoming two posts.</p>
 
     <div class="code">
@@ -229,7 +228,7 @@ out = re.sub(r"\s*[\u2014\u2013]\s*", ", ", out)</code></pre>
   </section>
 
   <section class="block">
-    <div class="head"><h2>Limits</h2><span class="num">05 / 05</span></div>
+    <div class="head"><h2>Limits</h2></div>
     <p class="lede">What it does not do, written down so nobody assumes otherwise.</p>
     <ul class="gates">
       <li><b>One photo per post</b>Each post carries a single picture. Several shots of the same cake go out as separate posts, because albums are not built.</li>
