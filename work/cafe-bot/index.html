@@ -56,7 +56,7 @@ h2{font-size:clamp(32px,4.4vw,56px);line-height:1.05;font-weight:500;letter-spac
 .code:first-of-type{border-top:0;padding-top:0}
 .code h3{font-size:17px;font-weight:600;margin-bottom:6px}
 .code p{color:var(--muted);font-size:15px}
-pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:18px 20px;overflow:auto;font:13px/1.6 ui-monospace,monospace}
+pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:18px 20px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace}
 
 .msg{animation:pop .45s cubic-bezier(.16,1,.3,1) both}
 .me{transform-origin:100% 100%}
@@ -172,10 +172,10 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
         <h3>Keys stay out of the code</h3>
         <p>The bot token, API key, and sheet ID live in Script Properties. The code can be shared or pasted into a chat without handing over access.</p>
       </div>
-<pre><code>var PROPS = PropertiesService.getScriptProperties();
-var TOKEN = PROPS.getProperty("TELEGRAM_TOKEN");
-var SHEET_ID = PROPS.getProperty("SHEET_ID");
-var OPENROUTER_API_KEY = PROPS.getProperty("OPENROUTER_API_KEY");</code></pre>
+<pre><code>const props = PropertiesService.getScriptProperties();
+const TOKEN              = props.getProperty('TOKEN').trim();
+const SHEET_ID           = props.getProperty('SHEET_ID');
+const OPENROUTER_API_KEY = props.getProperty('OPENROUTER_API_KEY').trim();</code></pre>
     </div>
 
     <div class="code">
@@ -184,17 +184,9 @@ var OPENROUTER_API_KEY = PROPS.getProperty("OPENROUTER_API_KEY");</code></pre>
         <p>One regular expression turns "2 kani-mango s" into a quantity, an item, and a size. When the size is left off, it defaults to 16.</p>
       </div>
 <pre><code>function parseOrder(text) {
-  var lower = text.toLowerCase().trim();
-  var match = lower.match(/^(\d+)\s+(.+?)(?:\s+(\S+))?$/);
-  if (!match) {
-    return { error: 'Format: "1 latte 16" or "2 kani-mango s"' };
-  }
-  return {
-    qty: parseInt(match[1], 10),
-    item: match[2].trim(),
-    size: match[3] || "16",
-    error: null
-  };
+    var m = text.toLowerCase().trim().match(/^(\d+)\s+(.+?)(?:\s+(\S+))?$/);
+    if (!m) return { error: 'Format: "1 latte 16" or "2 kani-mango s"' };
+    return { qty: parseInt(m[1], 10), item: m[2].trim(), size: m[3] || "16", error: null };
 }</code></pre>
     </div>
 
@@ -203,18 +195,18 @@ var OPENROUTER_API_KEY = PROPS.getProperty("OPENROUTER_API_KEY");</code></pre>
         <h3>Only menu items count</h3>
         <p>A sentence with several drinks has no fixed shape, so the menu is handed to the model with the message and the model may only answer with names and sizes that already exist. Anything missing from the reply is dropped rather than guessed.</p>
       </div>
-<pre><code>var prompt = "Parse the user's message into a JSON list of orders.\n" +
-  "Available menu items (name (size)): " + menuList.join(", ") + "\n" +
-  "Return ONLY valid JSON: " +
-  "{\"orders\":[{\"qty\":number,\"item\":\"menu item\",\"size\":\"size\"}]}\n" +
-  "Only include items that exist in the available menu list.";
+<pre><code>var prompt = "Parse the user's message into a JSON list of orders for a coffee/food shop.\n" +
+    "Available menu items (name (size)): " + menuList.join(", ") + "\n" +
+    "User message: " + text + "\n" +
+    "Return ONLY valid JSON: {\"orders\":[{\"qty\":number,\"item\":\"exact menu item name\",\"size\":\"exact size\"}]}\n" +
+    "Use exact menu item names and sizes. Only include items that exist in the available menu list. ...";
 
 var payload = {
-  model: "minimax/minimax-m3.1-flash:free",
-  response_format: { type: "json_object" },
-  temperature: 0,
-  messages: [{ role: "user", content: prompt }]
-};</code></pre>
+    model: "nvidia/nemotron-3.5-super-vl:free",
+    response_format: { type: "json_object" },
+    max_tokens: 400,
+    temperature: 0,
+    messages: [{ role: "user", content: prompt }]</code></pre>
     </div>
 
     <div class="code">
@@ -222,17 +214,14 @@ var payload = {
         <h3>Parsing the model's reply</h3>
         <p>Models sometimes wrap JSON in prose or code fences. The bot cuts out the first object it finds before parsing, and retries up to three times when the API errors.</p>
       </div>
-<pre><code>var start = textResponse.indexOf('{');
-var end = textResponse.lastIndexOf('}');
+<pre><code>var start = textResponse.indexOf('{'), end = textResponse.lastIndexOf('}');
+if (start !== -1 &amp;&amp; end &gt; start) textResponse = textResponse.substring(start, end + 1);
+else textResponse = textResponse.replace(/```json|```/g, "").trim();
 
-if (start !== -1 &amp;&amp; end &gt; start) {
-  textResponse = textResponse.substring(start, end + 1);
-} else {
-  textResponse = textResponse
-    .replace(/```json/g, "").replace(/```/g, "").trim();
-}
+var result = JSON.parse(textResponse);
 
-var resultJson = JSON.parse(textResponse);</code></pre>
+if (!result.shop_relevant)
+    return sendText(chatId, "🚫 **Ignored:** Not a shop expense.\n_Reason: " + (result.reason || "N/A") + "_");</code></pre>
     </div>
   </section>
 
