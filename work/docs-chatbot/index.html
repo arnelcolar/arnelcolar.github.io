@@ -259,7 +259,7 @@ pre{background:var(--soft);border:1px solid var(--line);border-radius:10px;paddi
     <div class="code">
       <div>
         <h3>Refuse before asking the model</h3>
-        <p>The reranker's score for the best passage decides whether the question is about the document at all. Off-topic questions never reach the language model.</p>
+        <p>The reranker's score for the best passage decides whether the question is about the document at all. Off-topic questions do not reach the language model. If the reranker itself is down, the code keeps the plain search order, and the prompt's own refusal is then the only guard.</p>
       </div>
 <pre><code>MIN_RELEVANCE = CONFIG["min_relevance"]  # -4.0 for the test manual
 
