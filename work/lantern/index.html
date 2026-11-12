@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en" class="no-fx">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lantern: scrolling product launch page</title>
+<meta name="description" content="A launch page for a fictional home server: scroll-driven scenes, a pinned screen tour, and every app screenshot built from HTML and CSS instead of images.">
+<meta name="theme-color" content="#07080a">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lantern: scrolling product launch page">
+<meta property="og:description" content="A launch page for a fictional home server. Every app screenshot on it is HTML and CSS, not an image.">
+<meta property="og:url" content="https://arnelcolar.is-a.dev/work/lantern/">
+<meta property="og:image" content="https://arnelcolar.is-a.dev/assets/shots/lantern.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arnelcolar.is-a.dev/assets/shots/lantern.webp">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="900">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="sky" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+<p class="chapter" aria-hidden="true"><b>00</b><span>Lantern</span></p>
+
+<header class="nav">
+  <a class="brand" href="#top"><img src="assets/mark.svg" alt="" width="24" height="24"><span>Lantern</span></a>
+  <nav class="receipt" aria-label="The five claims">
+    <a href="#screens" title="Every screen on this page is the real app">6 screens</a>
+    <a href="#apps" title="Photos, files, music, notes and AI">5 rooms</a>
+    <a href="#stayshome" title="Your data never leaves the house">Stays home</a>
+    <a href="#cost" title="6 watts idle, about $9 of power a year">6 W idle</a>
+    <a href="#reserve" title="$99 once. No subscription.">$99 once</a>
+  </nav>
+  <a class="btn btn-sm" href="#reserve" data-magnet>Reserve yours</a>
+</header>
+
+<main id="top">
+
+  <!-- 01 · hero -->
+  <section class="scene hero" data-scene data-chapter="00" data-label="Lantern">
+    <div class="sticky">
+      <div class="field" aria-hidden="true"><b></b></div>
+      <div class="intro">
+        <h1 class="vh">Lantern</h1>
+        <p class="wordmark" data-t="Lantern" aria-hidden="true">Lantern</p>
+        <p class="intro-line">Your photos, files and music. <span class="serif">At home.</span></p>
+        <div class="cta-row">
+          <a class="btn" href="#reserve" data-magnet>Reserve a Lantern,&nbsp;$99</a>
+          <a class="btn btn-ghost" href="#screens">See it run</a>
+        </div>
+        <p class="scroll-hint">Scroll</p>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow"><b>Early units</b>Shipping March 2027</p>
+        <p class="hook"><span>The cloud was never really yours.</span></p>
+        <h2 class="display" data-split>Two terabytes. <span class="serif">In your drawer.</span></h2>
+        <p class="lede" data-split-soft>One small box on the shelf holds your photos, files and music. Six watts at idle, no monthly bill, and nothing leaves the house unless you say so.</p>
+      </div>
+
+      <ul class="strip" aria-label="Highlights">
+        <li><b>6 W</b><span>idle, all day</span></li>
+        <li><b>2 TB</b><span>included</span></li>
+        <li><b>$0</b><span>per month</span></li>
+        <li><b>1 scan</b><span>to set it up</span></li>
+      </ul>
+
+      <figure class="rise-shot">
+        <div class="ui" data-theme="dark" aria-hidden="true">
+          <div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div>
+          <div class="ui-body home-ui">
+            <aside class="ui-rail">
+              <b class="ui-logo">L</b>
+              <span class="on">Home</span><span>Photos</span><span>Files</span><span>Music</span><span>Notes</span>
+            </aside>
+            <div class="ui-main">
+              <p class="ui-hello">Good evening, Ana.</p>
+              <p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p>
+              <div class="ui-cards">
+                <div class="ui-card">
+                  <span class="ui-k">Storage</span>
+                  <div class="ring" style="--v:38"><b>760</b><i>GB</i></div>
+                </div>
+                <div class="ui-card">
+                  <span class="ui-k">Devices</span>
+                  <div class="devices"><i></i><i></i><i></i><em>3 online</em></div>
+                </div>
+                <div class="ui-card">
+                  <span class="ui-k">Backups</span>
+                  <p class="ui-big">Nightly</p>
+                  <em>3 copies, 2 rooms</em>
+                </div>
+              </div>
+              <div class="ui-photos">
+                <i class="ph ph-a"></i><i class="ph ph-b"></i><i class="ph ph-c"></i><i class="ph ph-d"></i><i class="ph ph-e"></i><i class="ph ph-f"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figcaption>Every screen on this page is drawn in CSS. There is not one image file in it.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 · screens -->
+  <section id="screens" class="scene tour" data-scene data-chapter="01" data-label="Glass">
+    <div class="sticky">
+      <div class="tour-copy">
+        <h2 class="display" data-split>Glass you can see the room through.</h2>
+        <ol class="tour-list">
+          <li><b>Home</b><span>Storage, devices, last backup.</span></li>
+          <li><b>Photos</b><span>Every year, by face and place.</span></li>
+          <li><b>Files</b><span>Folders the way you left them.</span></li>
+          <li><b>Music</b><span>Your library, lossless, on the shelf.</span></li>
+          <li><b>On your phone</b><span>The same thing, in your pocket.</span></li>
+          <li><b>Lantern AI</b><span>Answers from your own files.</span></li>
+        </ol>
+        <p class="tour-note">Every screen here is hand-built HTML and CSS. No screenshots, no stock photos, nothing exported from a design tool.</p>
+      </div>
+      <div class="tour-stage" data-tilt>
+        <div class="screen on">
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div><div class="ui-body home-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span class="on">Home</span><span>Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><p class="ui-hello">Good evening, Ana.</p><p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p><div class="ui-cards"><div class="ui-card"><span class="ui-k">Storage</span><div class="ring" style="--v:38"><b>760</b><i>GB</i></div></div><div class="ui-card"><span class="ui-k">Devices</span><div class="devices"><i></i><i></i><i></i><em>3 online</em></div></div><div class="ui-card"><span class="ui-k">Backups</span><p class="ui-big">Nightly</p><em>3 copies, 2 rooms</em></div></div><div class="ui-photos"><i class="ph ph-a"></i><i class="ph ph-b"></i><i class="ph ph-c"></i><i class="ph ph-d"></i><i class="ph ph-e"></i><i class="ph ph-f"></i></div></div></div></div>
+        </div>
+        <div class="screen">
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Photos</span><em>12,480 items</em></div><div class="ui-body photos-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span class="on">Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><div class="chips"><i class="on">All</i><i>Places</i><i>People</i><i>2026</i><i>Favourites</i></div><div class="masonry"><i class="ph ph-b"></i><i class="ph ph-g"></i><i class="ph ph-a"></i><i class="ph ph-e"></i><i class="ph ph-h"></i><i class="ph ph-c"></i><i class="ph ph-f"></i><i class="ph ph-d"></i><i class="ph ph-i"></i><i class="ph ph-a"></i><i class="ph ph-d"></i><i class="ph ph-c"></i></div></div></div></div>
+        </div>
+        <div class="screen">
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Files</span><em>Home</em></div><div class="ui-body files-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span class="on">Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><div class="crumbs"><i>Home</i><s>/</s><i>Documents</i><s>/</s><i>Contracts</i></div><table class="ui-table"><tbody><tr><td>Folder</td><td>Leases</td><td>—</td><td>2h ago</td></tr><tr><td>PDF</td><td>Studio renewal 2027</td><td>1.4 MB</td><td>2h ago</td></tr><tr><td>PDF</td><td>Insurance schedule</td><td>860 KB</td><td>Yesterday</td></tr><tr><td>Sheet</td><td>Rent roll</td><td>92 KB</td><td>Mon</td></tr><tr><td>Folder</td><td>Scans</td><td>—</td><td>Mon</td></tr><tr><td>Doc</td><td>Notice to quit</td><td>34 KB</td><td>3 Nov</td></tr><tr><td>PDF</td><td>Deposit receipt</td><td>210 KB</td><td>28 Oct</td></tr><tr><td>Sheet</td><td>Utilities 2026</td><td>64 KB</td><td>24 Oct</td></tr><tr><td>Folder</td><td>Buildings</td><td>—</td><td>19 Oct</td></tr><tr><td>Image</td><td>Floor plan.png</td><td>1.1 MB</td><td>12 Oct</td></tr></tbody></table></div></div></div>
+        </div>
+        <div class="screen">
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Music</span><em>Lossless</em></div><div class="ui-body music-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span>Files</span><span class="on">Music</span><span>Notes</span></aside><div class="ui-main"><div class="player"><i class="ph ph-e art"></i><div class="player-meta"><b>Static</b><span>The Lines</span><em>indie · 2006 · 3:52</em><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div><div class="queue"><i>Dark Ceiling — Yolk</i><i>Winter Kite — Sable Sa</i><i>Slow Return — Fathom</i><i>Paper Room — Nola Vr</i><i>Hold the Line — Aster</i><i>Blue Hour — Kite &amp; Co</i><i>Low Tide — Meridian</i><i>Cedar — Nova Lake</i></div></div></div></div>
+        </div>
+        <div class="screen">
+          <div class="phone">
+            <div class="phone-bar"><b>9:41</b><i></i></div>
+            <div class="phone-body">
+              <p class="phone-h">Backups</p>
+              <div class="phone-card"><b>This iPhone</b><span>Last backup 4 minutes ago</span><em>Done</em></div>
+              <div class="phone-card"><b>Studio Mac</b><span>Last backup 2 hours ago</span><em>Done</em></div>
+              <div class="phone-card"><b>Photos</b><span>12,480 · up to date</span><em>Done</em></div>
+              <div class="phone-cta">Back up now</div>
+            </div>
+          </div>
+        </div>
+        <div class="screen">
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Ask</span><em>on device</em></div><div class="ui-body ai-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span>Files</span><span>Music</span><span class="on">Ask</span></aside><div class="ui-main"><div class="bubble q">When does the studio lease renew?</div><div class="bubble a"><p>It renews on <b>31 March 2027</b>. The notice window is 90 days, so the last day to give notice is <b>31 December 2026</b>.</p><div class="cite"><i></i><span>Studio renewal 2027.pdf · page 2</span></div></div><div class="bubble q">And the insurance renewal?</div><div class="bubble a"><p>Renews <b>1 July 2027</b>, and the premium went up 8% last year. The schedule lists both buildings.</p></div><div class="ask"><span>Ask about your files</span><i></i></div><p class="ai-note">Runs on the box. Nothing is sent anywhere.</p></div></div></div>
+        </div>
+        <span class="glare" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · five rooms -->
+  <section id="apps" class="scene apps" data-scene data-chapter="02" data-label="Rooms">
+    <div class="wrap head">
+      <h2 class="huge" data-split>Everything in one place.</h2>
+      <p class="lede" data-split-soft>Photos, files, music, notes and a local assistant. Five apps that share one library, one search and one login, instead of five subscriptions.</p>
+    </div>
+    <div class="assemble">
+      <div class="sticky">
+        <div class="panes" aria-label="Photos, files, music, notes and ask come together">
+          <figure class="pane pane-1" style="--i:-2;--ex:-1;--ey:-1;--rot:-8">
+            <div class="mini"><div class="mini-bar"><span>Photos</span><em>2026</em></div><div class="mini-grid"><i class="ph ph-b"></i><i class="ph ph-g"></i><i class="ph ph-a"></i><i class="ph ph-e"></i><i class="ph ph-h"></i><i class="ph ph-c"></i></div></div>
+            <figcaption><b>Photos</b>by face, place and year</figcaption>
+          </figure>
+          <figure class="pane pane-2" style="--i:-1;--ex:1;--ey:-1;--rot:6">
+            <div class="mini"><div class="mini-bar"><span>Files</span><em>Home</em></div><div class="mini-rows"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <figcaption><b>Files</b>any folder, any device</figcaption>
+          </figure>
+          <figure class="pane pane-3" style="--i:0;--ex:-1;--ey:1;--rot:5">
+            <div class="mini"><div class="mini-bar"><span>Music</span><em>Lossless</em></div><div class="mini-player"><i class="ph ph-e"></i><div><b>The Lines</b><span>Static · 3:52</span><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+            <figcaption><b>Music</b>lossless, yours</figcaption>
+          </figure>
+          <figure class="pane pane-4" style="--i:1;--ex:1;--ey:1;--rot:-6">
+            <div class="mini"><div class="mini-bar"><span>Ask</span><em>on device</em></div><div class="mini-ask"><i class="q">When does the lease renew?</i><i class="a">31 March 2027. Notice closes 31 December.</i></div></div>
+            <figcaption><b>Ask</b>answers from your files</figcaption>
+          </figure>
+          <figure class="pane pane-5" style="--i:2;--ex:0;--ey:1.35;--rot:2">
+            <div class="mini"><div class="mini-bar"><span>Notes</span><em>plain text</em></div><div class="mini-notes"><b>Studio renewal</b><em>Edited 2 hours ago · 1 of 42 notes</em><i></i><i></i><i></i><i></i><i class="short"></i><i class="short"></i></div></div>
+            <figcaption><b>Notes</b>plain text, forever</figcaption>
+          </figure>
+        </div>
+        <p class="assemble-cap"><span>Five apps.</span><span class="serif">One library.</span></p>
+      </div>
+    </div>
+    <div class="wrap gallery">
+      <figure class="shot" data-tilt>
+        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div><div class="ui-body home-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span class="on">Home</span><span>Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><p class="ui-hello">Good evening, Ana.</p><p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p><div class="ui-cards"><div class="ui-card"><span class="ui-k">Storage</span><div class="ring" style="--v:38"><b>760</b><i>GB</i></div></div><div class="ui-card"><span class="ui-k">Devices</span><div class="devices"><i></i><i></i><i></i><em>3 online</em></div></div><div class="ui-card"><span class="ui-k">Backups</span><p class="ui-big">Nightly</p><em>3 copies, 2 rooms</em></div></div><div class="ui-photos"><i class="ph ph-a"></i><i class="ph ph-b"></i><i class="ph ph-c"></i><i class="ph ph-d"></i><i class="ph ph-e"></i><i class="ph ph-f"></i></div></div></div></div>
+        <figcaption><b>Home</b>Storage, devices and the last backup, in one glance</figcaption>
+      </figure>
+      <figure class="shot" data-tilt>
+        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Photos</span><em>12,480 items</em></div><div class="ui-body photos-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span class="on">Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><div class="chips"><i class="on">All</i><i>Places</i><i>People</i><i>2026</i></div><div class="masonry"><i class="ph ph-b"></i><i class="ph ph-g"></i><i class="ph ph-a"></i><i class="ph ph-e"></i><i class="ph ph-h"></i><i class="ph ph-c"></i><i class="ph ph-f"></i><i class="ph ph-d"></i><i class="ph ph-i"></i><i class="ph ph-a"></i><i class="ph ph-d"></i><i class="ph ph-c"></i></div></div></div></div>
+        <figcaption><b>Photos</b>12,480 photos, all on your shelf</figcaption>
+      </figure>
+      <figure class="shot" data-tilt>
+        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Ask</span><em>on device</em></div><div class="ui-body ai-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span>Files</span><span>Music</span><span class="on">Ask</span></aside><div class="ui-main"><div class="bubble q">When does the studio lease renew?</div><div class="bubble a"><p>It renews on <b>31 March 2027</b>. The notice window is 90 days, so the last day to give notice is <b>31 December 2026</b>.</p><div class="cite"><i></i><span>Studio renewal 2027.pdf · page 2</span></div></div><div class="ask"><span>Ask about your files</span><i></i></div></div></div></div>
+        <figcaption><b>Ask</b>Answers with the page they came from</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 04 · stays home -->
+  <section id="stayshome" class="scene stays" data-scene data-chapter="03" data-label="At home">
+    <div class="wrap head">
+      <h2 class="huge" data-split>Your data sleeps <span class="serif">at home.</span></h2>
+      <p class="lede" data-split-soft>No upload queue, no terms of service, no server in another country holding your children's birthdays.</p>
+    </div>
+    <div class="wrap route" data-tilt>
+      <div class="node"><i class="ico ico-phone"></i><b>Your phone</b><span>Uploads over Wi-Fi, the moment you get in.</span></div>
+      <div class="wire"><span class="packet"></span></div>
+      <div class="node node-box"><i class="ico ico-box"></i><b>Lantern</b><span>2 TB, two copies, in two rooms.</span></div>
+      <div class="wire"><span class="packet p2"></span></div>
+      <div class="node"><i class="ico ico-tv"></i><b>Your TV</b><span>Streams the same library, no account.</span></div>
+    </div>
+    <div class="wrap compare">
+      <div class="col col-cloud">
+        <h4 class="col-head">The usual way <span>Someone else's computer</span></h4>
+        <ul>
+          <li>Uploads every photo twice, once to them</li>
+          <li>Reads your files to train features you did not ask for</li>
+          <li>$15 a month, forever, for 2 TB</li>
+          <li>Locks you out if a payment fails</li>
+        </ul>
+      </div>
+      <div class="col col-box">
+        <h4 class="col-head">Lantern <span>Your shelf</span></h4>
+        <ul>
+          <li>Copies stay in the house</li>
+          <li>Nothing is uploaded, scanned or shared</li>
+          <li>$99 once, then about $9 of power a year</li>
+          <li>Works when the internet does not</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · cost counter -->
+  <section id="cost" class="scene cost" data-scene data-chapter="04" data-label="Cost">
+    <div class="sticky">
+      <p class="counter" aria-label="99 dollars"><span class="ghost" aria-hidden="true">1440</span><span class="live" data-count="99" data-from="1440">1440</span><small>$</small></p>
+      <p class="cost-line"><span class="was">Eight years of 2 TB in the cloud.</span> <span class="now">One box.</span></p>
+      <p class="cost-note">$1,440 in subscriptions. $99 here, then about $9 of electricity a year.</p>
+    </div>
+  </section>
+
+  <section class="scene proof" data-scene data-chapter="04" data-label="Cost">
+    <div class="wrap">
+      <div class="specs">
+        <div class="spec"><b data-num="6">6</b><span>watts at idle. Less than the router.</span></div>
+        <div class="spec"><b data-num="0">0</b><span>dBA. No fan, no spinning disk.</span></div>
+        <div class="spec"><b data-num="2">2</b><span>copies, mirrored, in two rooms.</span></div>
+        <div class="spec"><b data-num="10">10</b><span>years of software updates.</span></div>
+      </div>
+      <div class="nope-wrap">
+        <ul class="nope">
+          <li><span>A subscription</span></li>
+          <li><span>An account</span></li>
+          <li><span>A port forward</span></li>
+          <li><span>A rack</span></li>
+        </ul>
+        <p class="lede">If you can plug in a router, you can run this.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · setup -->
+  <section id="setup" class="scene install" data-scene data-chapter="05" data-label="Setup">
+    <div class="wrap head">
+      <h2 class="huge" data-split>Plug it in. That is most of it.</h2>
+      <p class="lede" data-split-soft>No accounts, no ports to forward, no terminal. Your phone finds the box on the same Wi-Fi and does the rest.</p>
+    </div>
+    <ol class="stack">
+      <li>
+        <div class="card win">
+          <div class="titlebar"><i></i><i></i><i></i><span>Step 1 · Power</span></div>
+          <div class="card-art art-power">
+            <div class="box-render"><i class="led"></i><span class="port"></span></div>
+          </div>
+          <p><b>1</b>Power and Ethernet. The light turns amber, then white.</p>
+        </div>
+      </li>
+      <li>
+        <div class="card win">
+          <div class="titlebar"><i></i><i></i><i></i><span>Step 2 · Pair</span></div>
+          <div class="card-art art-pair">
+            <div class="qr" aria-hidden="true"><svg class="qr-art" viewBox="0 0 250 250" aria-hidden="true" shape-rendering="crispEdges"><rect width="250" height="250" fill="#f4f0e7"/><path d="M0 0h80v10h-80zM130 0h10v10h-10zM170 0h80v10h-80zM0 10h10v10h-10zM60 10h10v10h-10zM110 10h20v10h-20zM140 10h50v10h-50zM240 10h10v10h-10zM0 20h10v10h-10zM20 20h30v10h-30zM60 20h30v10h-30zM130 20h40v10h-40zM180 20h10v10h-10zM200 20h30v10h-30zM240 20h10v10h-10zM0 30h10v10h-10zM20 30h30v10h-30zM60 30h10v10h-10zM80 30h20v10h-20zM130 30h20v10h-20zM170 30h20v10h-20zM200 30h30v10h-30zM240 30h10v10h-10zM0 40h10v10h-10zM20 40h30v10h-30zM60 40h50v10h-50zM120 40h10v10h-10zM140 40h20v10h-20zM170 40h20v10h-20zM200 40h30v10h-30zM240 40h10v10h-10zM0 50h10v10h-10zM60 50h20v10h-20zM90 50h20v10h-20zM130 50h10v10h-10zM150 50h20v10h-20zM180 50h10v10h-10zM240 50h10v10h-10zM0 60h90v10h-90zM100 60h10v10h-10zM120 60h10v10h-10zM140 60h10v10h-10zM160 60h10v10h-10zM180 60h70v10h-70zM20 70h20v10h-20zM60 70h20v10h-20zM100 70h10v10h-10zM140 70h30v10h-30zM180 70h10v10h-10zM200 70h10v10h-10zM230 70h20v10h-20zM10 80h20v10h-20zM60 80h20v10h-20zM90 80h70v10h-70zM170 80h20v10h-20zM240 80h10v10h-10zM0 90h20v10h-20zM50 90h10v10h-10zM90 90h10v10h-10zM110 90h10v10h-10zM190 90h10v10h-10zM230 90h10v10h-10zM30 100h10v10h-10zM60 100h20v10h-20zM120 100h10v10h-10zM150 100h10v10h-10zM170 100h10v10h-10zM190 100h10v10h-10zM220 100h10v10h-10zM20 110h30v10h-30zM70 110h10v10h-10zM100 110h10v10h-10zM120 110h10v10h-10zM140 110h20v10h-20zM190 110h10v10h-10zM210 110h20v10h-20zM30 120h70v10h-70zM120 120h10v10h-10zM150 120h30v10h-30zM190 120h10v10h-10zM220 120h10v10h-10zM240 120h10v10h-10zM0 130h30v10h-30zM40 130h20v10h-20zM80 130h10v10h-10zM140 130h10v10h-10zM160 130h20v10h-20zM200 130h30v10h-30zM20 140h10v10h-10zM50 140h20v10h-20zM90 140h20v10h-20zM130 140h10v10h-10zM200 140h10v10h-10zM0 150h10v10h-10zM90 150h30v10h-30zM150 150h10v10h-10zM170 150h10v10h-10zM190 150h20v10h-20zM220 150h20v10h-20zM60 160h30v10h-30zM100 160h10v10h-10zM160 160h70v10h-70zM0 170h10v10h-10zM50 170h10v10h-10zM90 170h10v10h-10zM120 170h10v10h-10zM160 170h10v10h-10zM200 170h20v10h-20zM240 170h10v10h-10zM0 180h70v10h-70zM80 180h20v10h-20zM130 180h20v10h-20zM160 180h10v10h-10zM180 180h10v10h-10zM200 180h10v10h-10zM220 180h30v10h-30zM0 190h10v10h-10zM60 190h10v10h-10zM80 190h10v10h-10zM100 190h20v10h-20zM130 190h40v10h-40zM200 190h10v10h-10zM0 200h10v10h-10zM20 200h30v10h-30zM60 200h20v10h-20zM110 200h20v10h-20zM140 200h10v10h-10zM160 200h50v10h-50zM220 200h20v10h-20zM0 210h10v10h-10zM20 210h30v10h-30zM60 210h10v10h-10zM80 210h10v10h-10zM100 210h20v10h-20zM130 210h20v10h-20zM180 210h10v10h-10zM230 210h20v10h-20zM0 220h10v10h-10zM20 220h30v10h-30zM60 220h10v10h-10zM100 220h30v10h-30zM160 220h20v10h-20zM210 220h10v10h-10zM240 220h10v10h-10zM0 230h10v10h-10zM60 230h20v10h-20zM90 230h30v10h-30zM130 230h10v10h-10zM190 230h10v10h-10zM240 230h10v10h-10zM0 240h70v10h-70zM110 240h10v10h-10zM170 240h10v10h-10zM190 240h20v10h-20zM220 240h20v10h-20z" fill="#0b0e12"/></svg></div>
+            <p class="pair-hint">Point your camera at it</p>
+          </div>
+          <p><b>2</b>Scan the code on the card in the box. Name it, pick a password.</p>
+        </div>
+      </li>
+      <li>
+        <div class="card win">
+          <div class="titlebar"><i></i><i></i><i></i><span>Step 3 · Done</span></div>
+          <div class="card-art art-done">
+            <div class="done-ring"><i></i></div>
+            <p class="pair-hint">Backups start tonight</p>
+          </div>
+          <p><b>3</b>Your photos start arriving in the background. Nothing else to do.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 07 · reserve -->
+  <section id="reserve" class="scene join" data-scene data-chapter="06" data-label="Reserve">
+    <div class="wrap join-grid">
+      <div class="join-copy">
+        <h2 class="huge" data-split>First units ship in <span class="mute">March 2027.</span></h2>
+        <p class="lede" data-split-soft>Reserve now and you are in the first batch. Your card is only charged when the box is packed, and you can cancel any time before then.</p>
+        <div class="book">
+          <a class="btn btn-book" href="#reserve" data-magnet>Reserve a Lantern,&nbsp;$99</a>
+          <p class="book-sub">$99 once. Ships March 2027. Cancel any time before it ships, full refund.</p>
+          <p class="book-note">Secure checkout by Stripe. By reserving you agree to the <a href="#">Terms</a> and <a href="#">Refund Policy</a>.</p>
+          <p class="book-msg" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="price">
+        <p class="amount"><sup>$</sup>99</p>
+        <p class="once">once.<span class="mute"> No subscription.</span></p>
+        <p class="later">Then about <b>$9</b> a year of electricity.</p>
+        <ul class="gets">
+          <li>2 TB included, one extra drive bay</li>
+          <li>Photos, files, music, notes and Ask</li>
+          <li>Apps for iPhone, Android, Mac and Windows</li>
+          <li>Automatic backups, two copies</li>
+          <li>10 years of updates</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrap faq">
+      <div class="faq-head">
+        <h3>What people ask most.</h3>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What exactly is in the box?</summary><p>A fanless box the size of a paperback, a 2 TB drive inside, an empty bay for a second drive, a USB-C power supply and a card with a pairing code. No screen, no remote, no cables you have to buy.</p></details>
+        <details class="faq-item"><summary>Do I need to be technical?</summary><p>No. You plug it in, scan a code with your phone and pick a password. There is no terminal step, no port forwarding and no account to create.</p></details>
+        <details class="faq-item"><summary>What happens if the drive dies?</summary><p>Photos and files are written to two drives. If one fails, the box keeps serving from the other and tells you which one to swap. Drives are standard and replaceable, no tools beyond a screwdriver.</p></details>
+        <details class="faq-item"><summary>Can I reach it when I am away from home?</summary><p>Yes, through an encrypted relay that we cannot read, or direct if you prefer to set up your own. Relay access is free and has no bandwidth cap for photos and files.</p></details>
+        <details class="faq-item"><summary>How much can I store?</summary><p>2 TB with the included drive, about 650,000 phone photos. The second bay takes drives up to 8 TB, and libraries bigger than that can span several boxes.</p></details>
+        <details class="faq-item"><summary>Does it really work without the internet?</summary><p>Yes. Photos, files, music and notes stay available on your home network when the line is down. Only remote access needs the internet.</p></details>
+        <details class="faq-item"><summary>What does Ask run on?</summary><p>A small model on the box itself. It reads only the files you point it at, answers with the page it found the answer on, and sends nothing anywhere. No account, no token limits.</p></details>
+        <details class="faq-item"><summary>Is it a NAS?</summary><p>It is one, but you do not have to treat it like one. Folders appear in Finder and Explorer, and the apps do the rest.</p></details>
+        <details class="faq-item"><summary>How do I pay and when am I charged?</summary><p>You reserve with a card today; nothing is taken until your unit is packed. If you cancel before it ships, you are charged nothing.</p></details>
+        <details class="faq-item"><summary>Can I cancel?</summary><p>Any time before your box ships, in one click, for a full refund. After it arrives you have 30 days to send it back.</p></details>
+        <details class="faq-item"><summary>Which phones and computers work with it?</summary><p>iPhone and iPad from iOS 16, Android 10 and up, macOS 13 and up, and Windows 10 and 11. The web app works in any modern browser.</p></details>
+        <details class="faq-item"><summary>Does it work on a mesh network or with a VPN?</summary><p>Yes. It uses mDNS and a local certificate, so it works behind mesh systems without configuration. If your router isolates clients from each other, turn that setting off.</p></details>
+      </div>
+      <div class="faq-cta">
+        <p>Still deciding? Reserve now and cancel any time before it ships.</p>
+        <a class="btn" href="#reserve">Reserve a Lantern,&nbsp;$99</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/mark.svg" alt="" width="22" height="22"><span>Lantern</span></a>
+    <p>A small box for a big library. First units ship in March 2027, $99 once.</p>
+    <p class="fine">© 2027 Lantern Labs · Photography on this page is generated, the interface is real · Built in Porto.</p>
+    <p class="fine legal"><a href="#">Terms</a> · <a href="#">Privacy</a> · <a href="#">Refunds</a> · <a href="#">Status</a></p>
+  </div>
+</footer>
+
+<dialog class="zoom" aria-label="Full size screen">
+  <img alt="">
+  <form method="dialog"><button class="zoom-close" aria-label="Close">×</button></form>
+</dialog>
+
+<script src="site.js" defer></script>
+
+<aside style="max-width:1120px;margin:0 auto;padding:44px 24px 120px;border-top:1px solid rgba(128,128,128,.35);background:rgba(128,128,128,.06);font-family:system-ui,-apple-system,sans-serif;text-align:center">
+  <p style="margin:0 0 8px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;opacity:.7">Template &middot; fictional product</p>
+  <p style="margin:0 auto 16px;max-width:54ch;font-size:17px;line-height:1.5">Want a page like this for your product? Fixed scope, fixed price, quoted before I start. You own the code, and I reply within one working day.</p>
+  <a href="mailto:arnelcolar@gmail.com?subject=Project%20inquiry&amp;body=Page%20needed%3A%0ADeadline%3A%0ABudget%3A" style="display:inline-block;border:1px solid currentColor;border-radius:99px;padding:10px 22px;font-size:14px;font-weight:600;color:inherit;text-decoration:none">Send me the page and the deadline</a>
+  <p style="margin:14px 0 0;font-size:13px;opacity:.7"><a href="../../" style="color:inherit">See more work</a></p>
+</aside>
+</body>
+</html>
