@@ -1,0 +1,94 @@
+/* The shipped look: no gradients, no shadows. Separation comes from hairline
+   rules and one flat amber, so nothing has to be painted with light.
+   Loaded after site.css and overrides it. */
+
+*,*::before,*::after{background-image:none!important;box-shadow:none!important;filter:none!important}
+
+:root{
+  --solid:#07080a;
+  --panel:#11151b;
+  --raised:#171d25;
+  --rule:rgba(255,255,255,.11);
+  --rule-soft:rgba(255,255,255,.07);
+  --amber-flat:#f6a64e;
+}
+body{background:var(--solid)!important}
+
+/* ---- type painted with a gradient ---- */
+.wordmark{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;
+  -webkit-text-fill-color:#f4efe4!important;color:#f4efe4!important}
+.glow,.sky,.shade,.veil,.beam,.mist,.glare{display:none!important}
+.progress{background:var(--rule-soft)!important}
+.progress span{background:var(--amber-flat)!important}
+.eyebrow::after{background:var(--rule)!important}
+.scroll-hint::after{background:var(--rule)!important}
+
+/* ---- buttons: solid, with a hairline edge instead of a glow ---- */
+.btn,.ui-logo,.p-tiles i,.composer .send,.phone-cta,.chips i.on,.dash-t .tile-ico,
+.folder .i,.chat-h .bot,.fic{background-color:var(--amber-flat)!important;color:#151009!important}
+.btn{border:1px solid #ffc98a!important}
+.btn-ghost{background-color:transparent!important;color:#f4efe4!important;border:1px solid var(--rule)!important}
+.btn-ghost:hover{border-color:rgba(255,255,255,.24)!important}
+
+/* ---- surfaces ---- */
+.nav-inner,.receipt,.ui,.mini,.phone,.card,.price,.stack li,.col-box,.faq-cta,
+.exp-bar .crumbs,.ui-card,.dash-t,.folder,.msg.ai,.composer,.phone-card,
+.store-copy,.supported-head{background-color:var(--panel)!important}
+.ui-bar,.titlebar,.ui-rail{background-color:#0f141a!important}
+.mini,.pane,.ui,.phone,.price,.stack li,.card{border:1px solid var(--rule)!important}
+.box-render,.card-art,.lamp,.cover{background-color:#1b222b!important}
+.node-box,.col-box{background-color:var(--raised)!important}
+
+/* the ring is data, not decoration: a conic arc is the only way to draw it */
+.ring{background:conic-gradient(var(--amber-flat) calc(var(--v) * 1%),#242c36 0)!important}
+.ring::after{background:#12171d!important}
+
+/* ---- photographs keep their frame, lose their scrim ---- */
+.ph{background-color:#1e242c!important}
+.ph::after{display:none!important}
+.qr{background-color:#f4efe4!important;border:1px solid var(--rule)!important}
+
+/* ---- the hero: a hairline grid gives the flat page a structure ---- */
+.hero .sticky::before,.assemble .sticky::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,var(--rule-soft) 1px,transparent 1px) 0 0/25% 100%,
+    linear-gradient(180deg,var(--rule-soft) 1px,transparent 1px) 0 0/100% 25%;
+  -webkit-mask-image:radial-gradient(120% 80% at 50% 30%,#000 30%,transparent 72%);
+  mask-image:radial-gradient(120% 80% at 50% 30%,#000 30%,transparent 72%);
+  opacity:.5;
+}
+/* background-image is disabled globally above; grids are lines, not fills */
+.hero .sticky::before,.assemble .sticky::before{background-image:linear-gradient(90deg,var(--rule-soft) 1px,transparent 1px),linear-gradient(180deg,var(--rule-soft) 1px,transparent 1px)!important;background-size:25% 100%,100% 25%!important}
+
+/* the anchor the glow used to supply: the box, drawn in hairlines */
+
+/* ---- sheets that used a tint to read as "on" ---- */
+.ui-rail span.on{background-color:rgba(246,166,78,.16)!important;color:#ffe6c2!important}
+.exp-row:hover{background-color:rgba(246,166,78,.06)!important}
+.fic{color:#151009!important}
+.msg.me{background-color:rgba(246,166,78,.16)!important;border:1px solid rgba(246,166,78,.34)!important;color:#ffe6c2!important}
+.stack li,.card{border-color:var(--rule)!important}
+.pane{border:1px solid var(--rule)!important}
+
+/* ---- the device itself, drawn in hairlines ---- */
+.box-render{background-color:#151b23!important;border:1px solid var(--rule)!important}
+.box-render::before{border:1px solid rgba(255,255,255,.07)!important;background:none!important}
+.box-render .led{background:var(--amber-flat)!important;outline:1px solid rgba(246,166,78,.4)!important;outline-offset:7px}
+.box-render .port{background:rgba(244,239,228,.22)!important}
+.ico-box::before{background-color:var(--amber-flat)!important}
+.ico-box{background-color:rgba(246,166,78,.14)!important}
+.lamp,.cover{background-color:#1b222b!important}
+.node-box{border:1px solid rgba(246,166,78,.45)!important;background-color:rgba(246,166,78,.06)!important}
+.wire{background-color:rgba(246,166,78,.28)!important}
+
+@media (max-width:760px){
+  .hero .sticky{justify-content:flex-start!important;padding-top:96px!important}
+  .hero .sticky::before{opacity:.22}
+}
+
+/* iPhone: solid stand-ins for the two gradients it relies on */
+.ip-island{outline:1px solid rgba(255,255,255,.14)!important;outline-offset:0}
+.ip-wt{background-color:#0d1116!important}
+.ip-apps i.on .i{background-color:var(--amber-flat)!important;color:#170f06!important}
+.phone{background-color:#22282f!important;border:1px solid rgba(255,255,255,.2)!important}

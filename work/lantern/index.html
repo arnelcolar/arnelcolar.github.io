@@ -4,23 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lantern: scrolling product launch page</title>
-<meta name="description" content="A launch page for a fictional home server: scroll-driven scenes, a pinned screen tour, and every app screenshot built from HTML and CSS instead of images.">
-<meta name="theme-color" content="#07080a">
+<meta name="description" content="A launch page for a fictional home server: scroll-driven scenes, a pinned screen tour, and app screens built in HTML and CSS.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080a">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Lantern: scrolling product launch page">
-<meta property="og:description" content="A launch page for a fictional home server. Every app screenshot on it is HTML and CSS, not an image.">
+<meta property="og:description" content="A launch page for a fictional home server. The interface is HTML and CSS, the photographs are real.">
 <meta property="og:url" content="https://arnelcolar.is-a.dev/work/lantern/">
 <meta property="og:image" content="https://arnelcolar.is-a.dev/assets/shots/lantern.webp">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://arnelcolar.is-a.dev/assets/shots/lantern.webp">
 <meta property="og:image:width" content="1440">
 <meta property="og:image:height" content="900">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arnelcolar.is-a.dev/assets/shots/lantern.webp">
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="site.css">
+<script>/* ?grad shows the gradient edition; default is flat */
+  const l=document.createElement("link");l.rel="stylesheet";
+  l.href=location.search.includes("grad")?"data:text/css,":"flat.css";
+  document.head.appendChild(l);</script>
 </head>
 <body>
 
@@ -50,6 +54,10 @@
       <div class="field" aria-hidden="true"><b></b></div>
       <div class="intro">
         <h1 class="vh">Lantern</h1>
+        <p class="hero-mark" aria-hidden="true">
+          <i class="bm"><s></s><b></b></i>
+          <span>The box · 2&nbsp;TB · 6&nbsp;W idle</span>
+        </p>
         <p class="wordmark" data-t="Lantern" aria-hidden="true">Lantern</p>
         <p class="intro-line">Your photos, files and music. <span class="serif">At home.</span></p>
         <div class="cta-row">
@@ -76,36 +84,9 @@
       <figure class="rise-shot">
         <div class="ui" data-theme="dark" aria-hidden="true">
           <div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div>
-          <div class="ui-body home-ui">
-            <aside class="ui-rail">
-              <b class="ui-logo">L</b>
-              <span class="on">Home</span><span>Photos</span><span>Files</span><span>Music</span><span>Notes</span>
-            </aside>
-            <div class="ui-main">
-              <p class="ui-hello">Good evening, Ana.</p>
-              <p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p>
-              <div class="ui-cards">
-                <div class="ui-card">
-                  <span class="ui-k">Storage</span>
-                  <div class="ring" style="--v:38"><b>760</b><i>GB</i></div>
-                </div>
-                <div class="ui-card">
-                  <span class="ui-k">Devices</span>
-                  <div class="devices"><i></i><i></i><i></i><em>3 online</em></div>
-                </div>
-                <div class="ui-card">
-                  <span class="ui-k">Backups</span>
-                  <p class="ui-big">Nightly</p>
-                  <em>3 copies, 2 rooms</em>
-                </div>
-              </div>
-              <div class="ui-photos">
-                <i class="ph ph-a"></i><i class="ph ph-b"></i><i class="ph ph-c"></i><i class="ph ph-d"></i><i class="ph ph-e"></i><i class="ph ph-f"></i>
-              </div>
-            </div>
-          </div>
+          <div class="ui-body home-ui" data-fill="home"></div>
         </div>
-        <figcaption>Every screen on this page is drawn in CSS. There is not one image file in it.</figcaption>
+        <figcaption>Every screen on this page is drawn in HTML and CSS. The photographs are real, from a family's own library.</figcaption>
       </figure>
     </div>
   </section>
@@ -123,35 +104,26 @@
           <li><b>On your phone</b><span>The same thing, in your pocket.</span></li>
           <li><b>Lantern AI</b><span>Answers from your own files.</span></li>
         </ol>
-        <p class="tour-note">Every screen here is hand-built HTML and CSS. No screenshots, no stock photos, nothing exported from a design tool.</p>
+        <p class="tour-note">Every screen here is hand-built HTML and CSS. Nothing exported from a design tool, nothing faked in a screenshot.</p>
       </div>
       <div class="tour-stage" data-tilt>
         <div class="screen on">
-          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div><div class="ui-body home-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span class="on">Home</span><span>Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><p class="ui-hello">Good evening, Ana.</p><p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p><div class="ui-cards"><div class="ui-card"><span class="ui-k">Storage</span><div class="ring" style="--v:38"><b>760</b><i>GB</i></div></div><div class="ui-card"><span class="ui-k">Devices</span><div class="devices"><i></i><i></i><i></i><em>3 online</em></div></div><div class="ui-card"><span class="ui-k">Backups</span><p class="ui-big">Nightly</p><em>3 copies, 2 rooms</em></div></div><div class="ui-photos"><i class="ph ph-a"></i><i class="ph ph-b"></i><i class="ph ph-c"></i><i class="ph ph-d"></i><i class="ph ph-e"></i><i class="ph ph-f"></i></div></div></div></div>
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div><div class="ui-body home-ui" data-fill="home"></div></div>
         </div>
         <div class="screen">
-          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Photos</span><em>12,480 items</em></div><div class="ui-body photos-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span class="on">Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><div class="chips"><i class="on">All</i><i>Places</i><i>People</i><i>2026</i><i>Favourites</i></div><div class="masonry"><i class="ph ph-b"></i><i class="ph ph-g"></i><i class="ph ph-a"></i><i class="ph ph-e"></i><i class="ph ph-h"></i><i class="ph ph-c"></i><i class="ph ph-f"></i><i class="ph ph-d"></i><i class="ph ph-i"></i><i class="ph ph-a"></i><i class="ph ph-d"></i><i class="ph ph-c"></i></div></div></div></div>
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Photos</span><em>12,480 items</em></div><div class="ui-body photos-ui" data-fill="photos"></div></div>
         </div>
         <div class="screen">
-          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Files</span><em>Home</em></div><div class="ui-body files-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span class="on">Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><div class="crumbs"><i>Home</i><s>/</s><i>Documents</i><s>/</s><i>Contracts</i></div><table class="ui-table"><tbody><tr><td>Folder</td><td>Leases</td><td>—</td><td>2h ago</td></tr><tr><td>PDF</td><td>Studio renewal 2027</td><td>1.4 MB</td><td>2h ago</td></tr><tr><td>PDF</td><td>Insurance schedule</td><td>860 KB</td><td>Yesterday</td></tr><tr><td>Sheet</td><td>Rent roll</td><td>92 KB</td><td>Mon</td></tr><tr><td>Folder</td><td>Scans</td><td>—</td><td>Mon</td></tr><tr><td>Doc</td><td>Notice to quit</td><td>34 KB</td><td>3 Nov</td></tr><tr><td>PDF</td><td>Deposit receipt</td><td>210 KB</td><td>28 Oct</td></tr><tr><td>Sheet</td><td>Utilities 2026</td><td>64 KB</td><td>24 Oct</td></tr><tr><td>Folder</td><td>Buildings</td><td>—</td><td>19 Oct</td></tr><tr><td>Image</td><td>Floor plan.png</td><td>1.1 MB</td><td>12 Oct</td></tr></tbody></table></div></div></div>
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Files</span><em>Home</em></div><div class="ui-body files-ui" data-fill="files"></div></div>
         </div>
         <div class="screen">
-          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Music</span><em>Lossless</em></div><div class="ui-body music-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span>Files</span><span class="on">Music</span><span>Notes</span></aside><div class="ui-main"><div class="player"><i class="ph ph-e art"></i><div class="player-meta"><b>Static</b><span>The Lines</span><em>indie · 2006 · 3:52</em><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div><div class="queue"><i>Dark Ceiling — Yolk</i><i>Winter Kite — Sable Sa</i><i>Slow Return — Fathom</i><i>Paper Room — Nola Vr</i><i>Hold the Line — Aster</i><i>Blue Hour — Kite &amp; Co</i><i>Low Tide — Meridian</i><i>Cedar — Nova Lake</i></div></div></div></div>
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Music</span><em>Lossless</em></div><div class="ui-body music-ui" data-fill="music"></div></div>
         </div>
         <div class="screen">
-          <div class="phone">
-            <div class="phone-bar"><b>9:41</b><i></i></div>
-            <div class="phone-body">
-              <p class="phone-h">Backups</p>
-              <div class="phone-card"><b>This iPhone</b><span>Last backup 4 minutes ago</span><em>Done</em></div>
-              <div class="phone-card"><b>Studio Mac</b><span>Last backup 2 hours ago</span><em>Done</em></div>
-              <div class="phone-card"><b>Photos</b><span>12,480 · up to date</span><em>Done</em></div>
-              <div class="phone-cta">Back up now</div>
-            </div>
-          </div>
+          <div data-fill="phone"></div>
         </div>
         <div class="screen">
-          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Ask</span><em>on device</em></div><div class="ui-body ai-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span>Files</span><span>Music</span><span class="on">Ask</span></aside><div class="ui-main"><div class="bubble q">When does the studio lease renew?</div><div class="bubble a"><p>It renews on <b>31 March 2027</b>. The notice window is 90 days, so the last day to give notice is <b>31 December 2026</b>.</p><div class="cite"><i></i><span>Studio renewal 2027.pdf · page 2</span></div></div><div class="bubble q">And the insurance renewal?</div><div class="bubble a"><p>Renews <b>1 July 2027</b>, and the premium went up 8% last year. The schedule lists both buildings.</p></div><div class="ask"><span>Ask about your files</span><i></i></div><p class="ai-note">Runs on the box. Nothing is sent anywhere.</p></div></div></div>
+          <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Ask</span><em>on device</em></div><div class="ui-body ai-ui" data-fill="ask"></div></div>
         </div>
         <span class="glare" aria-hidden="true"></span>
       </div>
@@ -168,7 +140,7 @@
       <div class="sticky">
         <div class="panes" aria-label="Photos, files, music, notes and ask come together">
           <figure class="pane pane-1" style="--i:-2;--ex:-1;--ey:-1;--rot:-8">
-            <div class="mini"><div class="mini-bar"><span>Photos</span><em>2026</em></div><div class="mini-grid"><i class="ph ph-b"></i><i class="ph ph-g"></i><i class="ph ph-a"></i><i class="ph ph-e"></i><i class="ph ph-h"></i><i class="ph ph-c"></i></div></div>
+            <div class="mini"><div class="mini-bar"><span>Photos</span><em>2026</em></div><div class="mini-grid"><i class="ph"><img src="assets/photos/01.webp" alt="" width="600" height="401" loading="lazy" decoding="async"></i><i class="ph"><img src="assets/photos/07.webp" alt="" width="600" height="400" loading="lazy" decoding="async"></i><i class="ph"><img src="assets/photos/06.webp" alt="" width="600" height="400" loading="lazy" decoding="async"></i><i class="ph"><img src="assets/photos/12.webp" alt="" width="600" height="400" loading="lazy" decoding="async"></i><i class="ph"><img src="assets/photos/11.webp" alt="" width="600" height="400" loading="lazy" decoding="async"></i><i class="ph"><img src="assets/photos/04.webp" alt="" width="600" height="400" loading="lazy" decoding="async"></i></div></div>
             <figcaption><b>Photos</b>by face, place and year</figcaption>
           </figure>
           <figure class="pane pane-2" style="--i:-1;--ex:1;--ey:-1;--rot:6">
@@ -176,7 +148,7 @@
             <figcaption><b>Files</b>any folder, any device</figcaption>
           </figure>
           <figure class="pane pane-3" style="--i:0;--ex:-1;--ey:1;--rot:5">
-            <div class="mini"><div class="mini-bar"><span>Music</span><em>Lossless</em></div><div class="mini-player"><i class="ph ph-e"></i><div><b>The Lines</b><span>Static · 3:52</span><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+            <div class="mini"><div class="mini-bar"><span>Music</span><em>Lossless</em></div><div class="mini-player"><i class="ph"><img src="assets/covers/01.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><div><b>The Lines</b><span>Static · 3:52</span><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
             <figcaption><b>Music</b>lossless, yours</figcaption>
           </figure>
           <figure class="pane pane-4" style="--i:1;--ex:1;--ey:1;--rot:-6">
@@ -193,15 +165,15 @@
     </div>
     <div class="wrap gallery">
       <figure class="shot" data-tilt>
-        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div><div class="ui-body home-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span class="on">Home</span><span>Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><p class="ui-hello">Good evening, Ana.</p><p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p><div class="ui-cards"><div class="ui-card"><span class="ui-k">Storage</span><div class="ring" style="--v:38"><b>760</b><i>GB</i></div></div><div class="ui-card"><span class="ui-k">Devices</span><div class="devices"><i></i><i></i><i></i><em>3 online</em></div></div><div class="ui-card"><span class="ui-k">Backups</span><p class="ui-big">Nightly</p><em>3 copies, 2 rooms</em></div></div><div class="ui-photos"><i class="ph ph-a"></i><i class="ph ph-b"></i><i class="ph ph-c"></i><i class="ph ph-d"></i><i class="ph ph-e"></i><i class="ph ph-f"></i></div></div></div></div>
-        <figcaption><b>Home</b>Storage, devices and the last backup, in one glance</figcaption>
+        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Home</span><em>lantern.local</em></div><div class="ui-body home-ui" data-fill="home"></div></div>
+        <figcaption><b>Home</b>Your apps, your storage, your last backup</figcaption>
       </figure>
       <figure class="shot" data-tilt>
-        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Photos</span><em>12,480 items</em></div><div class="ui-body photos-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span class="on">Photos</span><span>Files</span><span>Music</span><span>Notes</span></aside><div class="ui-main"><div class="chips"><i class="on">All</i><i>Places</i><i>People</i><i>2026</i></div><div class="masonry"><i class="ph ph-b"></i><i class="ph ph-g"></i><i class="ph ph-a"></i><i class="ph ph-e"></i><i class="ph ph-h"></i><i class="ph ph-c"></i><i class="ph ph-f"></i><i class="ph ph-d"></i><i class="ph ph-i"></i><i class="ph ph-a"></i><i class="ph ph-d"></i><i class="ph ph-c"></i></div></div></div></div>
+        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Photos</span><em>12,480 items</em></div><div class="ui-body photos-ui" data-fill="photos"></div></div>
         <figcaption><b>Photos</b>12,480 photos, all on your shelf</figcaption>
       </figure>
       <figure class="shot" data-tilt>
-        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Ask</span><em>on device</em></div><div class="ui-body ai-ui"><aside class="ui-rail"><b class="ui-logo">L</b><span>Home</span><span>Photos</span><span>Files</span><span>Music</span><span class="on">Ask</span></aside><div class="ui-main"><div class="bubble q">When does the studio lease renew?</div><div class="bubble a"><p>It renews on <b>31 March 2027</b>. The notice window is 90 days, so the last day to give notice is <b>31 December 2026</b>.</p><div class="cite"><i></i><span>Studio renewal 2027.pdf · page 2</span></div></div><div class="ask"><span>Ask about your files</span><i></i></div></div></div></div>
+        <div class="ui" data-theme="dark"><div class="ui-bar"><i></i><i></i><i></i><span>Lantern · Ask</span><em>on device</em></div><div class="ui-body ai-ui" data-fill="ask"></div></div>
         <figcaption><b>Ask</b>Answers with the page they came from</figcaption>
       </figure>
     </div>
@@ -368,7 +340,7 @@
   <div class="wrap">
     <a class="brand" href="#top"><img src="assets/mark.svg" alt="" width="22" height="22"><span>Lantern</span></a>
     <p>A small box for a big library. First units ship in March 2027, $99 once.</p>
-    <p class="fine">© 2027 Lantern Labs · Photography on this page is generated, the interface is real · Built in Porto.</p>
+    <p class="fine">© 2027 Lantern Labs · Interface drawn in HTML and CSS · Photographs from Pexels · Built in Porto.</p>
     <p class="fine legal"><a href="#">Terms</a> · <a href="#">Privacy</a> · <a href="#">Refunds</a> · <a href="#">Status</a></p>
   </div>
 </footer>
@@ -377,6 +349,156 @@
   <img alt="">
   <form method="dialog"><button class="zoom-close" aria-label="Close">×</button></form>
 </dialog>
+
+<!-- One copy of each screen. The markup is cloned into every [data-fill] slot below,
+     so the hero, the tour and the gallery can never drift apart. -->
+<svg class="sprite" aria-hidden="true"><symbol id="i-home" viewBox="0 0 24 24"><path d="M3.2 10.4 12 3.4l8.8 7V20a1 1 0 0 1-1 1h-5.3v-6.1H9.5V21H4.2a1 1 0 0 1-1-1z"/></symbol><symbol id="i-photos" viewBox="0 0 24 24"><rect x="3.2" y="4.6" width="17.6" height="14.8" rx="1.7"/><path d="m4.2 16.4 4.6-3.9 3.6 2.8 3-2.6 4.4 4"/><circle cx="8.6" cy="9" r="1.5"/></symbol><symbol id="i-files" viewBox="0 0 24 24"><path d="M3.2 7.4A1.8 1.8 0 0 1 5 5.6h4.2l1.9 2.4H19a1.8 1.8 0 0 1 1.8 1.8v7.4A1.8 1.8 0 0 1 19 19H5a1.8 1.8 0 0 1-1.8-1.8z"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9.4 17V6.6l9.4-1.8v9.6"/><circle cx="7" cy="17.4" r="2.4"/><circle cx="16.4" cy="15" r="2.4"/></symbol><symbol id="i-notes" viewBox="0 0 24 24"><path d="M6.4 3.4h7.2l4 4v13.2H6.4z"/><path d="M13.6 3.4v4h4"/><path d="M9 12h6M9 15.4h4.2"/></symbol><symbol id="i-ask" viewBox="0 0 24 24"><path d="M12 3.2l1.9 5.1 5.1 1.9-5.1 1.9L12 17.2l-1.9-5.1L5 10.2l5.1-1.9z"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.7 5.7l1.7 1.7M16.6 16.6l1.7 1.7M18.3 5.7l-1.7 1.7M7.4 16.6l-1.7 1.7"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.4 7.8A1.6 1.6 0 0 1 5 6.2h3.8l1.8 2.2H19a1.6 1.6 0 0 1 1.6 1.6v6.2A1.6 1.6 0 0 1 19 18H5a1.6 1.6 0 0 1-1.6-1.6z"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.4"/><path d="m15.8 15.8 5 5"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.6 4.9 4.8L19.5 6.8"/></symbol></svg>
+
+<template id="tpl-home">
+  <aside class="ui-rail"><b class="ui-logo">L</b><span class="on"><svg class="i"><use href="#i-home"/></svg>Home</span><span><svg class="i"><use href="#i-photos"/></svg>Photos</span><span><svg class="i"><use href="#i-files"/></svg>Files</span><span><svg class="i"><use href="#i-music"/></svg>Music</span><span><svg class="i"><use href="#i-notes"/></svg>Notes</span><span><svg class="i"><use href="#i-ask"/></svg>Ask</span><span class="rail-foot"><svg class="i"><use href="#i-gear"/></svg>Settings</span></aside>
+  <div class="ui-main">
+    <p class="ui-hello">Good evening, Ana.</p>
+    <p class="ui-sub">Everything is backed up. Last check 4 minutes ago.</p>
+    <div class="dash">
+      <div class="dash-t"><i class="tile-ico"><svg class="i"><use href="#i-photos"/></svg></i><b>Photos</b><span>12,480</span></div>
+      <div class="dash-t"><i class="tile-ico"><svg class="i"><use href="#i-files"/></svg></i><b>Files</b><span>1,204</span></div>
+      <div class="dash-t"><i class="tile-ico"><svg class="i"><use href="#i-music"/></svg></i><b>Music</b><span>842</span></div>
+      <div class="dash-t"><i class="tile-ico"><svg class="i"><use href="#i-notes"/></svg></i><b>Notes</b><span>42</span></div>
+      <div class="dash-t"><i class="tile-ico"><svg class="i"><use href="#i-gear"/></svg></i><b>Settings</b><span>6 W</span></div>
+    </div>
+    <div class="ui-cards">
+      <div class="ui-card"><span class="ui-k">Storage</span><div class="ring" style="--v:38"><b>760</b><i>GB</i></div></div>
+      <div class="ui-card"><span class="ui-k">Devices</span><div class="devices"><i></i><i></i><i></i><em>3 online</em></div></div>
+      <div class="ui-card"><span class="ui-k">Backups</span><p class="ui-big">Nightly</p><em>3 copies, 2 rooms</em></div>
+    </div>
+    <div class="ui-recent">
+      <span class="ui-k">Recent</span>
+      <div class="ui-photos">
+        <i class="ph"><img src="assets/photos/02.webp" alt="All four of them" width="600" height="400" decoding="async"></i>
+        <i class="ph"><img src="assets/photos/06.webp" alt="The two of them in the lake" width="800" height="533" decoding="async"></i>
+        <i class="ph"><img src="assets/photos/07.webp" alt="Biscoito, the dog" width="800" height="533" decoding="async"></i>
+        <i class="ph"><img src="assets/photos/05.webp" alt="Great-grandmother Maria with the baby" width="800" height="532" decoding="async"></i>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-photos">
+  <aside class="ui-rail"><b class="ui-logo">L</b><span><svg class="i"><use href="#i-home"/></svg>Home</span><span class="on"><svg class="i"><use href="#i-photos"/></svg>Photos</span><span><svg class="i"><use href="#i-files"/></svg>Files</span><span><svg class="i"><use href="#i-music"/></svg>Music</span><span><svg class="i"><use href="#i-notes"/></svg>Notes</span><span><svg class="i"><use href="#i-ask"/></svg>Ask</span><span class="rail-foot"><svg class="i"><use href="#i-gear"/></svg>Settings</span></aside>
+  <div class="ui-main">
+    <div class="chips"><i class="on">All</i><i>Places</i><i>People</i><i>2026</i><i>Favourites</i></div>
+    <div class="masonry">
+      <i class="ph"><img src="assets/photos/01.webp" alt="The family on the lawn on the first warm weekend" width="800" height="530" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/02.webp" alt="All four of them, the last morning" width="600" height="400" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/03.webp" alt="Walking into the sea, all holding hands" width="600" height="401" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/04.webp" alt="The lake before anyone else was up" width="600" height="450" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/05.webp" alt="Great-grandmother Maria with the baby" width="800" height="532" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/06.webp" alt="The two of them in the water until their lips went blue" width="800" height="533" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/07.webp" alt="Biscoito, unbothered" width="800" height="533" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/08.webp" alt="The garden in August" width="449" height="800" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/09.webp" alt="Sunday at the grandparents' house" width="800" height="533" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/10.webp" alt="Joao on the log, halfway up the trail" width="600" height="800" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/11.webp" alt="Dinner for eleven" width="800" height="533" loading="lazy" decoding="async"></i>
+      <i class="ph"><img src="assets/photos/12.webp" alt="The drive home under the stars" width="533" height="800" loading="lazy" decoding="async"></i>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-files">
+  <aside class="ui-rail"><b class="ui-logo">L</b><span><svg class="i"><use href="#i-home"/></svg>Home</span><span><svg class="i"><use href="#i-photos"/></svg>Photos</span><span class="on"><svg class="i"><use href="#i-files"/></svg>Files</span><span><svg class="i"><use href="#i-music"/></svg>Music</span><span><svg class="i"><use href="#i-notes"/></svg>Notes</span><span><svg class="i"><use href="#i-ask"/></svg>Ask</span><span class="rail-foot"><svg class="i"><use href="#i-gear"/></svg>Settings</span></aside>
+  <div class="ui-main">
+    <div class="exp-bar">
+      <div class="crumbs"><i>Home</i><s>/</s><i>Documents</i><s>/</s><i>Contracts</i></div>
+      <div class="exp-tools"><svg class="i"><use href="#i-search"/></svg><b>Name</b><b>Modified</b></div>
+    </div>
+    <div class="folders">
+      <div class="folder"><svg class="i"><use href="#i-folder"/></svg><b>Leases</b><span>128 items</span></div>
+      <div class="folder"><svg class="i"><use href="#i-folder"/></svg><b>Scans</b><span>42 items</span></div>
+      <div class="folder"><svg class="i"><use href="#i-folder"/></svg><b>Buildings</b><span>9 items</span></div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-row"><i class="fic pdf">PDF</i><b>Studio renewal 2027</b><span>1.4 MB</span><span>2h ago</span></div>
+      <div class="exp-row"><i class="fic pdf">PDF</i><b>Insurance schedule</b><span>860 KB</span><span>Yesterday</span></div>
+      <div class="exp-row"><i class="fic xls">XLS</i><b>Rent roll</b><span>92 KB</span><span>Mon</span></div>
+      <div class="exp-row"><i class="fic img">IMG</i><b>Floor plan.png</b><span>1.1 MB</span><span>12 Oct</span></div>
+      <div class="exp-row"><i class="fic zip">ZIP</i><b>Site photos.zip</b><span>240 MB</span><span>4 Oct</span></div>
+      <div class="exp-row"><i class="fic doc">DOC</i><b>Notice to quit</b><span>34 KB</span><span>3 Nov</span></div>
+      <div class="exp-row"><i class="fic pdf">PDF</i><b>Deposit receipt</b><span>210 KB</span><span>28 Oct</span></div>
+      <div class="exp-row"><i class="fic xls">XLS</i><b>Utilities 2026</b><span>64 KB</span><span>24 Oct</span></div>
+      <div class="exp-row"><i class="fic img">IMG</i><b>Floor plan v2.png</b><span>2.3 MB</span><span>19 Oct</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-music">
+  <aside class="ui-rail"><b class="ui-logo">L</b><span><svg class="i"><use href="#i-home"/></svg>Home</span><span><svg class="i"><use href="#i-photos"/></svg>Photos</span><span><svg class="i"><use href="#i-files"/></svg>Files</span><span class="on"><svg class="i"><use href="#i-music"/></svg>Music</span><span><svg class="i"><use href="#i-notes"/></svg>Notes</span><span><svg class="i"><use href="#i-ask"/></svg>Ask</span><span class="rail-foot"><svg class="i"><use href="#i-gear"/></svg>Settings</span></aside>
+  <div class="ui-main">
+    <div class="player">
+      <i class="art"><img src="assets/covers/01.webp" alt="" width="340" height="340"></i>
+      <div class="player-meta"><b>Static</b><span>The Lines</span><em>Nightjar · 2006 · 3:52</em>
+        <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div class="albums">
+      <div class="alb"><i><img src="assets/covers/01.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Nightjar</b><span>The Lines</span></div>
+      <div class="alb"><i><img src="assets/covers/02.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Paper Room</b><span>Nola Vr</span></div>
+      <div class="alb"><i><img src="assets/covers/03.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Blue Hour</b><span>Kite &amp; Co</span></div>
+      <div class="alb"><i><img src="assets/covers/04.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Cedar</b><span>Nova Lake</span></div>
+      <div class="alb"><i><img src="assets/covers/05.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Low Tide</b><span>Meridian</span></div>
+      <div class="alb"><i><img src="assets/covers/06.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Slow Return</b><span>Fathom</span></div>
+      <div class="alb"><i><img src="assets/covers/07.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Winter Kite</b><span>Aster</span></div>
+      <div class="alb"><i><img src="assets/covers/08.webp" alt="" width="340" height="340" loading="lazy" decoding="async"></i><b>Hold the Line</b><span>Sable Sa</span></div>
+      <div class="alb"><i><img src="assets/covers/09.webp" alt="" width="400" height="266" loading="lazy" decoding="async"></i><b>Dark Ceiling</b><span>Yolk</span></div>
+      <div class="alb"><i><img src="assets/covers/10.webp" alt="" width="267" height="400" loading="lazy" decoding="async"></i><b>In the Long Grass</b><span>Meridian</span></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-phone">
+  <div class="phone">
+    <div class="ip-scr">
+      <span class="ip-island" aria-hidden="true"></span>
+      <div class="ip-status"><b>9:41</b><span class="ip-sys"><span class="ip-sig"><i></i><i></i><i></i><i></i></span><i class="ip-wifi"></i><i class="ip-batt"></i></span></div>
+      <div class="ip-widget">
+        <img src="assets/photos/02.webp" alt="" width="520" height="390" loading="lazy" decoding="async">
+        <div class="ip-wt"><span class="ui-k">Lantern</span><b>12,480 photos</b><em>Backed up 4 minutes ago</em></div>
+      </div>
+      <div class="ip-apps">
+        <i class="on"><svg class="i"><use href="#i-photos"/></svg><b>Photos</b></i>
+        <i><svg class="i"><use href="#i-files"/></svg><b>Files</b></i>
+        <i><svg class="i"><use href="#i-music"/></svg><b>Music</b></i>
+        <i><svg class="i"><use href="#i-notes"/></svg><b>Notes</b></i>
+        <i><svg class="i"><use href="#i-ask"/></svg><b>Ask</b></i>
+        <i><svg class="i"><use href="#i-gear"/></svg><b>Settings</b></i>
+        <i><svg class="i"><use href="#i-folder"/></svg><b>Shared</b></i>
+        <i><svg class="i"><use href="#i-search"/></svg><b>Recents</b></i>
+      </div>
+      <div class="ip-dock">
+        <svg class="i"><use href="#i-photos"/></svg>
+        <svg class="i"><use href="#i-files"/></svg>
+        <svg class="i"><use href="#i-music"/></svg>
+        <svg class="i"><use href="#i-ask"/></svg>
+      </div>
+      <span class="ip-home" aria-hidden="true"></span>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-ask">
+  <aside class="ui-rail"><b class="ui-logo">L</b><span><svg class="i"><use href="#i-home"/></svg>Home</span><span><svg class="i"><use href="#i-photos"/></svg>Photos</span><span><svg class="i"><use href="#i-files"/></svg>Files</span><span><svg class="i"><use href="#i-music"/></svg>Music</span><span><svg class="i"><use href="#i-notes"/></svg>Notes</span><span class="on"><svg class="i"><use href="#i-ask"/></svg>Ask</span><span class="rail-foot"><svg class="i"><use href="#i-gear"/></svg>Settings</span></aside>
+  <div class="ui-main">
+    <div class="chat-h"><i class="bot"><svg class="i"><use href="#i-ask"/></svg></i><div><b>Lantern Ask</b><span>On device · 12,480 photos, 1,204 files</span></div></div>
+    <div class="chat">
+      <div class="msg me">When does the studio lease renew?</div>
+      <div class="msg ai"><p>It renews on <b>31 March 2027</b>. The notice window is 90 days, so the last day to give notice is <b>31 December 2026</b>.</p><div class="cite"><i></i><span>Studio renewal 2027.pdf · page 2</span></div></div>
+      <div class="msg me">And the insurance renewal?</div>
+      <div class="msg ai"><p>Renews <b>1 July 2027</b>. The premium went up 8% last year, and the schedule lists both buildings.</p></div>
+    </div>
+    <div class="composer"><span>Ask about your files</span><svg class="i send"><use href="#i-send"/></svg></div>
+  </div>
+</template>
+
+<script>for(const s of document.querySelectorAll('[data-fill]')){const t=document.getElementById('tpl-'+s.dataset.fill);if(t)s.append(t.content.cloneNode(true))}</script>
 
 <script src="site.js" defer></script>
 
