@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A phone receptionist that books the visit</title>
+<meta name="description" content="A receptionist that answers a heating and air company's phone at any hour, asks the questions a front desk asks, spells the name back, and writes the visit into the calendar. Case study by Arnel Colar.">
+<meta property="og:title" content="A phone receptionist that books the visit">
+<meta property="og:description" content="It answers the line, works out what's wrong, books the visit and writes it into the calendar. Case study by Arnel Colar.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arnelcolar.is-a.dev/work/phone-agent/">
+<meta property="og:image" content="https://arnelcolar.is-a.dev/assets/shots/phone-agent.webp">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="A call transcript with the booking reference and the calendar entry it created">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A phone receptionist that books the visit">
+<meta name="twitter:description" content="It answers the line, works out what's wrong, books the visit and writes it into the calendar. Case study by Arnel Colar.">
+<meta name="twitter:image" content="https://arnelcolar.is-a.dev/assets/shots/phone-agent.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+.bar a{text-decoration:none}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:64px 0 72px}
+h1{font-size:clamp(31px,3.9vw,46px);line-height:1.07;font-weight:500;letter-spacing:-.038em;margin-top:12px;text-wrap:balance}
+.hero p{margin-top:20px;color:var(--muted);font-size:17px;max-width:48ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;list-style:none;font-size:13px}
+.facts li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+
+.call{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:9px;font-size:14px;line-height:1.5}
+.m{max-width:90%;padding:9px 13px;border-radius:14px}
+.them{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.you{align-self:flex-end;background:#e9e9e9;border-bottom-right-radius:4px}
+.m b{font-weight:600;letter-spacing:.02em}
+.callfoot{display:flex;justify-content:space-between;gap:12px;margin-top:6px;padding-top:11px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.callfoot b{color:var(--ink);font-weight:600;letter-spacing:-.01em}
+
+figure.ui{padding-bottom:40px}
+figure.ui .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--soft)}
+figcaption{font-size:13px;color:var(--muted);margin-top:12px}
+
+section.block{padding:68px 0 8px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:16px;margin-bottom:30px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(26px,3.3vw,40px);line-height:1.08;font-weight:500;letter-spacing:-.035em;text-wrap:balance}
+.lede{color:var(--muted);max-width:56ch;margin-bottom:36px;font-size:17px;line-height:1.65}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
+.steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
+.steps b{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
+.steps.two{grid-template-columns:repeat(2,1fr);gap:28px 32px}
+h3.sub{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:56px 0 12px}
+
+.log{list-style:none;border-left:2px solid var(--line);padding-left:20px;margin:0;font-size:15px}
+.log li{padding:7px 0;line-height:1.5}
+.log time{font:400 12px/1 ui-monospace,monospace;color:var(--muted);margin-right:10px}
+.log b{font-weight:600}
+.log .gap{border-top:1px dashed var(--line);margin-top:8px;padding-top:14px}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:13px 0;border-top:1px solid var(--line);vertical-align:top;line-height:1.55}
+th{font-size:13px;font-weight:500;color:var(--muted)}
+td:last-child,th:last-child{text-align:right;padding-left:16px}
+.note{color:var(--muted);font-size:15px;margin-top:20px;max-width:60ch}
+
+.faq{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}
+.faq li{padding:18px 0;border-top:1px solid var(--line)}
+.faq b{display:block;font-weight:600;margin-bottom:4px}
+.faq p{color:var(--muted);font-size:15px}
+
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:0;list-style:none;margin-top:8px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.chain li{padding:16px 18px;font-size:14px;color:var(--muted);border-left:1px solid var(--line)}
+.chain li:first-child{border-left:0}
+.chain b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;font-size:15px}
+
+.ask{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:48px 0 96px;border-top:1px solid var(--line)}
+.ask h2{font-size:clamp(28px,3.4vw,40px)}
+.ask p{color:var(--muted);margin-top:8px;max-width:52ch}
+
+@media (max-width:760px){
+  .hero,.steps,.steps.two,.faq,.chain{grid-template-columns:1fr}
+  .chain li{border-left:0;border-top:1px solid var(--line)}
+  .chain li:first-child{border-top:0}
+  .hero{padding:32px 0 56px;gap:40px}
+  th:last-child,td:last-child{text-align:left;padding-left:20px}
+}
+
+@media (max-width:600px){
+  table,thead,tbody,tr,td{display:block}
+  thead{display:none}
+  tr{padding:16px 0;border-top:1px solid var(--line)}
+  td{border:0;padding:0;text-align:left}
+  td:first-child{font-weight:600;margin-bottom:3px}
+  .log{padding-left:14px}
+  .log time{display:block;margin:0 0 2px}
+}
+</style>
+</head>
+<body>
+<div class="wrap bar"><a href="../../"><b>Arnel Colar</b></a><a class="back" href="../../#work">All work</a></div>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="label">Case study · Phone receptionist</p>
+      <h1>Someone picks up, works out what's wrong, and books the visit.</h1>
+      <p>The line at a heating and air company, answered by a receptionist that runs on the office machine. It asks the questions a good front desk asks, walks a caller through the checks that save a trip, spells the name back before writing it down, and puts the visit on the calendar with a reference the caller can repeat.</p>
+      <ul class="facts">
+        <li>Answers at any hour</li>
+        <li>Asks before it books</li>
+        <li>Spells the name back</li>
+        <li>Writes to the calendar</li>
+        <li>Runs on your own machine</li>
+        <li>Still being polished</li>
+      </ul>
+    </div>
+    <div class="call" aria-label="Excerpt from a test call">
+      <div class="m them">Okay — so the furnace is running but blowing cold air.</div>
+      <div class="m them">Is the thermostat set to “heat” and the fan on “auto”?</div>
+      <div class="m you">Yes.</div>
+      <div class="m them">When did you last change the filter?</div>
+      <div class="m you">Last year.</div>
+      <div class="m them">No problem. We'll get a tech out. What's your name?</div>
+      <div class="m you">Sean Reed.</div>
+      <div class="m them">Sean Reed — that's <b>S-E-A-N</b>, <b>R-E-E-D</b>. Did I get that right?</div>
+      <div class="m you">No — that's H, H, A, W, N.</div>
+      <div class="m them">Shawn Reed — that's <b>S-H-A-W-N</b>, <b>R-E-E-D</b>. Is that right?</div>
+      <div class="callfoot"><span>Booked <b>A-0012</b></span><span>Tomorrow, 8–10 a.m.</span></div>
+    </div>
+  </section>
+
+  <figure class="ui">
+    <div class="frame"><img src="../../assets/shots/phone-agent-calendar.webp" alt="The bookings calendar for November: urgent visits in red, the rest in blue, and a box underneath for callers who did not pick a time" width="1440" height="900" loading="lazy"></div>
+    <figcaption>Where the call ends up. Every booking is a row in the database and an event in the calendar the office already uses. Red is urgent; the box at the bottom is the callers who would not pick a time, so somebody rings them back.</figcaption>
+  </figure>
+
+  <section class="block">
+    <div class="head"><h2>The call nobody answers</h2></div>
+    <p class="lede">A two-person heating and air shop cannot answer the phone while both of them are under a house. The caller who gets voicemail at four in the afternoon dials the next name on the list, and the shop never learns it lost the job.</p>
+    <p class="lede" style="margin-top:-16px">An answering service fixes the ringing and not much else: it takes a message, and somebody still has to call back that evening, ask the same five questions, and write the visit down. The point of this build is the part after the message — asking, deciding, and putting it on the calendar while the caller is still on the line.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>One call, four moves</h2></div>
+    <ol class="steps">
+      <li><b>Picks up</b>Two rings of ringback first, then the greeting. Instant pickup reads as a machine, and two rings is what a person at a desk sounds like.</li>
+      <li><b>Works out the problem</b>It repeats the problem back in a few words, then asks the checks that save a trip: thermostat on heat, breaker, the furnace switch, the filter. If the answer is the filter, there is no visit to book.</li>
+      <li><b>Books it</b>One question at a time — name, callback number, address, what's wrong, the day and window. The name is spelled back from a tool rather than from memory, and confirmed before anything is written.</li>
+      <li><b>Writes it down</b>A row in the database and an event in the office calendar, plus a reference like A-0012 the caller can repeat. If the calendar is down the booking still saves.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What it does when it mishears</h2></div>
+    <p class="lede">This is the interesting part of the build, and the reason the log matters more than the demo. A phone line is a bad microphone: names, numbers and street names arrive wrong. Below is one test call, cut down, taken from the server log. The lines are verbatim.</p>
+    <ol class="log">
+      <li><time>21:43:27</time><b>Caller</b> — Sean Reed.</li>
+      <li><time>21:43:35</time><b>Receptionist</b> — Sean Reed — that's S-E-A-N, R-E-E-D.</li>
+      <li><time>21:43:39</time><b>Receptionist</b> — Did I get that right?</li>
+      <li class="gap"><time>21:43:49</time><b>Caller</b> — Now that's H, H, A, W, N.</li>
+      <li><time>21:44:44</time><b>Receptionist</b> — Let me try that again.</li>
+      <li><time>21:44:46</time><b>Receptionist</b> — Sean Reed — S-E-A-N, R-E-E-D.</li>
+      <li><time>21:44:49</time><b>Receptionist</b> — Is that right?</li>
+      <li class="gap"><time>21:45:34</time><b>Caller</b> — to the correct.</li>
+      <li><time>21:45:44</time><b>Receptionist</b> — My apologies, let me get that right.</li>
+      <li><time>21:45:48</time><b>Receptionist</b> — Is it S-H-A-W-N, R-E-E-D?</li>
+      <li><time>21:45:54</time><b>Caller</b> — Yes.</li>
+      <li><time>21:45:55</time><b>Receptionist</b> — Thanks, Shawn.</li>
+    </ol>
+    <p class="note">Three rounds to get one name, and it never guessed. That is the behaviour I wanted and it took work to get: the letters come from a tool, not from the model, and the booking is blocked until the caller says yes. The cost is time on the line — see the limits below.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What it won't do</h2></div>
+    <table>
+      <thead><tr><th>Ask it for</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>A price, an arrival time, a technician's name</td><td>Says someone will confirm, and takes the number</td></tr>
+        <tr><td>A gas smell or a carbon monoxide alarm</td><td>Tells the caller to leave the house and call 911 first, then takes the details and marks it urgent</td></tr>
+        <tr><td>Medical, legal or financial advice</td><td>Declines, and takes a message</td></tr>
+        <tr><td>To be booked twice</td><td>Returns the first reference instead of a second booking</td></tr>
+        <tr><td>A person, right now</td><td>Takes the number and says the office will call back within the hour, without more questions</td></tr>
+        <tr><td>Anything, when the booking fails</td><td>Takes name and number, gives the reference if there is one, and promises the same day — never a time it cannot keep</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Every one of these is a line in the persona, not a hope. The persona is one markdown file: who answers, how they talk, what they handle, and the hard limits. Changing the trade means changing that file and the tool it books with.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Still being built</h2></div>
+    <p class="lede">This one is not handed over to a client yet, so here is what is not finished. The company on this page is a stand-in of my own, and every caller and booking in it is test data.</p>
+    <ol class="steps two">
+      <li><b>It is slower than a person</b>Across 110 logged turns, a turn finished in a median of 5.7 seconds and the worst took 20. Almost all of that is waiting for the model's first sentence, not the speech recognition (median 1.1 seconds) or the voice.</li>
+      <li><b>Dead air</b>Three seconds of silence before the first word felt broken. A pre-recorded “Mm-hm.” or “Okay.” now plays within 0.7 seconds while the rest is being worked out.</li>
+      <li><b>One model, one failure</b>A fallback model took 26 to 38 seconds to start speaking and was removed. There is one model behind this now, and a stall is retried once before the caller is told anything.</li>
+      <li><b>It does not say it is a machine</b>On a real client's line I would have it say so in the first sentence and offer a person. That is the business owner's call, but it should be the default, and it is not built yet.</li>
+      <li><b>Bad lines</b>The log above shows the good case. The same call with wind and traffic on the line produced “(speaking in foreign language)” and “(birds chirping)” where the caller's sentence should be.</li>
+      <li><b>One phone system tested</b>Two carriers and a local phone exchange are wired up, but it has only ever run against my own test calls, never a real switchboard with hold music, transfers and extensions.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Under the hood</h2></div>
+    <p class="lede">For the technical reader. A Python service with three local parts and one model call, all on the office machine. The speech recognition and the voice are open models running on the CPU, so no audio leaves the building and there is no per-minute speech bill.</p>
+    <ol class="chain">
+      <li><b>The call</b>A phone exchange takes the line and hands the audio to the service over a socket, 8 kHz in both directions.</li>
+      <li><b>The ear</b>Local speech recognition turns each finished sentence into text, in about a second.</li>
+      <li><b>The reply</b>A model gets the persona, the call so far, and the tools it may call — book, spell a name, look up the calendar — and answers in one or two sentences.</li>
+      <li><b>The voice</b>A local voice model speaks the reply back. It is fast enough to run while the sentence is still being written.</li>
+    </ol>
+    <h3 class="sub">What broke, and the fix</h3>
+    <ol class="steps two">
+      <li><b>It hung up after two seconds</b>The phone exchange drops a call with no traffic in either direction. The service now sends 20 ms of silence whenever it has been quiet for 400 ms, so a slow answer no longer kills the line.</li>
+      <li><b>It repeated itself</b>The model called the booking tool twice for the same caller. A repeated identical call is now answered from a local record, and the booking endpoint returns the first reference for the same name, number and slot within 15 minutes.</li>
+      <li><b>It spelled from memory</b>Names came out wrong, and a wrong name sends a report to the wrong customer. The letters now come from a local tool, and the persona will not book until the caller confirms them.</li>
+      <li><b>The reference was guessable</b>The booking endpoint is reachable from the public side of the tunnel, so a loopback check would have exposed every caller's details. It needs a token instead.</li>
+    </ol>
+  </section>
+
+  <section class="ask">
+    <div>
+      <h2>Want the phone answered?</h2>
+      <p>Tell me the trade, the five questions your front desk always asks, and where a booking has to land.</p>
+      <p style="color:var(--muted,#6b6b6b)">Fixed scope, fixed price, quoted before I start. You own the code, and I reply within one working day.</p>
+    </div>
+    <a class="cta" href="mailto:arnelcolar@gmail.com?subject=Phone%20receptionist%20for%20my%20business&body=Trade%3A%0AQuestions%20we%20always%20ask%3A%0AWhere%20bookings%20should%20go%3A">Email me</a>
+  </section>
+</main>
+
+<footer><div class="wrap">The company, callers and bookings on this page are test data. Nothing here is a real customer.</div></footer>
+
+</body>
+</html>
