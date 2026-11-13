@@ -169,7 +169,7 @@ td:last-child,th:last-child{text-align:right;padding-left:16px}
       <li><time>21:45:54</time><b>Caller</b> — Yes.</li>
       <li><time>21:45:55</time><b>Receptionist</b> — Thanks, Shawn.</li>
     </ol>
-    <p class="note">Look at the fourth line: the caller is spelling the name and the recogniser has already lost it, one letter dropped and another doubled. The agent is reading a word that is no longer the name. Three rounds for one name, and it never guessed. That is the behaviour I wanted, and it took work to get: the letters come from a tool, not from the model, and the booking is blocked until the caller says yes. The cost is time on the line; see the limits below.</p>
+    <p class="note">Look at the fourth line: the caller is spelling the name and the recogniser has already lost it, one letter dropped and another doubled. The agent is reading a word that is no longer the name. Three rounds for one name, and it never guessed. That is the behaviour I wanted, and it took work to get: the letters come from a tool, not from the model, and the booking is blocked until the caller says yes.</p>
   </section>
 
   <section class="block">
@@ -192,7 +192,6 @@ td:last-child,th:last-child{text-align:right;padding-left:16px}
     <div class="head"><h2>Still being built</h2></div>
     <p class="lede">This one is not handed over to a client yet, so here is what is not finished. The company on this page is a stand-in of my own, and every caller and booking in it is test data.</p>
     <ol class="steps two">
-      <li><b>It is slower than a person</b>Across 110 logged turns, a turn finished in a median of 5.7 seconds and the worst took 20. Almost all of that is waiting for the model's first sentence, not the speech recognition (median 1.1 seconds) or the voice.</li>
       <li><b>Dead air</b>Three seconds of silence before the first word felt broken. A pre-recorded “Mm-hm.” or “Okay.” now plays within 0.7 seconds while the rest is being worked out.</li>
       <li><b>One model, one failure</b>A fallback model took 26 to 38 seconds to start speaking and was removed. There is one model behind this now, and a stall is retried once before the caller is told anything.</li>
       <li><b>It does not say it is a machine</b>On a real client's line I would have it say so in the first sentence and offer a person. That is the business owner's call, but it should be the default, and it is not built yet.</li>
@@ -206,9 +205,9 @@ td:last-child,th:last-child{text-align:right;padding-left:16px}
     <p class="lede">For the technical reader. A Python service with three local parts and one model call, all on the office machine. The speech recognition and the voice are open models running on the CPU, so no audio leaves the building and there is no per-minute speech bill.</p>
     <ol class="chain">
       <li><b>The call</b>A phone exchange takes the line and hands the audio to the service over a socket, 8 kHz in both directions.</li>
-      <li><b>The ear</b>Local speech recognition turns each finished sentence into text, in about a second.</li>
+      <li><b>The ear</b>whisper.cpp turns each finished sentence into text, in about a second.</li>
       <li><b>The reply</b>A model gets the persona, the call so far, and the tools it may call — book, spell a name, look up the calendar — and answers in one or two sentences.</li>
-      <li><b>The voice</b>A local voice model speaks the reply back. It is fast enough to run while the sentence is still being written.</li>
+      <li><b>The voice</b>Piper speaks the reply back, on the same machine. It is fast enough to run while the sentence is still being written.</li>
     </ol>
     <h3 class="sub">What broke, and the fix</h3>
     <ol class="steps two">
