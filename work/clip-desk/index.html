@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A clip desk that posts three times a day on its own</title>
+<meta name="description" content="A pipeline that finds a trending GTA VI video, cuts the best moments into vertical clips, checks them against a rulebook, and posts them to YouTube and TikTok on a daily schedule with no human in the loop. Case study by Arnel Colar.">
+<meta property="og:title" content="A clip desk that posts three times a day on its own">
+<meta property="og:description" content="Find, cut, check, post. Two APIs and a rulebook, no browser and no paid scheduler. Case study by Arnel Colar.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://arnelcolar.is-a.dev/work/clip-desk/">
+<meta property="og:image" content="https://arnelcolar.is-a.dev/assets/shots/clip-desk.webp">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="A vertical GTA VI clip next to the pipeline log that found, cut, checked and posted it">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A clip desk that posts three times a day on its own">
+<meta name="twitter:description" content="Find, cut, check, post. Two APIs and a rulebook, no browser and no paid scheduler. Case study by Arnel Colar.">
+<meta name="twitter:image" content="https://arnelcolar.is-a.dev/assets/shots/clip-desk.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+.bar a{text-decoration:none}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:64px 0 72px}
+h1{font-size:clamp(31px,3.9vw,46px);line-height:1.07;font-weight:500;letter-spacing:-.038em;margin-top:12px;text-wrap:balance}
+.hero p{margin-top:20px;color:var(--muted);font-size:17px;max-width:48ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;list-style:none;font-size:13px}
+.facts li{border:1px solid var(--line);border-radius:99px;padding:4px 12px}
+
+.day{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:20px 22px;font-size:14px}
+.day ol{list-style:none;margin:0}
+.day li{display:grid;grid-template-columns:58px 1fr;gap:14px;padding:11px 0;border-top:1px solid var(--line)}
+.day li:first-child{border-top:0}
+.day time{font:400 12px/1.9 ui-monospace,monospace;color:var(--muted)}
+.day b{font-weight:600;letter-spacing:-.01em}
+.day span{color:var(--muted)}
+
+figure.ui{padding-bottom:40px}
+figure.ui .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--soft)}
+figcaption{font-size:13px;color:var(--muted);margin-top:12px}
+
+section.block{padding:68px 0 8px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:16px;margin-bottom:30px;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(26px,3.3vw,40px);line-height:1.08;font-weight:500;letter-spacing:-.035em;text-wrap:balance}
+.lede{color:var(--muted);max-width:56ch;margin-bottom:36px;font-size:17px;line-height:1.65}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none}
+.steps li{border-top:1px solid var(--ink);padding-top:14px;font-size:15px;color:var(--muted)}
+.steps b{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
+.steps.two{grid-template-columns:repeat(2,1fr);gap:28px 32px}
+h3.sub{font-size:19px;font-weight:600;letter-spacing:-.01em;margin:56px 0 12px}
+
+.log{list-style:none;border-left:2px solid var(--line);padding-left:20px;margin:0;font-size:15px}
+.log li{padding:7px 0;line-height:1.5}
+.log time{font:400 12px/1 ui-monospace,monospace;color:var(--muted);margin-right:10px}
+.log b{font-weight:600}
+.log .gap{border-top:1px dashed var(--line);margin-top:8px;padding-top:14px}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:13px 0;border-top:1px solid var(--line);vertical-align:top;line-height:1.55}
+th{font-size:13px;font-weight:500;color:var(--muted)}
+td:last-child,th:last-child{text-align:right;padding-left:16px}
+.note{color:var(--muted);font-size:15px;margin-top:20px;max-width:60ch}
+
+.faq{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}
+.faq li{padding:18px 0;border-top:1px solid var(--line)}
+.faq b{display:block;font-weight:600;margin-bottom:4px}
+.faq p{color:var(--muted);font-size:15px}
+
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:0;list-style:none;margin-top:8px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.chain li{padding:16px 18px;font-size:14px;color:var(--muted);border-left:1px solid var(--line)}
+.chain li:first-child{border-left:0}
+.chain b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;font-size:15px}
+
+pre{font:400 13px/1.6 ui-monospace,SFMono-Regular,monospace;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;color:#3d434b}
+
+.ask{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:48px 0 96px;border-top:1px solid var(--line)}
+.ask h2{font-size:clamp(28px,3.4vw,40px)}
+.ask p{color:var(--muted);margin-top:8px;max-width:52ch}
+
+@media (max-width:760px){
+  .hero,.steps,.steps.two,.faq,.chain{grid-template-columns:1fr}
+  .chain li{border-left:0;border-top:1px solid var(--line)}
+  .chain li:first-child{border-top:0}
+  .hero{padding:32px 0 56px;gap:40px}
+  th:last-child,td:last-child{text-align:left;padding-left:20px}
+}
+
+@media (max-width:600px){
+  table,thead,tbody,tr,td{display:block}
+  thead{display:none}
+  tr{padding:16px 0;border-top:1px solid var(--line)}
+  td{border:0;padding:0;text-align:left}
+  td:first-child{font-weight:600;margin-bottom:3px}
+  .log{padding-left:14px}
+  .log time{display:block;margin:0 0 2px}
+  .day li{grid-template-columns:48px 1fr;gap:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap bar"><a href="../../"><b>Arnel Colar</b></a><a class="back" href="../../#work">All work</a></div>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="label">Case study · Automatic clip desk</p>
+      <h1>Three clips a day, cut and posted before anyone opens a laptop.</h1>
+      <p>A pipeline for a GTA VI clipping channel. It watches what is going viral this week, cuts the best moments into vertical clips, checks each one against a rulebook, and posts it to YouTube and TikTok on a fixed daily schedule. No editor, no scheduler subscription, no browser sitting open.</p>
+      <ul class="facts">
+        <li>Runs unattended</li>
+        <li>Finds its own footage</li>
+        <li>Checks before it posts</li>
+        <li>Posts through two APIs</li>
+        <li>Credits the original creator</li>
+        <li>Free of per-post tools</li>
+      </ul>
+    </div>
+    <div class="day" aria-label="One day on the clip desk">
+      <ol>
+        <li><time>04:00</time><div><b>Finds a source</b><br><span>Ranks this week's uploads by views per hour</span></div></li>
+        <li><time>04:05</time><div><b>Reads the video</b><br><span>Transcribes the audio on the same machine</span></div></li>
+        <li><time>04:12</time><div><b>Cuts two clips</b><br><span>Reframes to vertical, burns captions</span></div></li>
+        <li><time>04:20</time><div><b>Checks both</b><br><span>Six rules, or the clip never reaches the queue</span></div></li>
+        <li><time>09:30</time><div><b>Posts them</b><br><span>YouTube schedules the time; TikTok queues through Buffer</span></div></li>
+        <li><time>09:35</time><div><b>Clears the disk</b><br><span>Source and queue copies go once both platforms hold the clip</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <figure class="ui">
+    <div class="frame"><img src="../../assets/shots/clip-desk.webp" alt="A vertical GTA VI clip in a showroom, with the log of the morning that found, cut, checked and posted it" width="1440" height="900" fetchpriority="high"></div>
+    <figcaption>One clip from one morning. The frame on the left is what the pipeline produced, untouched: vertical, captions burned in, the streamer's own logo cleared from the corner, and the source credited in the caption.</figcaption>
+  </figure>
+
+  <section class="block">
+    <div class="head"><h2>What it saves you</h2></div>
+    <p class="lede">Clipping channels live or die on volume. Three posts a day is two hours of someone watching footage, choosing moments, cutting, captioning and uploading. It is also the first thing to stop when a person gets busy, and a channel that posts for nine days then disappears loses the audience it built.</p>
+    <p class="lede" style="margin-top:-16px">So the whole loop moves onto a machine that does not get bored: choose, cut, check, post, clean up. What is left for a person is the part a machine is bad at — deciding what the channel is about, and looking at the numbers to change it.</p>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What it does, in order</h2></div>
+    <ol class="steps">
+      <li><b>Finds the source</b>Several search angles plus a channel watchlist, ranked by views per hour rather than total views, so the clip comes from what is moving today instead of what was popular a month ago.</li>
+      <li><b>Picks the moment</b>Every second of the source is scored on loudness, reaction words and — when the platform gives them — audience replay markers. A run of two or three beats outranks one loud shout, and the cut starts on the setup line rather than mid-sentence.</li>
+      <li><b>Cuts it</b>Vertical 1080×1920, the game area held in frame over a blurred fill, word-level captions burned in, the streamer's corner logo cleared, and a two-second hook that says what the clip is before anything else happens.</li>
+      <li><b>Posts it</b>YouTube through its Data API, private on upload and public at the slot. TikTok through Buffer's API. Both hold the publish time themselves, so a machine that reboots at midnight still posts at ten.</li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What could go wrong, and what stops it</h2></div>
+    <p class="lede">Automated posting fails in four ways that matter. Each one has a check you can point at, not a promise.</p>
+    <table>
+      <thead><tr><th>Risk</th><th>Guard</th><th>Seen</th></tr></thead>
+      <tbody>
+        <tr><td>A junk clip goes out</td><td>Six rules run on every clip before it enters the queue: length, resolution and frame rate, hook length, burned captions, credit line, no watermark. A file that fails stays on disk and never reaches a platform.</td><td>Every queued clip passed all six</td></tr>
+        <tr><td>The same clip posts twice</td><td>Both platforms have a ledger keyed by file digest, and the poster refuses a file it has seen. After one real double-post, the check was tightened to require the caption to appear in the target account before the run counts as done.</td><td>Caught, then fixed</td></tr>
+        <tr><td>Someone's footage goes out uncredited</td><td>The credit line is generated from the source's own uploader handle and validated against the live channel. A clip with no handle in its record is skipped rather than posted bare.</td><td>6 of 6 credits verified with a working channel link</td></tr>
+        <tr><td>A run dies silently</td><td>Any crash, expired token or empty day sends a message and an email with the file that failed. A quiet morning means it worked, not that nobody looked.</td><td>Token expiry, upload failure and “nothing cut today” all alert</td></tr>
+        <tr><td>The disk fills with source video</td><td>Source files expire a day after their clip is cut, and a queue copy goes once both platforms hold it. The cut master is kept, so a failed post is repostable.</td><td>3.8 GB reclaimed on the first cleanup</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Where the data goes</h2></div>
+    <ul class="faq">
+      <li><b>Stays on the machine</b><p>The downloaded source video, the cut clips, both posting ledgers, and the rulebook the checker reads.</p></li>
+      <li><b>Leaves the machine</b><p>The finished clip to YouTube and to TikTok, a short alert to a Telegram bot, and — only while a post is pending — the clip on a public URL that Buffer fetches at publish time.</p></li>
+      <li><b>Keys</b><p>OAuth credentials, the Buffer API key and the bot token sit in per-service config files with owner-only permissions, outside the repository. Nothing is committed, and nothing is pasted into a chat window.</p></li>
+      <li><b>Exposure</b><p>The clip host is the only public thing: one URL prefix, random filenames, directory listing off, files removed within days.</p></li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>Under the hood</h2></div>
+    <p class="lede">A Python pipeline on an always-on home machine. No browser is in the production path: the posting half is two HTTP APIs, which is why the schedule survives reboots and why nothing breaks when a site changes its upload page.</p>
+    <ol class="chain">
+      <li><b>Find</b>A scheduled job queries several search angles and a watchlist, keeps only uploads from the last few days, and ranks them by views per hour.</li>
+      <li><b>Cut</b>whisper transcribes the audio on the CPU; a scorer turns the transcript and the audio energy into a per-second signal; the best non-overlapping moments become clips through ffmpeg.</li>
+      <li><b>Check</b>A separate script reads the finished file, not the intent: duration, dimensions, frame rate, caption presence, watermark, credit. Non-zero exit means nothing is posted.</li>
+      <li><b>Post</b>YouTube Data API for upload plus a scheduled publish time; Buffer's GraphQL API for TikTok. Both write to a ledger that a cleanup job reads.</li>
+    </ol>
+
+    <h3 class="sub">The decisions that took the longest</h3>
+    <ol class="steps two">
+      <li><b>APIs instead of a browser</b>Driving the TikTok upload page in a real browser worked, and it was a trap: a logged-in profile that expires, a page that changes, and a fix every few weeks. Buffer has an audited TikTok integration and a GraphQL endpoint, so the production path became one HTTP call and no browser at all.</li>
+      <li><b>Let the platform hold the time</b>Posting “at ten” by waking a machine at ten is fragile. Both platforms accept a future publish time, so the machine's job is to hand over the clip early and forget it.</li>
+      <li><b>Two beats, not one spike</b>The first scorer ranked loudness peaks, which selected single shouts with no setup. It now counts beats inside the window and rewards coverage, so a clip has a beginning and a payoff — the difference between a moment and a clip.</li>
+      <li><b>Checks read the file, not the plan</b>The checker re-opens the finished video with ffprobe. It catches what the pipeline intended to do and did not — a missing caption track, a wrong frame size, a watermark still visible.</li>
+    </ol>
+
+    <h3 class="sub">Measured, not estimated</h3>
+    <pre>2 min of source audio, transcribed on 4 cores     24 s
+a 60-minute stream, end to end                    ~12 min
+queue copy + source video reclaimed               3.8 GB in one run
+software cost of the whole pipeline                none</pre>
+  </section>
+
+  <section class="block">
+    <div class="head"><h2>What it won't do</h2></div>
+    <ul class="faq">
+      <li><b>It is not an editor</b><p>It cuts, reframes and captions. It does not write scripts, generate footage, or decide whether a joke is funny.</p></li>
+      <li><b>It cannot judge permission</b><p>It works from public signals only. Whether a streamer is happy to be clipped, or whether a campaign covers the footage, is a decision a person makes once and writes into the rules.</p></li>
+      <li><b>Clipping is not a monetisation plan</b><p>Third-party footage earns on campaign work and gets shaky when a channel tries to monetise it directly. That is a business call, and the pipeline does not pretend otherwise.</p></li>
+      <li><b>One channel, one look</b><p>The rules, the caption voice and the slot times are written for one channel. A second channel is a second config, not a setting.</p></li>
+    </ul>
+  </section>
+
+  <section class="ask">
+    <div>
+      <h2>Publishing at volume?</h2>
+      <p>Tell me the niche, how often you want to post, and which platforms. I'll show you what it cuts from your own sources — including the moments it rejected — before anything goes out.</p>
+      <p style="color:var(--muted,#6b6b6b)">Fixed scope, fixed price, quoted before I start. You own the code, and I reply within one working day.</p>
+    </div>
+    <a class="cta" href="mailto:arnelcolar@gmail.com?subject=A%20clip%20pipeline%20for%20my%20channel&body=Niche%3A%0AHow%20often%3A%0APlatforms%3A">Email me</a>
+  </section>
+</main>
+
+<footer><div class="wrap">The channel on this page is my own. Footage in the clip belongs to the streamer named in its caption.</div></footer>
+
+</body>
+</html>
