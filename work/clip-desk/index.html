@@ -145,8 +145,8 @@ pre{font:400 13px/1.6 ui-monospace,SFMono-Regular,monospace;background:var(--sof
   <section class="block">
     <div class="head"><h2>What it does, in order</h2></div>
     <ol class="steps">
-      <li><b>Finds the source</b>Several search angles plus a channel watchlist, ranked by views per hour rather than total views, so the clip comes from what is moving today instead of what was popular a month ago.</li>
-      <li><b>Picks the moment</b>Every second of the source is scored on loudness, reaction words and — when the platform gives them — audience replay markers. A run of two or three beats outranks one loud shout, and the cut starts on the setup line rather than mid-sentence.</li>
+      <li><b>Finds the source</b>Several search angles plus a channel watchlist, ranked by views per hour rather than total views, so the clip comes from what is moving today.</li>
+      <li><b>Picks the moment</b>Every second of the source is scored on loudness, reaction words and, when the platform publishes them, audience replay markers. A run of two or three beats outranks one loud shout, and the cut starts on the setup line rather than mid-sentence.</li>
       <li><b>Cuts it</b>Vertical 1080×1920, the game area held in frame over a blurred fill, word-level captions burned in, the streamer's corner logo cleared, and a two-second hook that says what the clip is before anything else happens.</li>
       <li><b>Posts it</b>YouTube through its Data API, private on upload and public at the slot. TikTok through Buffer's API. Both hold the publish time themselves, so a machine that reboots at midnight still posts at ten.</li>
     </ol>
@@ -154,7 +154,7 @@ pre{font:400 13px/1.6 ui-monospace,SFMono-Regular,monospace;background:var(--sof
 
   <section class="block">
     <div class="head"><h2>What could go wrong, and what stops it</h2></div>
-    <p class="lede">Automated posting fails in four ways that matter. Each one has a check you can point at, not a promise.</p>
+    <p class="lede">Automated posting fails in five ways that matter. Each one has a check you can point at.</p>
     <table>
       <thead><tr><th>Risk</th><th>Guard</th><th>Seen</th></tr></thead>
       <tbody>
@@ -195,7 +195,7 @@ pre{font:400 13px/1.6 ui-monospace,SFMono-Regular,monospace;background:var(--sof
       <li><b>Checks read the file, not the plan</b>The checker re-opens the finished video with ffprobe. It catches what the pipeline intended to do and did not — a missing caption track, a wrong frame size, a watermark still visible.</li>
     </ol>
 
-    <h3 class="sub">Measured, not estimated</h3>
+    <h3 class="sub">What the runs actually took</h3>
     <pre>2 min of source audio, transcribed on 4 cores     24 s
 a 60-minute stream, end to end                    ~12 min
 queue copy + source video reclaimed               3.8 GB in one run
