@@ -99,11 +99,12 @@ body{flex-direction:column;min-height:100dvh}
 .panel{width:100%;max-height:none;overflow:visible;padding:20px 16px 26px}
 .panel h1{font-size:22px}
 .btn{min-height:44px;font-size:15px}
-/* mobile total: fixed pill, hidden in-flow until near bottom */
-.price{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;margin:0;padding:14px 16px;transform:translateY(140%);transition:transform .3s ease}
-.price b{margin:2px 0 10px;font-size:26px}
-.price.show{transform:none}
-.price.stick{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom));left:auto;right:auto;transform:none;margin:22px 2px 8px;padding:24px 18px 28px}
+/* mobile total: hidden until a price change (brief peek pill) or scrolled near bottom */
+.price{display:none}
+.price b{margin:6px 0 16px;font-size:34px}
+.price.show{display:block;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;margin:0;padding:14px 16px}
+.price.show b{margin:2px 0 10px;font-size:26px}
+.price.stick{display:block;position:static;margin:22px 2px 8px;padding:24px 18px 28px;top:auto}
 .price.stick b{margin:6px 0 16px;font-size:34px}
 .hint{font-size:11px;bottom:10px}
 }
@@ -210,6 +211,7 @@ body{flex-direction:column;min-height:100dvh}
 <h2>Have a design photo?</h2>
 <div class="note">Show us a cake photo you like and we copy the look as close as we can. Free to send, priced when we confirm.<br><br><input type="file" id="designUp" accept="image/*"></div>
 
+<div id="priceSent"></div>
 <div class="price"><div>Estimated total</div><b id="total">₱950</b>
 <div id="breakdown" style="font-size:12px;opacity:.8;margin-top:6px"></div>
 <button id="order">Order this cake</button>
@@ -552,23 +554,26 @@ function price(){
   document.getElementById('breakdown').textContent=`${tiersN}-tier ${shapeLabel} ${state.size}" • ${state.finish} • ${cakeDesc} • ${frostName}`;
   peekTotal();
 }
-// mobile: brief peek on price change; sticks once the real card scrolls into view
-let peekT=null;
+// mobile: brief peek pill on price change; persistent card once scrolled near bottom
+let peekT=null,firstPrice=true;
 function peekTotal(){
   if(window.innerWidth>860)return;
+  if(firstPrice){firstPrice=false;return;}
   const p=document.querySelector('.price');
   if(p.classList.contains('stick'))return;
   p.classList.add('show');
   clearTimeout(peekT);peekT=setTimeout(()=>p.classList.remove('show'),2200);
 }
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{
-    const p=document.querySelector('.price');
-    if(e.isIntersecting){p.classList.add('stick');p.classList.remove('show');clearTimeout(peekT);}
-    else if(window.innerWidth<=860&&window.scrollY>80){p.classList.remove('stick');}
-  });},{threshold:0.15});
-  window.addEventListener('load',()=>{const s=document.getElementById('order');if(s)io.observe(s);});
+function nearBottom(){
+  if(window.innerWidth>860)return;
+  const s=document.getElementById('priceSent');if(!s)return;
+  const p=document.querySelector('.price');
+  if(s.getBoundingClientRect().top<window.innerHeight+200){p.classList.add('stick');p.classList.remove('show');clearTimeout(peekT);}
+  else p.classList.remove('stick');
 }
+window.addEventListener('scroll',nearBottom,{passive:true});
+window.addEventListener('resize',nearBottom);
+window.addEventListener('load',nearBottom);
 
 // wiring
 function seg(id,fn){document.getElementById(id).querySelectorAll('.btn').forEach(b=>b.onclick=()=>{document.getElementById(id).querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');fn(b);build();price();});}
