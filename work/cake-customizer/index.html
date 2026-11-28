@@ -95,11 +95,16 @@ label.switch{display:flex;align-items:center;gap:12px;cursor:pointer;font-size:1
 @media(min-width:861px){#omodal{align-items:center}#osheet{border-radius:16px}}
 @media(max-width:860px){
 body{flex-direction:column;min-height:100dvh}
-#view{order:-1;position:sticky;top:0;z-index:30;height:44dvh;min-height:300px;max-height:52dvh;flex:none;border-radius:0 0 22px 22px;overflow:hidden;box-shadow:0 10px 24px rgba(74,66,60,.22)}
+#view{order:-1;position:sticky;top:0;z-index:29;height:44dvh;min-height:300px;max-height:52dvh;flex:none;border-radius:0 0 22px 22px;overflow:hidden;box-shadow:0 10px 24px rgba(74,66,60,.22)}
 .panel{width:100%;max-height:none;overflow:visible;padding:20px 16px 26px}
 .panel h1{font-size:22px}
 .btn{min-height:44px;font-size:15px}
-.price{bottom:calc(12px + env(safe-area-inset-bottom));margin:22px 2px 8px}
+/* mobile total: fixed pill, hidden in-flow until near bottom */
+.price{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;margin:0;padding:14px 16px;transform:translateY(140%);transition:transform .3s ease}
+.price b{margin:2px 0 10px;font-size:26px}
+.price.show{transform:none}
+.price.stick{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom));left:auto;right:auto;transform:none;margin:22px 2px 8px;padding:24px 18px 28px}
+.price.stick b{margin:6px 0 16px;font-size:34px}
 .hint{font-size:11px;bottom:10px}
 }
 @media(min-width:861px){.panel{position:sticky;top:0;height:100vh}}
@@ -545,6 +550,24 @@ function price(){
   const cakeDesc=realCount===tiersN?state.flavor:(dummyCount===tiersN?'all dummy display':`real bottom + ${dummyCount} dummy`);
   const frostName=(frostings.find(f=>f[0]===state.frost)||['',state.frost])[1];
   document.getElementById('breakdown').textContent=`${tiersN}-tier ${shapeLabel} ${state.size}" • ${state.finish} • ${cakeDesc} • ${frostName}`;
+  peekTotal();
+}
+// mobile: brief peek on price change; sticks once the real card scrolls into view
+let peekT=null;
+function peekTotal(){
+  if(window.innerWidth>860)return;
+  const p=document.querySelector('.price');
+  if(p.classList.contains('stick'))return;
+  p.classList.add('show');
+  clearTimeout(peekT);peekT=setTimeout(()=>p.classList.remove('show'),2200);
+}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{
+    const p=document.querySelector('.price');
+    if(e.isIntersecting){p.classList.add('stick');p.classList.remove('show');clearTimeout(peekT);}
+    else if(window.innerWidth<=860&&window.scrollY>80){p.classList.remove('stick');}
+  });},{threshold:0.15});
+  window.addEventListener('load',()=>{const s=document.getElementById('order');if(s)io.observe(s);});
 }
 
 // wiring
