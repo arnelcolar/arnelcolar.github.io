@@ -194,9 +194,6 @@ body{flex-direction:column;min-height:100dvh}
 <div class="row" id="topRow">
 <button class="btn active" data-top="none">None</button>
 <button class="btn" data-top="hbd">HBD +₱200</button>
-<button class="btn" data-top="ball">Ball</button>
-<button class="btn" data-top="chocdrip">Choc drip</button>
-<button class="btn" data-top="orangetrim">Orange trim</button>
 <button class="btn" data-top="custom">My topper</button>
 </div>
 <div class="note" id="topUpWrap" style="display:none">Send a photo of your topper and we place it for you. No fee for the upload itself.<br><br><input type="file" id="topUp" accept="image/*"></div>
@@ -222,6 +219,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 // Real 3D scans: drop Trellis 2 .glb files next to this page named e.g. gal-blush.glb,
 // then set that key below to 1. Gallery tap loads the scan; options still price it.
 const GLB_FILES={blush:'gal-blush.glb',basket:'gal-basket.glb',bike:'gal-bike.glb',tiger:'gal-tiger.glb',black:'gal-black.glb',choco:'gal-choco.glb'};
@@ -247,7 +245,7 @@ function loadGlb(key){
 
 const state={scan:null,shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#f9d7e8',filling:'none',candles:0,topper:'none',msg:'',cupcakes:0,letter:'A',topFile:null,designFile:null};
 
-const frostings=[['#f9d7e8','Blush Pink'],['#ffffff','White'],['#8b4a3a','Chocolate'],['#f3b8c6','Rose Pink'],['#cfe8c9','Pistachio'],['#bcd7ff','Baby Blue'],['#fff3b0','Vanilla Cream'],['#e2694b','Terracotta']];
+const frostings=[['#f9d7e8','Blush Pink'],['#ffffff','White'],['#8b4a3a','Chocolate'],['#f3b8c6','Rose Pink'],['#cfe8c9','Pistachio'],['#bcd7ff','Baby Blue'],['#fff3b0','Vanilla Cream'],['#e2694b','Terracotta'],['#ffdf6b','Butter Yellow'],['#c41e28','Cherry Red'],['#b48cdc','Ube Purple'],['#78b478','Leaf Green']];
 const frostRow=document.getElementById('frostRow');
 frostings.forEach(([c,n],i)=>{
   const d=document.createElement('div');d.className='sw'+(i===0?' active':'');d.title=n;d.style.background=c;d.setAttribute('role','button');d.setAttribute('aria-label',n);
@@ -296,35 +294,31 @@ function heartShape(s){
   sh.bezierCurveTo(x+7*s,y,x+5*s,y+5*s,x+5*s,y+5*s);
   return sh;
 }
+// seamless rounded box: no extrude seams, no bevel pinch at corners.
 function roundedSlab(w,d,h,rad){
-  const s=new THREE.Shape();
-  const hw=w/2-rad,hd=d/2-rad;
-  s.moveTo(-hw,-d/2);s.lineTo(hw,-d/2);s.absarc(hw,-hd,rad,-Math.PI/2,0,false);
-  s.lineTo(w/2,hd);s.absarc(hw,hd,rad,0,Math.PI/2,false);
-  s.lineTo(-hw,d/2);s.absarc(-hw,hd,rad,Math.PI/2,Math.PI,false);
-  s.lineTo(-w/2,-hd);s.absarc(-hw,-hd,rad,Math.PI,Math.PI*1.5,false);
-  const g=new THREE.ExtrudeGeometry(s,{depth:h,bevelEnabled:true,bevelSize:rad*0.5,bevelThickness:rad*0.5,bevelSegments:3,curveSegments:8});
-  g.rotateX(-Math.PI/2);g.center();return g;
+  return new RoundedBoxGeometry(w,h,d,4,Math.min(rad,Math.min(w,d,h)/2-0.001));
 }
 // rounded lathe profile: true quarter-circle corners, not chamfers.
 // fondant gets a big soft roll, icing a small softened edge + hand-spread wobble.
-function roundLathe(r,h,e,seg){
-  const pts=[new THREE.Vector2(0,-h/2),new THREE.Vector2(Math.max(r-e,0.05),-h/2)];
-  for(let i=1;i<=seg;i++){const a=-Math.PI/2+(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-e+Math.cos(a)*e,-h/2+e+Math.sin(a)*e));}
-  pts.push(new THREE.Vector2(r,h/2-e));
-  for(let i=1;i<=seg;i++){const a=(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-e+Math.cos(a)*e,h/2-e+Math.sin(a)*e));}
+// separate top/bottom radii: upper stacked tiers need a deeper bottom roll
+// so the curve reads above the seam instead of vanishing into the tier below.
+// fondant: round rolled TOP, sharp flat BOTTOM (real fondant discs sit flat).
+// icing: small soft edge top + bottom with hand-spread wobble.
+function roundLathe(r,h,eT,eB,seg){
+  const pts=[new THREE.Vector2(0,-h/2),new THREE.Vector2(Math.max(r-eB,0.05),-h/2)];
+  for(let i=1;i<=seg;i++){const a=-Math.PI/2+(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-eB+Math.cos(a)*eB,-h/2+eB+Math.sin(a)*eB));}
+  pts.push(new THREE.Vector2(r,h/2-eT));
+  for(let i=1;i<=seg;i++){const a=(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-eT+Math.cos(a)*eT,h/2-eT+Math.sin(a)*eT));}
   pts.push(new THREE.Vector2(0,h/2));
   return new THREE.LatheGeometry(pts,72);
 }
 function tierGeo(shape,r,h,round){
-  const rad=round?Math.min(0.35,h*0.22):Math.min(0.12,h*0.08);
-  if(shape==='square')return roundedSlab(r*1.9,r*1.9,h,rad);
-  if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,rad);
-  if(shape==='heart'){const b=round?0.2:0.08;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:h*0.9,bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
-  if(shape==='letter'){const ld=letterData(r,h,round);if(ld)return ld.geo;}
-  if(round)return roundLathe(r,h,Math.min(0.35,h*0.22),6);
+  if(shape==='square')return roundedSlab(r*1.9,r*1.9,h,round?Math.min(0.08,h*0.05):Math.min(0.06,h*0.04));
+  if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,Math.min(0.06,h*0.04));
+  if(shape==='heart'){const b=round?0.12:0.1;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:Math.max(h*0.9-b*0.5,0.2),bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
+  if(shape==='letter'){const ld=letterData(r,h,round);if(ld)return ld.geo;}  if(round)return roundLathe(r,h,Math.min(0.16,h*0.11),0.001,6);
   // icing: small soft edge + slight hand-spread wobble on the wall
-  const g=roundLathe(r,h,Math.min(0.12,h*0.08),4);
+  const g=roundLathe(r,h,Math.min(0.12,h*0.08),Math.min(0.12,h*0.08),4);
   const p=g.attributes.position;
   for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const rad0=Math.hypot(x,z);if(rad0>r*0.5&&Math.abs(y)<h/2-0.01){const a=Math.atan2(z,x);const w=1+0.018*Math.sin(a*7+y*5)+0.012*Math.sin(a*3-y*9);p.setX(i,x*w);p.setZ(i,z*w);}}
   g.computeVertexNormals();
@@ -341,7 +335,7 @@ function letterPrep(r){
 }
 function letterData(r,h,round){
   const prep=letterPrep(r);if(!prep)return null;
-  const b=round?0.09:0.03;
+  const b=round?0.05:0.03;
   const geo=new THREE.ExtrudeGeometry(prep.shapes,{depth:h*0.85,bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2,curveSegments:12});
   geo.scale(prep.k,prep.k,1);geo.rotateX(-Math.PI/2);geo.center();
   let best=null,bl=0;
@@ -462,24 +456,11 @@ function build(){
       const fm=new THREE.Mesh(fg,new THREE.MeshStandardMaterial({color:fillColors[state.filling]||'#fff',roughness:0.5}));
       fm.position.y=y+H*0.45;cake.add(fm);
     }
-    // chocolate drip on the frosted wall (all tiers) + orange piped trim (all tiers)
-    if(state.topper==='chocdrip'){
-      const loop=buildOutline(state.shape,r);
-      const dripM=new THREE.MeshPhysicalMaterial({color:'#3d2314',roughness:0.25,clearcoat:0.7,clearcoatRoughness:0.3});
-      const band=new THREE.Mesh(tierGeo(state.shape,Math.max(r-0.012,0.2),0.16,smooth),dripM);
-      band.position.y=y+H-0.06;cake.add(band);
-      const step=Math.max(1,Math.floor(loop.length/26));
-      for(let k=0;k<loop.length;k+=step){
-        const len=0.15+((k*37)%10)/10*0.2;
-        const dd=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.06,len,10),dripM);
-        dd.position.set(loop[k][0],y+H-0.1-len/2,loop[k][1]);cake.add(dd);
-      }
-    }
     // piped cream dollops around each tier base, following the true outline
     {
       const loop=buildOutline(state.shape,r);
       const step=Math.max(1,Math.floor(loop.length/40));
-      const bmat=new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.2,roughnessMap:frostBump,envMapIntensity:0});
+      const bmat=smooth?new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.8,metalness:0,envMapIntensity:0.25}):new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.2,roughnessMap:frostBump,envMapIntensity:0});
       for(let k=0;k<loop.length;k+=step){
         const pip=new THREE.Mesh(new THREE.SphereGeometry(0.095,12,10),bmat);
         pip.scale.set(1,0.75,1);pip.position.set(loop[k][0],y+0.08,loop[k][1]);cake.add(pip);
@@ -489,16 +470,6 @@ function build(){
     // decorations only on top tier:
     if(i===tiers-1){
       const topYpos=y;
-      // orange piped trim around the top edge (all shapes incl. heart)
-      if(state.topper==='orangetrim'){
-        const tloop=buildOutline(state.shape,r);
-        const trimM=new THREE.MeshStandardMaterial({color:'#e2691e',roughness:0.55});
-        const tstep=Math.max(1,Math.floor(tloop.length/44));
-        for(let k=0;k<tloop.length;k+=tstep){
-          const dot=new THREE.Mesh(new THREE.SphereGeometry(0.09,12,10),trimM);
-          dot.scale.set(1,0.8,1);dot.position.set(tloop[k][0],topYpos-0.02,tloop[k][1]);cake.add(dot);
-        }
-      }
       // (berry & sprinkle toppings removed)
       // candles
       for(let k=0;k<(hasMsg?0:state.candles);k++){
@@ -523,28 +494,7 @@ function build(){
           const mt=new THREE.Mesh(new THREE.BoxGeometry(0.9,0.28,0.04),new THREE.MeshStandardMaterial({map:tx}));
           mt.position.set(0,topYpos+0.85,0);cake.add(mt);
         }
-        if(state.topper==='ball'){
-          const stick2=new THREE.Mesh(new THREE.CylinderGeometry(0.025,0.025,0.6,8),new THREE.MeshStandardMaterial({color:'#8a6a4a'}));
-          stick2.position.set(0,topYpos+0.25,0);cake.add(stick2);
-          const ball=new THREE.Mesh(new THREE.SphereGeometry(0.5,28,20),new THREE.MeshStandardMaterial({color:'#e2691e',roughness:0.55}));
-          ball.position.set(0,topYpos+0.85,0);ball.castShadow=true;cake.add(ball);
-          const seamM=new THREE.MeshStandardMaterial({color:'#2b1a12',roughness:0.6});
-          for(let v=0;v<3;v++){
-            const ring=new THREE.Mesh(new THREE.TorusGeometry(0.501,0.022,8,44),seamM);
-            ring.position.copy(ball.position);ring.rotation.y=v*Math.PI/3;cake.add(ring);
-          }
-          const eq=new THREE.Mesh(new THREE.TorusGeometry(0.501,0.022,8,44),seamM);
-          eq.position.copy(ball.position);eq.rotation.x=Math.PI/2;cake.add(eq);
-          // basketball cakes get the orange piped border too
-          const bloop=buildOutline(state.shape,r);
-          const btrimM=new THREE.MeshStandardMaterial({color:'#e2691e',roughness:0.55});
-          const bstep=Math.max(1,Math.floor(bloop.length/44));
-          for(let k=0;k<bloop.length;k+=bstep){
-            const dot=new THREE.Mesh(new THREE.SphereGeometry(0.09,12,10),btrimM);
-            dot.scale.set(1,0.8,1);dot.position.set(bloop[k][0],topYpos-0.02,bloop[k][1]);cake.add(dot);
-          }
-        }
-        if(tg){const tm=new THREE.Mesh(tg,new THREE.MeshStandardMaterial({color:'#e2694b',roughness:0.3,metalness:0.3}));tm.position.set(0,topYpos+0.85,0);tm.rotation.y=0.5;cake.add(tm);}
+                if(tg){const tm=new THREE.Mesh(tg,new THREE.MeshStandardMaterial({color:'#e2694b',roughness:0.3,metalness:0.3}));tm.position.set(0,topYpos+0.85,0);tm.rotation.y=0.5;cake.add(tm);}
       }
     }
   }
@@ -588,7 +538,6 @@ function price(){
   if(state.finish==='fondant')t+=fondantFee[state.size]||500;
   if(realCount>0){t+=flavorP[state.flavor]||0;if(state.filling!=='none')t+=120;}
   if(!locked){t+=state.candles*50;if(state.topper==='hbd'||state.topper==='custom')t+=200;}
-  if(state.topper==='chocdrip')t+=150;if(state.topper==='orangetrim')t+=100;
   if(state.cupcakes===6)t+=450;if(state.cupcakes===12)t+=850;
   if(state.msg.trim())t+=120;
   document.getElementById('total').textContent='₱'+t.toLocaleString('en-PH');
@@ -604,11 +553,11 @@ seg('shapeRow',b=>{state.scan=null;state.shape=b.dataset.shape;refreshShapeLock(
 seg('tierRow',b=>{state.tiers=+b.dataset.tiers;refreshRealLock();});
 const PRESETS={
   blush:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#f3b8c6',filling:'none',candles:0,topper:'none',msg:'',cupcakes:0},
-  basket:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#ffffff',filling:'none',candles:0,topper:'ball',msg:'',cupcakes:12},
+  basket:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#ffffff',filling:'none',candles:0,topper:'none',msg:'',cupcakes:12},
   bike:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#bcd7ff',filling:'none',candles:0,topper:'none',msg:'Happy Birthday',cupcakes:0},
   tiger:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#fff3b0',filling:'none',candles:0,topper:'none',msg:'Happy 6 Months',cupcakes:0},
-  black:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'chocdrip',msg:'Happy Birthday',cupcakes:0},
-  choco:{shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'chocdrip',msg:'',cupcakes:0}
+  black:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'none',msg:'Happy Birthday',cupcakes:0},
+  choco:{shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'none',msg:'',cupcakes:0}
 };
 function applyPreset(name){
   const pr=PRESETS[name];if(!pr)return;
