@@ -732,15 +732,15 @@ async function checkSlot(){
 }
 document.getElementById('osend').onclick=async()=>{
   const sendBtn=document.getElementById('osend');sendBtn.textContent='Sending...';
-  const name=document.getElementById('oname').value.trim();
-  const phone=document.getElementById('ophone').value.trim();
+  const nameEl=document.getElementById('oname'), phoneEl=document.getElementById('ophone');
+  const name=nameEl.value.trim();
+  const phone=phoneEl.value.trim();
   const mode=document.querySelector('#omode .btn.active').dataset.mode;
   const addr=document.getElementById('oaddr').value.trim();
   const when=document.getElementById('owhen').value;
   const dayWord=mode==='deliver'?'delivery':'pickup';
-  if(!name||!phone){alert('Add your name and phone so we can confirm your order.');sendBtn.textContent='Send order';return;}
-  if(/[0-9]/.test(name)||/\s/.test(name)){alert('Just your first name, please. No numbers or spaces.');sendBtn.textContent='Send order';return;}
-  if(!/^09[0-9]{9}$/.test(phone)){alert('Phone should start with 09 and be 11 digits, like 09171234567.');sendBtn.textContent='Send order';return;}
+  if(!nameEl.checkValidity()){nameEl.reportValidity();sendBtn.textContent='Send order';return;}
+  if(!phoneEl.checkValidity()){phoneEl.reportValidity();sendBtn.textContent='Send order';return;}
   if(!when){alert('Pick a '+dayWord+' day and time below.');sendBtn.textContent='Send order';return;}
   const whenDate=new Date(when+':00+08:00');
   if(whenDate<(Date.now()+6*3600*1000)){alert('Cakes need at least 6 hours to bake and finish. Pick a later time, or message us for a rush order.');sendBtn.textContent='Send order';return;}
@@ -1023,8 +1023,8 @@ if(new URLSearchParams(location.search).get('sent')){
 </div>
 <div class="note" id="opickNote">Pick up here: <b>Jelyn's Bakeshop, Blk 15 Lot 10 Phase 3 Peace Village, Antipolo, Rizal</b>. Open Mon to Sat, 8AM to 10PM. Closed Sundays. <a href="https://www.google.com/maps?q=14.6141,121.1932" target="_blank" rel="noopener">Open in Maps</a></div>
 <div class="orow">
-<div><label class="fl">Your name</label><input id="oname" placeholder="e.g. Maria" autocomplete="given-name"></div>
-<div><label class="fl">Phone</label><input id="ophone" type="tel" inputmode="numeric" maxlength="11" placeholder="09xx xxx xxxx" autocomplete="tel"></div>
+<div><label class="fl">Your name</label><input id="oname" name="name" placeholder="e.g. Maria" autocomplete="given-name" required pattern="[^\s\d]+" title="Just your first name. No numbers, no spaces."></div>
+<div><label class="fl">Phone</label><input id="ophone" name="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="09xx xxx xxxx" autocomplete="tel" required pattern="09[0-9]{9}" title="11 digits starting with 09, like 09171234567."></div>
 </div>
 <div id="oaddrWrap" style="display:none;margin-top:6px"><label class="fl">Delivery address</label><div class="addrwrap"><textarea id="oaddr" placeholder="Start typing street, barangay, city…" autocomplete="off"></textarea><ul id="oaddrList"></ul></div>
 <div class="row" style="margin-top:10px"><button class="btn" id="opin" type="button">Pin on map</button><button class="btn" id="oloc" type="button">Use my location</button><button class="btn" id="oest" type="button">Get delivery estimate</button></div>
