@@ -456,8 +456,8 @@ function build(){
       const fm=new THREE.Mesh(fg,new THREE.MeshStandardMaterial({color:fillColors[state.filling]||'#fff',roughness:0.5}));
       fm.position.y=y+H*0.45;cake.add(fm);
     }
-    // piped cream dollops around each tier base, following the true outline
-    {
+    // piped cream dollops around each tier base (icing only; fondant stays clean)
+    if(!smooth){
       const loop=buildOutline(state.shape,r);
       const step=Math.max(1,Math.floor(loop.length/40));
       const bmat=smooth?new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.8,metalness:0,envMapIntensity:0.25}):new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.2,roughnessMap:frostBump,envMapIntensity:0});
