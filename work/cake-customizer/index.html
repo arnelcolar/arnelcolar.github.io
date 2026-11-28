@@ -760,8 +760,10 @@ document.getElementById('osend').onclick=async()=>{
     }
   }catch(err){uplNote='\nPhotos: upload failed, customer sends manually';}
   const s=`CAKE ORDER\nName: ${name}\nPhone: ${phone}\n${mode==='deliver'?'Deliver to: '+addr+'\n':'Pickup at Jelyn\'s Bakeshop, Peace Village, Antipolo\n'}When: ${new Date(when).toLocaleString('en-PH')}\nCake: ${o.s} = ${document.getElementById('total').textContent}${estLine}${pinLink}${uplNote}`;
+  sendBtn.textContent='Sending...';
+  const saved=await logOrder({name,phone,mode,address:mode==='deliver'?addr:'',pin:(mode==='deliver'&&pinLat!=null)?('https://www.google.com/maps?q='+pinLat.toFixed(6)+','+pinLon.toFixed(6)):'',when,cake:o.s,total:document.getElementById('total').textContent,delivery:estLine.replace(/^\n/,'')+(pinLink?' |'+pinLink.replace(/^\n/,''):''),topperPhoto:topUrl||(state.topFile?state.topFile.name+' (manual)':''),designPhoto:desUrl||(state.designFile?state.designFile.name+' (manual)':'')});
   sendBtn.textContent='Send order';
-  logOrder({name,phone,mode,address:mode==='deliver'?addr:'',pin:(mode==='deliver'&&pinLat!=null)?('https://www.google.com/maps?q='+pinLat.toFixed(6)+','+pinLon.toFixed(6)):'',when,cake:o.s,total:document.getElementById('total').textContent,delivery:estLine.replace(/^\n/,'')+(pinLink?' |'+pinLink.replace(/^\n/,''):''),topperPhoto:topUrl||(state.topFile?state.topFile.name+' (manual)':''),designPhoto:desUrl||(state.designFile?state.designFile.name+' (manual)':'')});
+  if(!saved){alert('Order could not be saved. Check your connection and try again, or message us directly.');return;}
   navigator.clipboard?.writeText(s);
   document.getElementById('osent').style.display='block';
   document.getElementById('osentText').textContent=s;
