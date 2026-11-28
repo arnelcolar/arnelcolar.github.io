@@ -306,22 +306,29 @@ function roundedSlab(w,d,h,rad){
   const g=new THREE.ExtrudeGeometry(s,{depth:h,bevelEnabled:true,bevelSize:rad*0.5,bevelThickness:rad*0.5,bevelSegments:3,curveSegments:8});
   g.rotateX(-Math.PI/2);g.center();return g;
 }
+// rounded lathe profile: true quarter-circle corners, not chamfers.
+// fondant gets a big soft roll, icing a small softened edge + hand-spread wobble.
+function roundLathe(r,h,e,seg){
+  const pts=[new THREE.Vector2(0,-h/2),new THREE.Vector2(Math.max(r-e,0.05),-h/2)];
+  for(let i=1;i<=seg;i++){const a=-Math.PI/2+(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-e+Math.cos(a)*e,-h/2+e+Math.sin(a)*e));}
+  pts.push(new THREE.Vector2(r,h/2-e));
+  for(let i=1;i<=seg;i++){const a=(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-e+Math.cos(a)*e,h/2-e+Math.sin(a)*e));}
+  pts.push(new THREE.Vector2(0,h/2));
+  return new THREE.LatheGeometry(pts,72);
+}
 function tierGeo(shape,r,h,round){
-  const rad=round?Math.min(0.22,h*0.18):0.02;
+  const rad=round?Math.min(0.35,h*0.22):Math.min(0.12,h*0.08);
   if(shape==='square')return roundedSlab(r*1.9,r*1.9,h,rad);
   if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,rad);
-  if(shape==='heart'){const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:h*0.9,bevelEnabled:true,bevelSize:0.06,bevelThickness:0.06,bevelSegments:2});g.rotateX(-Math.PI/2);g.center();return g;}
-  if(shape==='letter'){const ld=letterData(r,h);if(ld)return ld.geo;}
-  if(!round)return new THREE.CylinderGeometry(r,r*0.98,h,64);
-  // fondant round: soft rolled edge (lathe capsule profile), icing: straight cylinder
-  const e=Math.min(0.16,h*0.15),pts=[];
-  pts.push(new THREE.Vector2(0,-h/2));
-  pts.push(new THREE.Vector2(r-e,-h/2));
-  pts.push(new THREE.Vector2(r,-h/2+e));
-  pts.push(new THREE.Vector2(r,h/2-e));
-  pts.push(new THREE.Vector2(r-e,h/2));
-  pts.push(new THREE.Vector2(0,h/2));
-  return new THREE.LatheGeometry(pts,64);
+  if(shape==='heart'){const b=round?0.2:0.08;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:h*0.9,bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
+  if(shape==='letter'){const ld=letterData(r,h,round);if(ld)return ld.geo;}
+  if(round)return roundLathe(r,h,Math.min(0.35,h*0.22),6);
+  // icing: small soft edge + slight hand-spread wobble on the wall
+  const g=roundLathe(r,h,Math.min(0.12,h*0.08),4);
+  const p=g.attributes.position;
+  for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const rad0=Math.hypot(x,z);if(rad0>r*0.5&&Math.abs(y)<h/2-0.01){const a=Math.atan2(z,x);const w=1+0.018*Math.sin(a*7+y*5)+0.012*Math.sin(a*3-y*9);p.setX(i,x*w);p.setZ(i,z*w);}}
+  g.computeVertexNormals();
+  return g;
 }
 function letterPrep(r){
   if(!cakeFont)return null;
@@ -332,9 +339,10 @@ function letterPrep(r){
   const k=(r*1.7)/Math.max(maxx-minx||1,maxy-miny||1);
   return {shapes,k,cx:(minx+maxx)/2,cy:(miny+maxy)/2};
 }
-function letterData(r,h){
+function letterData(r,h,round){
   const prep=letterPrep(r);if(!prep)return null;
-  const geo=new THREE.ExtrudeGeometry(prep.shapes,{depth:h*0.85,bevelEnabled:true,bevelSize:0.02,bevelThickness:0.02,bevelSegments:2,curveSegments:12});
+  const b=round?0.09:0.03;
+  const geo=new THREE.ExtrudeGeometry(prep.shapes,{depth:h*0.85,bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2,curveSegments:12});
   geo.scale(prep.k,prep.k,1);geo.rotateX(-Math.PI/2);geo.center();
   let best=null,bl=0;
   prep.shapes.forEach(s=>{const p=s.getPoints(144);if(p.length>bl){bl=p.length;best=p;}});
@@ -348,7 +356,7 @@ function loopFromShape(shape,div){
   return pts.map(p=>[p.x-(minx+maxx)/2,-(p.y-(miny+maxy)/2)]);
 }
 function buildOutline(shape,r){
-  if(shape==='letter'&&cakeFont){const ld=letterData(r,1.95);if(ld)return ld.loop;}
+  if(shape==='letter'&&cakeFont){const ld=letterData(r,1.95,false);if(ld)return ld.loop;}
   if(shape==='heart')return loopFromShape(heartShape(r/10),96);
   const N=shape==='round'?72:96,loop=[];
   for(let k=0;k<N;k++){const a=k/N*Math.PI*2;loop.push(edgePoint(shape,r,1.0,a));}
