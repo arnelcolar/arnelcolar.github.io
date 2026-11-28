@@ -424,7 +424,7 @@ function build(){
   if(state.cupcakes){
     const n=state.cupcakes,ringR=baseR+0.62;
     const cupMat=new THREE.MeshStandardMaterial({color:0xd9a066,roughness:0.8});
-    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,bumpMap:frostBump,bumpScale:0.04,roughnessMap:frostBump,envMapIntensity:0});
+    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,bumpMap:frostBump,bumpScale:0.08,roughnessMap:frostBump,envMapIntensity:0});
     for(let k=0;k<n;k++){
       const a=k/n*Math.PI*2;
       const cx=Math.cos(a)*ringR,cz=Math.sin(a)*ringR;
@@ -451,7 +451,7 @@ function build(){
     const smooth=state.finish==='fondant';
     const mat=smooth
       ?new THREE.MeshStandardMaterial({color:state.frost,roughness:0.8,metalness:0,envMapIntensity:0.25})
-      :new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,metalness:0,bumpMap:frostBump,bumpScale:0.06,roughnessMap:frostBump,envMapIntensity:0});
+      :new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,metalness:0,bumpMap:frostBump,bumpScale:0.1,roughnessMap:frostBump,envMapIntensity:0});
     const m=new THREE.Mesh(tierGeo(state.shape,r,H,smooth),mat);
     m.position.y=y+H/2;m.castShadow=true;m.receiveShadow=true;cake.add(m);
     // filling band (real tiers only)
@@ -464,7 +464,7 @@ function build(){
     if(!smooth){
       const loop=buildOutline(state.shape,r);
       const step=Math.max(1,Math.floor(loop.length/40));
-      const bmat=smooth?new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.8,metalness:0,envMapIntensity:0.25}):new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.05,roughnessMap:frostBump,envMapIntensity:0});
+      const bmat=smooth?new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.8,metalness:0,envMapIntensity:0.25}):new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.08,roughnessMap:frostBump,envMapIntensity:0});
       for(let k=0;k<loop.length;k+=step){
         const pip=new THREE.Mesh(new THREE.SphereGeometry(0.095,12,10),bmat);
         pip.scale.set(1,0.75,1);pip.position.set(loop[k][0],y+0.08,loop[k][1]);cake.add(pip);
