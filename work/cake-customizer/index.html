@@ -653,7 +653,6 @@ async function renderDays(){
 }
 async function renderSlots(){
   const grid=document.getElementById('slotGrid');grid.innerHTML='';
-  document.getElementById('owhen').value='';
   if(!selDay)return;
   const st=await dayBusy(selDay);
   const note=document.getElementById('slotNote');
@@ -669,15 +668,21 @@ async function renderSlots(){
     b.type='button';b.className='btn'+(selHour===h?' active':'');
     b.textContent=slotLabel(h);
     const past=isToday&&(h<=nowManila.getHours()+6);
-    if((st.busy&&st.busy.indexOf(h)>=0)||past)b.disabled=true;
+    const dis=(st.busy&&st.busy.indexOf(h)>=0)||past;
+    if(dis)b.disabled=true;
+    if(selHour===h&&dis)selHour=null;
     b.onclick=()=>{selHour=h;
       document.getElementById('owhen').value=selDay+'T'+String(h).padStart(2,'0')+':00';
-      renderSlots();};
+      grid.querySelectorAll('.btn').forEach(x=>x.classList.toggle('active',x===b));};
     grid.appendChild(b);
   }
+  document.getElementById('owhen').value=selHour==null?'':selDay+'T'+String(selHour).padStart(2,'0')+':00';
 }
 function openOrder(){
-  if(!selDay)selDay=manilaToday();
+  if(!selDay){selDay=manilaToday();
+    const mh=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila'})).getHours();
+    if(mh+6>=19){selDay=addDays(selDay,1);
+      while(new Date(selDay+'T00:00:00+08:00').toLocaleDateString('en-PH',{timeZone:'Asia/Manila',weekday:'short'})==='Sun')selDay=addDays(selDay,1);}}
   const o=orderSummary();
   renderDays();renderSlots();
   document.getElementById('osum').innerHTML=`<b>Your cake:</b> ${o.s}<br><b>Cake total:</b> ${document.getElementById('total').textContent}<br><span style="color:var(--muted)">Cakes ride in a car, not on a motorbike. Lalamove sets the real delivery fee inside their app.</span>`;
