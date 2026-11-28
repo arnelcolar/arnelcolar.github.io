@@ -40,7 +40,7 @@ body{margin:0;font-family:ui-rounded,system-ui,-apple-system,'Segoe UI',Roboto,s
 #shapeRow>.btn{flex:1 1 calc(33.333% - 6px);min-width:94px}
 #tierRow>.btn{flex:1 1 0;min-width:52px}
 #realRow>.btn{flex:1 1 100%;justify-content:flex-start}
-#cupRow>.btn,#topRow>.btn{flex:1 1 calc(50% - 4px)}
+#topRow>.btn{flex:1 1 calc(50% - 4px)}
 #frostRow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .sw{width:100%;height:auto;aspect-ratio:1;border-radius:50%;border:0;cursor:pointer;transition:transform .1s;background-clip:padding-box;box-shadow:inset 0 0 0 1px rgba(83,46,38,.35),0 1px 2px rgba(83,46,38,.12)}
 .sw:hover{transform:scale(1.06)}
@@ -230,13 +230,6 @@ body{flex-direction:column;min-height:100dvh}
 <div style="margin-top:8px">
 <input type="range" id="candles" min="0" max="5" value="0" style="width:100%"></div>
 
-<h2>Matching cupcakes</h2>
-<div class="row" id="cupRow">
-<button class="btn active" data-cup="0">None</button>
-<button class="btn" data-cup="6">Box of 6 +₱450</button>
-<button class="btn" data-cup="12">Box of 12 +₱850</button>
-</div>
-<div class="note">Same frosting and colors as your cake, boxed beside it. Just like in the photos.</div>
 
 <h2>Topper</h2>
 <div class="row" id="topRow">
@@ -294,7 +287,7 @@ function loadGlb(key){
   });
 }
 
-const state={scan:null,shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#f9d7e8',filling:'none',candles:0,topper:'none',msg:'',cupcakes:0,letter:'A',topFile:null,designFile:null};
+const state={scan:null,shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#f9d7e8',filling:'none',candles:0,topper:'none',msg:'',letter:'A',topFile:null,designFile:null};
 
 const frostings=[['#f9d7e8','Blush Pink'],['#ffffff','White'],['#8b4a3a','Chocolate'],['#f3b8c6','Rose Pink'],['#cfe8c9','Pistachio'],['#bcd7ff','Baby Blue'],['#fff3b0','Vanilla Cream'],['#e2694b','Terracotta'],['#ffdf6b','Butter Yellow'],['#c41e28','Cherry Red'],['#b48cdc','Ube Purple'],['#78b478','Leaf Green']];
 const frostRow=document.getElementById('frostRow');
@@ -440,36 +433,16 @@ function build(){
   const baseR=R0[state.size]||state.size/2/SZIN,H=(state.shape==='letter'||state.shape==='heart')?0.975:1.95;
   const fillColors={strawberry:'#ff6b8a',ganache:'#3d2314',creamcheese:'#fff8e7'};
   const hasMsg=state.msg.trim().length>0;
-  const boardR=state.shape==='rect'?baseR*1.35:baseR+0.5+(state.cupcakes?1.1:0);
-  const boardGrow=state.shape==='square'&&state.cupcakes?1.1:0;
+  const boardR=state.shape==='rect'?baseR*1.35:baseR+0.5;
   const boardGeo=state.shape==='rect'
-    ? new THREE.BoxGeometry(baseR*2.3+0.6+(state.cupcakes?1.6:0),0.12,baseR*1.5+0.6+(state.cupcakes?1.6:0))
+    ? new THREE.BoxGeometry(baseR*2.3+0.6,0.12,baseR*1.5+0.6)
     : (state.shape==='square'
-      ? new THREE.BoxGeometry(baseR*1.9+0.6+boardGrow,0.12,baseR*1.9+0.6+boardGrow)
+      ? new THREE.BoxGeometry(baseR*1.9+0.6,0.12,baseR*1.9+0.6)
       : new THREE.CylinderGeometry(boardR,boardR,0.12,64));
   const board=new THREE.Mesh(boardGeo,boardMat);
   board.position.y=0.06;board.receiveShadow=true;board.castShadow=true;cake.add(board);
   const drum=new THREE.Mesh(boardGeo,new THREE.MeshStandardMaterial({color:0xf2e4db,roughness:0.9}));drum.scale.set(1.05,0.45,1.05);drum.position.y=0.014;drum.receiveShadow=true;cake.add(drum);
   cake.add(contactAO(boardR+(state.shape==='square'?0.85:0)+(state.shape==='rect'?0.4:0)));
-  if(state.cupcakes){
-    const n=state.cupcakes,ringR=baseR+0.62;
-    const cupMat=new THREE.MeshStandardMaterial({color:0xd9a066,roughness:0.8});
-    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,bumpMap:frostBump,bumpScale:0.08,roughnessMap:frostBump,envMapIntensity:0});
-    for(let k=0;k<n;k++){
-      const a=k/n*Math.PI*2;
-      const cx=Math.cos(a)*ringR,cz=Math.sin(a)*ringR;
-      const cup=new THREE.Group();
-      const lin=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.12,0.22,16),cupMat);
-      lin.position.y=0.11;cup.add(lin);
-      const swirl=new THREE.Mesh(new THREE.SphereGeometry(0.16,16,12),swirlMat);
-      swirl.scale.set(1,0.7,1);swirl.position.y=0.3;cup.add(swirl);
-      const cherry=new THREE.Mesh(new THREE.SphereGeometry(0.05,10,8),new THREE.MeshStandardMaterial({color:'#d6455a',roughness:0.3}));
-      cherry.position.y=0.42;cup.add(cherry);
-      cup.position.set(cx,0.12,cz);
-      cup.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
-      cake.add(cup);
-    }
-  }
   let y=0.12;
 
   const tiers=state.shape==='round'?state.tiers:1;
@@ -584,7 +557,6 @@ function price(){
   if(state.finish==='fondant')t+=fondantFee[state.size]||500;
   if(realCount>0){t+=flavorP[state.flavor]||0;if(state.filling!=='none')t+=120;}
   if(!locked){t+=state.candles*50;if(state.topper==='hbd'||state.topper==='custom')t+=200;}
-  if(state.cupcakes===6)t+=450;if(state.cupcakes===12)t+=850;
   if(state.msg.trim())t+=120;
   setTotal(t);
   const shapeLabel=state.shape==='letter'?('Letter "'+(state.letter||'A').toUpperCase()+'"'):state.shape;
@@ -600,12 +572,12 @@ function seg(id,fn){document.getElementById(id).querySelectorAll('.btn').forEach
 seg('shapeRow',b=>{state.scan=null;state.shape=b.dataset.shape;refreshShapeLock();refreshRealLock();build();price();});
 seg('tierRow',b=>{state.tiers=+b.dataset.tiers;refreshRealLock();});
 const PRESETS={
-  blush:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#f3b8c6',filling:'none',candles:0,topper:'none',msg:'',cupcakes:0},
-  basket:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#ffffff',filling:'none',candles:0,topper:'none',msg:'',cupcakes:12},
-  bike:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#bcd7ff',filling:'none',candles:0,topper:'none',msg:'Happy Birthday',cupcakes:0},
-  tiger:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#fff3b0',filling:'none',candles:0,topper:'none',msg:'Happy 6 Months',cupcakes:0},
-  black:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'none',msg:'Happy Birthday',cupcakes:0},
-  choco:{shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'none',msg:'',cupcakes:0}
+  blush:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#f3b8c6',filling:'none',candles:0,topper:'none',msg:''},
+  basket:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#ffffff',filling:'none',candles:0,topper:'none',msg:''},
+  bike:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#bcd7ff',filling:'none',candles:0,topper:'none',msg:'Happy Birthday'},
+  tiger:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'vanilla',frost:'#fff3b0',filling:'none',candles:0,topper:'none',msg:'Happy 6 Months'},
+  black:{shape:'round',tiers:1,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'none',msg:'Happy Birthday'},
+  choco:{shape:'round',tiers:2,size:8,finish:'icing',real:'real',flavor:'chocolate',frost:'#8b4a3a',filling:'ganache',candles:0,topper:'none',msg:''}
 };
 function applyPreset(name){
   const pr=PRESETS[name];if(!pr)return;
@@ -623,10 +595,8 @@ function applyPreset(name){
   document.getElementById('candles').value=state.candles;document.getElementById('cVal').textContent=state.candles;
   document.querySelectorAll('#topRow .btn').forEach(b=>b.classList.toggle('active',b.dataset.top===state.topper));
   document.getElementById('msg').value=state.msg;
-  document.querySelectorAll('#cupRow .btn').forEach(b=>b.classList.toggle('active',+b.dataset.cup===state.cupcakes));
   state.topFile=null;state.designFile=null;document.getElementById('topUpWrap').style.display=state.topper==='custom'?'block':'none';refreshShapeLock();refreshRealLock();refreshTopLock();build();price();
 }
-document.querySelectorAll('#cupRow .btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('#cupRow .btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.cupcakes=+b.dataset.cup;build();price();});
 document.querySelectorAll('#galRow .galcard').forEach(b=>{b.setAttribute('aria-pressed','false');b.onclick=()=>{document.querySelectorAll('#galRow .galcard').forEach(x=>{x.classList.remove('active');x.setAttribute('aria-pressed','false');});b.classList.add('active');b.setAttribute('aria-pressed','true');applyPreset(b.dataset.preset);};});
 document.getElementById('fondantSw').onchange=e=>{state.finish=e.target.checked?'fondant':'icing';document.getElementById('finishLabel').textContent=e.target.checked?'Fondant +₱500':'Icing +₱0';build();price();};
 seg('realRow',b=>{state.real=b.dataset.real;refreshRealLock();});
@@ -672,7 +642,6 @@ function orderSummary(){
   const frostName2=(frostings.find(f=>f[0]===state.frost)||['',state.frost])[1];
   const bits=[`${tiersN}-tier ${shapeLabel} ${state.size}"`,state.finish,cakeDesc,`frosting ${frostName2}`];
   if(realCount&&state.filling!=='none')bits.push(`filling ${state.filling}`);
-  if(state.cupcakes)bits.push(`${state.cupcakes} matching cupcakes`);
   if(!locked&&state.candles)bits.push(`${state.candles} candle${state.candles>1?'s':''}`);
   if(!locked&&state.topper!=='none')bits.push(`topper ${state.topper}`);
   if(locked)bits.push(`message '${state.msg.trim()}'`);
