@@ -308,11 +308,11 @@ function roundLathe(r,h,eT,eB,seg){
   return new THREE.LatheGeometry(pts,72);
 }
 function tierGeo(shape,r,h,round){
-  if(shape==='square')return roundedSlab(r*1.9,r*1.9,h,round?Math.min(0.08,h*0.05):Math.min(0.06,h*0.04));
-  if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,Math.min(0.06,h*0.04));
-  if(shape==='heart'){const b=round?0.12:0.1;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:Math.max(h*0.9-b*0.5,0.2),bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
+  if(shape==='square')return roundedSlab(r*1.9,r*1.9,h,round?Math.min(0.08,h*0.05):Math.min(0.03,h*0.02));
+  if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,round?Math.min(0.06,h*0.04):Math.min(0.03,h*0.02));
+  if(shape==='heart'){const b=round?0.12:0.03;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:Math.max(h*0.9-b*0.5,0.2),bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
   if(shape==='letter'){const ld=letterData(r,h,round);if(ld)return ld.geo;}  if(round)return roundLathe(r,h,Math.min(0.16,h*0.11),0.001,6);
-  return roundLathe(r,h,Math.min(0.12,h*0.08),Math.min(0.12,h*0.08),4);
+  return roundLathe(r,h,0.006,0.006,2);
 }
 function letterPrep(r){
   if(!cakeFont)return null;
