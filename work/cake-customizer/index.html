@@ -662,11 +662,14 @@ async function renderSlots(){
     note.style.display='block';return;
   }
   note.style.display='none';
+  const nowManila=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila'}));
+  const isToday=selDay===manilaToday();
   for(const h of SLOTS){
     const b=document.createElement('button');
     b.type='button';b.className='btn'+(selHour===h?' active':'');
     b.textContent=slotLabel(h);
-    if(st.busy&&st.busy.indexOf(h)>=0)b.disabled=true;
+    const past=isToday&&(h<=nowManila.getHours()+6);
+    if((st.busy&&st.busy.indexOf(h)>=0)||past)b.disabled=true;
     b.onclick=()=>{selHour=h;
       document.getElementById('owhen').value=selDay+'T'+String(h).padStart(2,'0')+':00';
       renderSlots();};
@@ -701,8 +704,10 @@ omodal.addEventListener('click',e=>{if(e.target===omodal)closeOrder();});
 document.getElementById('ocancel').onclick=closeOrder;
 document.querySelectorAll('#omode .btn').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#omode .btn').forEach(x=>x.classList.toggle('active',x===b));
-  document.getElementById('oaddrWrap').style.display=b.dataset.mode==='deliver'?'block':'none';
-  document.getElementById('opickNote').style.display=b.dataset.mode==='pickup'?'block':'none';
+  const dm=b.dataset.mode;
+  document.getElementById('oaddrWrap').style.display=dm==='deliver'?'block':'none';
+  document.getElementById('opickNote').style.display=dm==='pickup'?'block':'none';
+  document.getElementById('dayLabel').textContent=dm==='deliver'?'Delivery day':'Pickup day';
 });
 async function checkSlot(){
   const w=document.getElementById('owhen').value,note=document.getElementById('slotNote');
@@ -725,7 +730,11 @@ document.getElementById('osend').onclick=async()=>{
   const mode=document.querySelector('#omode .btn.active').dataset.mode;
   const addr=document.getElementById('oaddr').value.trim();
   const when=document.getElementById('owhen').value;
-  if(!name||!phone||!when){alert('Add your name, phone, and pickup or delivery date and time.');return;}
+  const dayWord=mode==='deliver'?'delivery':'pickup';
+  if(!name||!phone){alert('Add your name and phone so we can confirm your order.');sendBtn.textContent='Send order';return;}
+  if(!when){alert('Pick a '+dayWord+' day and time below.');sendBtn.textContent='Send order';return;}
+  const whenDate=new Date(when+':00+08:00');
+  if(whenDate<(Date.now()+6*3600*1000)){alert('Cakes need at least 6 hours to bake and finish. Pick a later time, or message us for a rush order.');sendBtn.textContent='Send order';return;}
   if(mode==='deliver'&&!addr){alert('Add your delivery address first.');return;}
   if(mode==='deliver'&&document.getElementById('oestOut').dataset.toofar==='1'){alert('We cannot deliver that far by car. Contact us and we can work out an arrangement.');return;}
   if(!(await checkSlot())){alert('That time is already booked. Pick another time.');return;}
@@ -1006,7 +1015,7 @@ build();price();refreshTopLock();refreshShapeLock();refreshRealLock();resize();
 <div class="note">The amount below is a rough estimate based on the Lalamove sedan rate. Cakes ride in a car, not on a motorbike. Lalamove sets the real fee inside their app when the rider is booked.</div>
 <div id="omap"></div>
 <div id="oestOut" class="note" style="display:none"></div></div>
-<label class="fl">Pickup / delivery day</label>
+<label class="fl" id="dayLabel">Pickup day</label>
 <div id="dayStrip"></div>
 <label class="fl">Time</label>
 <div id="slotGrid"></div>
