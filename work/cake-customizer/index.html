@@ -324,12 +324,8 @@ function tierGeo(shape,r,h,round){
   if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,Math.min(0.06,h*0.04));
   if(shape==='heart'){const b=round?0.12:0.1;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:Math.max(h*0.9-b*0.5,0.2),bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
   if(shape==='letter'){const ld=letterData(r,h,round);if(ld)return ld.geo;}  if(round)return roundLathe(r,h,Math.min(0.16,h*0.11),0.001,6);
-  // icing: small soft edge + slight hand-spread wobble on the wall
-  const g=roundLathe(r,h,Math.min(0.12,h*0.08),Math.min(0.12,h*0.08),4);
-  const p=g.attributes.position;
-  for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i);const rad0=Math.hypot(x,z);if(rad0>r*0.5&&Math.abs(y)<h/2-0.01){const a=Math.atan2(z,x);const w=1+0.018*Math.sin(a*7+y*5)+0.012*Math.sin(a*3-y*9);p.setX(i,x*w);p.setZ(i,z*w);}}
-  g.computeVertexNormals();
-  return g;
+  // icing: small soft edge, perfectly smooth wall (texture carries the icing look)
+  return roundLathe(r,h,Math.min(0.12,h*0.08),Math.min(0.12,h*0.08),4);
 }
 function letterPrep(r){
   if(!cakeFont)return null;
@@ -372,23 +368,24 @@ function edgePoint(shape,r,p,a){
 }
 // half-extents of a tier footprint (for board + decorations)
 function extents(shape,r){return shape==='rect'?[r*1.15,r*0.75]:(shape==='square'?[r*0.95,r*0.95]:[r,r]);}
-// spatula-streak bump so icing reads as hand-spread buttercream, not plastic
+// spatula-streak bump so icing reads as hand-spread buttercream, not plastic.
+// low contrast + soft blur: reads smooth up close, streaky at a glance.
 function makeFrostTexture(){
   const c=document.createElement('canvas');c.width=c.height=256;
   const g=c.getContext('2d');
-  g.fillStyle='#808080';g.fillRect(0,0,256,256);
-  for(let i=0;i<9000;i++){const v=70+Math.random()*115|0;g.fillStyle=`rgb(${v},${v},${v})`;g.fillRect(Math.random()*256,Math.random()*256,2,2);}
-  // long horizontal spatula sweeps
-  for(let i=0;i<46;i++){
-    const y0=Math.random()*256,lane=2+Math.random()*5;
-    g.globalAlpha=0.55;g.fillStyle=Math.random()<0.5?'#4a4a4a':'#bdbdbd';
+  g.fillStyle='#8a8a8a';g.fillRect(0,0,256,256);
+  // long horizontal spatula sweeps, low contrast
+  for(let i=0;i<40;i++){
+    const y0=Math.random()*256,lane=3+Math.random()*6;
+    g.globalAlpha=0.16;g.fillStyle=Math.random()<0.5?'#6f6f6f':'#a5a5a5';
     for(let x=0;x<256;x+=4){g.fillRect(x,y0+Math.sin((x+i*37)*0.08)*3,lane,lane*0.7);}
   }
-  // a few vertical comb strokes
-  g.globalAlpha=0.3;
-  for(let i=0;i<26;i++){const x0=Math.random()*256;g.fillStyle=i%2?'#6a6a6a':'#9c9c9c';g.fillRect(x0,Math.random()*60,2+Math.random()*3,120+Math.random()*136);}
   g.globalAlpha=1;
-  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,3);
+  // soften: draw scaled-down then back up to blur the streaks
+  const s=document.createElement('canvas');s.width=s.height=64;
+  s.getContext('2d').drawImage(c,0,0,64,64);
+  g.clearRect(0,0,256,256);g.drawImage(s,0,0,256,256);
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(2,2);
   return t;
 }
 const frostBump=makeFrostTexture();
@@ -427,7 +424,7 @@ function build(){
   if(state.cupcakes){
     const n=state.cupcakes,ringR=baseR+0.62;
     const cupMat=new THREE.MeshStandardMaterial({color:0xd9a066,roughness:0.8});
-    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,bumpMap:frostBump,bumpScale:0.15,roughnessMap:frostBump,envMapIntensity:0});
+    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,bumpMap:frostBump,bumpScale:0.04,roughnessMap:frostBump,envMapIntensity:0});
     for(let k=0;k<n;k++){
       const a=k/n*Math.PI*2;
       const cx=Math.cos(a)*ringR,cz=Math.sin(a)*ringR;
@@ -454,7 +451,7 @@ function build(){
     const smooth=state.finish==='fondant';
     const mat=smooth
       ?new THREE.MeshStandardMaterial({color:state.frost,roughness:0.8,metalness:0,envMapIntensity:0.25})
-      :new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,metalness:0,bumpMap:frostBump,bumpScale:0.3,roughnessMap:frostBump,envMapIntensity:0});
+      :new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,metalness:0,bumpMap:frostBump,bumpScale:0.06,roughnessMap:frostBump,envMapIntensity:0});
     const m=new THREE.Mesh(tierGeo(state.shape,r,H,smooth),mat);
     m.position.y=y+H/2;m.castShadow=true;m.receiveShadow=true;cake.add(m);
     // filling band (real tiers only)
@@ -467,7 +464,7 @@ function build(){
     if(!smooth){
       const loop=buildOutline(state.shape,r);
       const step=Math.max(1,Math.floor(loop.length/40));
-      const bmat=smooth?new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.8,metalness:0,envMapIntensity:0.25}):new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.2,roughnessMap:frostBump,envMapIntensity:0});
+      const bmat=smooth?new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.8,metalness:0,envMapIntensity:0.25}):new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.05,roughnessMap:frostBump,envMapIntensity:0});
       for(let k=0;k<loop.length;k+=step){
         const pip=new THREE.Mesh(new THREE.SphereGeometry(0.095,12,10),bmat);
         pip.scale.set(1,0.75,1);pip.position.set(loop[k][0],y+0.08,loop[k][1]);cake.add(pip);
