@@ -99,7 +99,7 @@ body{flex-direction:column;min-height:100dvh}
 .panel{width:100%;max-height:none;overflow:visible;padding:20px 16px 26px}
 .panel h1{font-size:22px}
 .btn{min-height:44px;font-size:15px}
-/* mobile total: hidden until a price change (brief peek pill) or scrolled near bottom */
+
 .price{display:none}
 .price b{margin:6px 0 16px;font-size:34px}
 .price.show{display:block;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:40;margin:0;padding:14px 16px}
@@ -112,6 +112,7 @@ body{flex-direction:column;min-height:100dvh}
 </style>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
 </head>
 <body>
 <button id="panelToggle" aria-label="Hide options" title="Hide options">‹</button>
@@ -227,8 +228,6 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-// Real 3D scans: drop Trellis 2 .glb files next to this page named e.g. gal-blush.glb,
-// then set that key below to 1. Gallery tap loads the scan; options still price it.
 const GLB_FILES={blush:'gal-blush.glb',basket:'gal-basket.glb',bike:'gal-bike.glb',tiger:'gal-tiger.glb',black:'gal-black.glb',choco:'gal-choco.glb'};
 const glbCache={};
 const gltfLoader=new GLTFLoader();
@@ -236,7 +235,6 @@ function loadGlb(key){
   return new Promise((res,rej)=>{
     if(glbCache[key])return res(glbCache[key].clone(true));
     gltfLoader.load(GLB_FILES[key],g=>{
-      // normalize: sit on board, fit ~4 units tall
       const box=new THREE.Box3().setFromObject(g.scene);
       const size=new THREE.Vector3();box.getSize(size);
       const s=Math.min(4/(size.y||1),2.2/(Math.max(size.x,size.z)||1));
@@ -271,9 +269,6 @@ scene.environment=new THREE.PMREMGenerator(ren).fromScene(new RoomEnvironment(),
 scene.environmentIntensity=0.35;
 view.prepend(ren.domElement);
 const ctl=new OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI/2.1;ctl.target.set(0,2.6,0);
-// lighting per ClipStudio shadow guide: one warm key (direct light), cool sky
-// ambient, warm table bounce (reflected light), faint cool rim from behind.
-// key sits low-ish and to the side so the cast shadow stretches softly.
 scene.add(new THREE.HemisphereLight(0xfff4ec,0xe8b48f,0.45));
 const sun=new THREE.DirectionalLight(0xffe3c4,1.5);sun.position.set(-6.5,3.2,2.5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
 sun.shadow.camera.left=-7;sun.shadow.camera.right=7;sun.shadow.camera.top=9;sun.shadow.camera.bottom=-2;
@@ -281,13 +276,11 @@ sun.shadow.camera.near=1;sun.shadow.camera.far=25;sun.shadow.bias=-0.0004;sun.sh
 const fill=new THREE.DirectionalLight(0xdfe8ff,0.35);fill.position.set(4,2.5,-1);scene.add(fill);
 const rim=new THREE.DirectionalLight(0xfff0dd,0.5);rim.position.set(2,4,-5);scene.add(rim);
 
-// table + board
 const table=new THREE.Mesh(new THREE.CircleGeometry(9,48),new THREE.ShadowMaterial({opacity:0.22}));
 table.rotation.x=-Math.PI/2;table.receiveShadow=true;scene.add(table);
 const boardMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.35,metalness:0.15});
 
 let cake=new THREE.Group();scene.add(cake);
-// 1 scene unit ≈ 2.58in (8" base → r=1.55)
 const SZIN=2.58;
 const R0={};[6,8,10,12,14,16].forEach(s=>R0[s]=s/2/SZIN);
 
@@ -301,16 +294,9 @@ function heartShape(s){
   sh.bezierCurveTo(x+7*s,y,x+5*s,y+5*s,x+5*s,y+5*s);
   return sh;
 }
-// seamless rounded box: no extrude seams, no bevel pinch at corners.
 function roundedSlab(w,d,h,rad){
   return new RoundedBoxGeometry(w,h,d,4,Math.min(rad,Math.min(w,d,h)/2-0.001));
 }
-// rounded lathe profile: true quarter-circle corners, not chamfers.
-// fondant gets a big soft roll, icing a small softened edge + hand-spread wobble.
-// separate top/bottom radii: upper stacked tiers need a deeper bottom roll
-// so the curve reads above the seam instead of vanishing into the tier below.
-// fondant: round rolled TOP, sharp flat BOTTOM (real fondant discs sit flat).
-// icing: small soft edge top + bottom with hand-spread wobble.
 function roundLathe(r,h,eT,eB,seg){
   const pts=[new THREE.Vector2(0,-h/2),new THREE.Vector2(Math.max(r-eB,0.05),-h/2)];
   for(let i=1;i<=seg;i++){const a=-Math.PI/2+(i/seg)*(Math.PI/2);pts.push(new THREE.Vector2(r-eB+Math.cos(a)*eB,-h/2+eB+Math.sin(a)*eB));}
@@ -324,7 +310,6 @@ function tierGeo(shape,r,h,round){
   if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,Math.min(0.06,h*0.04));
   if(shape==='heart'){const b=round?0.12:0.1;const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:Math.max(h*0.9-b*0.5,0.2),bevelEnabled:true,bevelSize:b,bevelThickness:b,bevelSegments:round?4:2});g.rotateX(-Math.PI/2);g.center();return g;}
   if(shape==='letter'){const ld=letterData(r,h,round);if(ld)return ld.geo;}  if(round)return roundLathe(r,h,Math.min(0.16,h*0.11),0.001,6);
-  // icing: small soft edge, perfectly smooth wall (texture carries the icing look)
   return roundLathe(r,h,Math.min(0.12,h*0.08),Math.min(0.12,h*0.08),4);
 }
 function letterPrep(r){
@@ -359,29 +344,22 @@ function buildOutline(shape,r){
   for(let k=0;k<N;k++){const a=k/N*Math.PI*2;loop.push(edgePoint(shape,r,1.0,a));}
   return loop;
 }
-// (drip skirt removed with the drip option)
-// points around the tier edge at inset `p` (0 = edge, 1 = center) — piping follows the true shape
 function edgePoint(shape,r,p,a){
   if(shape==='square'){const s=r*0.95*p;const side=Math.floor(((a%(Math.PI*2))+Math.PI*2)%(Math.PI*2)/(Math.PI/2));const t=(((a%(Math.PI*2))+Math.PI*2)%(Math.PI/2))/(Math.PI/2)*2-1;return side===0?[s,t*s]:side===1?[t*s,s]:side===2?[-s,-t*s]:[-t*s,-s];}
   if(shape==='rect'){const w=r*1.15*p,d=r*0.75*p;const side=Math.floor(((a%(Math.PI*2))+Math.PI*2)%(Math.PI*2)/(Math.PI/2));const t=(((a%(Math.PI*2))+Math.PI*2)%(Math.PI/2))/(Math.PI/2)*2-1;return side===0?[w,t*d]:side===1?[t*w,d]:side===2?[-w,-t*d]:[-t*w,-d];}
   return [Math.cos(a)*r*p,Math.sin(a)*r*p];
 }
-// half-extents of a tier footprint (for board + decorations)
 function extents(shape,r){return shape==='rect'?[r*1.15,r*0.75]:(shape==='square'?[r*0.95,r*0.95]:[r,r]);}
-// spatula-streak bump so icing reads as hand-spread buttercream, not plastic.
-// low contrast + soft blur: reads smooth up close, streaky at a glance.
 function makeFrostTexture(){
   const c=document.createElement('canvas');c.width=c.height=256;
   const g=c.getContext('2d');
   g.fillStyle='#8a8a8a';g.fillRect(0,0,256,256);
-  // long horizontal spatula sweeps, low contrast
   for(let i=0;i<40;i++){
     const y0=Math.random()*256,lane=3+Math.random()*6;
     g.globalAlpha=0.16;g.fillStyle=Math.random()<0.5?'#6f6f6f':'#a5a5a5';
     for(let x=0;x<256;x+=4){g.fillRect(x,y0+Math.sin((x+i*37)*0.08)*3,lane,lane*0.7);}
   }
   g.globalAlpha=1;
-  // soften: draw scaled-down then back up to blur the streaks
   const s=document.createElement('canvas');s.width=s.height=64;
   s.getContext('2d').drawImage(c,0,0,64,64);
   g.clearRect(0,0,256,256);g.drawImage(s,0,0,256,256);
@@ -389,13 +367,10 @@ function makeFrostTexture(){
   return t;
 }
 const frostBump=makeFrostTexture();
-// baker-style glaze: one continuous skirt with smooth drips (donut-glaze drip-function idea),
-// true to every footprint. Letters via TextGeometry-style font shapes (three.js docs).
 let cakeFont=null;
 new FontLoader().loadAsync('https://unpkg.com/three@0.160.0/examples/fonts/helvetiker_bold.typeface.json')
   .then(f=>{cakeFont=f;if(state.shape==='letter')build();refreshShapeLock();})
   .catch(()=>{const n=document.getElementById('letterNote');if(n)n.textContent='Font failed to load (needs internet) - pick another shape.';});
-// (drip helpers removed with the drip option)
 
 const glbOK={blush:false,basket:false,bike:false,tiger:false,black:false,choco:false};
 function scanEnable(key){glbOK[key]=true;}
@@ -403,7 +378,6 @@ function build(){
   scene.remove(cake);cake.traverse(o=>{o.geometry?.dispose?.()});cake=new THREE.Group();scene.add(cake);
   if(state.scan&&GLB_FILES[state.scan]&&glbOK[state.scan]){
     loadGlb(state.scan).then(m=>{cake.add(m);}).catch(()=>{state.scan=null;glbOK[state.scan]=false;build();});
-    // board under the scan
     const board=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,0.12,64),boardMat);
     board.position.y=0.06;board.receiveShadow=true;board.castShadow=true;cake.add(board);
     return;
@@ -420,7 +394,6 @@ function build(){
       : new THREE.CylinderGeometry(boardR,boardR,0.12,64));
   const board=new THREE.Mesh(boardGeo,boardMat);
   board.position.y=0.06;board.receiveShadow=true;board.castShadow=true;cake.add(board);
-  // matching cupcakes on the board (same frosting as the cake)
   if(state.cupcakes){
     const n=state.cupcakes,ringR=baseR+0.62;
     const cupMat=new THREE.MeshStandardMaterial({color:0xd9a066,roughness:0.8});
@@ -445,22 +418,18 @@ function build(){
   const tiers=state.shape==='round'?state.tiers:1;
   for(let i=0;i<tiers;i++){
     const r=baseR*(1-i*0.18);
-    // bottom-real mode: tier 0 is real cake, upper tiers are iced foam
     const tierDummy=state.shape==='round'&&(state.real==='dummy'||(state.real==='bottom'&&i>0));
-    // icing = textured buttercream; fondant = smooth satin
     const smooth=state.finish==='fondant';
     const mat=smooth
       ?new THREE.MeshStandardMaterial({color:state.frost,roughness:0.8,metalness:0,envMapIntensity:0.25})
       :new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,metalness:0,bumpMap:frostBump,bumpScale:0.1,roughnessMap:frostBump,envMapIntensity:0});
     const m=new THREE.Mesh(tierGeo(state.shape,r,H,smooth),mat);
     m.position.y=y+H/2;m.castShadow=true;m.receiveShadow=true;cake.add(m);
-    // filling band (real tiers only)
     if(state.filling!=='none'&&!tierDummy){
       const fg=tierGeo(state.shape,r*1.005,0.14,smooth);
       const fm=new THREE.Mesh(fg,new THREE.MeshStandardMaterial({color:fillColors[state.filling]||'#fff',roughness:0.5}));
       fm.position.y=y+H*0.45;cake.add(fm);
     }
-    // piped cream dollops around each tier base (icing only; fondant stays clean)
     if(!smooth){
       const loop=buildOutline(state.shape,r);
       const step=Math.max(1,Math.floor(loop.length/40));
@@ -471,11 +440,8 @@ function build(){
       }
     }
     y+=H;
-    // decorations only on top tier:
     if(i===tiers-1){
       const topYpos=y;
-      // (berry & sprinkle toppings removed)
-      // candles
       for(let k=0;k<(hasMsg?0:state.candles);k++){
         const a=k/Math.max(1,state.candles)*Math.PI*2;
         const [ex,ez]=extents(state.shape,r);
@@ -485,7 +451,6 @@ function build(){
         const f=new THREE.Mesh(new THREE.SphereGeometry(0.06,12,12),new THREE.MeshStandardMaterial({color:'#ffbe0b',emissive:'#ff9e00',emissiveIntensity:2}));
         f.position.set(cx,topYpos+0.62,cz);cake.add(f);
       }
-      // topper
       if(state.topper!=='none'&&!hasMsg){
         const stick=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.02,0.7,8),new THREE.MeshStandardMaterial({color:'#8a6a4a'}));
         stick.position.set(0,topYpos+0.35,0);cake.add(stick);
@@ -502,7 +467,6 @@ function build(){
       }
     }
   }
-  // piped message written on the top surface (hides top decorations while present)
   if(hasMsg){
     const tiersN=state.shape==='round'?state.tiers:1;
     const lastR=baseR*(1-(tiersN-1)*0.18);
@@ -527,10 +491,8 @@ function build(){
   }
 }
 
-// servings + pricing (PHP pesos)
 const basePrice={6:1600,8:2100,10:3100,12:4100,14:5100,16:6100};
 const fondantFee={6:500,8:1000,10:1500,12:2000,14:2500,16:3000};
-// (servings removed — sizes are diameter only)
 const flavorP={vanilla:0,chocolate:150,redvelvet:200,lemon:180};
 function price(){
   const locked=state.msg.trim().length>0;
@@ -551,7 +513,6 @@ function price(){
   document.getElementById('breakdown').textContent=`${tiersN}-tier ${shapeLabel} ${state.size}" • ${state.finish} • ${cakeDesc} • ${frostName}`;
   peekTotal();
 }
-// mobile: brief peek pill on price change; persistent card once scrolled near bottom
 let peekT=null,firstPrice=true;
 function peekTotal(){
   if(window.innerWidth>860)return;
@@ -572,7 +533,6 @@ window.addEventListener('scroll',nearBottom,{passive:true});
 window.addEventListener('resize',nearBottom);
 window.addEventListener('load',nearBottom);
 
-// wiring
 function seg(id,fn){document.getElementById(id).querySelectorAll('.btn').forEach(b=>b.onclick=()=>{document.getElementById(id).querySelectorAll('.btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');fn(b);build();price();});}
 seg('shapeRow',b=>{state.scan=null;state.shape=b.dataset.shape;refreshShapeLock();refreshRealLock();build();price();});
 seg('tierRow',b=>{state.tiers=+b.dataset.tiers;refreshRealLock();});
@@ -616,8 +576,6 @@ document.getElementById('filling').onchange=e=>{state.filling=e.target.value;bui
 document.getElementById('candles').oninput=e=>{state.candles=+e.target.value;document.getElementById('cVal').textContent=e.target.value;build();price();};
 document.getElementById('msg').oninput=e=>{state.msg=e.target.value;refreshTopLock();build();price();};
 function refreshShapeLock(){
-  // only round stacks tiers — every other shape bakes single-tier;
-  // and 6" base is always single-tier (too small to stack)
   const multi=state.shape==='round'&&state.size!==6;
   document.querySelectorAll('#tierRow .btn').forEach(b=>{b.disabled=!multi||(+b.dataset.tiers>1&&state.size===6&&state.shape==='round');});
   document.getElementById('letterPick').style.display=state.shape==='letter'?'block':'none';
@@ -631,7 +589,6 @@ function refreshTopLock(){
   document.getElementById('topNote').style.display=locked?'block':'none';
 }
 
-
 function resize(){const w=view.clientWidth,h=view.clientHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
 window.addEventListener('resize',resize);
 (function loop(){ctl.update();ren.render(scene,cam);requestAnimationFrame(loop);})();
@@ -642,7 +599,6 @@ function refreshRealLock(){
   if(!showOpt&&state.real!=='real'){state.real='real';document.querySelectorAll('#realRow .btn').forEach(x=>x.classList.toggle('active',x.dataset.real==='real'));}
   document.getElementById('dummyNote').style.display=(state.real!=='real'&&showOpt)?'block':'none';
 }
-// order modal
 function orderSummary(){
   const tiersN=state.shape==='round'?state.tiers:1;
   const shapeLabel=state.shape==='letter'?('Letter "'+(state.letter||'A').toUpperCase()+'"'):state.shape;
@@ -656,7 +612,7 @@ function orderSummary(){
 }
 const omodal=document.getElementById('omodal');
 const SLOTS=[9,11,13,15,17,19];
-const MOCK_SLOTS=0; // set to 1 to preview taken slots without real orders
+const MOCK_SLOTS=0;
 let selDay='',selHour=null;
 function manilaToday(){
   return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -796,11 +752,8 @@ document.getElementById('osend').onclick=async()=>{
   document.getElementById('osent').style.display='block';
   document.getElementById('osentText').textContent=s;
 };
-// delivery estimate: OSRM road distance from Jelyn's Bakeshop (Peace Village,
-// Antipolo ~14.6141,121.1932) x Lalamove PH sedan card — cakes go by car only,
-// never motorcycle. Sedan: base P71 + P16/km (0-5) + P14 (5-10) + P12 (10-30) + P11 (30+)
 const SHOP_LAT=14.6141,SHOP_LON=121.1932;
-const UPL_URL='https://script.google.com/macros/s/AKfycbxgMJc5QLiyS6YjX_mbw4tTMa2E8j2VFsbxbk67OZOqdUQo6MPp3o_YMTtvNUbaUN99/exec'; // cake order receiver: uploads + sheet logging
+const UPL_URL='https://script.google.com/macros/s/AKfycbxgMJc5QLiyS6YjX_mbw4tTMa2E8j2VFsbxbk67OZOqdUQo6MPp3o_YMTtvNUbaUN99/exec';
 const SHEET_URL=UPL_URL;
 async function logOrder(order){
   if(!SHEET_URL)return false;
@@ -822,7 +775,6 @@ function lalaFee(km){
   return Math.round(71+5*16+5*14+20*12+(km-30)*11);
 }
 async function geocode(q){
-  // Photon first (no rate-limit drama), Nominatim as backup
   try{
     const r=await fetch('https://photon.komoot.io/api/?limit=1&lat=14.6&lon=121.0&q='+encodeURIComponent(q+', Philippines'));
     const j=await r.json();
@@ -840,7 +792,6 @@ async function geocode(q){
   return {lat:+j[0].lat,lon:+j[0].lon,name:j[0].display_name};
 }
 async function roadKm(a,b,c,d){
-  // OSRM first, Valhalla (FOSSGIS) backup
   try{
     const u=`https://router.project-osrm.org/route/v1/driving/${a},${b};${c},${d}?overview=false`;
     const r=await fetch(u);
@@ -880,15 +831,12 @@ document.getElementById('oest').onclick=async()=>{
     out.dataset.fee=fee;out.dataset.km=km.toFixed(1);
   }catch(e){out.textContent='We could not find that address. Add the barangay and city (Marikina Heights, Marikina works).';}
 };
-// pin-on-map: Leaflet picker centered on the bakeshop; pin/Nominatim reverse-geocode/
-// browser geolocation all feed the same estimate + order text
 let omap=null,omarker=null,pinLat=null,pinLon=null,pinName='';
 function ensureMap(){
   const el=document.getElementById('omap');
   el.style.display='block';
   if(omap){omap.invalidateSize();return;}
   omap=L.map('omap').setView([SHOP_LAT,SHOP_LON],13);
-  // Esri street tiles: free for apps, no key. CARTO now needs a key, OSM blocks apps.
   const esri=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,attribution:'© Esri © OpenStreetMap contributors'});
   esri.addTo(omap);
   esri.on('tileerror',()=>{
@@ -967,8 +915,6 @@ async function runEstimate(){
 }
 document.getElementById('oest').onclick=runEstimate;
 document.getElementById('opin').onclick=()=>{ensureMap();};
-// autocomplete: Photon search-as-you-type, biased to Antipolo; tap a suggestion
-// to pin that spot on the map + fill the address box
 let sugTimer=null,sugItems=[],sugSel=-1;
 const oaddr=document.getElementById('oaddr'),oaddrList=document.getElementById('oaddrList');
 function hideSug(){oaddrList.style.display='none';sugSel=-1;}
