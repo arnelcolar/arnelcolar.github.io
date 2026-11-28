@@ -6,7 +6,7 @@
 <title>Cake Customizer — Jelyn's Bakeshop</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-:root{--bg:#faf5f1;--ink:#532e26;--muted:#a4837a;--brand:#e79fb3;--brand-dark:#532e26;--card:#ffffff;--line:#ecd9d2;--shadow:0 1px 3px rgba(83,46,38,.18)}
+:root{--bg:#ffffff;--ink:#532e26;--muted:#a4837a;--brand:#e79fb3;--brand-dark:#532e26;--card:#ffffff;--line:#ecd9d2;--shadow:0 1px 3px rgba(83,46,38,.18)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:ui-rounded,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
 .panel{width:384px;flex:none;padding:24px 22px 28px;background:var(--bg);overflow-y:auto;max-height:100vh;scrollbar-width:thin;scrollbar-color:transparent transparent}
@@ -49,7 +49,7 @@ label.switch{display:flex;align-items:center;gap:12px;cursor:pointer;font-size:1
 #order:hover{background:var(--brand-dark)}
 #order:active{transform:translateY(1px);box-shadow:none}
 #topNote,#dummyNote,.note{font-size:13px;line-height:1.5;color:#8a2a48;background:#fbeef2;border:1.5px solid var(--brand);border-radius:8px;padding:11px 13px;margin-top:10px}
-#view{flex:1;position:relative;min-height:100vh;min-width:0;background:radial-gradient(circle at 50% 22%,#f4ece8 0%,#ece0da 45%,#e2d3cd 70%,#d6c2ba 100%)}
+#view{flex:1;position:relative;min-height:100vh;min-width:0;background:radial-gradient(circle at 50% 22%,#ffffff 0%,#fdfbf9 55%,#f3ede9 100%)}
 #view canvas{position:absolute;inset:0;display:block;touch-action:none;z-index:2}
 .wm{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:1}
 .wm img{width:min(1260px,210%);opacity:.08;filter:grayscale(.5)}
@@ -263,14 +263,14 @@ ren.shadowMap.enabled=true;ren.shadowMap.type=THREE.PCFSoftShadowMap;
 ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=0.9;
 ren.outputColorSpace=THREE.SRGBColorSpace;
 scene.environment=new THREE.PMREMGenerator(ren).fromScene(new RoomEnvironment(),0.04).texture;
-scene.environmentIntensity=0.55;
+scene.environmentIntensity=0.35;
 view.prepend(ren.domElement);
 const ctl=new OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI/2.1;ctl.target.set(0,2.6,0);
 // lighting per ClipStudio shadow guide: one warm key (direct light), cool sky
 // ambient, warm table bounce (reflected light), faint cool rim from behind.
 // key sits low-ish and to the side so the cast shadow stretches softly.
 scene.add(new THREE.HemisphereLight(0xfff4ec,0xe8b48f,0.45));
-const sun=new THREE.DirectionalLight(0xffe3c4,1.6);sun.position.set(-4.5,5.5,3.5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+const sun=new THREE.DirectionalLight(0xffe3c4,1.5);sun.position.set(-6.5,3.2,2.5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
 sun.shadow.camera.left=-7;sun.shadow.camera.right=7;sun.shadow.camera.top=9;sun.shadow.camera.bottom=-2;
 sun.shadow.camera.near=1;sun.shadow.camera.far=25;sun.shadow.bias=-0.0004;sun.shadow.normalBias=0.02;sun.shadow.radius=6;scene.add(sun);
 const fill=new THREE.DirectionalLight(0xdfe8ff,0.35);fill.position.set(4,2.5,-1);scene.add(fill);
@@ -296,12 +296,32 @@ function heartShape(s){
   sh.bezierCurveTo(x+7*s,y,x+5*s,y+5*s,x+5*s,y+5*s);
   return sh;
 }
-function tierGeo(shape,r,h){
-  if(shape==='square')return new THREE.BoxGeometry(r*1.9,h,r*1.9);
-  if(shape==='rect')return new THREE.BoxGeometry(r*2.3,h,r*1.5);
+function roundedSlab(w,d,h,rad){
+  const s=new THREE.Shape();
+  const hw=w/2-rad,hd=d/2-rad;
+  s.moveTo(-hw,-d/2);s.lineTo(hw,-d/2);s.absarc(hw,-hd,rad,-Math.PI/2,0,false);
+  s.lineTo(w/2,hd);s.absarc(hw,hd,rad,0,Math.PI/2,false);
+  s.lineTo(-hw,d/2);s.absarc(-hw,hd,rad,Math.PI/2,Math.PI,false);
+  s.lineTo(-w/2,-hd);s.absarc(-hw,-hd,rad,Math.PI,Math.PI*1.5,false);
+  const g=new THREE.ExtrudeGeometry(s,{depth:h,bevelEnabled:true,bevelSize:rad*0.5,bevelThickness:rad*0.5,bevelSegments:3,curveSegments:8});
+  g.rotateX(-Math.PI/2);g.center();return g;
+}
+function tierGeo(shape,r,h,round){
+  const rad=round?Math.min(0.22,h*0.18):0.02;
+  if(shape==='square')return roundedSlab(r*1.9,r*1.9,h,rad);
+  if(shape==='rect')return roundedSlab(r*2.3,r*1.5,h,rad);
   if(shape==='heart'){const g=new THREE.ExtrudeGeometry(heartShape(r/10),{depth:h*0.9,bevelEnabled:true,bevelSize:0.06,bevelThickness:0.06,bevelSegments:2});g.rotateX(-Math.PI/2);g.center();return g;}
   if(shape==='letter'){const ld=letterData(r,h);if(ld)return ld.geo;}
-  return new THREE.CylinderGeometry(r,r*0.98,h,64);
+  if(!round)return new THREE.CylinderGeometry(r,r*0.98,h,64);
+  // fondant round: soft rolled edge (lathe capsule profile), icing: straight cylinder
+  const e=Math.min(0.16,h*0.15),pts=[];
+  pts.push(new THREE.Vector2(0,-h/2));
+  pts.push(new THREE.Vector2(r-e,-h/2));
+  pts.push(new THREE.Vector2(r,-h/2+e));
+  pts.push(new THREE.Vector2(r,h/2-e));
+  pts.push(new THREE.Vector2(r-e,h/2));
+  pts.push(new THREE.Vector2(0,h/2));
+  return new THREE.LatheGeometry(pts,64);
 }
 function letterPrep(r){
   if(!cakeFont)return null;
@@ -343,15 +363,23 @@ function edgePoint(shape,r,p,a){
 }
 // half-extents of a tier footprint (for board + decorations)
 function extents(shape,r){return shape==='rect'?[r*1.15,r*0.75]:(shape==='square'?[r*0.95,r*0.95]:[r,r]);}
-// faint spatula-streak bump so frosting reads as buttercream, not plastic
+// spatula-streak bump so icing reads as hand-spread buttercream, not plastic
 function makeFrostTexture(){
   const c=document.createElement('canvas');c.width=c.height=256;
   const g=c.getContext('2d');
   g.fillStyle='#808080';g.fillRect(0,0,256,256);
-  for(let i=0;i<9000;i++){const v=110+Math.random()*40|0;g.fillStyle=`rgb(${v},${v},${v})`;g.fillRect(Math.random()*256,Math.random()*256,1.5,1.5);}
-  g.globalAlpha=0.12;
-  for(let i=0;i<60;i++){g.fillStyle=Math.random()<0.5?'#6f6f6f':'#909090';g.fillRect(Math.random()*256,0,1+Math.random()*2,256);}
-  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(2,2);
+  for(let i=0;i<9000;i++){const v=70+Math.random()*115|0;g.fillStyle=`rgb(${v},${v},${v})`;g.fillRect(Math.random()*256,Math.random()*256,2,2);}
+  // long horizontal spatula sweeps
+  for(let i=0;i<46;i++){
+    const y0=Math.random()*256,lane=2+Math.random()*5;
+    g.globalAlpha=0.55;g.fillStyle=Math.random()<0.5?'#4a4a4a':'#bdbdbd';
+    for(let x=0;x<256;x+=4){g.fillRect(x,y0+Math.sin((x+i*37)*0.08)*3,lane,lane*0.7);}
+  }
+  // a few vertical comb strokes
+  g.globalAlpha=0.3;
+  for(let i=0;i<26;i++){const x0=Math.random()*256;g.fillStyle=i%2?'#6a6a6a':'#9c9c9c';g.fillRect(x0,Math.random()*60,2+Math.random()*3,120+Math.random()*136);}
+  g.globalAlpha=1;
+  const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,3);
   return t;
 }
 const frostBump=makeFrostTexture();
@@ -363,10 +391,12 @@ new FontLoader().loadAsync('https://unpkg.com/three@0.160.0/examples/fonts/helve
   .catch(()=>{const n=document.getElementById('letterNote');if(n)n.textContent='Font failed to load (needs internet) - pick another shape.';});
 // (drip helpers removed with the drip option)
 
+const glbOK={blush:false,basket:false,bike:false,tiger:false,black:false,choco:false};
+function scanEnable(key){glbOK[key]=true;}
 function build(){
   scene.remove(cake);cake.traverse(o=>{o.geometry?.dispose?.()});cake=new THREE.Group();scene.add(cake);
-  if(state.scan&&GLB_FILES[state.scan]){
-    loadGlb(state.scan).then(m=>{cake.add(m);}).catch(()=>{state.scan=null;build();});
+  if(state.scan&&GLB_FILES[state.scan]&&glbOK[state.scan]){
+    loadGlb(state.scan).then(m=>{cake.add(m);}).catch(()=>{state.scan=null;glbOK[state.scan]=false;build();});
     // board under the scan
     const board=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,0.12,64),boardMat);
     board.position.y=0.06;board.receiveShadow=true;board.castShadow=true;cake.add(board);
@@ -388,7 +418,7 @@ function build(){
   if(state.cupcakes){
     const n=state.cupcakes,ringR=baseR+0.62;
     const cupMat=new THREE.MeshStandardMaterial({color:0xd9a066,roughness:0.8});
-    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:0.6,bumpMap:frostBump,bumpScale:0.02});
+    const swirlMat=new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,bumpMap:frostBump,bumpScale:0.15,roughnessMap:frostBump,envMapIntensity:0});
     for(let k=0;k<n;k++){
       const a=k/n*Math.PI*2;
       const cx=Math.cos(a)*ringR,cz=Math.sin(a)*ringR;
@@ -414,13 +444,13 @@ function build(){
     // icing = textured buttercream; fondant = smooth satin
     const smooth=state.finish==='fondant';
     const mat=smooth
-      ?new THREE.MeshPhysicalMaterial({color:state.frost,roughness:0.42,clearcoat:0.6,clearcoatRoughness:0.35,envMapIntensity:0.7,specularIntensity:0.6})
-      :new THREE.MeshStandardMaterial({color:state.frost,roughness:0.78,bumpMap:frostBump,bumpScale:0.02,envMapIntensity:0.45});
-    const m=new THREE.Mesh(tierGeo(state.shape,r,H),mat);
+      ?new THREE.MeshStandardMaterial({color:state.frost,roughness:0.8,metalness:0,envMapIntensity:0.25})
+      :new THREE.MeshStandardMaterial({color:state.frost,roughness:1.0,metalness:0,bumpMap:frostBump,bumpScale:0.3,roughnessMap:frostBump,envMapIntensity:0});
+    const m=new THREE.Mesh(tierGeo(state.shape,r,H,smooth),mat);
     m.position.y=y+H/2;m.castShadow=true;m.receiveShadow=true;cake.add(m);
     // filling band (real tiers only)
     if(state.filling!=='none'&&!tierDummy){
-      const fg=tierGeo(state.shape,r*1.005,0.14);
+      const fg=tierGeo(state.shape,r*1.005,0.14,smooth);
       const fm=new THREE.Mesh(fg,new THREE.MeshStandardMaterial({color:fillColors[state.filling]||'#fff',roughness:0.5}));
       fm.position.y=y+H*0.45;cake.add(fm);
     }
@@ -428,7 +458,7 @@ function build(){
     if(state.topper==='chocdrip'){
       const loop=buildOutline(state.shape,r);
       const dripM=new THREE.MeshPhysicalMaterial({color:'#3d2314',roughness:0.25,clearcoat:0.7,clearcoatRoughness:0.3});
-      const band=new THREE.Mesh(tierGeo(state.shape,Math.max(r-0.012,0.2),0.16),dripM);
+      const band=new THREE.Mesh(tierGeo(state.shape,Math.max(r-0.012,0.2),0.16,smooth),dripM);
       band.position.y=y+H-0.06;cake.add(band);
       const step=Math.max(1,Math.floor(loop.length/26));
       for(let k=0;k<loop.length;k+=step){
@@ -441,7 +471,7 @@ function build(){
     {
       const loop=buildOutline(state.shape,r);
       const step=Math.max(1,Math.floor(loop.length/40));
-      const bmat=new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:0.6,bumpMap:frostBump,bumpScale:0.03});
+      const bmat=new THREE.MeshStandardMaterial({color:new THREE.Color(state.frost).lerp(new THREE.Color('#ffffff'),0.35),roughness:1.0,bumpMap:frostBump,bumpScale:0.2,roughnessMap:frostBump,envMapIntensity:0});
       for(let k=0;k<loop.length;k+=step){
         const pip=new THREE.Mesh(new THREE.SphereGeometry(0.095,12,10),bmat);
         pip.scale.set(1,0.75,1);pip.position.set(loop[k][0],y+0.08,loop[k][1]);cake.add(pip);
