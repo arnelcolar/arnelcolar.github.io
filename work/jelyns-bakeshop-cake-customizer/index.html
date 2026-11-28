@@ -230,6 +230,9 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+let animeLib=null;
+try{animeLib=await import('https://cdn.jsdelivr.net/npm/animejs@4.1.4/lib/anime.esm.min.js');}catch(e){}
+const animate=animeLib?animeLib.animate:null,stagger=animeLib?animeLib.stagger:()=>0;
 const GLB_FILES={blush:'gal-blush.glb',basket:'gal-basket.glb',bike:'gal-bike.glb',tiger:'gal-tiger.glb',black:'gal-black.glb',choco:'gal-choco.glb'};
 const glbCache={};
 const gltfLoader=new GLTFLoader();
@@ -496,6 +499,14 @@ function build(){
 const basePrice={6:1600,8:2100,10:3100,12:4100,14:5100,16:6100};
 const fondantFee={6:500,8:1000,10:1500,12:2000,14:2500,16:3000};
 const flavorP={vanilla:0,chocolate:150,redvelvet:200,lemon:180};
+let shownTotal=null,priceTick=0;
+function setTotal(t){
+  const el=document.getElementById('total'),fmt=v=>'₱'+Math.round(v).toLocaleString('en-PH');
+  if(!animate||shownTotal===null||shownTotal===t){shownTotal=t;el.textContent=fmt(t);return;}
+  const from=shownTotal,my=++priceTick;shownTotal=t;
+  const o={v:from};
+  animate(o,{v:t,duration:460,ease:'outQuad',onUpdate:()=>{if(my===priceTick)el.textContent=fmt(o.v);}});
+}
 function price(){
   const locked=state.msg.trim().length>0;
   const tiersN=state.shape==='round'?state.tiers:1;
@@ -508,7 +519,7 @@ function price(){
   if(!locked){t+=state.candles*50;if(state.topper==='hbd'||state.topper==='custom')t+=200;}
   if(state.cupcakes===6)t+=450;if(state.cupcakes===12)t+=850;
   if(state.msg.trim())t+=120;
-  document.getElementById('total').textContent='₱'+t.toLocaleString('en-PH');
+  setTotal(t);
   const shapeLabel=state.shape==='letter'?('Letter "'+(state.letter||'A').toUpperCase()+'"'):state.shape;
   const cakeDesc=realCount===tiersN?state.flavor:(dummyCount===tiersN?'all dummy display':`real bottom + ${dummyCount} dummy`);
   const frostName=(frostings.find(f=>f[0]===state.frost)||['',state.frost])[1];
@@ -689,6 +700,7 @@ function openOrder(){
   renderDays();renderSlots();
   document.getElementById('osum').innerHTML=`<b>Your cake:</b> ${o.s}<br><b>Cake total:</b> ${document.getElementById('total').textContent}<br><span style="color:var(--muted)">Cakes ride in a car, not on a motorbike. Lalamove sets the real delivery fee inside their app.</span>`;
   omodal.classList.add('open');
+  if(animate)animate('#osheet',{translateY:[26,0],opacity:[0,1],duration:280,ease:'outQuad'});
 }
 function closeOrder(){omodal.classList.remove('open');}
 document.getElementById('order').onclick=openOrder;
@@ -1005,6 +1017,7 @@ document.getElementById('oloc').onclick=()=>{
   },()=>alert('We could not get your location. Pin it on the map instead.'),{timeout:10000,enableHighAccuracy:true,maximumAge:0});
 };
 build();price();refreshTopLock();refreshShapeLock();refreshRealLock();resize();
+if(animate)animate('#galRow .galcard',{opacity:[0,1],translateY:[14,0],duration:520,delay:stagger(55),ease:'outQuad'});
 if(new URLSearchParams(location.search).get('sent')){
   const b=document.getElementById('okbanner');
   b.style.display='block';
