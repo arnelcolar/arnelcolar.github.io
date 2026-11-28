@@ -694,8 +694,8 @@ async function renderSlots(){
 function openOrder(){
   if(!selDay){selDay=manilaToday();
     const mh=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Manila'})).getHours();
-    if(mh+6>=19){selDay=addDays(selDay,1);
-      while(new Date(selDay+'T00:00:00+08:00').toLocaleDateString('en-PH',{timeZone:'Asia/Manila',weekday:'short'})==='Sun')selDay=addDays(selDay,1);}}
+    if(mh+6>=19)selDay=addDays(selDay,1);
+    while(new Date(selDay+'T00:00:00+08:00').toLocaleDateString('en-PH',{timeZone:'Asia/Manila',weekday:'short'})==='Sun')selDay=addDays(selDay,1);}
   const o=orderSummary();
   renderDays();renderSlots();
   document.getElementById('osum').innerHTML=`<b>Your cake:</b> ${o.s}<br><b>Cake total:</b> ${document.getElementById('total').textContent}<br><span style="color:var(--muted)">Cakes ride in a car, not on a motorbike. Lalamove sets the real delivery fee inside their app.</span>`;
